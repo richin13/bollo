@@ -4,7 +4,9 @@ compiler:
   - gcc
   - clang
 
-script: cmake --build
+script: 
+  - ls && pwd
+  - cmake --build
 
 notifications:
   slack: bollodev:Q8KVLzHppFsWjnXLEbqpNopX
