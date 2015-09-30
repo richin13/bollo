@@ -3,3 +3,6 @@ language: cpp
 compiler:
   - gcc
   - clang
+
+notifications:
+  slack: bollodev:Q8KVLzHppFsWjnXLEbqpNopX
