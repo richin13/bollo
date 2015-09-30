@@ -4,5 +4,7 @@ compiler:
   - gcc
   - clang
 
+script: cmake -D
+
 notifications:
   slack: bollodev:Q8KVLzHppFsWjnXLEbqpNopX
