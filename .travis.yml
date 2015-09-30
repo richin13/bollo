@@ -4,7 +4,7 @@ compiler:
   - gcc
   - clang
 
-script: cmake ..
+script: cmake bollo/
 
 notifications:
   slack: bollodev:Q8KVLzHppFsWjnXLEbqpNopX
