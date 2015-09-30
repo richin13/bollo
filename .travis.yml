@@ -4,9 +4,7 @@ compiler:
   - gcc
   - clang
 
-script: 
-  - ls && pwd
-  - cmake /home/travis/build/richin13/bollo
+script: cmake .
 
 notifications:
   slack: bollodev:Q8KVLzHppFsWjnXLEbqpNopX
