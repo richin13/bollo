@@ -6,7 +6,7 @@ compiler:
 
 script: 
   - ls && pwd
-  - cmake --build
+  - cmake /home/travis/build/richin13/bollo
 
 notifications:
   slack: bollodev:Q8KVLzHppFsWjnXLEbqpNopX
