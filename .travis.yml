@@ -6,6 +6,8 @@ compiler:
 
 script: cmake .
 
+sudo: true
+
 before_install:
   - sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu trusty universe"
     && sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu trusty main"
