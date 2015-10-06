@@ -1,8 +1,6 @@
 language: cpp
 
-compiler:
-  - gcc
-  - clang
+compiler: gcc
 
 script: cmake .
 
@@ -12,8 +10,13 @@ before_install:
   - sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu trusty universe"
     && sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu trusty main"
     && sudo apt-get update
+<<<<<<< HEAD
     && sudo apt-get install qdbus qmlscene qt5-default qt5-qmake qtbase5-dev-tools qtchooser qtdeclarative5-dev xbitmaps xterm libqt5svg5-dev qttools5-dev qtscript5-dev qtdeclarative5-folderlistmodel-plugin qtdeclarative5-controls-plugin cmake -y
   - whereis qt
+=======
+    && sudo apt-get install qdbus qmlscene qt5-default qt5-qmake qtbase5-dev-tools qtchooser qtdeclarative5-dev xbitmaps xterm libqt5svg5-dev qttools5-dev qtscript5-dev qtdeclarative5-folderlistmodel-plugin qtdeclarative5-controls-plugin cmake libmysqlcppconn-dev -y
+
+>>>>>>> a855ce836b91b22d8a406af4ad232140bb82e96e
 
 notifications:
   slack: bollodev:Q8KVLzHppFsWjnXLEbqpNopX

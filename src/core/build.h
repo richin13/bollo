@@ -9,12 +9,6 @@
 #include <string>
 #include <stdlib.h>
 
-//mysql-connector-c++ libraries.
-#include "mysql_connection.h"
-#include <cppconn/driver.h>
-
 using namespace std;
-using namespace sql;
-using namespace sql::mysql;
 
 #endif //BOLLO_BUILD_H

@@ -1,6 +1,4 @@
-#include <iostream>
-
-using namespace std;
+#include "src/core/build.h"
 
 int main() {
     cout << "Hello, World! I am Bollo\n";
