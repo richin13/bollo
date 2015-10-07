@@ -5,9 +5,9 @@
 #ifndef BOLLO_SQL_H
 #define BOLLO_SQL_H
 
-#define HOST "tcp://127.0.0.1:3306"
-#define USER "bollo"
-#define PASSWORD "fapOnMerkel__"
+#define HOST "tcp://104.197.58.180:3306"
+#define USER "root"
+#define PASSWORD "hTOfh3E7"
 #define SCHEMA ""
 
 //mysql-connector-c++ libraries.
