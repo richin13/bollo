@@ -8,7 +8,7 @@
 #define HOST "tcp://104.197.58.180:3306"
 #define USER "root"
 #define PASSWORD "hTOfh3E7"
-#define SCHEMA ""
+#define SCHEMA "bollo_test"
 
 //mysql-connector-c++ libraries.
 #include "mysql_connection.h"

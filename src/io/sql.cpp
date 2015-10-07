@@ -6,6 +6,9 @@
 
 using namespace bollo::_sql;
 
+Driver* BolloConn::driver;
+Connection* BolloConn::con;
+
 BolloConn::BolloConn() {
 
 }
@@ -15,9 +18,11 @@ BolloConn::~BolloConn() {
 }
 
 Connection* BolloConn::getConn() {
-    driver = get_driver_instance();
-    con = driver->connect(HOST, USER, PASSWORD);
-    con->setSchema(SCHEMA);//FIXME:define the real schema name
+    if(BolloConn::con == nullptr) {
+        driver = get_driver_instance();
+        con = driver->connect(HOST, USER, PASSWORD);
+        con->setSchema(SCHEMA);//FIXME:define the real schema name
+    }
 
     return con;
 }
