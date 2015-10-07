@@ -5,9 +5,13 @@
 #ifndef BOLLO_BUILD_H
 #define BOLLO_BUILD_H
 
+//C includes
+#include <stdlib.h>
+
 #include <iostream>
 #include <string>
-#include <stdlib.h>
+#include <mutex>
+#include <condition_variable>
 
 using namespace std;
 

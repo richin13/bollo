@@ -8,7 +8,7 @@ int main() {
     cout << "This... is... just... the beginning\n";
     cout << "Expect us!" << endl;
 
-    _log << "This is the first log entry";
+    _log.bakery(1) << "Adding a logbook entry to bakery 1";
 
     return EXIT_SUCCESS;
 }

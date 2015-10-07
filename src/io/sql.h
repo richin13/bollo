@@ -16,7 +16,9 @@
 #include <cppconn/resultset.h>
 #include <cppconn/prepared_statement.h>
 
-using namespace std;
+//std libs
+#include "../core/build.h"
+
 using namespace sql;
 using namespace sql::mysql;
 

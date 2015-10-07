@@ -5,6 +5,9 @@
 #ifndef BOLLO_LOGGER_H
 #define BOLLO_LOGGER_H
 
+//std libs
+#include "../core/build.h"
+
 #include "../io/sql.h"
 
 using namespace bollo::_sql;
@@ -12,10 +15,15 @@ using namespace bollo::_sql;
 namespace bollo {
     namespace logger {
 
-        class LogBook {
+        mutex mtx;
+        condition_variable cv;
 
+        class LogBook {
+            int bakery_id;
         public:
             LogBook &operator<<(const string &);
+
+            LogBook &bakery(int);
         };
 
     }
