@@ -9,18 +9,18 @@
 
 using namespace bollo::_sql;
 
-namespace logger {
+namespace bollo {
+    namespace logger {
 
-    class LogBook {
+        class LogBook {
 
-    public:
-        LogBook &operator<<(const string &);
-    };
+        public:
+            LogBook &operator<<(const string &);
+        };
 
+    }
+
+    extern logger::LogBook _log;
 }
-
-using namespace logger;
-
-extern LogBook _log;
 
 #endif //BOLLO_LOGGER_H
