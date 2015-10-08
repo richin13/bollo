@@ -8,6 +8,9 @@ using namespace bollo::logger;
 
 LogBook bollo::_log;
 
+mutex bollo::logger::mtx;
+condition_variable bollo::logger::cv;
+
 /**
  * Overloaded function for the '<<' operator.
  * Please use _log.bakery(bakery_id) to add an entry

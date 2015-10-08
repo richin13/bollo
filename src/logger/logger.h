@@ -15,8 +15,8 @@ using namespace bollo::_sql;
 namespace bollo {
     namespace logger {
 
-        mutex mtx;
-        condition_variable cv;
+        extern mutex mtx;
+        extern condition_variable cv;
 
         class LogBook {
             int bakery_id;

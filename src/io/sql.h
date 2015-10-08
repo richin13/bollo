@@ -35,6 +35,10 @@ namespace bollo {
 
             static Connection* getConn();
         };
+
+        bool login(string, string);
+
+        string _sha1(string);
     }
 }
 
