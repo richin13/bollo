@@ -6,9 +6,9 @@
 #define BOLLO_BAKERY_H
 
 #include <QtCore/qthread.h>
-#include "build.h"
+#include "../build.h"
 
-class Bakery : public QThread {
+class Bakery : public QThread {//TODO: Is it a Thread?
 Q_OBJECT
 
     unsigned int bakery_id;

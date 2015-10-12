@@ -4,67 +4,28 @@
 #include "../core/build.h"
 #include "sql.h"
 
-#include <openssl/sha.h>
-#include <sstream>
+#include <QtSql/qsqlquery.h>
+#include <QtCore/qvariant.h>
+#include <QtCore/qcryptographichash.h>
 
 using namespace bollo::_sql;
 
-Driver* BolloConn::driver;
-Connection* BolloConn::con;
+int bollo::_sql::login(QString username, QByteArray raw_pw) {
+    int user_id = 0;
+    const char* std_str = raw_pw.constData();
+    QString _pw = QString(QCryptographicHash::hash(std_str, QCryptographicHash::Sha1).toHex());
 
-BolloConn::BolloConn() {
+    QSqlQuery query;
+    query.prepare("SELECT user_id FROM bollo_user WHERE user_username = ? AND user_password = ?");
 
-}
+    query.addBindValue(QVariant(username));
+    query.addBindValue(QVariant(_pw));
 
-BolloConn::~BolloConn() {
-    //log this
-    delete driver;
-    delete con;
-}
-
-Connection* BolloConn::getConn() {
-    if(BolloConn::con == nullptr) {
-        driver = get_driver_instance();
-        con = driver->connect(HOST, USER, PASSWORD);
-        con->setSchema(SCHEMA);
+    if(query.next()) {
+        //TODO: log that login was successful!
+        user_id = query.value(0).toInt();
     }
 
-    return con;
-}
+    return user_id;
 
-bool bollo::_sql::login(string username, string password) {
-    string hash = _sha1(password);
-
-    Connection* conn = BolloConn::getConn();
-    PreparedStatement* ps = conn->prepareStatement("SELECT user_username, " \
-    "user_username WHERE user_username = ? AND user_password = ?");
-
-    ps->setString(1, username);
-    ps->setString(2, hash);
-
-    ResultSet* resultSet = ps->executeQuery();
-
-//    if(resultSet->next()) {
-//        TODO:log the login attempt succeeded
-//        return true;
-//    } else {
-//        TODO:log the login attempt fail
-//        return false;
-//    }
-
-    return resultSet->next();
-
-}
-
-string bollo::_sql::_sha1(string password) {
-    unsigned char sha_digest[20];
-
-    SHA1((unsigned char*)password.c_str(), password.size(), sha_digest);
-
-    stringstream hashed_pw;
-    for(int i = 0; i < 20; ++i) {
-        hashed_pw << hex << (int)sha_digest[i];
-    }
-
-    return hashed_pw.str();
 }

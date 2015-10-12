@@ -6,6 +6,7 @@
 #define BOLLO_LOGGER_H
 
 //std libs
+#include <QtCore/qsemaphore.h>
 #include "../core/build.h"
 
 #include "../io/sql.h"
@@ -14,15 +15,11 @@ using namespace bollo::_sql;
 
 namespace bollo {
     namespace logger {
-
-        extern mutex mtx;
-        extern condition_variable cv;
-
+        extern QSemaphore mtx;
         class LogBook {
             int bakery_id;
         public:
-            LogBook &operator<<(const string &);
-
+            LogBook &operator<<(const QString);
             LogBook &bakery(int);
         };
 
