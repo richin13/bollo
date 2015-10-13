@@ -10,7 +10,7 @@ using namespace bollo::logger;
 
 LogBook bollo::_log;
 
-QSemaphore bollo::logger::mtx;
+QSemaphore bollo::logger::mtx(1);
 
 /**
  * Overloaded function for the '<<' operator.
@@ -19,14 +19,6 @@ QSemaphore bollo::logger::mtx;
  * @param x QString Event information.
  */
 LogBook &LogBook::operator<<(const QString x) {
-    /*
-    Connection* conn = BolloConn::getConn();//FIXME: No longer using mysql
-    PreparedStatement* ps = conn->prepareStatement("INSERT INTO "\
-    "bollo_logbook(logbook_description, logbook_bakery) VALUES(?, ?)");
-    ps->setString(1, x);
-    ps->setInt(2, this->bakery_id);
-    */
-
     QSqlQuery query;
     query.prepare("INSERT INTO bollo_logbook(logbook_description, "\
                           "logbook_bakery) VALUES(?, ?)");
@@ -34,7 +26,7 @@ LogBook &LogBook::operator<<(const QString x) {
     query.addBindValue(QVariant(this->bakery_id));
 
     if(!query.exec()) {
-        cerr << "Failed to execute\n";
+        cerr << "Failed to execute\n";//TODO: Real logging.
     }
     mtx.release();
     return *this;

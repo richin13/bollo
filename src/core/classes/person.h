@@ -5,25 +5,26 @@
 #ifndef BOLLO_PERSON_H
 #define BOLLO_PERSON_H
 
+#include <QtCore/qstring.h>
 #include "../build.h"
 
 class Person {
 private:
     int id;
-    string first_name;
-    string last_name;
-    string username;
-    string email;
-    string telegram;//TODO: Either the telegram number or the user.
+    QString first_name;
+    QString last_name;
+    QString username;
+    QString email;
+    QString telegram;//TODO: Either the telegram number or the user.
 
 public:
     Person();
 
-    Person(int id, const string &first_name,
-           const string &last_name,
-           const string &username,
-           const string &email,
-           const string &telegram) :
+    Person(int id, const QString &first_name,
+           const QString &last_name,
+           const QString &username,
+           const QString &email,
+           const QString &telegram = "") :
             id(id), first_name(first_name), last_name(last_name),
             username(username), email(email), telegram(telegram) { };
 
@@ -31,25 +32,25 @@ public:
 
     void setId(int id);
 
-    const string &getFirst_name() const;
+    const QString &getFirst_name() const;
 
-    void setFirst_name(const string);
+    void setFirst_name(const QString);
 
-    const string &getLast_name() const;
+    const QString &getLast_name() const;
 
-    void setLast_name(const string);
+    void setLast_name(const QString);
 
-    const string &getUsername() const;
+    const QString &getUsername() const;
 
-    void setUsername(const string);
+    void setUsername(const QString);
 
-    const string &getEmail() const;
+    const QString &getEmail() const;
 
-    void setEmail(const string);
+    void setEmail(const QString);
 
-    const string &getTelegram() const;
+    const QString &getTelegram() const;
 
-    void setTelegram(const string);
+    void setTelegram(const QString);
 };
 
 

@@ -4,7 +4,7 @@ project(Bollo)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 set(CMAKE_AUTOMOC ON)
 
-set(SOURCE_FILES main.cpp src/core/classes/bakery.cpp src/core/classes/bakery.h src/core/build.h src/logger/logger.cpp src/logger/logger.h src/io/sql.cpp src/io/sql.h src/core/bollo.cpp src/core/bollo.h src/core/classes/person.cpp src/core/classes/person.h)
+set(SOURCE_FILES main.cpp src/core/classes/bakery.cpp src/core/classes/bakery.h src/core/build.h src/logger/logger.cpp src/logger/logger.h src/io/sql.cpp src/io/sql.h src/core/bollo.cpp src/core/bollo.h src/core/classes/person.cpp src/core/classes/person.h src/ui/logindialog.cpp src/ui/logindialog.h src/ui/ui_headers/ui_logindialog.h)
 add_executable(Bollo ${SOURCE_FILES})
 
 find_package(Qt5Core REQUIRED)

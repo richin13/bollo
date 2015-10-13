@@ -14,42 +14,42 @@ void Person::setId(int _id) {
     this->id = _id;
 }
 
-const string &Person::getFirst_name() const {
+const QString &Person::getFirst_name() const {
     return this->first_name;
 }
 
-void Person::setFirst_name(const string _fn) {
+void Person::setFirst_name(const QString _fn) {
     this->first_name = _fn;
 }
 
-const string &Person::getLast_name() const {
+const QString &Person::getLast_name() const {
     return this->last_name;
 }
 
-void Person::setLast_name(const string _ln) {
+void Person::setLast_name(const QString _ln) {
     this->last_name = _ln;
 }
 
-const string &Person::getUsername() const {
+const QString &Person::getUsername() const {
     return this->username;
 }
 
-void Person::setUsername(const string _un) {
+void Person::setUsername(const QString _un) {
     this->username = _un;
 }
 
-const string &Person::getEmail() const {
+const QString &Person::getEmail() const {
     return this->email;
 }
 
-void Person::setEmail(const string _email) {
+void Person::setEmail(const QString _email) {
     this->email = _email;
 }
 
-const string &Person::getTelegram() const {
+const QString &Person::getTelegram() const {
     return this->telegram;
 }
 
-void Person::setTelegram(const string _telegram) {
+void Person::setTelegram(const QString _telegram) {
     this->telegram = _telegram;
 }

@@ -8,10 +8,10 @@
 //std libs
 #include <QtCore/qsemaphore.h>
 #include "../core/build.h"
-
+#include <QtSql/qsqldatabase.h>
 #include "../io/sql.h"
 
-using namespace bollo::_sql;
+using namespace bollo::query;
 
 namespace bollo {
     namespace logger {
