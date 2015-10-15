@@ -49,7 +49,6 @@ Join [bollodev-team](https://bollodev.slack.com/)
 
  - Add GUI
  - Add CORE
- - Castillo really need to add at least a fuck*ng line of code.
  - Add Night Mode
 
 License
