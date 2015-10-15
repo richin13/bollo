@@ -7,7 +7,6 @@
 using namespace bollo;
 
 int main(int argc, char** argv) {
-//    QApplication application(argc, argv);
     BolloApp app(argc, argv);
 
     cout << "Hello, World! I am Bollo\n";
@@ -15,12 +14,9 @@ int main(int argc, char** argv) {
     cout << "Expect us!" << endl;
 
 //    _log.bakery(1) << "Logging in PostgresSQL!";
-//    QString pw = "abc123";
-//    QByteArray byteArray = pw.toUtf8();
-//    int id = query::login(QString("richin13"), byteArray);
-//    cout << endl << id << endl;
 //    _log.bakery(bakery->get_id()) << "Logging!";
 
+    //FIXME: this should be in BolloApp:QApplication class.
     if(!BolloApp::success_connection) {
         QMessageBox::critical(nullptr, "Unable to connect to the database server",
                               "An error occurred while trying to reach the PosgreSQL server");
@@ -31,7 +27,5 @@ int main(int argc, char** argv) {
     LoginDialog loginDialog;
     loginDialog.show();
 
-//    return application.exec();
     return app.exec();
-//    return EXIT_SUCCESS;
 }
