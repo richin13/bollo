@@ -1,8 +1,8 @@
 #include <QtWidgets/qmessagebox.h>
-#include "src/core/build.h"
-#include "src/logger/logger.h"
-#include "src/core/bollo.h"
-#include "src/ui/logindialog.h"
+#include "core/build.h"
+#include "logger/logger.h"
+#include "core/bollo.h"
+#include "ui/logindialog.h"
 
 using namespace bollo;
 
