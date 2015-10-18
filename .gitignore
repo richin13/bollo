@@ -28,4 +28,4 @@
 *.app
 
 # Annoying directories
-.idea/*
+.idea*

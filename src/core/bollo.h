@@ -17,10 +17,12 @@
 #include <QtCore/qsettings.h>
 #include <QtCore/qstandardpaths.h>
 #include <QtCore/qdir.h>
+#include <QtCore/qvector.h>
 
 
 #include "build.h"
 #include "classes/person.h"
+#include "classes/bakery.h"
 
 class BolloApp : public QApplication {
 private:
@@ -29,8 +31,6 @@ private:
     void init_settings(void);
 
     void load_default_settings(void);
-
-
 
 public:
     /* Basic application information */
@@ -48,6 +48,9 @@ public:
 
     /* Settings and directories */
     QDir* app_dir;
+
+    /* Application data */
+    static QVector<Bakery> bakeries;
 
     /* Constructors */
     explicit BolloApp(int argc, char** argv);

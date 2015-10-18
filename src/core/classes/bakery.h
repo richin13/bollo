@@ -11,7 +11,8 @@
 typedef unsigned short int integer_code;
 
 typedef struct bakery_operation {
-    integer_code code;
+    unsigned int bakery_id;
+    integer_code progress;
     QString description;
 } operation;
 
@@ -23,55 +24,48 @@ private:
      * TODO: at the same time */
     unsigned int bakery_id;
     QString bakery_name;
-
     integer_code bakery_state;
     QString bakery_city;//address
 
     operation current_operation;
+    bool closed_down;
 public:
     Bakery();
-
+    ~Bakery();
     Bakery(unsigned int id,
            QString name,
            integer_code state,
-           QString &city) :
+           QString& city) :
             bakery_id(id), bakery_name(name), bakery_state(state),
-            bakery_city(city) { }
+            bakery_city(city) {
+        this->current_operation.bakery_id = this->bakery_id;
+    }
 
-    ~Bakery();
+    unsigned int get_id() const;
+    void set_id(unsigned int);
+    const QString& get_name();
+    void set_name(const QString&);
+    unsigned short get_state() const;
+    void set_state(integer_code);
+    const QString& get_city();
+    void set_city(const QString&);
 
-    unsigned int getBakery_id() const;
-    void setBakery_id(unsigned int);
-    const QString &getBakery_name();
-    void setBakery_name(const QString &);
-    unsigned short getBakery_address_state() const;
-    void setBakery_state(integer_code);
-    const QString &getBakery_address_city();
-    void setBakery_city(const QString &);
-
-    //TODO: Add operations
-    /*
-        Mix ingredients.
-        Fermentation of the dough.
-        Divide dough.
-        Shape the dough.
-        Final fermentation of the dough.
-        Bake bread.
-        Distribute the bread.
-     */
+    /* Operations */
     void mix_ingredients(void);
-    void fermentate_dough(bool _final = false);
+    void ferment_dough(bool is_final = false);
     void divide_dough(void);
     void shape_dough(void);
     void bake_bread(void);
     void distribute_bread(void);
 
+protected:
+    virtual void run() override;
 public slots:
     void close_down(void);
     void set_up(void);
 signals:
-    void operation_changed(const operation &);//TODO: test if const struct can have its members modified.
-
+    void operation_changed(const operation&);
+    void yeast(int dough);
 };
 
 

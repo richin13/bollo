@@ -16,6 +16,8 @@ Person* BolloApp::current_user;
 
 bool BolloApp::success_connection;
 
+QVector<Bakery> BolloApp::bakeries;//TODO: Load'em from db
+
 BolloApp::BolloApp(int argc, char** argv) : QApplication(argc, argv) {
     BolloApp::app_name = "Bollo";
     BolloApp::codename = "Ajonjoli";
