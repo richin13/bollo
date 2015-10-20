@@ -7,6 +7,7 @@
 
 #include <QtCore/qthread.h>
 #include "../build.h"
+#include "baker.h"
 
 typedef unsigned short int integer_code;
 
@@ -16,31 +17,36 @@ typedef struct bakery_operation {
     QString description;
 } operation;
 
-class Bakery : public QThread {//TODO: Is it a Thread?
+class Bakery : public QThread {
 Q_OBJECT
 private:
-    /* TODO: It must be a lightweight class in order to keep the performance
-     * TODO: once there are a variable and vast amount of bakeries working
-     * TODO: at the same time */
+    /* Basic information */
     unsigned int bakery_id;
     QString bakery_name;
     integer_code bakery_state;
     QString bakery_city;//address
 
+    /* Ops */
     operation current_operation;
     bool closed_down;
+    Baker* baker;//Baker thread
 public:
     Bakery();
     ~Bakery();
+
     Bakery(unsigned int id,
            QString name,
            integer_code state,
            QString& city) :
             bakery_id(id), bakery_name(name), bakery_state(state),
             bakery_city(city) {
+        this->baker = new Baker();
         this->current_operation.bakery_id = this->bakery_id;
+        connect(this, &Bakery::yeast, baker, &Baker::start_clean);//TODO: May fail
+        connect(baker, &Baker::clean_ready, this, &Bakery::set_up);// this 1 too
     }
 
+//Kinda unneeded
     unsigned int get_id() const;
     void set_id(unsigned int);
     const QString& get_name();

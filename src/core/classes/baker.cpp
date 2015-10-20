@@ -7,6 +7,7 @@
 
 void Baker::run() {
     QTimer timer;
+    //TODO: should emmit a signal saying clean is ready
 }
 
 

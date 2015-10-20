@@ -7,19 +7,11 @@
 
 
 #include <QtCore/qthread.h>
-#include "bakery.h"
 
 class Baker : public QThread {
 Q_OBJECT
-private:
-    Bakery workplace;
-
 public:
-    Baker(Bakery& _workplace) : workplace(_workplace) {
-        connect(this, Baker::clean_ready, workplace, &Bakery::set_up);
-        connect(workplace, &Bakery::yeast, this, Baker::start_clean);//FIXME: May fail SIGSV
-
-    }
+    Baker() { }
 
     virtual void run() override;
 public slots:
