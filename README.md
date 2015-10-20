@@ -45,7 +45,7 @@ Join [bollodev-team](https://bollodev.slack.com/)
 
 ### TODOs
 
- ~~- Add GUI~~
+ - ~~Add GUI~~
  - Add CORE
  - Add Night Mode
 
