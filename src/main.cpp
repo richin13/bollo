@@ -4,10 +4,14 @@
 #include "core/bollo.h"
 #include "ui/logindialog.h"
 
+#include "ui/mainwindow.h"
+#include "ui/themes.h"
+#include <QApplication>
+
 using namespace bollo;
 
 int main(int argc, char** argv) {
-    BolloApp app(argc, argv);
+    /*BolloApp app(argc, argv);
 
     cout << "Hello, World! I am Bollo\n";
     cout << "This... is... just... the beginning\n";
@@ -25,7 +29,13 @@ int main(int argc, char** argv) {
     }
 
     LoginDialog loginDialog;
-    loginDialog.show();
+    loginDialog.show();*/
 
-    return app.exec();
+    QApplication a(argc, argv);
+    MainWindow w;
+
+    Ui::setDarkTheme();
+    w.show();
+
+    return a.exec();
 }
