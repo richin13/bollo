@@ -51,7 +51,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="resources.qrc">:/images/assets/pending-icon.png</pixmap>
+      <pixmap resource="../resources.qrc">:/images/assets/pending-icon.png</pixmap>
      </property>
     </widget>
     <widget class="QLabel" name="firstFermentIcon">
@@ -79,7 +79,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="resources.qrc">:/images/assets/pending-icon.png</pixmap>
+      <pixmap resource="../resources.qrc">:/images/assets/pending-icon.png</pixmap>
      </property>
     </widget>
     <widget class="QLabel" name="doughDivisionIcon">
@@ -107,7 +107,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="resources.qrc">:/images/assets/pending-icon.png</pixmap>
+      <pixmap resource="../resources.qrc">:/images/assets/pending-icon.png</pixmap>
      </property>
     </widget>
     <widget class="QLabel" name="doughFormingIcon">
@@ -135,7 +135,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="resources.qrc">:/images/assets/pending-icon.png</pixmap>
+      <pixmap resource="../resources.qrc">:/images/assets/pending-icon.png</pixmap>
      </property>
     </widget>
     <widget class="QLabel" name="finalFermentIcon">
@@ -163,7 +163,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="resources.qrc">:/images/assets/pending-icon.png</pixmap>
+      <pixmap resource="../resources.qrc">:/images/assets/pending-icon.png</pixmap>
      </property>
     </widget>
     <widget class="QLabel" name="bakingIcon">
@@ -191,7 +191,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="resources.qrc">:/images/assets/pending-icon.png</pixmap>
+      <pixmap resource="../resources.qrc">:/images/assets/pending-icon.png</pixmap>
      </property>
     </widget>
     <widget class="QLabel" name="shippedIcon">
@@ -219,7 +219,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="resources.qrc">:/images/assets/pending-icon.png</pixmap>
+      <pixmap resource="../resources.qrc">:/images/assets/pending-icon.png</pixmap>
      </property>
     </widget>
     <widget class="QLabel" name="onSaleIcon">
@@ -247,7 +247,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="resources.qrc">:/images/assets/pending-icon.png</pixmap>
+      <pixmap resource="../resources.qrc">:/images/assets/pending-icon.png</pixmap>
      </property>
     </widget>
     <widget class="QProgressBar" name="firstFermentBar">
@@ -477,15 +477,15 @@ QProgressBar::chunk {
     <widget class="QLabel" name="title1">
      <property name="geometry">
       <rect>
-       <x>14</x>
+       <x>6</x>
        <y>110</y>
-       <width>61</width>
+       <width>81</width>
        <height>31</height>
       </rect>
      </property>
      <property name="maximumSize">
       <size>
-       <width>100</width>
+       <width>16777215</width>
        <height>16777215</height>
       </size>
      </property>
@@ -505,9 +505,9 @@ QProgressBar::chunk {
     <widget class="QLabel" name="title2">
      <property name="geometry">
       <rect>
-       <x>140</x>
+       <x>123</x>
        <y>110</y>
-       <width>71</width>
+       <width>101</width>
        <height>31</height>
       </rect>
      </property>
@@ -530,9 +530,9 @@ QProgressBar::chunk {
     <widget class="QLabel" name="title3">
      <property name="geometry">
       <rect>
-       <x>276</x>
+       <x>264</x>
        <y>110</y>
-       <width>61</width>
+       <width>81</width>
        <height>31</height>
       </rect>
      </property>
@@ -555,9 +555,9 @@ QProgressBar::chunk {
     <widget class="QLabel" name="title4">
      <property name="geometry">
       <rect>
-       <x>404</x>
+       <x>394</x>
        <y>110</y>
-       <width>61</width>
+       <width>81</width>
        <height>31</height>
       </rect>
      </property>
@@ -580,9 +580,9 @@ QProgressBar::chunk {
     <widget class="QLabel" name="title5">
      <property name="geometry">
       <rect>
-       <x>530</x>
+       <x>515</x>
        <y>110</y>
-       <width>71</width>
+       <width>101</width>
        <height>31</height>
       </rect>
      </property>
@@ -655,9 +655,9 @@ QProgressBar::chunk {
     <widget class="QLabel" name="title8">
      <property name="geometry">
       <rect>
-       <x>920</x>
+       <x>909</x>
        <y>110</y>
-       <width>71</width>
+       <width>91</width>
        <height>21</height>
       </rect>
      </property>
@@ -750,7 +750,7 @@ QProgressBar::chunk {
      <x>0</x>
      <y>0</y>
      <width>1022</width>
-     <height>20</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -819,7 +819,7 @@ QProgressBar::chunk {
   </widget>
   <action name="actionBakeryList">
    <property name="icon">
-    <iconset resource="resources.qrc">
+    <iconset resource="../resources.qrc">
      <normaloff>:/images/assets/bread-icon.png</normaloff>:/images/assets/bread-icon.png</iconset>
    </property>
    <property name="text">
@@ -831,7 +831,7 @@ QProgressBar::chunk {
   </action>
   <action name="actionShowGraphs">
    <property name="icon">
-    <iconset resource="resources.qrc">
+    <iconset resource="../resources.qrc">
      <normaloff>:/images/assets/graph-icon.png</normaloff>:/images/assets/graph-icon.png</iconset>
    </property>
    <property name="text">
@@ -843,7 +843,7 @@ QProgressBar::chunk {
   </action>
   <action name="actionContinueProcess">
    <property name="icon">
-    <iconset resource="resources.qrc">
+    <iconset resource="../resources.qrc">
      <normaloff>:/images/assets/continue-icon.png</normaloff>:/images/assets/continue-icon.png</iconset>
    </property>
    <property name="text">
@@ -855,7 +855,7 @@ QProgressBar::chunk {
   </action>
   <action name="actionPauseProcess">
    <property name="icon">
-    <iconset resource="resources.qrc">
+    <iconset resource="../resources.qrc">
      <normaloff>:/images/assets/pause-icon.png</normaloff>:/images/assets/pause-icon.png</iconset>
    </property>
    <property name="text">
@@ -867,7 +867,7 @@ QProgressBar::chunk {
   </action>
   <action name="actionCancelProcess">
    <property name="icon">
-    <iconset resource="resources.qrc">
+    <iconset resource="../resources.qrc">
      <normaloff>:/images/assets/cancel-icon.png</normaloff>:/images/assets/cancel-icon.png</iconset>
    </property>
    <property name="text">
@@ -879,7 +879,7 @@ QProgressBar::chunk {
   </action>
   <action name="actionBakeryLog">
    <property name="icon">
-    <iconset resource="resources.qrc">
+    <iconset resource="../resources.qrc">
      <normaloff>:/images/assets/log-icon.png</normaloff>:/images/assets/log-icon.png</iconset>
    </property>
    <property name="text">
@@ -987,6 +987,7 @@ QProgressBar::chunk {
   </action>
  </widget>
  <resources>
+  <include location="../resources.qrc"/>
   <include location="resources.qrc"/>
  </resources>
  <connections/>
