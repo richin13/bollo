@@ -10,12 +10,7 @@
 //std libs
 #include "../core/build.h"
 
-namespace bollo {
-
-    namespace query {
-        int login(const QString, const QByteArray);
-    }
-}
+int login(const QString, const QByteArray);
 
 
 #endif //BOLLO_SQL_H

@@ -9,9 +9,8 @@
 #include <QtCore/qcryptographichash.h>
 #include <QDebug>
 
-using namespace bollo::query;
 
-int bollo::query::login(const QString username, const QByteArray raw_pw) {
+int login(const QString username, const QByteArray raw_pw) {
     int user_id = 0;
     const char* std_str = raw_pw.constData();
     QString _pw = QString(QCryptographicHash::hash(std_str, QCryptographicHash::Sha1).toHex());

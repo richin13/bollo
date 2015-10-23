@@ -11,21 +11,16 @@
 #include <QtSql/qsqldatabase.h>
 #include "../io/sql.h"
 
-using namespace bollo::query;
+extern QSemaphore mtx;
 
-namespace bollo {
-    namespace logger {
-        extern QSemaphore mtx;
-        class LogBook {
-            int bakery_id;
-        public:
-            LogBook &operator<<(const QString);
-            LogBook &bakery(int);
-        };
+class LogBook {
+    int bakery_id;
+public:
+    LogBook& operator<<(const QString);
+    LogBook& bakery(int);
+};
 
-    }
 
-    extern logger::LogBook _log;
-}
+extern LogBook _log;
 
 #endif //BOLLO_LOGGER_H

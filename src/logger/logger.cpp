@@ -6,11 +6,10 @@
 #include <QtCore/qvariant.h>
 #include "logger.h"
 
-using namespace bollo::logger;
 
-LogBook bollo::_log;
+LogBook _log;
 
-QSemaphore bollo::logger::mtx(1);
+QSemaphore mtx(1);
 
 /**
  * Overloaded function for the '<<' operator.
