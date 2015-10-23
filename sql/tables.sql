@@ -10,14 +10,14 @@ CREATE TABLE bollo_logbook (
 	logbook_id SERIAL,
     logbook_description VARCHAR(100) NOT NULL,
     logbook_date DATE NOT NULL DEFAULT CURRENT_DATE,
-    logbook_time TIME without time zone NOT NULL DEFAULT(NOW() at time zone 'utc-6'),
+    logbook_time TIME without time zone NOT NULL DEFAULT(CURRENT_TIME at time zone 'utc-6'),
     logbook_bakery INT,
     CONSTRAINT logbook_PK PRIMARY KEY (logbook_id),
     CONSTRAINT logbook_bakery_FK FOREIGN KEY(logbook_bakery)
     REFERENCES bollo_bakery(bakery_id)
     ON UPDATE CASCADE ON DELETE CASCADE
 );
-CREATE TABLE bollo_lb_problem (
+CREATE TABLE bollo_logbook_problem (
     logbook_id INT NOT NULL,
     problem_dough FLOAT NOT NULL,
     CONSTRAINT lb_problem_FK FOREIGN KEY(logbook_id)
@@ -33,6 +33,7 @@ CREATE TABLE bollo_user (
     user_email TEXT NOT NULL UNIQUE,
     user_token INT NULL,
     user_forgot_token CHAR(16) NULL DEFAULT NULL UNIQUE,
+    user_session_token TEXT NULL DEFAULT NULL UNIQUE,
     CONSTRAINT user_PK PRIMARY KEY(user_id, user_username)
 );
 CREATE TABLE bollo_inactive_account (
@@ -45,6 +46,9 @@ CREATE TABLE bollo_inactive_account (
     REFERENCES bollo_user(user_id, user_username)
     ON UPDATE CASCADE ON DELETE CASCADE
 );
+
+
+
 CREATE TABLE bollo_api (
 	api_id SERIAL,
     api_token CHAR(16) NOT NULL UNIQUE,
