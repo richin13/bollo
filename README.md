@@ -1,6 +1,4 @@
-[![Build Status](https://magnum.travis-ci.com/richin13/bollo.svg?token=p369YzepyGqbGJ8VGohq&branch=ajonjoli)](https://magnum.travis-ci.com/richin13/bollo)
-
-# Bollo
+# Bollo [![Build Status](https://magnum.travis-ci.com/richin13/bollo.svg?token=p369YzepyGqbGJ8VGohq&branch=ajonjoli)](https://magnum.travis-ci.com/richin13/bollo)
 
 Bollo is a bakery-management system aimed to handle a variable number of bakeries at the same time. It uses PostgreSQL and a versatile API build just for it.
 
@@ -47,7 +45,7 @@ Join [bollodev-team](https://bollodev.slack.com/)
 
 ### TODOs
 
- - Add GUI
+ - ~~Add GUI~~
  - Add CORE
  - Add Night Mode
 

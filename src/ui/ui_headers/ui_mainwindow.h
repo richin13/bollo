@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'mainwindow.ui'
+** Form generated from reading UI file 'mainwindowSA6952.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.5.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef UI_MAINWINDOW_H
-#define UI_MAINWINDOW_H
+#ifndef MAINWINDOWSA6952_H
+#define MAINWINDOWSA6952_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
@@ -301,32 +301,32 @@ public:
         shippedBar->setTextVisible(false);
         title1 = new QLabel(groupBox);
         title1->setObjectName(QStringLiteral("title1"));
-        title1->setGeometry(QRect(14, 110, 61, 31));
-        title1->setMaximumSize(QSize(100, 16777215));
+        title1->setGeometry(QRect(6, 110, 81, 31));
+        title1->setMaximumSize(QSize(16777215, 16777215));
         title1->setStyleSheet(QStringLiteral(""));
         title1->setAlignment(Qt::AlignCenter);
         title1->setWordWrap(true);
         title2 = new QLabel(groupBox);
         title2->setObjectName(QStringLiteral("title2"));
-        title2->setGeometry(QRect(140, 110, 71, 31));
+        title2->setGeometry(QRect(123, 110, 101, 31));
         title2->setMaximumSize(QSize(120, 16777215));
         title2->setAlignment(Qt::AlignCenter);
         title2->setWordWrap(true);
         title3 = new QLabel(groupBox);
         title3->setObjectName(QStringLiteral("title3"));
-        title3->setGeometry(QRect(276, 110, 61, 31));
+        title3->setGeometry(QRect(264, 110, 81, 31));
         title3->setMaximumSize(QSize(100, 16777215));
         title3->setAlignment(Qt::AlignCenter);
         title3->setWordWrap(true);
         title4 = new QLabel(groupBox);
         title4->setObjectName(QStringLiteral("title4"));
-        title4->setGeometry(QRect(404, 110, 61, 31));
+        title4->setGeometry(QRect(394, 110, 81, 31));
         title4->setMaximumSize(QSize(100, 16777215));
         title4->setAlignment(Qt::AlignCenter);
         title4->setWordWrap(true);
         title5 = new QLabel(groupBox);
         title5->setObjectName(QStringLiteral("title5"));
-        title5->setGeometry(QRect(530, 110, 71, 31));
+        title5->setGeometry(QRect(515, 110, 101, 31));
         title5->setMaximumSize(QSize(120, 16777215));
         title5->setAlignment(Qt::AlignCenter);
         title5->setWordWrap(true);
@@ -344,7 +344,7 @@ public:
         title7->setWordWrap(true);
         title8 = new QLabel(groupBox);
         title8->setObjectName(QStringLiteral("title8"));
-        title8->setGeometry(QRect(920, 110, 71, 21));
+        title8->setGeometry(QRect(909, 110, 91, 21));
         title8->setMaximumSize(QSize(120, 16777215));
         title8->setAlignment(Qt::AlignCenter);
         title8->setWordWrap(true);
@@ -366,7 +366,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QStringLiteral("menubar"));
-        menubar->setGeometry(QRect(0, 0, 1022, 20));
+        menubar->setGeometry(QRect(0, 0, 1022, 21));
         menuFile = new QMenu(menubar);
         menuFile->setObjectName(QStringLiteral("menuFile"));
         menuEdit = new QMenu(menubar);
@@ -524,4 +524,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // UI_MAINWINDOW_H
+#endif // MAINWINDOWSA6952_H

@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_headers/ui_mainwindow.h"
 #include "menuactionmanager.h"
+#include "themes.h"
 
 #include <QDebug>
 #include <QMovie>
@@ -12,6 +13,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // MainWindow Setup
     ui->setupUi(this);
+
+    // Check dark theme toggle box, since its applied by default
+    setChecked(Ui::DARK);
 
     connectWidgets();
 }
@@ -73,11 +77,13 @@ void MainWindow::setChecked(Ui::Theme theme) {
     if (theme == Ui::DARK) {
 
         ui->actionThemeLight->setChecked(false);
+        ui->actionThemeDark->setChecked(true);
     }
 
     else {
 
         ui->actionThemeDark->setChecked(false);
+        ui->actionThemeLight->setChecked(true);
     }
 }
 
@@ -123,6 +129,9 @@ void MainWindow::connectMenuActions() {
     MenuActionManager* actManager = new MenuActionManager(this);
 
     connect(ui->actionTelegram, SIGNAL(triggered(bool)), actManager, SLOT(telegramMenu()));
+
+    // File menu
+    connect(ui->actionExit, SIGNAL(triggered(bool)), actManager, SLOT(exit()));
 
     // Edit menu
     connect(ui->actionThemeLight, SIGNAL(triggered(bool)), actManager,SLOT(setDefaultTheme()));

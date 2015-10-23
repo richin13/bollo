@@ -1,4 +1,5 @@
 #include <iostream>
+#include <QApplication>
 
 #include "mainwindow.h"
 #include "menuactionmanager.h"
@@ -71,7 +72,8 @@ void MenuActionManager::signOut() {
 
 void MenuActionManager::exit() {
 
-
+    // Implement proper application closing action.
+    qApp->quit();
 }
 
 // ============ EDIT MENU ================
