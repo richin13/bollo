@@ -74,7 +74,7 @@ public:
 
     void setupUi(QDialog* LoginDialog) {
         if(LoginDialog->objectName().isEmpty())
-            LoginDialog->setObjectName(BolloApp::windowTittle());
+            LoginDialog->setObjectName("MainWindow");
         LoginDialog->resize(273, 262);
         tabWidget = new QTabWidget(LoginDialog);
         tabWidget->setObjectName(QStringLiteral("tabWidget"));

@@ -9,7 +9,7 @@ Bakery::Bakery() {
 }
 
 Bakery::~Bakery() {
-    //TODO
+    delete baker;
 }
 
 unsigned int Bakery::get_id() const {
@@ -143,7 +143,11 @@ void Bakery::set_up(void) {
     closed_down = false;
     current_operation.progress = 0;
     current_operation.description = "";
-    //TODO: Should emmit a signal saying: "Hey, I am ready"
+    /* TODO: Should emmit a signal saying: "Hey, I am ready"
+        so we can notify, through the UI or, why not, an email to
+        the administrator.
+     */
+    this->start();
 }
 
 void Bakery::run() {

@@ -24,6 +24,7 @@
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
+#include "../../core/bollo.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -419,7 +420,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Bollo - Pre-alpha [Codename: Ajonjoli]", 0));
+        MainWindow->setWindowTitle(BolloApp::get().windowTittle());
         actionBakeryList->setText(QApplication::translate("MainWindow", "bakeryList", 0));
 #ifndef QT_NO_TOOLTIP
         actionBakeryList->setToolTip(QApplication::translate("MainWindow", "Lista de panaderias", 0));

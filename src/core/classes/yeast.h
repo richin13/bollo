@@ -6,14 +6,20 @@
 #define BOLLO_YEAST_H
 
 
-#include <QtCore/qobject.h>
+#include <QtCore/qthread.h>
 
-class Yeast : public QObject {
+class Yeast : public QThread {
 Q_OBJECT
 private:
+    bool on;
 public:
     Yeast();
-    ~Yeast();
+    virtual void run() override;
+
+public slots:
+    void select_yeast(void);
+signals:
+    void contaminated_yeast(void);
 };
 
 

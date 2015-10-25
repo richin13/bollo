@@ -26,7 +26,7 @@ public:
 
     ~LoginDialog();
 
-private slots:
+public slots:
 
     void on_qb_exit_clicked();
 
@@ -37,6 +37,7 @@ private slots:
 private:
     Ui::LoginDialog* ui;
     int user_id;
+    QNetworkAccessManager* manager;
 };
 
 #endif //BOLLO_LOGINDIALOG_H

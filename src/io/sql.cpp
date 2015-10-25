@@ -12,21 +12,18 @@
 
 int login(const QString username, const QByteArray raw_pw) {
     int user_id = 0;
-    const char* std_str = raw_pw.constData();
-    QString _pw = QString(QCryptographicHash::hash(std_str, QCryptographicHash::Sha1).toHex());
+    QString _pw = QString(QCryptographicHash::hash(raw_pw.constData(), QCryptographicHash::Sha256).toHex());
     QSqlQuery query;
-    query.prepare("SELECT user_id FROM bollo_user WHERE user_username = ? AND user_password = ?");
+    query.prepare("SELECT user_id FROM bollo_user WHERE user_username = :usr AND user_password = :pw");
 
-    query.addBindValue(QVariant(username));
-    query.addBindValue(QVariant(_pw));
-
+    query.bindValue(":usr", QVariant(username));
+    query.bindValue(":pw", QVariant(_pw));
     query.exec();
 
     if(query.next()) {
         //TODO: log that login was successful!
         user_id = query.value(0).toInt();
     }
-
     return user_id;
 
 }
