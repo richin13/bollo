@@ -9,15 +9,22 @@
 #include <QtCore/qsemaphore.h>
 #include "../core/build.h"
 #include <QtSql/qsqldatabase.h>
+#include <QtSql/qsqlerror.h>
 #include "../io/sql.h"
+#include <QDebug>
 
 extern QSemaphore mtx;
 
 class LogBook {
     int bakery_id;
+    int dough;
+    bool normal;
 public:
-    LogBook& operator<<(const QString);
-    LogBook& bakery(int);
+    LogBook& operator<<(const QString&);
+    LogBook& general(int);
+    LogBook& problem(int, int);
+
+    int insert_logbook_entry(QString, int);
 };
 
 
