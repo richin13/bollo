@@ -477,7 +477,7 @@ QProgressBar::chunk {
     <widget class="QLabel" name="title1">
      <property name="geometry">
       <rect>
-       <x>6</x>
+       <x>4</x>
        <y>110</y>
        <width>81</width>
        <height>31</height>
@@ -485,7 +485,7 @@ QProgressBar::chunk {
      </property>
      <property name="maximumSize">
       <size>
-       <width>16777215</width>
+       <width>100</width>
        <height>16777215</height>
       </size>
      </property>
@@ -505,7 +505,7 @@ QProgressBar::chunk {
     <widget class="QLabel" name="title2">
      <property name="geometry">
       <rect>
-       <x>123</x>
+       <x>125</x>
        <y>110</y>
        <width>101</width>
        <height>31</height>
@@ -530,7 +530,7 @@ QProgressBar::chunk {
     <widget class="QLabel" name="title3">
      <property name="geometry">
       <rect>
-       <x>264</x>
+       <x>265</x>
        <y>110</y>
        <width>81</width>
        <height>31</height>
@@ -580,7 +580,7 @@ QProgressBar::chunk {
     <widget class="QLabel" name="title5">
      <property name="geometry">
       <rect>
-       <x>515</x>
+       <x>513</x>
        <y>110</y>
        <width>101</width>
        <height>31</height>
@@ -655,7 +655,7 @@ QProgressBar::chunk {
     <widget class="QLabel" name="title8">
      <property name="geometry">
       <rect>
-       <x>909</x>
+       <x>910</x>
        <y>110</y>
        <width>91</width>
        <height>21</height>
@@ -776,6 +776,7 @@ QProgressBar::chunk {
     <addaction name="actionChangePassword"/>
     <addaction name="actionEditBakerys"/>
     <addaction name="menuTemas"/>
+    <addaction name="actionPreferencesPanel"/>
    </widget>
    <widget class="QMenu" name="menuLog">
     <property name="title">
@@ -985,10 +986,18 @@ QProgressBar::chunk {
     <string>Editar panaderias</string>
    </property>
   </action>
+  <action name="actionPreferencesPanel">
+   <property name="text">
+    <string>Preferencias</string>
+   </property>
+   <property name="toolTip">
+    <string>Preferencias de la aplicacion</string>
+   </property>
+  </action>
  </widget>
  <resources>
   <include location="../resources.qrc"/>
-  <include location="resources.qrc"/>
+  <include location="../resources.qrc"/>
  </resources>
  <connections/>
 </ui>

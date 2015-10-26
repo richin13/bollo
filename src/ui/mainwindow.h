@@ -21,15 +21,6 @@ namespace Ui {
 #define BAR_INCREMENT 20
 
 /**
- * Path alias were all the GUI resources
- * are located images, sounds, gifs, etc.
- */
-#define ASSETS_PATH ":/images/assets"
-
-#define DONE_ICON  ASSETS_PATH "/check-icon.png"
-#define LOADING_GIFF_DARK ASSETS_PATH "/loadDark.GIF"
-
-/**
  * @brief Available GUI themes
  * All the available themes to be
  * applied to the GUI.

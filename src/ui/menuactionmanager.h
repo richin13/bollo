@@ -32,6 +32,7 @@ public slots:
     void setDefaultTheme();
     void setDarkTheme();
     void changePassword();
+    void preferencesPanel();
 
     // Tools menu
     void logBrowser();

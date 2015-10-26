@@ -5,6 +5,8 @@
 #include "menuactionmanager.h"
 #include "telegramcpanel.h"
 #include "themes.h"
+#include "bakeryselect.h"
+#include "preferencespanel.h"
 
 using namespace std;
 
@@ -25,7 +27,8 @@ MenuActionManager::~MenuActionManager() {
 
 void MenuActionManager::showBakeryList() {
 
-    cout << "Works bitch" << endl;
+    BakerySelect* bakeryList = new BakerySelect ();
+    bakeryList->show();
 }
 
 void MenuActionManager::showGraphs() {
@@ -93,6 +96,12 @@ void MenuActionManager::setDarkTheme() {
 void MenuActionManager::changePassword() {
 
 
+}
+
+void MenuActionManager::preferencesPanel() {
+
+    PreferencesPanel* prefPanel = new PreferencesPanel();
+    prefPanel->show();
 }
 
 // ============ TOOLS MENU ================

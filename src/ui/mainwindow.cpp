@@ -2,6 +2,7 @@
 #include "ui_headers/ui_mainwindow.h"
 #include "menuactionmanager.h"
 #include "themes.h"
+#include "assets.h"
 
 #include <QDebug>
 #include <QMovie>
@@ -38,7 +39,7 @@ MainWindow::~MainWindow() {
  */
 void MainWindow::setLoadingGif(QLabel* label) {
 
-    loadingGif = new QMovie(LOADING_GIFF_DARK);
+    loadingGif = new QMovie(Ui::LOADING_GIFF_DARK);
     label->setMovie(loadingGif);
     loadingGif->start();
 }
@@ -57,7 +58,7 @@ void MainWindow::setLoadingGif(QLabel* label) {
 void MainWindow::setDoneIcon(QLabel* label) {
 
 
-    label->setPixmap(QPixmap(QString::fromUtf8(DONE_ICON)));
+    label->setPixmap(QPixmap(Ui::DONE_ICON));
 
     qDebug() << "OBJECT -> " << loadingGif << " destroyed";
     delete loadingGif;
@@ -106,7 +107,7 @@ void MainWindow::on_firstFermentBar_valueChanged(int value) {
 
 void MainWindow::on_incrementBtn_clicked() {
 
-    ui->firstFermentBar->setValue(value += 20);
+    ui->firstFermentBar->setValue(value += BAR_INCREMENT);
 }
 
 // TODO: Connect all the remaining widgets
@@ -136,4 +137,5 @@ void MainWindow::connectMenuActions() {
     // Edit menu
     connect(ui->actionThemeLight, SIGNAL(triggered(bool)), actManager,SLOT(setDefaultTheme()));
     connect(ui->actionThemeDark, SIGNAL(triggered(bool)), actManager,SLOT(setDarkTheme()));
+    connect(ui->actionPreferencesPanel, SIGNAL(triggered(bool)), actManager, SLOT(preferencesPanel()));
 }

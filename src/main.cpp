@@ -11,7 +11,7 @@ int main(int argc, char** argv) {
     LoginDialog loginDialog;
     MainWindow w;
     Ui::setDarkTheme();
-    loginDialog.show();
+    //loginDialog.show();
     w.show();
 
     return app.exec();
