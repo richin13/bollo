@@ -6,6 +6,7 @@
 #include <QtWidgets/qmessagebox.h>
 #include <QtWidgets/qapplication.h>
 #include "bollo.h"
+#include "../logger/easylogging++.h"
 
 BolloApp::BolloApp() {
     this->app_dir = new QDir(QDir().homePath() + "/bollo");
@@ -20,6 +21,7 @@ BolloApp::BolloApp() {
 
 
 void BolloApp::init_database(void) {
+    LOG(INFO) << "Starting database server connection";
     this->bollo_db = QSqlDatabase::addDatabase("QPSQL");
     bollo_db.setHostName(HOST);
     bollo_db.setDatabaseName(SCHEMA);
@@ -27,6 +29,7 @@ void BolloApp::init_database(void) {
     bollo_db.setPassword(PASSWORD);
 
     if(!bollo_db.open()) {
+        LOG(FATAL) << "Unable to reach the database server";
         QMessageBox::critical(QApplication::activeWindow(),
                               "Unable to connect to the database server",
                               "An error occurred while trying to reach the PosgreSQL server");

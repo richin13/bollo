@@ -2,15 +2,15 @@
 // Created by ricardo on 05/10/15.
 //
 
-#include <QtSql/qsqlquery.h>
-#include <QtCore/qvariant.h>
-#include <QtWidgets/qapplication.h>
+
 #include "logger.h"
 
 
 LogBook _log;
 
 QSemaphore mtx(1);
+QSemaphore mtx_logger(1);
+QSemaphore mtx_writer(1);
 
 /**
  * Overloaded function for the '<<' operator.
