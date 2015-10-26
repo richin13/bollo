@@ -13,7 +13,7 @@ set(SOURCE_FILES src/main.cpp src/core/classes/bakery.cpp src/core/classes/baker
         src/ui/mainwindow.h src/ui/ui_headers/ui_mainwindow.h src/ui/menuactionmanager.cpp src/ui/menuactionmanager.h
         src/ui/popup.cpp src/ui/popup.h src/ui/ui_headers/ui_popup.h src/ui/telegramcpanel.cpp src/ui/telegramcpanel.h
         src/ui/ui_headers/ui_telegramcpanel.h src/ui/themes.cpp src/ui/themes.h src/core/classes/ministry.cpp
-        src/core/classes/ministry.h src/io/http.cpp src/io/http.h src/ui/assets.h src/ui/bakeryselect.cpp
+        src/core/classes/ministry.h src/io/http.cpp src/io/http.h src/logger/easylogging++.h src/ui/assets.h src/ui/bakeryselect.cpp
         src/ui/bakeryselect.h src/ui/ui_headers/ui_bakeryselect.h src/ui/preferencespanel.cpp src/ui/preferencespanel.h
         src/ui/ui_headers/ui_preferencespanel.h)
 

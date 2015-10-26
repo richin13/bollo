@@ -6,14 +6,25 @@
 #define BOLLO_LOGGER_H
 
 //std libs
+#include <ctime>
+
 #include <QtCore/qsemaphore.h>
-#include "../core/build.h"
-#include <QtSql/qsqldatabase.h>
-#include <QtSql/qsqlerror.h>
-#include "../io/sql.h"
+#include <QtCore/qvariant.h>
 #include <QDebug>
 
+#include <QtSql/qsqldatabase.h>
+#include <QtSql/qsqlerror.h>
+#include <QtSql/qsqlquery.h>
+
+#include "../core/build.h"
+#include "../io/sql.h"
+
 extern QSemaphore mtx;
+extern QSemaphore mtx_writer;
+
+enum LogType {
+    DEBUG, WARNING, ERROR
+};
 
 class LogBook {
     int bakery_id;
@@ -26,7 +37,6 @@ public:
 
     int insert_logbook_entry(QString, int);
 };
-
 
 extern LogBook _log;
 

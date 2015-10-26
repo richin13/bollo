@@ -47,7 +47,7 @@ public:
     QSqlDatabase bollo_db;
 
     /* Settings and directories */
-    QDir* app_dir;
+    QDir* app_dir;//TODO: Find a way to deallocate this!
 
     /* Application data */
     QVector<Bakery> bakeries;
