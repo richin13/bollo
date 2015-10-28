@@ -16,6 +16,9 @@
 
 #include "../core/bollo.h"
 
+
 QUrl* url_builder(QString section, QString module, QHash<QString, QString>& args);
+void extract_json_object(QNetworkReply*, QJsonObject*);
+
 
 #endif //BOLLO_HTTP_H

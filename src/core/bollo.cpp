@@ -5,20 +5,36 @@
 
 #include <QtWidgets/qmessagebox.h>
 #include <QtWidgets/qapplication.h>
+#include <QtNetwork/qnetworkaccessmanager.h>
+#include <QtCore/qjsondocument.h>
+#include <QtCore/qjsonarray.h>
 #include "bollo.h"
 #include "../logger/easylogging++.h"
+#include "../io/http.h"
+#include "../io/handler.h"
 
 BolloApp::BolloApp() {
     this->app_dir = new QDir(QDir().homePath() + "/bollo");
-
+    this->manager = new QNetworkAccessManager(this);
     //TODO: Add a splash screen to make the whole process more user-friendly
     /* The database connection - Only need to be done once */
     init_database();
 
     /* The app settings stored at home directory */
     init_settings();
+
+    load_bakeries_from_db();
+
+    /* Object connections */
+    connect(this, &BolloApp::destroyed, this, &BolloApp::deleteLater);
 }
 
+BolloApp::~BolloApp() {
+    LOG(DEBUG) << "Freeing allocated objects in BolloApp class";
+    delete app_dir;
+    delete manager;
+    delete current_user;
+}
 
 void BolloApp::init_database(void) {
     LOG(INFO) << "Starting database server connection";
@@ -75,6 +91,37 @@ void BolloApp::load_default_settings(void) {
     bollo_settings.setValue(QStringLiteral("db_pass"), QVariant(PASSWORD));
     bollo_settings.setValue(QStringLiteral("db_schema"), QVariant(SCHEMA));
     bollo_settings.endGroup();
+}
+
+void BolloApp::load_bakeries_from_db() {
+    LOG(DEBUG) << "Loading bakeries through web API";
+
+    //Request all
+    QHash<QString, QString> args;
+    args["all"];
+    QUrl* url = url_builder("bakeries", "bakery", args);
+    LOG(INFO) << "Sending GET request to " + url->toString().toStdString();
+
+    connect(manager, &QNetworkAccessManager::finished, this, &BolloApp::loaded_bakeries);
+    manager->get(QNetworkRequest(*url));
+}
+
+void BolloApp::loaded_bakeries(QNetworkReply* reply) {
+    LOG(INFO) << "Got reply from server";
+    QJsonObject jsonObject;
+
+    extract_json_object(reply, &jsonObject);
+
+    if(!jsonObject.take("code").toInt()) {
+        QJsonArray array = jsonObject.take("bakeries").toArray();
+        Handler::get_bakeries_vector(&array);
+
+        LOG(INFO) << "Loaded bakeries: " + std::to_string(BolloApp::get().bakeries.size());
+    } else {
+        LOG(WARNING) << "Error code in response " + jsonObject.take("message").toString().toStdString();
+    }
+
+    connect(reply, &QNetworkReply::finished, reply, &QNetworkReply::deleteLater);
 }
 
 QString BolloApp::windowTittle() {

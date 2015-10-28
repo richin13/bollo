@@ -22,26 +22,39 @@
 #include <QtCore/qstandardpaths.h>
 #include <QtCore/qdir.h>
 #include <QtCore/qvector.h>
+#include <QtNetwork/qnetworkreply.h>
 
 #include "build.h"
 #include "classes/person.h"
 #include "classes/bakery.h"
 
-class BolloApp {
+class BolloApp : public QObject {
+Q_OBJECT
 private:
     BolloApp();
+
+    ~BolloApp();
 
     BolloApp(const BolloApp&) { }
 
     void operator=(BolloApp const&) { }
+
+
     void init_database(void);
 
     void init_settings(void);
 
     void load_default_settings(void);
+
+    void load_bakeries_from_db();
+
+
 public:
-    /* User information */
+/* User information */
     Person* current_user;
+
+    /* Networking connection manager */
+    QNetworkAccessManager* manager;
 
     /* Database connection information */
     QSqlDatabase bollo_db;
@@ -50,11 +63,14 @@ public:
     QDir* app_dir;//TODO: Find a way to deallocate this!
 
     /* Application data */
-    QVector<Bakery> bakeries;
+    std::vector<Bakery> bakeries;
 
     QString windowTittle();
 
     static BolloApp& get();
+
+public slots:
+    void loaded_bakeries(QNetworkReply*);
 };
 
 

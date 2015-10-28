@@ -4,12 +4,20 @@
 
 #include "bakery.h"
 
-Bakery::Bakery() {
-    //TODO
+Bakery::Bakery(const Bakery& cpy) {
+    bakery_id = cpy.get_id();
+    bakery_name = cpy.get_name();
+    bakery_state = cpy.get_state();
+    bakery_city = cpy.get_city();
+    bakery_stock = cpy.get_stock();
+
+    current_operation = cpy.get_current_op();
+    closed_down = cpy.is_closed_down();
+    baker = cpy.get_baker();
 }
 
 Bakery::~Bakery() {
-    delete baker;
+//    delete baker;
 }
 
 unsigned int Bakery::get_id() const {
@@ -20,7 +28,7 @@ void Bakery::set_id(unsigned int bakery_id) {
     this->bakery_id = bakery_id;
 }
 
-const QString& Bakery::get_name() {
+const QString& Bakery::get_name() const {
     return bakery_name;
 }
 
@@ -28,20 +36,52 @@ void Bakery::set_name(const QString& bakery_name) {
     this->bakery_name = bakery_name;
 }
 
-unsigned short Bakery::get_state() const {
+QString Bakery::get_state() const {
     return bakery_state;
 }
 
-void Bakery::set_state(unsigned short bakery_address_state) {
-    this->bakery_state = bakery_address_state;
+void Bakery::set_state(QString bakery_state) {
+    this->bakery_state = bakery_state;
 }
 
-const QString& Bakery::get_city() {
+QString Bakery::get_city() const {
     return bakery_city;
 }
 
 void Bakery::set_city(const QString& bakery_city) {
     this->bakery_city = bakery_city;
+}
+
+int Bakery::get_stock() const {
+    return this->bakery_stock;
+}
+
+void Bakery::set_stock(int stock) {
+    this->bakery_stock = stock;
+}
+
+const operation& Bakery::get_current_op() const {
+    return current_operation;
+}
+
+void Bakery::set_current_op(const operation& current_operation) {
+    Bakery::current_operation = current_operation;
+}
+
+bool Bakery::is_closed_down() const {
+    return closed_down;
+}
+
+void Bakery::set_closed_down(bool closed_down) {
+    Bakery::closed_down = closed_down;
+}
+
+Baker* Bakery::get_baker() const {
+    return baker;
+}
+
+void Bakery::set_baker(Baker* baker) {
+    this->baker = baker;
 }
 
 void Bakery::mix_ingredients(void) {
@@ -147,10 +187,10 @@ void Bakery::set_up(void) {
         so we can notify, through the UI or, why not, an email to
         the administrator.
      */
-    this->start();
+//    this->start();
 }
 
-void Bakery::run() {
+void Bakery::_run() {
     while(!closed_down) {
         mix_ingredients();
         ferment_dough();

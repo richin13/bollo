@@ -17,31 +17,41 @@ typedef struct bakery_operation {
     QString description;
 } operation;
 
-class Bakery : public QThread {
+class Bakery : public QObject {
 Q_OBJECT
 private:
     /* Basic information */
     unsigned int bakery_id;
     QString bakery_name;
-    integer_code bakery_state;
+    QString bakery_state;
     QString bakery_city;//address
+    int bakery_stock;
 
     /* Ops */
     operation current_operation;
     bool closed_down;
     Baker* baker;//Baker thread
 public:
-    Bakery();
+    Bakery(){}
+    Bakery(const Bakery&);
     ~Bakery();
 
     Bakery(unsigned int id,
-           QString name,
-           integer_code state,
-           QString& city) :
-            bakery_id(id), bakery_name(name), bakery_state(state),
-            bakery_city(city) {
+           const QString& name,
+           const QString& state,
+           const QString& city,
+            int stock, int progress, const QString& status) :
+            bakery_id(id),
+            bakery_name(name),
+            bakery_state(state),
+            bakery_city(city),
+            bakery_stock(stock) {
+
         this->baker = new Baker();
         this->current_operation.bakery_id = this->bakery_id;
+        this->current_operation.progress = (integer_code) progress;
+        this->current_operation.description = status;
+
         connect(this, &Bakery::yeast, baker, &Baker::start_clean);//TODO: May fail
         connect(baker, &Baker::clean_ready, this, &Bakery::set_up);// this 1 too
     }
@@ -49,12 +59,22 @@ public:
 //Kinda unneeded
     unsigned int get_id() const;
     void set_id(unsigned int);
-    const QString& get_name();
+    const QString& get_name() const;
     void set_name(const QString&);
-    unsigned short get_state() const;
-    void set_state(integer_code);
-    const QString& get_city();
+    QString get_state() const;
+    void set_state(QString);
+    QString get_city() const;
     void set_city(const QString&);
+    int get_stock() const;
+    void set_stock(int);
+
+    const operation& get_current_op() const;
+    void set_current_op(const operation&);
+    bool is_closed_down() const;
+    void set_closed_down(bool);
+    Baker* get_baker() const;
+    void set_baker(Baker*);
+
 
     /* Operations */
     void mix_ingredients(void);
@@ -63,9 +83,7 @@ public:
     void shape_dough(void);
     void bake_bread(void);
     void distribute_bread(void);
-
-protected:
-    virtual void run() override;
+    void _run();
 public slots:
     void close_down(void);
     void set_up(void);

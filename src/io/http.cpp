@@ -5,6 +5,7 @@
 
 #include <QtCore/qjsondocument.h>
 #include "http.h"
+#include "../logger/easylogging++.h"
 
 /**
  * @brief Builds a new URL to make a request to it.
@@ -28,3 +29,6 @@ QUrl* url_builder(QString section, QString module, QHash<QString, QString>& args
     return url;
 }
 
+void extract_json_object(QNetworkReply* rep, QJsonObject * json) {
+    *json = QJsonDocument::fromJson(rep->readAll()).object();
+}

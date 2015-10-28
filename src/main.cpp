@@ -14,15 +14,15 @@ std::string* _app_dir();
 int main(int argc, char** argv) {
     START_EASYLOGGINGPP(argc, argv);
     init_log();
-    LOG(INFO) << "Application starting";
 
+    LOG(INFO) << "Application starting";
     QApplication app(argc, argv);
     BolloApp& a = BolloApp::get();
 
     LoginDialog loginDialog;
     MainWindow w;
     Ui::setDarkTheme();
-    //loginDialog.show();
+    loginDialog.show();
     w.show();
 
     return app.exec();

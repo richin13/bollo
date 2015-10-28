@@ -12,6 +12,7 @@ class Baker : public QThread {
 Q_OBJECT
 public:
     Baker() { }
+    ~Baker(){}
 
     virtual void run() override;
 public slots:

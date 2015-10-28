@@ -12,7 +12,7 @@ Ministry::Ministry() {
 void Ministry::run() {
     qsrand((uint) QTime::currentTime().msec());
     for(int i = 0; i > 0; i++) {//To avoid endless loop warning!
-        int rnd = qrand() % app->bakeries.size();
+        unsigned long rnd = qrand() % app->bakeries.size();
         const Bakery& b = app->bakeries.at(rnd);
 
     }
