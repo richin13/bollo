@@ -3,13 +3,17 @@
 #include "bakeryselect.h"
 #include "ui_headers/ui_bakeryselect.h"
 #include "assets.h"
+#include "../core/bollo.h"
 
 BakerySelect::BakerySelect(QWidget *parent) : QDialog(parent),
     ui(new Ui::bakerySelect) {
 
     ui->setupUi(this);
 
-    addBakery("Panaderia penecito", "Amazando", 10);
+    int size = (int) BolloApp::get().bakeries.size();
+    for(int i = 0; i < size; ++i) {
+        addBakery(BolloApp::get().bakeries.at(i));
+    }
 }
 
 BakerySelect::~BakerySelect() {
@@ -25,14 +29,17 @@ void BakerySelect::checkAvailableBakeries() {
      */
 }
 
-void BakerySelect::addBakery(QString bakeryName, QString status, int progress) {
+void BakerySelect::addBakery(const Bakery& bakery) {
 
     QCommandLinkButton* button = new QCommandLinkButton();
 
-    QString buttonDesc = bakeryName + " | Estado: " + status + " (" +
-            QString::number(progress) + "%)";
+    QString formatted =
+            QString("%1 - %2| Estado: %3 (%4%)").arg(bakery.get_name(),
+                                                     bakery.get_city(),
+                                                     bakery.get_current_op().description,
+                                                     QVariant(bakery.get_current_op().progress % 100).toString());
 
-    button->setText(buttonDesc);
+    button->setText(formatted);
     button->setIcon(QIcon(Ui::SHOP_ICON));
 
     ui->layout->addWidget(button);

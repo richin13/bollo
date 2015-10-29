@@ -15,7 +15,7 @@ set(SOURCE_FILES src/main.cpp src/core/classes/bakery.cpp src/core/classes/baker
         src/ui/ui_headers/ui_telegramcpanel.h src/ui/themes.cpp src/ui/themes.h src/core/classes/ministry.cpp
         src/core/classes/ministry.h src/io/http.cpp src/io/http.h src/logger/easylogging++.h src/ui/assets.h src/ui/bakeryselect.cpp
         src/ui/bakeryselect.h src/ui/ui_headers/ui_bakeryselect.h src/ui/preferencespanel.cpp src/ui/preferencespanel.h
-        src/ui/ui_headers/ui_preferencespanel.h src/io/handler.h)
+        src/ui/ui_headers/ui_preferencespanel.h src/io/handler.h src/core/bollo_constants.h src/core/bollo_constants.cpp)
 
 find_package(Qt5Core REQUIRED)
 find_package(Qt5Widgets REQUIRED)

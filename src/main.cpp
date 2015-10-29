@@ -19,11 +19,12 @@ int main(int argc, char** argv) {
     QApplication app(argc, argv);
     BolloApp& a = BolloApp::get();
 
+    Ui::setDarkTheme();
     LoginDialog loginDialog;
     MainWindow w;
-    Ui::setDarkTheme();
+
+    QObject::connect(&loginDialog, &LoginDialog::logged_in, &w, &MainWindow::show);
     loginDialog.show();
-    w.show();
 
     return app.exec();
 }

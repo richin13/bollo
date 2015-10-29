@@ -17,11 +17,12 @@ BolloApp::BolloApp() {
     this->app_dir = new QDir(QDir().homePath() + "/bollo");
     this->manager = new QNetworkAccessManager(this);
     //TODO: Add a splash screen to make the whole process more user-friendly
-    /* The database connection - Only need to be done once */
-    init_database();
 
     /* The app settings stored at home directory */
     init_settings();
+
+    /* The database connection - Only need to be done once */
+    init_database();
 
     load_bakeries_from_db();
 
@@ -36,61 +37,94 @@ BolloApp::~BolloApp() {
     delete current_user;
 }
 
-void BolloApp::init_database(void) {
-    LOG(INFO) << "Starting database server connection";
-    this->bollo_db = QSqlDatabase::addDatabase("QPSQL");
-    bollo_db.setHostName(HOST);
-    bollo_db.setDatabaseName(SCHEMA);
-    bollo_db.setUserName(USER);
-    bollo_db.setPassword(PASSWORD);
-
-    if(!bollo_db.open()) {
-        LOG(FATAL) << "Unable to reach the database server";
-        QMessageBox::critical(QApplication::activeWindow(),
-                              "Unable to connect to the database server",
-                              "An error occurred while trying to reach the PosgreSQL server");
-    }
-}
-
-//TODO: Load bakeries from DB >> Assigned to @Castle0721
-
 void BolloApp::init_settings(void) {
+    LOG(INFO) << "Loading Bollo settings";
     QString absolute_path = this->app_dir->absolutePath();
 
     if(!this->app_dir->exists()) {
         QDir().mkdir(absolute_path);
         load_default_settings();
     } else {
-        QFileInfo config_file = QFileInfo(absolute_path + "/settings/bollo.ini");
+        QFileInfo config_file = QFileInfo(config_file_path());
         if(!config_file.exists()) {
             load_default_settings();
+        } else {
+            load_settings();
         }
     }
 }
 
 void BolloApp::load_default_settings(void) {
-    QString fullPath = this->app_dir->absolutePath() + "/settings/bollo.ini";
+    QString fullPath = config_file_path();
 
     if(QFile::exists(fullPath)) {
         QFile::remove(fullPath);
     }
 
-    QFileInfo config_file = QFileInfo(fullPath);
-    QSettings bollo_settings(config_file.absoluteFilePath(), QSettings::NativeFormat);
+    QSettings bollo_settings(fullPath, QSettings::NativeFormat);
 
     /* Networking settings */
     bollo_settings.beginGroup(QStringLiteral("Networking"));
-    bollo_settings.setValue(QStringLiteral("host_url"), QVariant(WEB_HOST));
-    bollo_settings.setValue(QStringLiteral("api_path"), QVariant(API_PATH));
+    bollo_settings.setValue(QStringLiteral("host_url"), QVariant(""));
+    bollo_settings.setValue(QStringLiteral("api_path"), QVariant(""));
     bollo_settings.endGroup();
 
     /* Db settings */
     bollo_settings.beginGroup(QStringLiteral("Database"));
-    bollo_settings.setValue(QStringLiteral("db_host"), QVariant(HOST));
-    bollo_settings.setValue(QStringLiteral("db_user"), QVariant(USER));
-    bollo_settings.setValue(QStringLiteral("db_pass"), QVariant(PASSWORD));
-    bollo_settings.setValue(QStringLiteral("db_schema"), QVariant(SCHEMA));
+    bollo_settings.setValue(QStringLiteral("db_host"), QVariant(""));
+    bollo_settings.setValue(QStringLiteral("db_user"), QVariant(""));
+    bollo_settings.setValue(QStringLiteral("db_pass"), QVariant(""));
+    bollo_settings.setValue(QStringLiteral("db_schema"), QVariant(""));
     bollo_settings.endGroup();
+
+    /* General operations settings */
+    bollo_settings.beginGroup(QStringLiteral("Operations"));
+    bollo_settings.setValue(QStringLiteral("average_production"), QVariant(55));
+    bollo_settings.setValue(QStringLiteral("dough_per_batch"), QVariant(15));
+    bollo_settings.setValue(QStringLiteral("poll_probability"), QVariant(10));
+    bollo_settings.setValue(QStringLiteral("badyeast_probability"), QVariant(10));//Man, this is hard
+    bollo_settings.endGroup();
+}
+
+void BolloApp::load_settings(void) {
+    QString cf_path = config_file_path();
+
+    if(!QFile::exists(cf_path)) {
+        throw std::exception();
+    }
+
+    QSettings bollo_settings(cf_path, QSettings::NativeFormat);
+
+    /* Networking settings */
+    bollo_settings.beginGroup(QStringLiteral("Networking"));
+    Constants::API_HOST = bollo_settings.value("host_url").toString();
+    Constants::API_PATH = bollo_settings.value("api_path").toString();
+    bollo_settings.endGroup();
+
+    /* Db settings */
+    bollo_settings.beginGroup(QStringLiteral("Database"));
+    Constants::DB_HOST = bollo_settings.value("db_host").toString();
+    Constants::DB_USERNAME = bollo_settings.value("db_user").toString();
+    Constants::DB_PASSWORD = bollo_settings.value("db_pass").toString();
+    Constants::DB_SCHEME = bollo_settings.value("db_schema").toString();
+    bollo_settings.endGroup();
+
+}
+
+void BolloApp::init_database(void) {
+    LOG(INFO) << "Starting database server connection";
+    this->bollo_db = QSqlDatabase::addDatabase("QPSQL");
+    bollo_db.setHostName(Constants::DB_HOST);
+    bollo_db.setDatabaseName(Constants::DB_SCHEME);
+    bollo_db.setUserName(Constants::DB_USERNAME);
+    bollo_db.setPassword(Constants::DB_PASSWORD);
+
+    if(!bollo_db.open()) {
+        LOG(FATAL) << "Unable to reach the database server";
+        QMessageBox::critical(QApplication::activeWindow(),
+                              "Revisa tu conexión a Internet",
+                              "Ocurrió un error mientras intentabámos comunicarnos con el servidor de base de datos.");
+    }
 }
 
 void BolloApp::load_bakeries_from_db() {
@@ -99,11 +133,12 @@ void BolloApp::load_bakeries_from_db() {
     //Request all
     QHash<QString, QString> args;
     args["all"];
-    QUrl* url = url_builder("bakeries", "bakery", args);
-    LOG(INFO) << "Sending GET request to " + url->toString().toStdString();
+    QUrl url;
+    url_builder(url, "bakeries", "bakery", args);
+    LOG(INFO) << "Sending GET request to " + url.toString().toStdString();
 
     connect(manager, &QNetworkAccessManager::finished, this, &BolloApp::loaded_bakeries);
-    manager->get(QNetworkRequest(*url));
+    manager->get(QNetworkRequest(url));
 }
 
 void BolloApp::loaded_bakeries(QNetworkReply* reply) {
@@ -121,7 +156,7 @@ void BolloApp::loaded_bakeries(QNetworkReply* reply) {
         LOG(WARNING) << "Error code in response " + jsonObject.take("message").toString().toStdString();
     }
 
-    connect(reply, &QNetworkReply::finished, reply, &QNetworkReply::deleteLater);
+    QObject::connect(reply, &QNetworkReply::finished, reply, &QNetworkReply::deleteLater);
 }
 
 QString BolloApp::windowTittle() {
@@ -131,4 +166,26 @@ QString BolloApp::windowTittle() {
 BolloApp& BolloApp::get() {
     static BolloApp instance;
     return instance;
+}
+
+QString BolloApp::config_file_path() {
+    return QString(app_dir->absolutePath() + "/settings/bollo.ini");
+}
+
+void BolloApp::set_setting(const QString& key, const QVariant& value) {
+    static QString cf_path = config_file_path();
+    static QSettings bollo_settings(cf_path, QSettings::NativeFormat);
+
+    bollo_settings.setValue(key, value);
+}
+
+QVariant BolloApp::get_setting(const QString& group, const QString& key) {
+    static QString cf_path = config_file_path();
+    static QSettings bollo_settings(cf_path, QSettings::NativeFormat);
+
+    bollo_settings.beginGroup(group);
+    QVariant result = bollo_settings.value(key);
+    bollo_settings.endGroup();
+
+    return result;
 }

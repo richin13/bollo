@@ -34,6 +34,9 @@ public slots:
 
     void gotReply(QNetworkReply*);
 
+signals:
+    void logged_in();
+
 private:
     Ui::LoginDialog* ui;
     int user_id;

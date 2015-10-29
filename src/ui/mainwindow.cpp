@@ -9,8 +9,8 @@
 
 int value = 0;
 
-MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent), ui(new Ui::MainWindow) {
+MainWindow::MainWindow(QWidget* parent) :
+        QMainWindow(parent), ui(new Ui::MainWindow) {
 
     // MainWindow Setup
     ui->setupUi(this);
@@ -75,7 +75,7 @@ void MainWindow::setDoneIcon(QLabel* label) {
  */
 void MainWindow::setChecked(Ui::Theme theme) {
 
-    if (theme == Ui::DARK) {
+    if(theme == Ui::DARK) {
 
         ui->actionThemeLight->setChecked(false);
         ui->actionThemeDark->setChecked(true);
@@ -93,12 +93,12 @@ void MainWindow::setChecked(Ui::Theme theme) {
 void MainWindow::on_firstFermentBar_valueChanged(int value) {
 
     // Set loading gif the first time the bar value has changed
-    if (value == BAR_INCREMENT) {
+    if(value == BAR_INCREMENT) {
 
         setLoadingGif(ui->firstFermentIcon);
     }
 
-    if (value == MAX_BAR_VALUE) {
+    if(value == MAX_BAR_VALUE) {
 
         setDoneIcon(ui->firstFermentIcon);
         setLoadingGif(ui->doughDivisionIcon);
@@ -135,7 +135,7 @@ void MainWindow::connectMenuActions() {
     connect(ui->actionExit, SIGNAL(triggered(bool)), actManager, SLOT(exit()));
 
     // Edit menu
-    connect(ui->actionThemeLight, SIGNAL(triggered(bool)), actManager,SLOT(setDefaultTheme()));
-    connect(ui->actionThemeDark, SIGNAL(triggered(bool)), actManager,SLOT(setDarkTheme()));
+    connect(ui->actionThemeLight, SIGNAL(triggered(bool)), actManager, SLOT(setDefaultTheme()));
+    connect(ui->actionThemeDark, SIGNAL(triggered(bool)), actManager, SLOT(setDarkTheme()));
     connect(ui->actionPreferencesPanel, SIGNAL(triggered(bool)), actManager, SLOT(preferencesPanel()));
 }

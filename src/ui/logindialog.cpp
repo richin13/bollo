@@ -27,20 +27,23 @@ void LoginDialog::on_qb_login_clicked() {
     QString username = ui->qle_username->text();
     QByteArray password = ui->qle_password->text().toUtf8();
     LOG(INFO) << "Logging in user " + username.toStdString();
+    ui->qb_login->setEnabled(false);
     this->user_id = login(username, password);
 
     if(this->user_id) {
         //Build the URL
         QHash<QString, QString> args;
         args["id"] = QVariant(user_id).toString();
-        QUrl* url = url_builder("users", "user", args);//Looks like this-> .../api/v1/users/user.php?id=user_id
+        QUrl url;
+        url_builder(url, "users", "user", args);//Looks like this-> .../api/v1/users/user.php?id=user_id
 
         connect(BolloApp::get().manager, &QNetworkAccessManager::finished, this, &LoginDialog::gotReply);
 
         //Send request using GET method. TODO: GET or POST? Maybe POST in the future.
-        BolloApp::get().manager->get(QNetworkRequest(*url));
-        LOG(INFO) << "Sent GET request to URL " + url->toString().toStdString();
+        BolloApp::get().manager->get(QNetworkRequest(url));
+        LOG(INFO) << "Sent GET request to URL " + url.toString().toStdString();
     } else {
+        ui->qb_login->setEnabled(true);
         QMessageBox::critical(this, "Datos incorrectos", "Usuario/Contraseña incorrectos. Intente de nuevo");
         LOG(WARNING) << "Invalid user credentials";
     }
@@ -62,6 +65,7 @@ void LoginDialog::gotReply(QNetworkReply* reply) {
 
         BolloApp::get().current_user = new Person(id, fn, ln, un, email);
         this->close();
+        emit logged_in();
     }
 
     connect(reply, &QNetworkReply::finished, reply, &QNetworkReply::deleteLater);

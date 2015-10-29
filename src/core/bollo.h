@@ -5,14 +5,6 @@
 #ifndef BOLLO_BOLLO_H
 #define BOLLO_BOLLO_H
 
-#define WEB_HOST "http://localhost/bollo_web"
-#define API_PATH "/api/v1"
-
-#define HOST "104.154.49.207"
-#define USER "postgres"
-#define PASSWORD "W3aS28yt"
-#define SCHEMA "bollo_test"
-
 #define APP_NAME "Bollo"
 #define CODENAME "Ajonjoli"
 #define VERSION "0.0.1-build-10_4"//[version]-build-{MONTH_week}
@@ -27,6 +19,7 @@
 #include "build.h"
 #include "classes/person.h"
 #include "classes/bakery.h"
+#include "bollo_constants.h"
 
 class BolloApp : public QObject {
 Q_OBJECT
@@ -46,9 +39,12 @@ private:
 
     void load_default_settings(void);
 
+    void load_settings(void);
+
     void load_bakeries_from_db();
 
 
+    QString config_file_path();
 public:
 /* User information */
     Person* current_user;
@@ -69,6 +65,8 @@ public:
 
     static BolloApp& get();
 
+    void set_setting(const QString&, const QVariant&);
+    QVariant get_setting(const QString&, const QString&);
 public slots:
     void loaded_bakeries(QNetworkReply*);
 };
