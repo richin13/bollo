@@ -137,7 +137,7 @@ void BolloApp::load_bakeries_from_db() {
     url_builder(url, "bakeries", "bakery", args);
     LOG(INFO) << "Sending GET request to " + url.toString().toStdString();
 
-    connect(manager, &QNetworkAccessManager::finished, this, &BolloApp::loaded_bakeries);
+    QObject::connect(manager, &QNetworkAccessManager::finished, this, &BolloApp::loaded_bakeries);
     manager->get(QNetworkRequest(url));
 }
 
@@ -168,15 +168,17 @@ BolloApp& BolloApp::get() {
     return instance;
 }
 
-QString BolloApp::config_file_path() {
+const QString& BolloApp::config_file_path() const {
     return QString(app_dir->absolutePath() + "/settings/bollo.ini");
 }
 
-void BolloApp::set_setting(const QString& key, const QVariant& value) {
+void BolloApp::set_setting(const QString& group, const QString& key, const QVariant& value) {
     static QString cf_path = config_file_path();
     static QSettings bollo_settings(cf_path, QSettings::NativeFormat);
 
+    bollo_settings.beginGroup(group);
     bollo_settings.setValue(key, value);
+    bollo_settings.endGroup();
 }
 
 QVariant BolloApp::get_setting(const QString& group, const QString& key) {

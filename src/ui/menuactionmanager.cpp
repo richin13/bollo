@@ -102,6 +102,10 @@ void MenuActionManager::preferencesPanel() {
 
     PreferencesPanel* prefPanel = new PreferencesPanel();
     prefPanel->show();
+    //FIXME: Do not forget about delete prefPanel
+    /*
+     * Use deleteLater for safely memory deallocation of the object.
+     * */
 }
 
 // ============ TOOLS MENU ================
@@ -121,6 +125,10 @@ void MenuActionManager::telegramMenu() {
     TelegramCpanel* teleCpanel = new TelegramCpanel();
 
     teleCpanel->show();
+    //FIXME: Do not forget about delete teleCpanel
+    /*
+     * Use deleteLater for safely memory deallocation of the object.
+     * */
 }
 
 // ============ HELP MENU ================

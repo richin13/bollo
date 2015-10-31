@@ -6,7 +6,7 @@
 #include "logger.h"
 
 
-LogBook _log;
+LogBook logbook;
 
 QSemaphore mtx(1);
 QSemaphore mtx_logger(1);
@@ -14,7 +14,7 @@ QSemaphore mtx_writer(1);
 
 /**
  * Overloaded function for the '<<' operator.
- * Please use _log.bakery(bakery_id) to add an entry
+ * Please use logBook.bakery(bakery_id) to add an entry
  * to the logbook.
  * @param x QString Event information.
  */
@@ -35,14 +35,12 @@ LogBook& LogBook::operator<<(const QString& x) {
         }
 
         if(!query.exec()) {
-            qDebug() << query.lastError();
-            cerr << "Failed to execute\n";//TODO: Real logging.
+            LOG(WARNING) << "Failed to execute query -> " << query.lastError().text().toStdString();
         }
 
     } else {
         //TODO: Add real loggin here
-        qDebug() << "Couldn't add the record!";
-        qDebug() << query.lastError();
+        LOG(WARNING) << "Failed to add the logbook entry -> " << query.lastError().text().toStdString();
     }
 
 
@@ -95,4 +93,9 @@ int LogBook::insert_logbook_entry(QString d, int b) {
     //if it reaches here there were a problem.
     return 0;
 
+}
+
+
+void* send_query(void* arg) {
+    return nullptr;
 }

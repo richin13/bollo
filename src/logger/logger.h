@@ -16,20 +16,25 @@
 #include <QtSql/qsqlerror.h>
 #include <QtSql/qsqlquery.h>
 
+#include <pthread.h>//Officially not multiplatform.
+
 #include "../core/build.h"
 #include "../io/sql.h"
-
+#include "easylogging++.h"
 extern QSemaphore mtx;
 extern QSemaphore mtx_writer;
 
-enum LogType {
-    DEBUG, WARNING, ERROR
-};
+typedef struct {
+    QString message;
+    int bakery_id;
+} th_data;
 
 class LogBook {
     int bakery_id;
     int dough;
     bool normal;
+
+//    QQueue<th_data>
 public:
     LogBook& operator<<(const QString&);
     LogBook& general(int);
@@ -38,6 +43,9 @@ public:
     int insert_logbook_entry(QString, int);
 };
 
-extern LogBook _log;
+
+void* send_query(void*);
+
+extern LogBook logbook;
 
 #endif //BOLLO_LOGGER_H

@@ -44,7 +44,7 @@ private:
     void load_bakeries_from_db();
 
 
-    QString config_file_path();
+    const QString& config_file_path() const;
 public:
 /* User information */
     Person* current_user;
@@ -65,7 +65,7 @@ public:
 
     static BolloApp& get();
 
-    void set_setting(const QString&, const QVariant&);
+    void set_setting(const QString&, const QString&, const QVariant&);
     QVariant get_setting(const QString&, const QString&);
 public slots:
     void loaded_bakeries(QNetworkReply*);
