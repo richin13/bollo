@@ -7,6 +7,7 @@
 #include "themes.h"
 #include "bakeryselect.h"
 #include "preferencespanel.h"
+#include "logbookdialog.h"
 
 using namespace std;
 
@@ -34,6 +35,12 @@ void MenuActionManager::showBakeryList() {
 void MenuActionManager::showGraphs() {
 
 
+}
+
+void MenuActionManager::showLogbook() {
+    LogbookDialog* logbookDialog = new LogbookDialog;
+    logbookDialog->show();
+    connect(logbookDialog, &QDialog::finished, logbookDialog, &LogbookDialog::deleteLater);
 }
 
 void MenuActionManager::continueProcess() {

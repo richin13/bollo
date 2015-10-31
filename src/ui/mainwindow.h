@@ -48,6 +48,7 @@ signals:
 private slots:
     void on_firstFermentBar_valueChanged(int value);
     void on_incrementBtn_clicked();
+    void exit_app();
 
 private:
     Ui::MainWindow* ui;

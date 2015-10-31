@@ -3,8 +3,8 @@
 #include "menuactionmanager.h"
 #include "themes.h"
 #include "assets.h"
+#include "logindialog.h"
 
-#include <QDebug>
 #include <QMovie>
 
 int value = 0;
@@ -17,6 +17,12 @@ MainWindow::MainWindow(QWidget* parent) :
 
     // Check dark theme toggle box, since its applied by default
     setChecked(Ui::DARK);
+
+    LoginDialog* loginDialog = new LoginDialog;
+    loginDialog->show();
+    connect(loginDialog, &LoginDialog::accepted, loginDialog, &QObject::deleteLater);
+    connect(loginDialog, &LoginDialog::rejected, this,
+            &MainWindow::exit_app);//FIXME: Not working. I would fix it but its 03:32 in the morning. I JUST WANNA FAP
 
     connectWidgets();
 }
@@ -110,6 +116,10 @@ void MainWindow::on_incrementBtn_clicked() {
     ui->firstFermentBar->setValue(value += BAR_INCREMENT);
 }
 
+void MainWindow::exit_app() {
+    qApp->exit();
+}
+
 // TODO: Connect all the remaining widgets
 
 void MainWindow::connectWidgets() {
@@ -123,6 +133,7 @@ void MainWindow::connectToolBarActions() {
     MenuActionManager* actManager = new MenuActionManager(this);
 
     connect(ui->actionBakeryList, SIGNAL(triggered(bool)), actManager, SLOT(showBakeryList()));
+    connect(ui->actionBakeryLog, &QAction::triggered, actManager, &MenuActionManager::showLogbook);
 }
 
 void MainWindow::connectMenuActions() {

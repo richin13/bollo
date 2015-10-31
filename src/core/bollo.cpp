@@ -12,6 +12,7 @@
 #include "../logger/easylogging++.h"
 #include "../io/http.h"
 #include "../io/handler.h"
+#include "../logger/logger.h"
 
 BolloApp::BolloApp() {
     this->app_dir = new QDir(QDir().homePath() + "/bollo");
@@ -28,6 +29,7 @@ BolloApp::BolloApp() {
 
     /* Object connections */
     connect(this, &BolloApp::destroyed, this, &BolloApp::deleteLater);
+    connect(this, &BolloApp::destroyed, &logbook, &Logger::deleteLater);
 }
 
 BolloApp::~BolloApp() {

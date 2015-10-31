@@ -6,6 +6,7 @@
 
 #include "logger/easylogging++.h"
 #include "ui/logbookdialog.h"
+#include "logger/logger.h"
 
 INITIALIZE_EASYLOGGINGPP
 
@@ -21,13 +22,9 @@ int main(int argc, char** argv) {
     BolloApp& a = BolloApp::get();
 
     Ui::setDarkTheme();
-//    LoginDialog loginDialog;
-//    MainWindow w;
-//
-//    QObject::connect(&loginDialog, &LoginDialog::logged_in, &w, &MainWindow::show);
-//    loginDialog.show();
-    LogbookDialog ld;
-    ld.show();
+    MainWindow w;
+
+    w.show();
     return app.exec();
 }
 

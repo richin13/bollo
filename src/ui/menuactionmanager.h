@@ -16,6 +16,7 @@ public slots:
     // Tool bar action
     void showBakeryList();
     void showGraphs();
+    void showLogbook();
     void continueProcess();
     void pauseProcess();
     void cancelProcess();

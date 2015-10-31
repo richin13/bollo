@@ -20,6 +20,15 @@ void Logbook::setBakery(const QString& bakery) {
     Logbook::bakery = bakery;
 }
 
+
+int Logbook::getBakeryId() const {
+    return bakery_id;
+}
+
+void Logbook::setBakery(int i) {
+    Logbook::bakery_id = i;
+}
+
 const QString& Logbook::getDescription() const {
     return description;
 }
