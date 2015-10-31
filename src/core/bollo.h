@@ -44,7 +44,7 @@ private:
     void load_bakeries_from_db();
 
 
-    const QString& config_file_path() const;
+    QString config_file_path() const;
 public:
 /* User information */
     Person* current_user;

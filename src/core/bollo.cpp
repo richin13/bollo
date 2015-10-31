@@ -168,7 +168,7 @@ BolloApp& BolloApp::get() {
     return instance;
 }
 
-const QString& BolloApp::config_file_path() const {
+QString BolloApp::config_file_path() const {
     return QString(app_dir->absolutePath() + "/settings/bollo.ini");
 }
 
