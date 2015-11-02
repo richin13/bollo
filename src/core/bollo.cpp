@@ -49,8 +49,11 @@ void BolloApp::init_settings(void) {
     } else {
         QFileInfo config_file = QFileInfo(config_file_path());
         if(!config_file.exists()) {
+            LOG(INFO) << "Settings file not found, creating default...";
             load_default_settings();
+            LOG(INFO) << "Settings file created";
         } else {
+            LOG(INFO) << "Settings file found";
             load_settings();
         }
     }

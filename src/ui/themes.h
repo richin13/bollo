@@ -4,7 +4,7 @@
 namespace Ui {
 
 void setDarkTheme();
-void setDefaultTheme();
+void setLightTheme();
 }
 
 #endif // THEMES

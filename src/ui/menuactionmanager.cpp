@@ -90,7 +90,7 @@ void MenuActionManager::exit() {
 
 void MenuActionManager::setDefaultTheme() {
 
-    Ui::setDefaultTheme();
+    Ui::setLightTheme();
     mainWindow->setChecked(Ui::DEFAULT);
 }
 
@@ -109,10 +109,7 @@ void MenuActionManager::preferencesPanel() {
 
     PreferencesPanel* prefPanel = new PreferencesPanel();
     prefPanel->show();
-    //FIXME: Do not forget about delete prefPanel
-    /*
-     * Use deleteLater for safely memory deallocation of the object.
-     * */
+    connect(prefPanel, &QDialog::finished, prefPanel, &PreferencesPanel::deleteLater);
 }
 
 // ============ TOOLS MENU ================
@@ -130,12 +127,8 @@ void MenuActionManager::graphViewer() {
 void MenuActionManager::telegramMenu() {
 
     TelegramCpanel* teleCpanel = new TelegramCpanel();
-
     teleCpanel->show();
-    //FIXME: Do not forget about delete teleCpanel
-    /*
-     * Use deleteLater for safely memory deallocation of the object.
-     * */
+    connect(teleCpanel, &QDialog::finished, teleCpanel, &TelegramCpanel::deleteLater);
 }
 
 // ============ HELP MENU ================

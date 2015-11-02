@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'mainwindowTi5290.ui'
+** Form generated from reading UI file 'mainwindowQb5486.ui'
 **
-** Created by: Qt User Interface Compiler version 5.5.1
+** Created by: Qt User Interface Compiler version 5.4.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef MAINWINDOWTI5290_H
-#define MAINWINDOWTI5290_H
+#ifndef MAINWINDOWQB5486_H
+#define MAINWINDOWQB5486_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
@@ -23,6 +23,7 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolBar>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -50,6 +51,8 @@ public:
     QAction *actionEditBakerys;
     QAction *actionPreferencesPanel;
     QWidget *centralWidget;
+    QVBoxLayout *verticalLayout;
+    QWidget *dashboard;
     QGroupBox *groupBox;
     QLabel *mixingIcon;
     QLabel *firstFermentIcon;
@@ -153,9 +156,13 @@ public:
         actionPreferencesPanel->setObjectName(QStringLiteral("actionPreferencesPanel"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        groupBox = new QGroupBox(centralWidget);
+        verticalLayout = new QVBoxLayout(centralWidget);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        dashboard = new QWidget(centralWidget);
+        dashboard->setObjectName(QStringLiteral("dashboard"));
+        groupBox = new QGroupBox(dashboard);
         groupBox->setObjectName(QStringLiteral("groupBox"));
-        groupBox->setGeometry(QRect(9, 9, 1004, 311));
+        groupBox->setGeometry(QRect(0, 0, 1004, 311));
         mixingIcon = new QLabel(groupBox);
         mixingIcon->setObjectName(QStringLiteral("mixingIcon"));
         mixingIcon->setGeometry(QRect(20, 60, 48, 48));
@@ -366,6 +373,9 @@ public:
         createdBreadsLabel = new QLabel(groupBox);
         createdBreadsLabel->setObjectName(QStringLiteral("createdBreadsLabel"));
         createdBreadsLabel->setGeometry(QRect(220, 180, 111, 16));
+
+        verticalLayout->addWidget(dashboard);
+
         MainWindow->setCentralWidget(centralWidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QStringLiteral("menubar"));
@@ -532,4 +542,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // MAINWINDOWTI5290_H
+#endif // MAINWINDOWQB5486_H

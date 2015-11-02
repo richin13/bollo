@@ -52,6 +52,7 @@ private slots:
 
 private:
     Ui::MainWindow* ui;
+    void applySettings();
 
     QMovie* loadingGif;
     void setLoadingGif (QLabel* );

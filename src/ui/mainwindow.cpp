@@ -5,6 +5,8 @@
 #include "assets.h"
 #include "logindialog.h"
 
+#include <QStyle>
+#include <QDesktopWidget>
 #include <QMovie>
 
 int value = 0;
@@ -14,6 +16,7 @@ MainWindow::MainWindow(QWidget* parent) :
 
     // MainWindow Setup
     ui->setupUi(this);
+    applySettings();
 
     // Check dark theme toggle box, since its applied by default
     setChecked(Ui::DARK);
@@ -21,8 +24,8 @@ MainWindow::MainWindow(QWidget* parent) :
     LoginDialog* loginDialog = new LoginDialog;
     loginDialog->show();
     connect(loginDialog, &LoginDialog::accepted, loginDialog, &QObject::deleteLater);
-    connect(loginDialog, &LoginDialog::rejected, this,
-            &MainWindow::exit_app);//FIXME: Not working. I would fix it but its 03:32 in the morning. I JUST WANNA FAP
+    //connect(loginDialog, &LoginDialog::rejected, this,
+            //&MainWindow::exit_app);//FIXME: Not working. I would fix it but its 03:32 in the morning. I JUST WANNA FAP
 
     connectWidgets();
 }
@@ -30,6 +33,23 @@ MainWindow::MainWindow(QWidget* parent) :
 MainWindow::~MainWindow() {
 
     delete ui;
+}
+
+/**
+ * Used to apply various ui settings to the main window, that
+ * can't be applied with qt designer
+ */
+void MainWindow::applySettings() {
+
+    // Center window
+    this->setGeometry(
+            QStyle::alignedRect(
+                    Qt::LeftToRight,
+                    Qt::AlignCenter,
+                    this->size(),
+                    qApp->desktop()->availableGeometry()
+            )
+    );
 }
 
 /**
@@ -62,7 +82,6 @@ void MainWindow::setLoadingGif(QLabel* label) {
  * allocated heap memory.
  */
 void MainWindow::setDoneIcon(QLabel* label) {
-
 
     label->setPixmap(QPixmap(Ui::DONE_ICON));
 
