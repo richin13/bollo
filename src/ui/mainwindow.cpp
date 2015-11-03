@@ -5,7 +5,6 @@
 #include "assets.h"
 #include "logindialog.h"
 
-#include <QStyle>
 #include <QDesktopWidget>
 #include <QMovie>
 

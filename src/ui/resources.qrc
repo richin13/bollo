@@ -1,17 +1,18 @@
 <RCC>
-    <qresource prefix="/images">
-        <file>assets/check-icon.png</file>
-        <file>assets/log-icon.png</file>
-        <file>assets/continue-icon.png</file>
-        <file>assets/pause-icon.png</file>
-        <file>assets/bread-icon.png</file>
-        <file>assets/pending-icon.png</file>
-        <file>assets/cancel-icon.png</file>
-        <file>assets/graph-icon.png</file>
-        <file>assets/loadDark.GIF</file>
-        <file>assets/shop-icon.png</file>
-    </qresource>
-    <qresource prefix="/js">
-        <file>notifier.js</file>
-    </qresource>
+  <qresource prefix="/images">
+    <file>assets/check-icon.png</file>
+    <file>assets/log-icon.png</file>
+    <file>assets/continue-icon.png</file>
+    <file>assets/pause-icon.png</file>
+    <file>assets/bread-icon.png</file>
+    <file>assets/pending-icon.png</file>
+    <file>assets/cancel-icon.png</file>
+    <file>assets/graph-icon.png</file>
+    <file>assets/loadDark.GIF</file>
+    <file>assets/shop-icon.png</file>
+    <file>assets/avatar.png</file>
+  </qresource>
+  <qresource prefix="/js">
+    <file>notifier.js</file>
+  </qresource>
 </RCC>

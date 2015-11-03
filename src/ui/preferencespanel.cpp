@@ -20,7 +20,7 @@ PreferencesPanel::~PreferencesPanel() {
 }
 
 /**
- * @brief PreferencesPanel::fillSettinsValue Fill all the values with the
+ * @brief PreferencesPanel::fillSettingsValue Fill all the values with the
  * ones in the .ini file
  *
  * Fills each value or edit line, with the ones from the .ini file.
@@ -82,7 +82,9 @@ void PreferencesPanel::bakerySettingsChanged() {
 }
 
 void PreferencesPanel::on_buttonBox_accepted() {
+    this->setCursor(QCursor(Qt::WaitCursor));
     writePreferencesToFile();
+    this->close();
 }
 
 /**

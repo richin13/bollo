@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'preferencespanelZK5290.ui'
+** Form generated from reading UI file 'preferencespanelc15045.ui'
 **
-** Created by: Qt User Interface Compiler version 5.5.1
+** Created by: Qt User Interface Compiler version 5.4.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef PREFERENCESPANELZK5290_H
-#define PREFERENCESPANELZK5290_H
+#ifndef PREFERENCESPANELC15045_H
+#define PREFERENCESPANELC15045_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
@@ -85,7 +85,7 @@ public:
         title5->setGeometry(QRect(20, 30, 71, 16));
         apiHostUrl = new QLineEdit(apiGBox);
         apiHostUrl->setObjectName(QStringLiteral("apiHostUrl"));
-        apiHostUrl->setGeometry(QRect(20, 50, 291, 21));
+        apiHostUrl->setGeometry(QRect(20, 50, 301, 21));
         dbGBox = new QGroupBox(networkingTab);
         dbGBox->setObjectName(QStringLiteral("dbGBox"));
         dbGBox->setGeometry(QRect(10, 120, 511, 241));
@@ -100,19 +100,19 @@ public:
         title2->setGeometry(QRect(20, 80, 161, 16));
         dbName = new QLineEdit(dbGBox);
         dbName->setObjectName(QStringLiteral("dbName"));
-        dbName->setGeometry(QRect(20, 100, 111, 21));
+        dbName->setGeometry(QRect(20, 100, 141, 21));
         title3 = new QLabel(dbGBox);
         title3->setObjectName(QStringLiteral("title3"));
         title3->setGeometry(QRect(20, 130, 81, 16));
         dbUserName = new QLineEdit(dbGBox);
         dbUserName->setObjectName(QStringLiteral("dbUserName"));
-        dbUserName->setGeometry(QRect(20, 150, 111, 21));
+        dbUserName->setGeometry(QRect(20, 150, 141, 21));
         title4 = new QLabel(dbGBox);
         title4->setObjectName(QStringLiteral("title4"));
         title4->setGeometry(QRect(20, 180, 81, 16));
         dbPassword = new QLineEdit(dbGBox);
         dbPassword->setObjectName(QStringLiteral("dbPassword"));
-        dbPassword->setGeometry(QRect(20, 200, 111, 21));
+        dbPassword->setGeometry(QRect(20, 200, 141, 21));
         dbPassword->setEchoMode(QLineEdit::Password);
         tabWidget->addTab(networkingTab, QString());
         bakerySettings = new QWidget();
@@ -172,7 +172,7 @@ public:
 
         retranslateUi(PreferencesPanel);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(PreferencesPanel);
@@ -213,4 +213,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // PREFERENCESPANELZK5290_H
+#endif // PREFERENCESPANELC15045_H

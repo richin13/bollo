@@ -44,7 +44,7 @@
    <item>
     <layout class="QFormLayout" name="layout">
      <item row="0" column="1">
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="noAvailableBakeries">
        <property name="text">
         <string>No hay panaderias disponibles</string>
        </property>

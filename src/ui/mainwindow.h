@@ -60,6 +60,7 @@ private:
 
     void connectWidgets();
     void connectToolBarActions();
+
     void connectMenuActions();
     void connectHelpMenuActions();
     void connectFileMenuActions();

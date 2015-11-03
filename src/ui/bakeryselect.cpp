@@ -9,11 +9,7 @@ BakerySelect::BakerySelect(QWidget *parent) : QDialog(parent),
     ui(new Ui::bakerySelect) {
 
     ui->setupUi(this);
-
-    int size = (int) BolloApp::get().bakeries.size();
-    for(int i = 0; i < size; ++i) {
-        addBakery(BolloApp::get().bakeries.at(i));
-    }
+    createBakerisList();
 }
 
 BakerySelect::~BakerySelect() {
@@ -21,12 +17,27 @@ BakerySelect::~BakerySelect() {
     delete ui;
 }
 
-void BakerySelect::checkAvailableBakeries() {
+/**
+ * Checks if the bakeries list is empty, if it's notifies the user that
+ * no bakeries are available, if its not empty build a button for each
+ * bakery with the name, location an progress.
+ */
+void BakerySelect::createBakerisList() {
 
-    /*
-     * TODO: ADD "No hay panaderias disponibles" when all the backend
-     * logic is implemented.
-     */
+    int listSize = (int) BolloApp::get().bakeries.size();
+
+    if (listSize != 0) {
+
+        ui->noAvailableBakeries->setVisible(false);
+
+        for(int i = 0; i < listSize; ++i) {
+            addBakery(BolloApp::get().bakeries.at(i));
+        }
+    }
+
+    else {
+        ui->noAvailableBakeries->setVisible(true);
+    }
 }
 
 void BakerySelect::addBakery(const Bakery& bakery) {
@@ -34,7 +45,7 @@ void BakerySelect::addBakery(const Bakery& bakery) {
     QCommandLinkButton* button = new QCommandLinkButton();
 
     QString formatted =
-            QString("%1 - %2| Estado: %3 (%4%)").arg(bakery.get_name(),
+            QString("%1 - %2 | Estado: %3 (%4%)").arg(bakery.get_name(),
                                                      bakery.get_city(),
                                                      bakery.get_current_op().description,
                                                      QVariant(bakery.get_current_op().progress % 100).toString());

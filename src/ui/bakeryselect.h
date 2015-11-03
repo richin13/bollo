@@ -21,7 +21,7 @@ public:
 private:
     Ui::bakerySelect *ui;
 
-    void checkAvailableBakeries();
+    void createBakerisList();
 
     void addBakery(const Bakery&);
     QWidget* createHorizontalLine();

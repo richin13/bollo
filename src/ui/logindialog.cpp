@@ -8,11 +8,14 @@
 #include "../io/sql.h"
 #include "../io/http.h"
 #include "../logger/easylogging++.h"
+#include "assets.h"
 
 LoginDialog::LoginDialog(QWidget* parent) :
         QDialog(parent),
         ui(new Ui::LoginDialog) {
+
     ui->setupUi(this);
+    ui->label->setPixmap(QPixmap(Ui::AVATAR_ICON));
 }
 
 LoginDialog::~LoginDialog() {

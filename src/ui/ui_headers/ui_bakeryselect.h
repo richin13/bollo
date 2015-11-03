@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'bakeryselect.ui'
+** Form generated from reading UI file 'bakeryselectq15045.ui'
 **
-** Created by: Qt User Interface Compiler version 5.5.0
+** Created by: Qt User Interface Compiler version 5.4.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef UI_BAKERYSELECT_H
-#define UI_BAKERYSELECT_H
+#ifndef BAKERYSELECTQ15045_H
+#define BAKERYSELECTQ15045_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
@@ -26,7 +26,7 @@ class Ui_bakerySelect
 public:
     QVBoxLayout *verticalLayout;
     QFormLayout *layout;
-    QLabel *label;
+    QLabel *noAvailableBakeries;
 
     void setupUi(QDialog *bakerySelect)
     {
@@ -47,11 +47,11 @@ public:
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         layout = new QFormLayout();
         layout->setObjectName(QStringLiteral("layout"));
-        label = new QLabel(bakerySelect);
-        label->setObjectName(QStringLiteral("label"));
-        label->setAlignment(Qt::AlignCenter);
+        noAvailableBakeries = new QLabel(bakerySelect);
+        noAvailableBakeries->setObjectName(QStringLiteral("noAvailableBakeries"));
+        noAvailableBakeries->setAlignment(Qt::AlignCenter);
 
-        layout->setWidget(0, QFormLayout::FieldRole, label);
+        layout->setWidget(0, QFormLayout::FieldRole, noAvailableBakeries);
 
 
         verticalLayout->addLayout(layout);
@@ -65,7 +65,7 @@ public:
     void retranslateUi(QDialog *bakerySelect)
     {
         bakerySelect->setWindowTitle(QApplication::translate("bakerySelect", "Panaderias", 0));
-        label->setText(QApplication::translate("bakerySelect", "No hay panaderias disponibles", 0));
+        noAvailableBakeries->setText(QApplication::translate("bakerySelect", "No hay panaderias disponibles", 0));
     } // retranslateUi
 
 };
@@ -76,4 +76,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // UI_BAKERYSELECT_H
+#endif // BAKERYSELECTQ15045_H
