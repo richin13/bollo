@@ -18,10 +18,10 @@ QMutex mutex;
  */
 Logger& Logger::operator<<(const QString& x) {
     this->entry->setDescription(x);
-    buffer->enqueue(this->entry);
-    emptyBuffer->wakeAll();
+    buffer->enqueue(this->entry);//Copy constructor to deal with memory leaks
+    this->entry = nullptr;//Free the global pointer to avoid data inconsistency.
+    emit start_worker();
     mutex.unlock();
-    std::cout << "Current buffer size: " << buffer->size() << std::endl;
     return *this;
 }
 

@@ -97,6 +97,7 @@ public:
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
         MainWindow->resize(1022, 552);
         MainWindow->setWindowFilePath(QStringLiteral(""));
+        MainWindow->setAttribute(Qt::WA_QuitOnClose, true);
         actionBakeryList = new QAction(MainWindow);
         actionBakeryList->setObjectName(QStringLiteral("actionBakeryList"));
         QIcon icon;

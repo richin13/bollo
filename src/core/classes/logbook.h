@@ -60,6 +60,15 @@ private:
 public:
     LogbookProblem() { }
 
+    LogbookProblem(const LogbookProblem& c) : Logbook(c) {
+        this->id = c.id;
+        this->bakery = c.bakery;
+        this->bakery_id = c.bakery_id;
+        this->date = c.date;
+        this->hour = c.hour;
+        this->dough = c.dough;
+    }
+
     LogbookProblem(int _id, const QString& _bak,
                    const QString& _des,
                    const QString& _date,

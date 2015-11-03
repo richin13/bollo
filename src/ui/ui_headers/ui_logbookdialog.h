@@ -79,8 +79,10 @@ public:
         qtGeneral->setHorizontalHeaderLabels(qtGeneralHeaders);
         qtGeneral->setColumnWidth(0, 50);
         qtGeneral->setColumnWidth(1, 115);
-        qtGeneral->setColumnWidth(2, 180);
-
+        qtGeneral->setColumnWidth(2, 193);
+        qtGeneral->verticalHeader()->setVisible(false);
+        qtGeneral->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        qtGeneral->setSelectionBehavior(QAbstractItemView::SelectRows);
         loadGeneral();
 
 
@@ -106,10 +108,13 @@ public:
         qtProblem->setHorizontalHeaderLabels(qtProblemHeaders);
         qtProblem->setColumnWidth(0, 50);
         qtProblem->setColumnWidth(1, 110);
-        qtProblem->setColumnWidth(2, 150);
+        qtProblem->setColumnWidth(2, 163);
         qtProblem->setColumnWidth(3, 80);
         qtProblem->setColumnWidth(4, 80);
         qtProblem->setColumnWidth(5, 75);
+        qtProblem->verticalHeader()->setVisible(false);
+        qtProblem->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        qtProblem->setSelectionBehavior(QAbstractItemView::SelectRows);
         loadProblem();
 
         qtProblem->setObjectName(QStringLiteral("qtProblem"));
@@ -117,6 +122,8 @@ public:
         stackedWidget->addWidget(page_2);
 
         QObject::connect(qcbType, SIGNAL(activated(int)), stackedWidget, SLOT(setCurrentIndex(int)));
+        QObject::connect(qbClose, &QPushButton::clicked, qtGeneral, &QTableWidget::clear);
+        QObject::connect(qbClose, &QPushButton::clicked, qtProblem, &QTableWidget::clear);
 
         stackedWidget->setCurrentIndex(0);
 
