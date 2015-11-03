@@ -14,12 +14,16 @@ void init_log();
 std::string* _app_dir();
 
 int main(int argc, char** argv) {
+    QApplication app(argc, argv);
     START_EASYLOGGINGPP(argc, argv);
     init_log();
 
     LOG(INFO) << "Application starting";
-    QApplication app(argc, argv);
     BolloApp& a = BolloApp::get();
+
+    logbook.general(1) << "Mezcla de ingredientes";
+    logbook.general(2) << "Mezcla de ingredientes";
+    logbook.problem(1, 10) << "Colitis";
 
     Ui::setDarkTheme();
     MainWindow w;

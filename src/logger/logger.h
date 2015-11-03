@@ -29,15 +29,13 @@
 
 extern QMutex mutex;
 
-class LoggerWorker : public QThread {
+class LoggerWorker : public QObject {
 Q_OBJECT
 private:
     QQueue<Logbook*>* buffer;
-    QWaitCondition* emptyBuffer;
-    QMutex mtx;
 public:
-    LoggerWorker(QQueue<Logbook*>* buf, QWaitCondition* eb) :
-            buffer(buf), emptyBuffer(eb) {
+    LoggerWorker(QQueue<Logbook*>* buf) :
+            buffer(buf) {
 
     }
 
@@ -62,15 +60,12 @@ public:
 
     }
 
-    void run() override {
+public slots:
+
+    void send_logbook_entries() {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wmissing-noreturn"
-        while(true) {
-            mtx.lock();
-            if(buffer->isEmpty()) emptyBuffer->wait(&mtx);
-            qDebug() << "Buffer-: " << *buffer;
-
-
+        while(!buffer->isEmpty()) {
             Logbook* _entry = buffer->dequeue();
 
             QSqlQuery query;
@@ -83,7 +78,7 @@ public:
                     LOG(DEBUG) << "Sending new problem logbook entry";
                     query.prepare(QStringLiteral("INSERT INTO bollo_logbook_problem VALUES(:1, :2)"));
                     query.bindValue(":1", QVariant(id));
-                    query.bindValue(":2", QVariant(p->get_dough()));//Wtf is wrong with _entry?
+                    query.bindValue(":2", QVariant(p->get_dough()));
 
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "OCDFAInspection"
@@ -103,36 +98,36 @@ public:
             } else {
                 LOG(WARNING) << "Failed to add the logbook entry -> " << query.lastError().text().toStdString();
             }
-            mtx.unlock();
         }
 #pragma clang diagnostic pop
     };
-
 };
 
 class Logger : public QObject {
 Q_OBJECT
     Logbook* entry;
     LoggerWorker* worker;
-    QWaitCondition* emptyBuffer;
 
     QQueue<Logbook*>* buffer;
+
+    QThread worker_thread;
 public:
 
     Logger() {
         buffer = new QQueue<Logbook*>();
-        emptyBuffer = new QWaitCondition();
-        worker = new LoggerWorker(buffer, emptyBuffer);
-        worker->start();
+        worker = new LoggerWorker(buffer);
+        worker->moveToThread(&worker_thread);
+
+        /* Regular connects */
+        connect(&worker_thread, &QThread::finished, worker, &LoggerWorker::deleteLater);
+        connect(this, &Logger::start_worker, worker, &LoggerWorker::send_logbook_entries);
+
+        worker_thread.start();
     }
 
     ~Logger() {
-        worker->exit();
-        worker->wait();
-        while(worker->isRunning()) {
-            qDebug() << "Apparently it finished!";
-        }
-        delete emptyBuffer;
+        worker_thread.quit();
+        worker_thread.wait();
         delete buffer;
         delete entry;
     }
@@ -140,6 +135,9 @@ public:
     Logger& operator<<(const QString&);
     Logger& general(int);
     Logger& problem(int, int);
+
+signals:
+    void start_worker();
 };
 
 extern Logger logbook;

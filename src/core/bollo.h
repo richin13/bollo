@@ -56,7 +56,7 @@ public:
     QSqlDatabase bollo_db;
 
     /* Settings and directories */
-    QDir* app_dir;//TODO: Find a way to deallocate this!
+    QDir app_dir;//TODO: Find a way to deallocate this!
 
     /* Application data */
     std::vector<Bakery> bakeries;
@@ -69,6 +69,9 @@ public:
     QVariant get_setting(const QString&, const QString&);
 public slots:
     void loaded_bakeries(QNetworkReply*);
+
+signals:
+    void application_exiting();
 };
 
 

@@ -15,8 +15,10 @@
 #include "../logger/logger.h"
 
 BolloApp::BolloApp() {
-    this->app_dir = new QDir(QDir().homePath() + "/bollo");
+    this->app_dir = QDir(QDir().homePath() + "/bollo");
+
     this->manager = new QNetworkAccessManager(this);
+    connect(this, &BolloApp::application_exiting, manager, &QNetworkAccessManager::deleteLater);
     //TODO: Add a splash screen to make the whole process more user-friendly
 
     /* The app settings stored at home directory */
@@ -25,25 +27,27 @@ BolloApp::BolloApp() {
     /* The database connection - Only need to be done once */
     init_database();
 
+    /* Fetch the information of the bakeries through the API - What happens when somebody adds a new bakery? */
     load_bakeries_from_db();
 
     /* Object connections */
     connect(this, &BolloApp::destroyed, this, &BolloApp::deleteLater);
-    connect(this, &BolloApp::destroyed, &logbook, &Logger::deleteLater);
+//    connect(this, &BolloApp::application_exiting, &logbook, &Logger::deleteLater);
 }
 
 BolloApp::~BolloApp() {
     LOG(DEBUG) << "Freeing allocated objects in BolloApp class";
-    delete app_dir;
-    delete manager;
+    emit application_exiting();
     delete current_user;
+
+    LOG(INFO) << "Done freeing allocated objects in BolloApp class";
 }
 
 void BolloApp::init_settings(void) {
     LOG(INFO) << "Loading Bollo settings";
-    QString absolute_path = this->app_dir->absolutePath();
+    QString absolute_path = this->app_dir.absolutePath();
 
-    if(!this->app_dir->exists()) {
+    if(!this->app_dir.exists()) {
         QDir().mkdir(absolute_path);
         load_default_settings();
     } else {
@@ -174,7 +178,7 @@ BolloApp& BolloApp::get() {
 }
 
 QString BolloApp::config_file_path() const {
-    return QString(app_dir->absolutePath() + "/settings/bollo.ini");
+    return QString(app_dir.absolutePath() + "/settings/bollo.ini");
 }
 
 void BolloApp::set_setting(const QString& group, const QString& key, const QVariant& value) {

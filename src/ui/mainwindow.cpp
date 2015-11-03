@@ -24,7 +24,7 @@ MainWindow::MainWindow(QWidget* parent) :
     loginDialog->show();
     connect(loginDialog, &LoginDialog::accepted, loginDialog, &QObject::deleteLater);
     //connect(loginDialog, &LoginDialog::rejected, this,
-            //&MainWindow::exit_app);//FIXME: Not working. I would fix it but its 03:32 in the morning. I JUST WANNA FAP
+    //&MainWindow::exit_app);//FIXME: Not working. I would fix it but its 03:32 in the morning. I JUST WANNA FAP
 
     connectWidgets();
 }
