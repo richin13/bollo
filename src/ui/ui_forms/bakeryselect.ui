@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>371</width>
+    <width>500</width>
     <height>399</height>
    </rect>
   </property>
@@ -18,13 +18,13 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>371</width>
+    <width>500</width>
     <height>399</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>371</width>
+    <width>500</width>
     <height>399</height>
    </size>
   </property>
@@ -33,6 +33,9 @@
   </property>
   <property name="layoutDirection">
    <enum>Qt::LeftToRight</enum>
+  </property>
+  <property name="windowFilePath">
+   <string notr="true"/>
   </property>
   <property name="sizeGripEnabled">
    <bool>false</bool>

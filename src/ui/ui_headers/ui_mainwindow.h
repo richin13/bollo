@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'mainwindowQb5486.ui'
+** Form generated from reading UI file 'mainwindowS26742.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.4.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef MAINWINDOWQB5486_H
-#define MAINWINDOWQB5486_H
+#ifndef MAINWINDOWS26742_H
+#define MAINWINDOWS26742_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
@@ -96,6 +96,7 @@ public:
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
         MainWindow->resize(1022, 552);
+        MainWindow->setWindowFilePath(QStringLiteral(""));
         actionBakeryList = new QAction(MainWindow);
         actionBakeryList->setObjectName(QStringLiteral("actionBakeryList"));
         QIcon icon;
@@ -216,13 +217,13 @@ public:
         firstFermentBar->setGeometry(QRect(70, 80, 81, 6));
         firstFermentBar->setMaximumSize(QSize(16777215, 6));
         firstFermentBar->setStyleSheet(QLatin1String("QProgressBar {\n"
-                                                             "    background-color: #808080;\n"
-                                                             "	border-radius: 2px;\n"
-                                                             " }\n"
-                                                             "\n"
-                                                             "QProgressBar::chunk {\n"
-                                                             "    background-color: #5BC614;\n"
-                                                             " }"));
+"    background-color: #808080;\n"
+"	border-radius: 2px;\n"
+" }\n"
+"\n"
+"QProgressBar::chunk {\n"
+"    background-color: #5BC614;\n"
+" }"));
         firstFermentBar->setValue(0);
         firstFermentBar->setTextVisible(false);
         doughDivisionBar = new QProgressBar(groupBox);
@@ -230,13 +231,13 @@ public:
         doughDivisionBar->setGeometry(QRect(200, 80, 81, 6));
         doughDivisionBar->setMaximumSize(QSize(16777215, 6));
         doughDivisionBar->setStyleSheet(QLatin1String("QProgressBar {\n"
-                                                              "    background-color: #808080;\n"
-                                                              "	border-radius: 2px;\n"
-                                                              " }\n"
-                                                              "\n"
-                                                              "QProgressBar::chunk {\n"
-                                                              "    background-color: #5BC614;\n"
-                                                              " }"));
+"    background-color: #808080;\n"
+"	border-radius: 2px;\n"
+" }\n"
+"\n"
+"QProgressBar::chunk {\n"
+"    background-color: #5BC614;\n"
+" }"));
         doughDivisionBar->setValue(0);
         doughDivisionBar->setTextVisible(false);
         doughFormingBar = new QProgressBar(groupBox);
@@ -244,13 +245,13 @@ public:
         doughFormingBar->setGeometry(QRect(330, 80, 81, 6));
         doughFormingBar->setMaximumSize(QSize(16777215, 6));
         doughFormingBar->setStyleSheet(QLatin1String("QProgressBar {\n"
-                                                             "    background-color: #808080;\n"
-                                                             "	border-radius: 2px;\n"
-                                                             " }\n"
-                                                             "\n"
-                                                             "QProgressBar::chunk {\n"
-                                                             "    background-color: #5BC614;\n"
-                                                             " }"));
+"    background-color: #808080;\n"
+"	border-radius: 2px;\n"
+" }\n"
+"\n"
+"QProgressBar::chunk {\n"
+"    background-color: #5BC614;\n"
+" }"));
         doughFormingBar->setValue(0);
         doughFormingBar->setTextVisible(false);
         finalFermentBar = new QProgressBar(groupBox);
@@ -258,13 +259,13 @@ public:
         finalFermentBar->setGeometry(QRect(460, 80, 81, 6));
         finalFermentBar->setMaximumSize(QSize(16777215, 6));
         finalFermentBar->setStyleSheet(QLatin1String("QProgressBar {\n"
-                                                             "    background-color: #808080;\n"
-                                                             "	border-radius: 2px;\n"
-                                                             " }\n"
-                                                             "\n"
-                                                             "QProgressBar::chunk {\n"
-                                                             "    background-color: #5BC614;\n"
-                                                             " }"));
+"    background-color: #808080;\n"
+"	border-radius: 2px;\n"
+" }\n"
+"\n"
+"QProgressBar::chunk {\n"
+"    background-color: #5BC614;\n"
+" }"));
         finalFermentBar->setValue(0);
         finalFermentBar->setTextVisible(false);
         bakingBar = new QProgressBar(groupBox);
@@ -272,13 +273,13 @@ public:
         bakingBar->setGeometry(QRect(590, 80, 81, 6));
         bakingBar->setMaximumSize(QSize(16777215, 6));
         bakingBar->setStyleSheet(QLatin1String("QProgressBar {\n"
-                                                       "    background-color: #808080;\n"
-                                                       "	border-radius: 2px;\n"
-                                                       " }\n"
-                                                       "\n"
-                                                       "QProgressBar::chunk {\n"
-                                                       "    background-color: #5BC614;\n"
-                                                       " }"));
+"    background-color: #808080;\n"
+"	border-radius: 2px;\n"
+" }\n"
+"\n"
+"QProgressBar::chunk {\n"
+"    background-color: #5BC614;\n"
+" }"));
         bakingBar->setValue(0);
         bakingBar->setTextVisible(false);
         onSaleBar = new QProgressBar(groupBox);
@@ -286,13 +287,13 @@ public:
         onSaleBar->setGeometry(QRect(720, 80, 81, 6));
         onSaleBar->setMaximumSize(QSize(16777215, 6));
         onSaleBar->setStyleSheet(QLatin1String("QProgressBar {\n"
-                                                       "    background-color: #808080;\n"
-                                                       "	border-radius: 2px;\n"
-                                                       " }\n"
-                                                       "\n"
-                                                       "QProgressBar::chunk {\n"
-                                                       "    background-color: #5BC614;\n"
-                                                       " }"));
+"    background-color: #808080;\n"
+"	border-radius: 2px;\n"
+" }\n"
+"\n"
+"QProgressBar::chunk {\n"
+"    background-color: #5BC614;\n"
+" }"));
         onSaleBar->setValue(0);
         onSaleBar->setTextVisible(false);
         shippedBar = new QProgressBar(groupBox);
@@ -300,13 +301,13 @@ public:
         shippedBar->setGeometry(QRect(850, 80, 81, 6));
         shippedBar->setMaximumSize(QSize(16777215, 6));
         shippedBar->setStyleSheet(QLatin1String("QProgressBar {\n"
-                                                        "    background-color: #808080;\n"
-                                                        "	border-radius: 2px;\n"
-                                                        " }\n"
-                                                        "\n"
-                                                        "QProgressBar::chunk {\n"
-                                                        "    background-color: #5BC614;\n"
-                                                        " }"));
+"    background-color: #808080;\n"
+"	border-radius: 2px;\n"
+" }\n"
+"\n"
+"QProgressBar::chunk {\n"
+"    background-color: #5BC614;\n"
+" }"));
         shippedBar->setValue(0);
         shippedBar->setTextVisible(false);
         title1 = new QLabel(groupBox);
@@ -542,4 +543,5 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // MAINWINDOWQB5486_H
+#endif // MAINWINDOWS26742_H
+

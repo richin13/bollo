@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>Bollo - Pre-alpha [Codename: Ajonjoli]</string>
   </property>
+  <property name="windowFilePath">
+   <string notr="true"/>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
