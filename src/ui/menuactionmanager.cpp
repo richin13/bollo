@@ -38,6 +38,7 @@ void MenuActionManager::showGraphs() {
 }
 
 void MenuActionManager::showLogbook() {
+
     LogbookDialog* logbookDialog = new LogbookDialog;
     logbookDialog->show();
     connect(logbookDialog, &QDialog::finished, logbookDialog, &LogbookDialog::deleteLater);

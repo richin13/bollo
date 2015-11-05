@@ -1,5 +1,6 @@
-#include "mainwindow.h"
 #include "ui_headers/ui_mainwindow.h"
+#include "../logger/easylogging++.h"
+#include "mainwindow.h"
 #include "menuactionmanager.h"
 #include "themes.h"
 #include "assets.h"
@@ -7,6 +8,7 @@
 
 #include <QDesktopWidget>
 #include <QMovie>
+#include <string>
 
 int value = 0;
 
@@ -17,16 +19,8 @@ MainWindow::MainWindow(QWidget* parent) :
     ui->setupUi(this);
     applySettings();
 
-    // Check dark theme toggle box, since its applied by default
-    setChecked(Ui::DARK);
-
-    LoginDialog* loginDialog = new LoginDialog;
-    loginDialog->show();
-    connect(loginDialog, &LoginDialog::accepted, loginDialog, &QObject::deleteLater);
-    //connect(loginDialog, &LoginDialog::rejected, this,
-    //&MainWindow::exit_app);//FIXME: Not working. I would fix it but its 03:32 in the morning. I JUST WANNA FAP
-
     connectWidgets();
+    showLoginAndValidate();
 }
 
 MainWindow::~MainWindow() {
@@ -41,14 +35,83 @@ MainWindow::~MainWindow() {
 void MainWindow::applySettings() {
 
     // Center window
-    this->setGeometry(
-            QStyle::alignedRect(
-                    Qt::LeftToRight,
-                    Qt::AlignCenter,
-                    this->size(),
-                    qApp->desktop()->availableGeometry()
-            )
-    );
+    this->setGeometry(QStyle::alignedRect(Qt::LeftToRight, Qt::AlignCenter,
+            this->size(), qApp->desktop()->availableGeometry()));
+
+    // Check dark theme toggle box, since its applied by default
+    setChecked(Ui::DARK);
+
+    // By default disable toolbar and dashboard
+    widgetsEnabled(false);
+}
+
+/**
+ * Show a login dialog and validates the user credentials, if
+ * the user credentials are correct, show the bakery selectPane.
+ */
+void MainWindow::showLoginAndValidate() {
+
+    LoginDialog* loginDialog = new LoginDialog;
+    loginDialog->show();
+
+    connect(loginDialog, &LoginDialog::logged_in, this, &MainWindow::showSelectPane);
+    connect(loginDialog, &LoginDialog::accepted, loginDialog, &QObject::deleteLater);
+
+    //FIXME: Sometimes work and dont work
+    //connect(loginDialog, &LoginDialog::rejected, this, &MainWindow::exitApp);
+}
+
+void MainWindow::exitApp() {
+    qApp->quit();
+}
+
+/**
+ * Show the main select bakery pane, in which a bakery list is diplayed
+ * and somo charts about the overall statistics of the bakeries. Those charts
+ * are generated in the bollo web server and rendered in an html viewer in this
+ * select pane.
+ */
+void MainWindow::showSelectPane() {
+
+    LOG(DEBUG) << "Showing select panel";
+
+    selectPane = new SelectWindow();
+    selectPane->displayWebPage("");
+
+    ui->centralWidget->layout()->addWidget(selectPane);
+
+    connect(selectPane, SIGNAL(bakerySelected(int)), this, SLOT(showDashBoard(int)));
+}
+
+/**
+ * After a bakery is selected in the select pane, the toolbar, menubar actions and
+ * dashboard are enabled and the dashboard for the selected bakery is shown.
+ */
+void MainWindow::showDashBoard (int bakeryId) {
+
+    LOG(DEBUG) << "Showing dashboard for bakery: " + std::to_string(bakeryId);
+    selectPane->deleteLater();
+    widgetsEnabled(true);
+}
+
+/**
+ * Enable and disable the select pane, the toolbar, and some menubar actions,
+ * used when the application is launched in the bakery select pane and login,
+ * and then when the dashboard is shown
+ */
+void MainWindow::widgetsEnabled(bool status) {
+
+    ui->toolBar->setEnabled(status);
+
+    // Edit bakeries action
+    ui->menuEdit->actions().at(1)->setEnabled(status);
+
+    // All tool menu actions
+    ui->menuTools->actions().at(0)->setEnabled(status);
+    ui->menuTools->actions().at(1)->setEnabled(status);
+    ui->menuTools->actions().at(2)->setEnabled(status);
+
+    ui->groupBox->setVisible(status);
 }
 
 /**
@@ -83,8 +146,6 @@ void MainWindow::setLoadingGif(QLabel* label) {
 void MainWindow::setDoneIcon(QLabel* label) {
 
     label->setPixmap(QPixmap(Ui::DONE_ICON));
-
-    qDebug() << "OBJECT -> " << loadingGif << " destroyed";
     delete loadingGif;
 }
 
@@ -132,10 +193,6 @@ void MainWindow::on_firstFermentBar_valueChanged(int value) {
 void MainWindow::on_incrementBtn_clicked() {
 
     ui->firstFermentBar->setValue(value += BAR_INCREMENT);
-}
-
-void MainWindow::exit_app() {
-    qApp->exit();
 }
 
 // TODO: Connect all the remaining widgets

@@ -5,6 +5,8 @@
 #include <QStyle>
 #include <QtWidgets/QLabel>
 
+#include "selectpane.h"
+
 namespace Ui {
 
 /**
@@ -48,11 +50,17 @@ signals:
 private slots:
     void on_firstFermentBar_valueChanged(int value);
     void on_incrementBtn_clicked();
-    void exit_app();
+    void exitApp();
+    void showSelectPane();
+    void showDashBoard(int );
 
 private:
     Ui::MainWindow* ui;
+    SelectWindow* selectPane;
+
     void applySettings();
+    void showLoginAndValidate();
+    void widgetsEnabled(bool);
 
     QMovie* loadingGif;
     void setLoadingGif (QLabel* );

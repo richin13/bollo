@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'mainwindowS26742.ui'
+** Form generated from reading UI file 'mainwindowKB5218.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.4.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef MAINWINDOWS26742_H
-#define MAINWINDOWS26742_H
+#ifndef MAINWINDOWKB5218_H
+#define MAINWINDOWKB5218_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
@@ -52,7 +52,6 @@ public:
     QAction *actionPreferencesPanel;
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout;
-    QWidget *dashboard;
     QGroupBox *groupBox;
     QLabel *mixingIcon;
     QLabel *firstFermentIcon;
@@ -85,8 +84,8 @@ public:
     QMenuBar *menubar;
     QMenu *menuFile;
     QMenu *menuEdit;
-    QMenu *menuTemas;
-    QMenu *menuLog;
+    QMenu *menuThemes;
+    QMenu *menuTools;
     QMenu *menuHelp;
     QStatusBar *statusbar;
     QToolBar *toolBar;
@@ -95,9 +94,8 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(1022, 552);
+        MainWindow->resize(1027, 552);
         MainWindow->setWindowFilePath(QStringLiteral(""));
-        MainWindow->setAttribute(Qt::WA_QuitOnClose, true);
         actionBakeryList = new QAction(MainWindow);
         actionBakeryList->setObjectName(QStringLiteral("actionBakeryList"));
         QIcon icon;
@@ -160,11 +158,8 @@ public:
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         verticalLayout = new QVBoxLayout(centralWidget);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        dashboard = new QWidget(centralWidget);
-        dashboard->setObjectName(QStringLiteral("dashboard"));
-        groupBox = new QGroupBox(dashboard);
+        groupBox = new QGroupBox(centralWidget);
         groupBox->setObjectName(QStringLiteral("groupBox"));
-        groupBox->setGeometry(QRect(0, 0, 1004, 311));
         mixingIcon = new QLabel(groupBox);
         mixingIcon->setObjectName(QStringLiteral("mixingIcon"));
         mixingIcon->setGeometry(QRect(20, 60, 48, 48));
@@ -218,13 +213,13 @@ public:
         firstFermentBar->setGeometry(QRect(70, 80, 81, 6));
         firstFermentBar->setMaximumSize(QSize(16777215, 6));
         firstFermentBar->setStyleSheet(QLatin1String("QProgressBar {\n"
-"    background-color: #808080;\n"
-"	border-radius: 2px;\n"
-" }\n"
-"\n"
-"QProgressBar::chunk {\n"
-"    background-color: #5BC614;\n"
-" }"));
+                                                             "    background-color: #808080;\n"
+                                                             "	border-radius: 2px;\n"
+                                                             " }\n"
+                                                             "\n"
+                                                             "QProgressBar::chunk {\n"
+                                                             "    background-color: #5BC614;\n"
+                                                             " }"));
         firstFermentBar->setValue(0);
         firstFermentBar->setTextVisible(false);
         doughDivisionBar = new QProgressBar(groupBox);
@@ -232,13 +227,13 @@ public:
         doughDivisionBar->setGeometry(QRect(200, 80, 81, 6));
         doughDivisionBar->setMaximumSize(QSize(16777215, 6));
         doughDivisionBar->setStyleSheet(QLatin1String("QProgressBar {\n"
-"    background-color: #808080;\n"
-"	border-radius: 2px;\n"
-" }\n"
-"\n"
-"QProgressBar::chunk {\n"
-"    background-color: #5BC614;\n"
-" }"));
+                                                              "    background-color: #808080;\n"
+                                                              "	border-radius: 2px;\n"
+                                                              " }\n"
+                                                              "\n"
+                                                              "QProgressBar::chunk {\n"
+                                                              "    background-color: #5BC614;\n"
+                                                              " }"));
         doughDivisionBar->setValue(0);
         doughDivisionBar->setTextVisible(false);
         doughFormingBar = new QProgressBar(groupBox);
@@ -246,13 +241,13 @@ public:
         doughFormingBar->setGeometry(QRect(330, 80, 81, 6));
         doughFormingBar->setMaximumSize(QSize(16777215, 6));
         doughFormingBar->setStyleSheet(QLatin1String("QProgressBar {\n"
-"    background-color: #808080;\n"
-"	border-radius: 2px;\n"
-" }\n"
-"\n"
-"QProgressBar::chunk {\n"
-"    background-color: #5BC614;\n"
-" }"));
+                                                             "    background-color: #808080;\n"
+                                                             "	border-radius: 2px;\n"
+                                                             " }\n"
+                                                             "\n"
+                                                             "QProgressBar::chunk {\n"
+                                                             "    background-color: #5BC614;\n"
+                                                             " }"));
         doughFormingBar->setValue(0);
         doughFormingBar->setTextVisible(false);
         finalFermentBar = new QProgressBar(groupBox);
@@ -260,13 +255,13 @@ public:
         finalFermentBar->setGeometry(QRect(460, 80, 81, 6));
         finalFermentBar->setMaximumSize(QSize(16777215, 6));
         finalFermentBar->setStyleSheet(QLatin1String("QProgressBar {\n"
-"    background-color: #808080;\n"
-"	border-radius: 2px;\n"
-" }\n"
-"\n"
-"QProgressBar::chunk {\n"
-"    background-color: #5BC614;\n"
-" }"));
+                                                             "    background-color: #808080;\n"
+                                                             "	border-radius: 2px;\n"
+                                                             " }\n"
+                                                             "\n"
+                                                             "QProgressBar::chunk {\n"
+                                                             "    background-color: #5BC614;\n"
+                                                             " }"));
         finalFermentBar->setValue(0);
         finalFermentBar->setTextVisible(false);
         bakingBar = new QProgressBar(groupBox);
@@ -274,13 +269,13 @@ public:
         bakingBar->setGeometry(QRect(590, 80, 81, 6));
         bakingBar->setMaximumSize(QSize(16777215, 6));
         bakingBar->setStyleSheet(QLatin1String("QProgressBar {\n"
-"    background-color: #808080;\n"
-"	border-radius: 2px;\n"
-" }\n"
-"\n"
-"QProgressBar::chunk {\n"
-"    background-color: #5BC614;\n"
-" }"));
+                                                       "    background-color: #808080;\n"
+                                                       "	border-radius: 2px;\n"
+                                                       " }\n"
+                                                       "\n"
+                                                       "QProgressBar::chunk {\n"
+                                                       "    background-color: #5BC614;\n"
+                                                       " }"));
         bakingBar->setValue(0);
         bakingBar->setTextVisible(false);
         onSaleBar = new QProgressBar(groupBox);
@@ -288,13 +283,13 @@ public:
         onSaleBar->setGeometry(QRect(720, 80, 81, 6));
         onSaleBar->setMaximumSize(QSize(16777215, 6));
         onSaleBar->setStyleSheet(QLatin1String("QProgressBar {\n"
-"    background-color: #808080;\n"
-"	border-radius: 2px;\n"
-" }\n"
-"\n"
-"QProgressBar::chunk {\n"
-"    background-color: #5BC614;\n"
-" }"));
+                                                       "    background-color: #808080;\n"
+                                                       "	border-radius: 2px;\n"
+                                                       " }\n"
+                                                       "\n"
+                                                       "QProgressBar::chunk {\n"
+                                                       "    background-color: #5BC614;\n"
+                                                       " }"));
         onSaleBar->setValue(0);
         onSaleBar->setTextVisible(false);
         shippedBar = new QProgressBar(groupBox);
@@ -302,13 +297,13 @@ public:
         shippedBar->setGeometry(QRect(850, 80, 81, 6));
         shippedBar->setMaximumSize(QSize(16777215, 6));
         shippedBar->setStyleSheet(QLatin1String("QProgressBar {\n"
-"    background-color: #808080;\n"
-"	border-radius: 2px;\n"
-" }\n"
-"\n"
-"QProgressBar::chunk {\n"
-"    background-color: #5BC614;\n"
-" }"));
+                                                        "    background-color: #808080;\n"
+                                                        "	border-radius: 2px;\n"
+                                                        " }\n"
+                                                        "\n"
+                                                        "QProgressBar::chunk {\n"
+                                                        "    background-color: #5BC614;\n"
+                                                        " }"));
         shippedBar->setValue(0);
         shippedBar->setTextVisible(false);
         title1 = new QLabel(groupBox);
@@ -376,20 +371,20 @@ public:
         createdBreadsLabel->setObjectName(QStringLiteral("createdBreadsLabel"));
         createdBreadsLabel->setGeometry(QRect(220, 180, 111, 16));
 
-        verticalLayout->addWidget(dashboard);
+        verticalLayout->addWidget(groupBox);
 
         MainWindow->setCentralWidget(centralWidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QStringLiteral("menubar"));
-        menubar->setGeometry(QRect(0, 0, 1022, 26));
+        menubar->setGeometry(QRect(0, 0, 1027, 26));
         menuFile = new QMenu(menubar);
         menuFile->setObjectName(QStringLiteral("menuFile"));
         menuEdit = new QMenu(menubar);
         menuEdit->setObjectName(QStringLiteral("menuEdit"));
-        menuTemas = new QMenu(menuEdit);
-        menuTemas->setObjectName(QStringLiteral("menuTemas"));
-        menuLog = new QMenu(menubar);
-        menuLog->setObjectName(QStringLiteral("menuLog"));
+        menuThemes = new QMenu(menuEdit);
+        menuThemes->setObjectName(QStringLiteral("menuThemes"));
+        menuTools = new QMenu(menubar);
+        menuTools->setObjectName(QStringLiteral("menuTools"));
         menuHelp = new QMenu(menubar);
         menuHelp->setObjectName(QStringLiteral("menuHelp"));
         MainWindow->setMenuBar(menubar);
@@ -402,7 +397,7 @@ public:
 
         menubar->addAction(menuFile->menuAction());
         menubar->addAction(menuEdit->menuAction());
-        menubar->addAction(menuLog->menuAction());
+        menubar->addAction(menuTools->menuAction());
         menubar->addAction(menuHelp->menuAction());
         menuFile->addAction(actionNewBakery);
         menuFile->addAction(actionSignOut);
@@ -410,13 +405,13 @@ public:
         menuFile->addAction(actionExit);
         menuEdit->addAction(actionChangePassword);
         menuEdit->addAction(actionEditBakerys);
-        menuEdit->addAction(menuTemas->menuAction());
+        menuEdit->addAction(menuThemes->menuAction());
         menuEdit->addAction(actionPreferencesPanel);
-        menuTemas->addAction(actionThemeLight);
-        menuTemas->addAction(actionThemeDark);
-        menuLog->addAction(actionLogBrowser);
-        menuLog->addAction(actionGraphViewer);
-        menuLog->addAction(actionTelegram);
+        menuThemes->addAction(actionThemeLight);
+        menuThemes->addAction(actionThemeDark);
+        menuTools->addAction(actionLogBrowser);
+        menuTools->addAction(actionGraphViewer);
+        menuTools->addAction(actionTelegram);
         menuHelp->addAction(actionAbout);
         menuHelp->addAction(actionHelp);
         toolBar->addAction(actionBakeryList);
@@ -530,8 +525,8 @@ public:
         createdBreadsLabel->setText(QApplication::translate("MainWindow", "Panes creados: ----", 0));
         menuFile->setTitle(QApplication::translate("MainWindow", "File", 0));
         menuEdit->setTitle(QApplication::translate("MainWindow", "Edit", 0));
-        menuTemas->setTitle(QApplication::translate("MainWindow", "Temas", 0));
-        menuLog->setTitle(QApplication::translate("MainWindow", "Tools", 0));
+        menuThemes->setTitle(QApplication::translate("MainWindow", "Temas", 0));
+        menuTools->setTitle(QApplication::translate("MainWindow", "Tools", 0));
         menuHelp->setTitle(QApplication::translate("MainWindow", "Help", 0));
         toolBar->setWindowTitle(QApplication::translate("MainWindow", "toolBar", 0));
     } // retranslateUi
@@ -544,5 +539,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // MAINWINDOWS26742_H
-
+#endif // MAINWINDOWKB5218_H

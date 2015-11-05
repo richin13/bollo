@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1022</width>
+    <width>1027</width>
     <height>552</height>
    </rect>
   </property>
@@ -19,260 +19,251 @@
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QWidget" name="dashboard" native="true">
-      <widget class="QGroupBox" name="groupBox">
+     <widget class="QGroupBox" name="groupBox">
+      <property name="title">
+       <string>Estado de panaderia</string>
+      </property>
+      <widget class="QLabel" name="mixingIcon">
        <property name="geometry">
         <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>1004</width>
-         <height>311</height>
+         <x>20</x>
+         <y>60</y>
+         <width>48</width>
+         <height>48</height>
         </rect>
        </property>
-       <property name="title">
-        <string>Estado de panaderia</string>
+       <property name="minimumSize">
+        <size>
+         <width>48</width>
+         <height>48</height>
+        </size>
        </property>
-       <widget class="QLabel" name="mixingIcon">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>60</y>
-          <width>48</width>
-          <height>48</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>48</width>
-          <height>48</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>48</width>
-          <height>48</height>
-         </size>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="pixmap">
-         <pixmap resource="../resources.qrc">:/images/assets/pending-icon.png</pixmap>
-        </property>
-       </widget>
-       <widget class="QLabel" name="firstFermentIcon">
-        <property name="geometry">
-         <rect>
-          <x>150</x>
-          <y>60</y>
-          <width>48</width>
-          <height>48</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>48</width>
-          <height>48</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>48</width>
-          <height>48</height>
-         </size>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="pixmap">
-         <pixmap resource="../resources.qrc">:/images/assets/pending-icon.png</pixmap>
-        </property>
-       </widget>
-       <widget class="QLabel" name="doughDivisionIcon">
-        <property name="geometry">
-         <rect>
-          <x>280</x>
-          <y>60</y>
-          <width>48</width>
-          <height>48</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>48</width>
-          <height>48</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>48</width>
-          <height>48</height>
-         </size>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="pixmap">
-         <pixmap resource="../resources.qrc">:/images/assets/pending-icon.png</pixmap>
-        </property>
-       </widget>
-       <widget class="QLabel" name="doughFormingIcon">
-        <property name="geometry">
-         <rect>
-          <x>410</x>
-          <y>60</y>
-          <width>48</width>
-          <height>48</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>48</width>
-          <height>48</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>48</width>
-          <height>48</height>
-         </size>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="pixmap">
-         <pixmap resource="../resources.qrc">:/images/assets/pending-icon.png</pixmap>
-        </property>
-       </widget>
-       <widget class="QLabel" name="finalFermentIcon">
-        <property name="geometry">
-         <rect>
-          <x>540</x>
-          <y>60</y>
-          <width>48</width>
-          <height>48</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>48</width>
-          <height>48</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>48</width>
-          <height>48</height>
-         </size>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="pixmap">
-         <pixmap resource="../resources.qrc">:/images/assets/pending-icon.png</pixmap>
-        </property>
-       </widget>
-       <widget class="QLabel" name="bakingIcon">
-        <property name="geometry">
-         <rect>
-          <x>670</x>
-          <y>60</y>
-          <width>48</width>
-          <height>48</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>48</width>
-          <height>48</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>48</width>
-          <height>48</height>
-         </size>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="pixmap">
-         <pixmap resource="../resources.qrc">:/images/assets/pending-icon.png</pixmap>
-        </property>
-       </widget>
-       <widget class="QLabel" name="shippedIcon">
-        <property name="geometry">
-         <rect>
-          <x>930</x>
-          <y>60</y>
-          <width>48</width>
-          <height>48</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>48</width>
-          <height>48</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>48</width>
-          <height>48</height>
-         </size>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="pixmap">
-         <pixmap resource="../resources.qrc">:/images/assets/pending-icon.png</pixmap>
-        </property>
-       </widget>
-       <widget class="QLabel" name="onSaleIcon">
-        <property name="geometry">
-         <rect>
-          <x>800</x>
-          <y>60</y>
-          <width>48</width>
-          <height>48</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>48</width>
-          <height>48</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>48</width>
-          <height>48</height>
-         </size>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="pixmap">
-         <pixmap resource="../resources.qrc">:/images/assets/pending-icon.png</pixmap>
-        </property>
-       </widget>
-       <widget class="QProgressBar" name="firstFermentBar">
-        <property name="geometry">
-         <rect>
-          <x>70</x>
-          <y>80</y>
-          <width>81</width>
-          <height>6</height>
-         </rect>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>6</height>
-         </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QProgressBar {
+       <property name="maximumSize">
+        <size>
+         <width>48</width>
+         <height>48</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="../resources.qrc">:/images/assets/pending-icon.png</pixmap>
+       </property>
+      </widget>
+      <widget class="QLabel" name="firstFermentIcon">
+       <property name="geometry">
+        <rect>
+         <x>150</x>
+         <y>60</y>
+         <width>48</width>
+         <height>48</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>48</width>
+         <height>48</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>48</width>
+         <height>48</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="../resources.qrc">:/images/assets/pending-icon.png</pixmap>
+       </property>
+      </widget>
+      <widget class="QLabel" name="doughDivisionIcon">
+       <property name="geometry">
+        <rect>
+         <x>280</x>
+         <y>60</y>
+         <width>48</width>
+         <height>48</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>48</width>
+         <height>48</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>48</width>
+         <height>48</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="../resources.qrc">:/images/assets/pending-icon.png</pixmap>
+       </property>
+      </widget>
+      <widget class="QLabel" name="doughFormingIcon">
+       <property name="geometry">
+        <rect>
+         <x>410</x>
+         <y>60</y>
+         <width>48</width>
+         <height>48</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>48</width>
+         <height>48</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>48</width>
+         <height>48</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="../resources.qrc">:/images/assets/pending-icon.png</pixmap>
+       </property>
+      </widget>
+      <widget class="QLabel" name="finalFermentIcon">
+       <property name="geometry">
+        <rect>
+         <x>540</x>
+         <y>60</y>
+         <width>48</width>
+         <height>48</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>48</width>
+         <height>48</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>48</width>
+         <height>48</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="../resources.qrc">:/images/assets/pending-icon.png</pixmap>
+       </property>
+      </widget>
+      <widget class="QLabel" name="bakingIcon">
+       <property name="geometry">
+        <rect>
+         <x>670</x>
+         <y>60</y>
+         <width>48</width>
+         <height>48</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>48</width>
+         <height>48</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>48</width>
+         <height>48</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="../resources.qrc">:/images/assets/pending-icon.png</pixmap>
+       </property>
+      </widget>
+      <widget class="QLabel" name="shippedIcon">
+       <property name="geometry">
+        <rect>
+         <x>930</x>
+         <y>60</y>
+         <width>48</width>
+         <height>48</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>48</width>
+         <height>48</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>48</width>
+         <height>48</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="../resources.qrc">:/images/assets/pending-icon.png</pixmap>
+       </property>
+      </widget>
+      <widget class="QLabel" name="onSaleIcon">
+       <property name="geometry">
+        <rect>
+         <x>800</x>
+         <y>60</y>
+         <width>48</width>
+         <height>48</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>48</width>
+         <height>48</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>48</width>
+         <height>48</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="../resources.qrc">:/images/assets/pending-icon.png</pixmap>
+       </property>
+      </widget>
+      <widget class="QProgressBar" name="firstFermentBar">
+       <property name="geometry">
+        <rect>
+         <x>70</x>
+         <y>80</y>
+         <width>81</width>
+         <height>6</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>6</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QProgressBar {
     background-color: #808080;
 	border-radius: 2px;
  }
@@ -280,31 +271,31 @@
 QProgressBar::chunk {
     background-color: #5BC614;
  }</string>
-        </property>
-        <property name="value">
-         <number>0</number>
-        </property>
-        <property name="textVisible">
-         <bool>false</bool>
-        </property>
-       </widget>
-       <widget class="QProgressBar" name="doughDivisionBar">
-        <property name="geometry">
-         <rect>
-          <x>200</x>
-          <y>80</y>
-          <width>81</width>
-          <height>6</height>
-         </rect>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>6</height>
-         </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QProgressBar {
+       </property>
+       <property name="value">
+        <number>0</number>
+       </property>
+       <property name="textVisible">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QProgressBar" name="doughDivisionBar">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>80</y>
+         <width>81</width>
+         <height>6</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>6</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QProgressBar {
     background-color: #808080;
 	border-radius: 2px;
  }
@@ -312,31 +303,31 @@ QProgressBar::chunk {
 QProgressBar::chunk {
     background-color: #5BC614;
  }</string>
-        </property>
-        <property name="value">
-         <number>0</number>
-        </property>
-        <property name="textVisible">
-         <bool>false</bool>
-        </property>
-       </widget>
-       <widget class="QProgressBar" name="doughFormingBar">
-        <property name="geometry">
-         <rect>
-          <x>330</x>
-          <y>80</y>
-          <width>81</width>
-          <height>6</height>
-         </rect>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>6</height>
-         </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QProgressBar {
+       </property>
+       <property name="value">
+        <number>0</number>
+       </property>
+       <property name="textVisible">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QProgressBar" name="doughFormingBar">
+       <property name="geometry">
+        <rect>
+         <x>330</x>
+         <y>80</y>
+         <width>81</width>
+         <height>6</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>6</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QProgressBar {
     background-color: #808080;
 	border-radius: 2px;
  }
@@ -344,31 +335,31 @@ QProgressBar::chunk {
 QProgressBar::chunk {
     background-color: #5BC614;
  }</string>
-        </property>
-        <property name="value">
-         <number>0</number>
-        </property>
-        <property name="textVisible">
-         <bool>false</bool>
-        </property>
-       </widget>
-       <widget class="QProgressBar" name="finalFermentBar">
-        <property name="geometry">
-         <rect>
-          <x>460</x>
-          <y>80</y>
-          <width>81</width>
-          <height>6</height>
-         </rect>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>6</height>
-         </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QProgressBar {
+       </property>
+       <property name="value">
+        <number>0</number>
+       </property>
+       <property name="textVisible">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QProgressBar" name="finalFermentBar">
+       <property name="geometry">
+        <rect>
+         <x>460</x>
+         <y>80</y>
+         <width>81</width>
+         <height>6</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>6</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QProgressBar {
     background-color: #808080;
 	border-radius: 2px;
  }
@@ -376,31 +367,31 @@ QProgressBar::chunk {
 QProgressBar::chunk {
     background-color: #5BC614;
  }</string>
-        </property>
-        <property name="value">
-         <number>0</number>
-        </property>
-        <property name="textVisible">
-         <bool>false</bool>
-        </property>
-       </widget>
-       <widget class="QProgressBar" name="bakingBar">
-        <property name="geometry">
-         <rect>
-          <x>590</x>
-          <y>80</y>
-          <width>81</width>
-          <height>6</height>
-         </rect>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>6</height>
-         </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QProgressBar {
+       </property>
+       <property name="value">
+        <number>0</number>
+       </property>
+       <property name="textVisible">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QProgressBar" name="bakingBar">
+       <property name="geometry">
+        <rect>
+         <x>590</x>
+         <y>80</y>
+         <width>81</width>
+         <height>6</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>6</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QProgressBar {
     background-color: #808080;
 	border-radius: 2px;
  }
@@ -408,31 +399,31 @@ QProgressBar::chunk {
 QProgressBar::chunk {
     background-color: #5BC614;
  }</string>
-        </property>
-        <property name="value">
-         <number>0</number>
-        </property>
-        <property name="textVisible">
-         <bool>false</bool>
-        </property>
-       </widget>
-       <widget class="QProgressBar" name="onSaleBar">
-        <property name="geometry">
-         <rect>
-          <x>720</x>
-          <y>80</y>
-          <width>81</width>
-          <height>6</height>
-         </rect>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>6</height>
-         </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QProgressBar {
+       </property>
+       <property name="value">
+        <number>0</number>
+       </property>
+       <property name="textVisible">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QProgressBar" name="onSaleBar">
+       <property name="geometry">
+        <rect>
+         <x>720</x>
+         <y>80</y>
+         <width>81</width>
+         <height>6</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>6</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QProgressBar {
     background-color: #808080;
 	border-radius: 2px;
  }
@@ -440,31 +431,31 @@ QProgressBar::chunk {
 QProgressBar::chunk {
     background-color: #5BC614;
  }</string>
-        </property>
-        <property name="value">
-         <number>0</number>
-        </property>
-        <property name="textVisible">
-         <bool>false</bool>
-        </property>
-       </widget>
-       <widget class="QProgressBar" name="shippedBar">
-        <property name="geometry">
-         <rect>
-          <x>850</x>
-          <y>80</y>
-          <width>81</width>
-          <height>6</height>
-         </rect>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>6</height>
-         </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QProgressBar {
+       </property>
+       <property name="value">
+        <number>0</number>
+       </property>
+       <property name="textVisible">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QProgressBar" name="shippedBar">
+       <property name="geometry">
+        <rect>
+         <x>850</x>
+         <y>80</y>
+         <width>81</width>
+         <height>6</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>6</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QProgressBar {
     background-color: #808080;
 	border-radius: 2px;
  }
@@ -472,282 +463,281 @@ QProgressBar::chunk {
 QProgressBar::chunk {
     background-color: #5BC614;
  }</string>
-        </property>
-        <property name="value">
-         <number>0</number>
-        </property>
-        <property name="textVisible">
-         <bool>false</bool>
-        </property>
-       </widget>
-       <widget class="QLabel" name="title1">
-        <property name="geometry">
-         <rect>
-          <x>4</x>
-          <y>110</y>
-          <width>81</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>100</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true"/>
-        </property>
-        <property name="text">
-         <string>Mezcla de ingredientes</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-        <property name="wordWrap">
-         <bool>true</bool>
-        </property>
-       </widget>
-       <widget class="QLabel" name="title2">
-        <property name="geometry">
-         <rect>
-          <x>125</x>
-          <y>110</y>
-          <width>101</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>120</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>Fermentacion primaria</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-        <property name="wordWrap">
-         <bool>true</bool>
-        </property>
-       </widget>
-       <widget class="QLabel" name="title3">
-        <property name="geometry">
-         <rect>
-          <x>265</x>
-          <y>110</y>
-          <width>81</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>100</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>Division de la masa</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-        <property name="wordWrap">
-         <bool>true</bool>
-        </property>
-       </widget>
-       <widget class="QLabel" name="title4">
-        <property name="geometry">
-         <rect>
-          <x>394</x>
-          <y>110</y>
-          <width>81</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>100</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>Formando panes</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-        <property name="wordWrap">
-         <bool>true</bool>
-        </property>
-       </widget>
-       <widget class="QLabel" name="title5">
-        <property name="geometry">
-         <rect>
-          <x>513</x>
-          <y>110</y>
-          <width>101</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>120</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>Fermentacion final</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-        <property name="wordWrap">
-         <bool>true</bool>
-        </property>
-       </widget>
-       <widget class="QLabel" name="title6">
-        <property name="geometry">
-         <rect>
-          <x>660</x>
-          <y>110</y>
-          <width>71</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>120</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>Horneo</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-        <property name="wordWrap">
-         <bool>true</bool>
-        </property>
-       </widget>
-       <widget class="QLabel" name="title7">
-        <property name="geometry">
-         <rect>
-          <x>790</x>
-          <y>110</y>
-          <width>71</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>120</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>Venta</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-        <property name="wordWrap">
-         <bool>true</bool>
-        </property>
-       </widget>
-       <widget class="QLabel" name="title8">
-        <property name="geometry">
-         <rect>
-          <x>910</x>
-          <y>110</y>
-          <width>91</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>120</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>Distribucion</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-        <property name="wordWrap">
-         <bool>true</bool>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="incrementBtn">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>260</y>
-          <width>80</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Increment</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="statusLabel">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>180</y>
-          <width>111</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Estado:  ----</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="timeRemainingLabel">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>200</y>
-          <width>151</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Tiempo restante:       --:--</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="elapsedTimeLabel">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>220</y>
-          <width>151</width>
-          <height>20</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Tiempo transcurrido:  --:--</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="createdBreadsLabel">
-        <property name="geometry">
-         <rect>
-          <x>220</x>
-          <y>180</y>
-          <width>111</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Panes creados: ----</string>
-        </property>
-       </widget>
+       </property>
+       <property name="value">
+        <number>0</number>
+       </property>
+       <property name="textVisible">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="title1">
+       <property name="geometry">
+        <rect>
+         <x>4</x>
+         <y>110</y>
+         <width>81</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>100</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string>Mezcla de ingredientes</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="title2">
+       <property name="geometry">
+        <rect>
+         <x>125</x>
+         <y>110</y>
+         <width>101</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>120</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Fermentacion primaria</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="title3">
+       <property name="geometry">
+        <rect>
+         <x>265</x>
+         <y>110</y>
+         <width>81</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>100</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Division de la masa</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="title4">
+       <property name="geometry">
+        <rect>
+         <x>394</x>
+         <y>110</y>
+         <width>81</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>100</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Formando panes</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="title5">
+       <property name="geometry">
+        <rect>
+         <x>513</x>
+         <y>110</y>
+         <width>101</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>120</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Fermentacion final</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="title6">
+       <property name="geometry">
+        <rect>
+         <x>660</x>
+         <y>110</y>
+         <width>71</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>120</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Horneo</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="title7">
+       <property name="geometry">
+        <rect>
+         <x>790</x>
+         <y>110</y>
+         <width>71</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>120</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Venta</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="title8">
+       <property name="geometry">
+        <rect>
+         <x>910</x>
+         <y>110</y>
+         <width>91</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>120</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Distribucion</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="incrementBtn">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>260</y>
+         <width>80</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Increment</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="statusLabel">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>180</y>
+         <width>111</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Estado:  ----</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="timeRemainingLabel">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>200</y>
+         <width>151</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Tiempo restante:       --:--</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="elapsedTimeLabel">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>220</y>
+         <width>151</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Tiempo transcurrido:  --:--</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="createdBreadsLabel">
+       <property name="geometry">
+        <rect>
+         <x>220</x>
+         <y>180</y>
+         <width>111</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Panes creados: ----</string>
+       </property>
       </widget>
      </widget>
     </item>
@@ -758,7 +748,7 @@ QProgressBar::chunk {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1022</width>
+     <width>1027</width>
      <height>26</height>
     </rect>
    </property>
@@ -775,7 +765,7 @@ QProgressBar::chunk {
     <property name="title">
      <string>Edit</string>
     </property>
-    <widget class="QMenu" name="menuTemas">
+    <widget class="QMenu" name="menuThemes">
      <property name="title">
       <string>Temas</string>
      </property>
@@ -784,10 +774,10 @@ QProgressBar::chunk {
     </widget>
     <addaction name="actionChangePassword"/>
     <addaction name="actionEditBakerys"/>
-    <addaction name="menuTemas"/>
+    <addaction name="menuThemes"/>
     <addaction name="actionPreferencesPanel"/>
    </widget>
-   <widget class="QMenu" name="menuLog">
+   <widget class="QMenu" name="menuTools">
     <property name="title">
      <string>Tools</string>
     </property>
@@ -804,7 +794,7 @@ QProgressBar::chunk {
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
-   <addaction name="menuLog"/>
+   <addaction name="menuTools"/>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
@@ -1007,7 +997,6 @@ QProgressBar::chunk {
  <resources>
   <include location="../resources.qrc"/>
   <include location="../resources.qrc"/>
-  <include location="../../../../../../Descargas/bollo/src/ui/resources.qrc"/>
  </resources>
  <connections/>
 </ui>
