@@ -17,8 +17,6 @@
 BolloApp::BolloApp() {
     this->app_dir = QDir(QDir().homePath() + "/bollo");
 
-    this->manager = new QNetworkAccessManager(this);
-    connect(this, &BolloApp::application_exiting, manager, &QNetworkAccessManager::deleteLater);
     //TODO: Add a splash screen to make the whole process more user-friendly
 
     /* The app settings stored at home directory */
@@ -138,7 +136,7 @@ void BolloApp::init_database(void) {
 
 void BolloApp::load_bakeries_from_db() {
     LOG(DEBUG) << "Loading bakeries through web API";
-
+    QNetworkAccessManager* manager = new QNetworkAccessManager(this);
     //Request all
     QHash<QString, QString> args;
     args["all"];
@@ -147,11 +145,12 @@ void BolloApp::load_bakeries_from_db() {
     LOG(INFO) << "Sending GET request to " + url.toString().toStdString();
 
     QObject::connect(manager, &QNetworkAccessManager::finished, this, &BolloApp::loaded_bakeries);
+    QObject::connect(manager, &QNetworkAccessManager::finished, manager, &QNetworkAccessManager::deleteLater);
     manager->get(QNetworkRequest(url));
 }
 
 void BolloApp::loaded_bakeries(QNetworkReply* reply) {
-    LOG(INFO) << "Got reply from server";
+    LOG(INFO) << "Got reply from server: Load bakeries";
     QJsonObject jsonObject;
 
     extract_json_object(reply, &jsonObject);
@@ -162,7 +161,7 @@ void BolloApp::loaded_bakeries(QNetworkReply* reply) {
 
         LOG(INFO) << "Loaded bakeries: " + std::to_string(BolloApp::get().bakeries.size());
     } else {
-        LOG(WARNING) << "Error code in response " + jsonObject.take("message").toString().toStdString();
+        LOG(WARNING) << "Error code in response: " + jsonObject.take("message").toString().toStdString();
     }
 
     QObject::connect(reply, &QNetworkReply::finished, reply, &QNetworkReply::deleteLater);

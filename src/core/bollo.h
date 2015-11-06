@@ -6,8 +6,8 @@
 #define BOLLO_BOLLO_H
 
 #define APP_NAME "Bollo"
-#define CODENAME "Ajonjoli"
-#define VERSION "0.0.1-build-10_4"//[version]-build-{MONTH_week}
+#define CODENAME "Baguette"
+#define VERSION "0.0.2-build-11_1"//[version]-build-{MONTH_week}
 
 #include <QtSql/qsqldatabase.h>
 #include <QtCore/qsettings.h>
@@ -48,9 +48,6 @@ private:
 public:
 /* User information */
     Person* current_user;
-
-    /* Networking connection manager */
-    QNetworkAccessManager* manager;
 
     /* Database connection information */
     QSqlDatabase bollo_db;
