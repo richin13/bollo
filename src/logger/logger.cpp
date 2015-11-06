@@ -6,8 +6,6 @@
 #include "logger.h"
 
 
-Logger logbook;
-
 QMutex mutex;
 
 /**

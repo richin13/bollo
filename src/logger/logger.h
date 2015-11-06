@@ -140,6 +140,4 @@ signals:
     void start_worker();
 };
 
-extern Logger logbook;
-
 #endif //BOLLO_LOGGER_H

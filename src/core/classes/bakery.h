@@ -8,6 +8,7 @@
 #include <QtCore/qthread.h>
 #include "../build.h"
 #include "baker.h"
+#include "logbook.h"
 
 typedef unsigned short int integer_code;
 
@@ -31,6 +32,9 @@ private:
     operation current_operation;
     bool closed_down;
     Baker* baker;//Baker thread
+
+    /* Logbook handler */
+    Logbook logbook;
 public:
     Bakery(){}
     Bakery(const Bakery&);
