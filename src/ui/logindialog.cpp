@@ -5,7 +5,6 @@
 #include <QtCore/qjsonobject.h>
 #include <QtWidgets/qmessagebox.h>
 #include "logindialog.h"
-#include "../io/sql.h"
 #include "../io/http.h"
 #include "../logger/easylogging++.h"
 #include "assets.h"
@@ -31,34 +30,31 @@ void LoginDialog::on_qb_login_clicked() {
     QByteArray password = ui->qle_password->text().toUtf8();
     LOG(INFO) << "Logging in user " + username.toStdString();
     ui->qb_login->setEnabled(false);
-    this->user_id = login(username, password);
 
-    if(this->user_id) {
-        //Build the URL
-        QHash<QString, QString> args;
-        args["id"] = QVariant(user_id).toString();
-        QUrl url;
-        url_builder(url, "users", "user", args);//Looks like this-> .../api/v1/users/user.php?id=user_id
+    QNetworkAccessManager* manager = new QNetworkAccessManager(this);
 
-        connect(BolloApp::get().manager, &QNetworkAccessManager::finished, this, &LoginDialog::gotReply);
+    //Build the URL
+    QHash<QString, QString> args;
+    args["user"] = username;
+    args["password"] = password;
+    args["bolloapp"];//To avoid creating a web session
+    QUrl url;
+    url_builder(url, "users", "login", args);
 
-        //Send request using GET method. TODO: GET or POST? Maybe POST in the future.
-        BolloApp::get().manager->get(QNetworkRequest(url));
-        LOG(INFO) << "Sent GET request to URL " + url.toString().toStdString();
-    } else {
-        ui->qb_login->setEnabled(true);
-        QMessageBox::critical(this, "Datos incorrectos", "Usuario/Contraseña incorrectos. Intente de nuevo");
-        LOG(WARNING) << "Invalid user credentials";
-    }
+    connect(manager, &QNetworkAccessManager::finished, this, &LoginDialog::got_login_reply);
+    connect(manager, &QNetworkAccessManager::finished, manager, &QNetworkAccessManager::deleteLater);
+    manager->get(QNetworkRequest(url));
+    LOG(INFO) << "Sent GET request to URL to API at section 'users' module 'login'";
 }
 
-void LoginDialog::gotReply(QNetworkReply* reply) {
-    LOG(INFO) << "Got reply from server: User information request";
+void LoginDialog::got_login_reply(QNetworkReply* reply) {
+    LOG(INFO) << "Got reply from server: Login request";
     QJsonObject object;
 
     extract_json_object(reply, &object);
-    if(!object.take("code").toInt()) {//It was previously checked that the user exists!
-        QJsonObject person = object.take("user").toObject();
+    int code_reply = object.take("code").toInt();
+    if(!code_reply) {
+        QJsonObject person = object.take("user_details").toObject();
 
         int id = person.take("id").toInt();
         QString fn = person.take("first_name").toString();
@@ -69,6 +65,20 @@ void LoginDialog::gotReply(QNetworkReply* reply) {
         BolloApp::get().current_user = new Person(id, fn, ln, un, email);
         this->close();
         emit logged_in();
+    } else {
+        ui->qb_login->setEnabled(true);
+        switch(code_reply) {
+            case 1:
+                QMessageBox::critical(this, "Cuenta inactiva", "La cuenta no ha sido activada.");
+                LOG(WARNING) << "Inactive account";
+                break;
+            case 2:
+                QMessageBox::critical(this, "Datos incorrectos", "Usuario/Contraseña incorrectos. Intente de nuevo");
+                LOG(WARNING) << "Invalid user credentials";
+                break;
+            default:
+                LOG(FATAL) << "Call a developer! Now! NOW! <> Invalid API parameters at 'login' in 'users'";
+        }
     }
 
     connect(reply, &QNetworkReply::finished, reply, &QNetworkReply::deleteLater);

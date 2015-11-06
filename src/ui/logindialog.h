@@ -32,7 +32,7 @@ public slots:
 
     void on_qb_login_clicked();
 
-    void gotReply(QNetworkReply*);
+    void got_login_reply(QNetworkReply*);
 
 signals:
     void logged_in();
