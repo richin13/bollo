@@ -41,7 +41,7 @@ public:
             QJsonObject bakery = array->at(i).toObject();
 
             //information
-            int id = bakery.take("id").toString().toInt();
+            int id = bakery.take("id").toInt();
             QString name = bakery.take("name").toString();
             QString province = Handler::get_province_name(bakery.take("province").toInt());
             QString city = bakery.take("city").toString();
