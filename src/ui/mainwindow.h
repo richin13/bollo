@@ -14,6 +14,7 @@ namespace Ui {
  * can have.
  */
 #define MAX_BAR_VALUE 100
+#define MIN_BAR_VALUE 0
 
 /**
  * Value used to set the progress bars
@@ -65,6 +66,7 @@ private:
     QMovie* loadingGif;
     void setLoadingGif (QLabel* );
     void setDoneIcon (QLabel* );
+    void setDefaultIcon(QLabel* );
 
     void connectWidgets();
     void connectToolBarActions();
@@ -74,6 +76,51 @@ private:
     void connectFileMenuActions();
     void connectToolMenuActions();
     void connectEditMenuActions();
+
+
+    //***********Bakery Variables*************//
+    int current_bakery_id;
+    QString current_bakery_stage;
+
+
+    //****SLOTS****//
+    void progress_operation(bakery_operation current_operation);
+    void update_bakery_operations(bakery_operation bakery_progress);
+
+
+
+    //*************Progress Bars Methods*************//
+    void setProgressBar(QString stage, int progress);
+
+    void set_mixIngredients_progress(int progress_value);
+    void set_firstFermentBar(int progress_value);
+    void set_doughDivisionBar(int progress_value);
+    void set_doughFormingBar(int progress_value);
+    void set_finalFermentBar(int progress_value);
+    void set_bakingBar(int progress_value);
+    void set_onSaleBar(int progress_value);
+    void set_shippedBar(int progress_value);
+
+    //*********Update Bakery Progress Operations Methods***********//
+    void update_from_mix_ingredients();
+    void update_from_first_fermentation();
+    void update_from_bread_distribution();
+    void update_from_sale();
+    void update_from_baking();
+    void update_from_final_fermentation();
+    void update_from_forming_dough();
+    void update_from_divide_dough();
+
+    //*******Cleaning Progress Bars Methods**********//
+    void clean_mixIngredients_progress();
+    void clean_firstFermentBar();
+    void clean_doughDivisionBar();
+    void clean_doughFormingBar();
+    void clean_finalFermentBar();
+    void clean_bakingBar();
+    void clean_onSaleBar();
+    void clean_shippedBar();
+
 };
 
 #endif // MAINWINDOW_H
