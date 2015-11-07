@@ -54,7 +54,6 @@ void MainWindow::showLoginAndValidate() {
     LoginDialog* loginDialog = new LoginDialog;
     loginDialog->show();
 
-    connect(loginDialog, &LoginDialog::logged_in, loginDialog, &LoginDialog::close);
     connect(loginDialog, &LoginDialog::logged_in, this, &MainWindow::showSelectPane);
     connect(loginDialog, &LoginDialog::accepted, loginDialog, &QObject::deleteLater);
 
@@ -78,7 +77,6 @@ void MainWindow::showSelectPane() {
 
     selectPane = new SelectWindow();
     ui->centralWidget->layout()->addWidget(selectPane);
-    selectPane->buildBakeriesList();
 
     connect(selectPane, SIGNAL(bakerySelected(int)), this, SLOT(showDashBoard(int)));
 }
@@ -240,13 +238,6 @@ void MainWindow::connectMenuActions() {
     connect(ui->actionThemeDark, SIGNAL(triggered(bool)), actManager, SLOT(setDarkTheme()));
     connect(ui->actionPreferencesPanel, SIGNAL(triggered(bool)), actManager, SLOT(preferencesPanel()));
 }
-
-
-
-
-
-
-
 
 /*
  * @brief MainWindow::progress_operation --> Updates the GUI according to
@@ -599,5 +590,3 @@ void MainWindow::clean_shippedBar() {
     ui->shippedBar->setValue(MIN_BAR_VALUE);
     setDefaultIcon(ui->shippedIcon);
 }
-
-
