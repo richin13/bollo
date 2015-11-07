@@ -5,7 +5,9 @@
 #include <QString>
 namespace Ui {
 
-class Popup;
+    class Popup;
+
+    #define TIME_MILIS 5000
 }
 
 class Popup : public QDialog {
@@ -13,15 +15,16 @@ class Popup : public QDialog {
     Q_OBJECT
 
 public:
-    explicit Popup(QWidget *parent = 0);
-    void showPopup (QString title, QString message);
+    Popup(QString title, QString msg, QWidget *parent = 0);
     ~Popup();
 
 private slots:
-    void on_closeButton_clicked();
+    void close();
 
 private:
     Ui::Popup *ui;
+
+    void applySettings();
 };
 
 #endif // POPUP_H

@@ -5,10 +5,10 @@
 #include "themes.h"
 #include "assets.h"
 #include "logindialog.h"
+#include "popup.h"
 
 #include <QDesktopWidget>
 #include <QMovie>
-#include <string>
 
 int value = 0;
 
@@ -54,6 +54,7 @@ void MainWindow::showLoginAndValidate() {
     LoginDialog* loginDialog = new LoginDialog;
     loginDialog->show();
 
+    connect(loginDialog, &LoginDialog::logged_in, loginDialog, &LoginDialog::close);
     connect(loginDialog, &LoginDialog::logged_in, this, &MainWindow::showSelectPane);
     connect(loginDialog, &LoginDialog::accepted, loginDialog, &QObject::deleteLater);
 
@@ -76,9 +77,8 @@ void MainWindow::showSelectPane() {
     LOG(DEBUG) << "Showing select panel";
 
     selectPane = new SelectWindow();
-    selectPane->displayWebPage("");
-
     ui->centralWidget->layout()->addWidget(selectPane);
+    selectPane->buildBakeriesList();
 
     connect(selectPane, SIGNAL(bakerySelected(int)), this, SLOT(showDashBoard(int)));
 }

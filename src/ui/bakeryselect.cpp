@@ -45,7 +45,7 @@ void BakerySelect::addBakery(const Bakery& bakery) {
     QCommandLinkButton* button = new QCommandLinkButton();
 
     QString formatted =
-            QString("%1 - %2 | Estado: %3 (%4%)").arg(bakery.get_name(),
+            QString("%1 (%2) | Estado: %3 (%4%)").arg(bakery.get_name(),
                                                      bakery.get_city(),
                                                      bakery.get_current_op().description,
                                                      QVariant(bakery.get_current_op().progress % 100).toString());

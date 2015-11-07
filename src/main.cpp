@@ -21,9 +21,9 @@ int main(int argc, char** argv) {
     LOG(INFO) << "Application starting";
     BolloApp& a = BolloApp::get();
 
-    logbook.general(1) << "Mezcla de ingredientes";
-    logbook.general(2) << "Mezcla de ingredientes";
-    logbook.problem(1, 10) << "Colitis";
+    //logbook.general(1) << "Mezcla de ingredientes";
+    //logbook.general(2) << "Mezcla de ingredientes";
+    //logbook.problem(1, 10) << "Colitis";
 
     Ui::setDarkTheme();
     MainWindow w;

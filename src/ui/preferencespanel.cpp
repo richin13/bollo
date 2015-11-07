@@ -27,8 +27,6 @@ PreferencesPanel::~PreferencesPanel() {
  */
 void PreferencesPanel::fillSettingsValue() {
 
-    // TODO: GET values from .ini file and set the values.
-
     // NetWorking tab
     ui->apiHostUrl->setText(Constants::API_HOST);
     ui->dbHostUrl->setText(Constants::DB_HOST);
@@ -129,7 +127,7 @@ void PreferencesPanel::writePreferencesToFile() {
         BolloApp::get().set_setting("Operations", QStringLiteral("badyeast_probability"), QVariant(bad_yeast_prob));
 
         //TODO: Missing 'Ministry of health raid' probability
-        LOG(DEBUG) << "Updated operations settins";
+        LOG(DEBUG) << "Updated operations settings";
     }
 }
 
