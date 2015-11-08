@@ -18,9 +18,14 @@ Q_OBJECT
 public:
     explicit LogbookDialog(QWidget* parent = 0);
     ~LogbookDialog();
-
+    void load_events(int filtering = 0);
+    void load_problems(int filtering = 0);
 private slots:
     void on_qbClose_clicked();
+    void loaded_events(QNetworkReply*);
+    void setup_events(const QJsonArray&);
+    void loaded_problems(QNetworkReply*);
+    void setup_problems(const QJsonArray&);
 
 private:
     Ui::LogbookDialog* ui;

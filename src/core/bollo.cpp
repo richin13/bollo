@@ -167,6 +167,20 @@ void BolloApp::loaded_bakeries(QNetworkReply* reply) {
     QObject::connect(reply, &QNetworkReply::finished, reply, &QNetworkReply::deleteLater);
 }
 
+
+const QString& BolloApp::get_bakery_name(int id) {
+    int size = (int) bakeries.size();
+
+    for(int i = 0; i < size; ++i) {
+        Bakery current = bakeries.at((unsigned long) i);
+        if(current.get_id() == id) {
+            return current.get_name();
+        }
+    }
+
+    return QStringLiteral("Not found");//Should never happen.
+}
+
 QString BolloApp::windowTittle() {
     return QString("%1-[%2]_%3").arg(APP_NAME, CODENAME, VERSION);
 }

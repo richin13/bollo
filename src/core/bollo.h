@@ -64,6 +64,8 @@ public:
 
     void set_setting(const QString&, const QString&, const QVariant&);
     QVariant get_setting(const QString&, const QString&);
+
+    const QString& get_bakery_name(int);
 public slots:
     void loaded_bakeries(QNetworkReply*);
 

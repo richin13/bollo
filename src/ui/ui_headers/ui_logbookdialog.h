@@ -16,6 +16,9 @@
 #include <QtWidgets/QStackedWidget>
 #include <QtWidgets/QTableWidget>
 #include <QtWidgets/QWidget>
+#include <QtNetwork/qnetworkaccessmanager.h>
+#include <QtCore/qurl.h>
+#include "../../io/http.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -83,8 +86,6 @@ public:
         qtGeneral->verticalHeader()->setVisible(false);
         qtGeneral->setEditTriggers(QAbstractItemView::NoEditTriggers);
         qtGeneral->setSelectionBehavior(QAbstractItemView::SelectRows);
-        loadGeneral();
-
 
         qtGeneral->setObjectName(QStringLiteral("qtGeneral"));
         qtGeneral->setGeometry(QRect(10, 10, 561, 241));
@@ -115,7 +116,6 @@ public:
         qtProblem->verticalHeader()->setVisible(false);
         qtProblem->setEditTriggers(QAbstractItemView::NoEditTriggers);
         qtProblem->setSelectionBehavior(QAbstractItemView::SelectRows);
-        loadProblem();
 
         qtProblem->setObjectName(QStringLiteral("qtProblem"));
         qtProblem->setGeometry(QRect(10, 10, 561, 241));
@@ -131,58 +131,6 @@ public:
         QMetaObject::connectSlotsByName(Dialog);
     } // setupUi
 
-
-    void loadGeneral() {
-        qtGeneral->setRowCount(1);
-
-        QTableWidgetItem* rowCode1 = new QTableWidgetItem();
-        rowCode1->setText(QStringLiteral("1"));
-        qtGeneral->setItem(0, 0, rowCode1);
-
-        QTableWidgetItem* rowBakery1 = new QTableWidgetItem();
-        rowBakery1->setText("Delipan Centro");
-        qtGeneral->setItem(0, 1, rowBakery1);
-
-        QTableWidgetItem* rowDescription1 = new QTableWidgetItem();
-        rowDescription1->setText("Mezcla de ingredientes");
-        qtGeneral->setItem(0, 2, rowDescription1);
-
-        QTableWidgetItem* rowDate1 = new QTableWidgetItem();
-        rowDate1->setText("30-10-2015");
-        qtGeneral->setItem(0, 3, rowDate1);
-
-        QTableWidgetItem* rowHour1 = new QTableWidgetItem();
-        rowHour1->setText("20:00:30");
-        qtGeneral->setItem(0, 4, rowHour1);
-    }
-
-    void loadProblem() {
-        qtProblem->setRowCount(1);
-
-        QTableWidgetItem* rowCodeProblem1 = new QTableWidgetItem();
-        rowCodeProblem1->setText(QStringLiteral("66"));
-        qtProblem->setItem(0, 0, rowCodeProblem1);
-
-        QTableWidgetItem* rowBakeryProblem1 = new QTableWidgetItem();
-        rowBakeryProblem1->setText(QStringLiteral("Delipan centro"));
-        qtProblem->setItem(0, 1, rowBakeryProblem1);
-
-        QTableWidgetItem* rowDescriptProblem1 = new QTableWidgetItem();
-        rowDescriptProblem1->setText(QStringLiteral("Desechos fecales"));
-        qtProblem->setItem(0, 2, rowDescriptProblem1);
-
-        QTableWidgetItem* rowDough1 = new QTableWidgetItem();
-        rowDough1->setText(QStringLiteral("15"));
-        qtProblem->setItem(0, 3, rowDough1);
-
-        QTableWidgetItem* rowDateProblem1 = new QTableWidgetItem();
-        rowDateProblem1->setText("30-10-2015");
-        qtProblem->setItem(0, 4, rowDateProblem1);
-
-        QTableWidgetItem* rowHourProblem1 = new QTableWidgetItem();
-        rowHourProblem1->setText(QStringLiteral("06:30:01"));
-        qtProblem->setItem(0, 5, rowHourProblem1);
-    }
 };
 
 namespace Ui {
