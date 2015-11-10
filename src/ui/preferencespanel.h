@@ -3,6 +3,9 @@
 
 #include <QDialog>
 
+#include "ui_headers/ui_preferencespanel.h"
+#include "../io/settings.h"
+
 namespace Ui {
 class PreferencesPanel;
 }

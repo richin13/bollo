@@ -5,7 +5,6 @@
 #include "themes.h"
 #include "assets.h"
 #include "logindialog.h"
-#include "popup.h"
 
 #include <QDesktopWidget>
 #include <QMovie>
@@ -262,7 +261,7 @@ void MainWindow::connectMenuActions() {
  * --> The code inside the if conditional only if the bakery id
  * --> belongs to the bakery that is being displayed
  */
-void MainWindow::progress_operation(bakery_operation current_operation) {
+void MainWindow::progress_operation(_operation current_operation) {
 
     if (current_operation.bakery_id == this->current_bakery_id) {
 
@@ -420,7 +419,7 @@ void MainWindow::set_shippedBar(int progress_value) {
  * --> 'Bakery List' in order to control its progress
  *
  */
-void MainWindow::update_bakery_operations(bakery_operation bakery_progress) {
+void MainWindow::update_bakery_operations(_operation bakery_progress) {
 
     int progress_value = bakery_progress.progress % 100;
     switch(bakery_progress.progress / 100) {

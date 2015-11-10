@@ -1,6 +1,5 @@
 #include "bakeryedit.h"
 #include "ui_headers/ui_bakeryedit.h"
-#include "../core/bollo.h"
 
 BakeryEdit::BakeryEdit(QWidget *parent) : QDialog(parent),
     ui(new Ui::BakeryEdit) {
@@ -113,16 +112,7 @@ void BakeryEdit::connectEventChangeManagers() {
  * the button is enabled again.
  */
 void BakeryEdit::validateNewBakeInput() {
-
-    if (ui->bakeryName->text().isEmpty() || ui->bakeryCity->text().isEmpty()) {
-
-        ui->createBakeryBtn->setDisabled(true);
-    }
-
-    else {
-
-        ui->createBakeryBtn->setDisabled(false);
-    }
+    ui->createBakeryBtn->setDisabled(ui->bakeryName->text().isEmpty() || ui->bakeryCity->text().isEmpty());
 }
 
 /**
@@ -130,16 +120,7 @@ void BakeryEdit::validateNewBakeInput() {
  * the button is enabled again.
  */
 void BakeryEdit::validateEditBakeInput() {
-
-    if (ui->bakeryNameEdit->text().isEmpty() || ui->bakeryCityEdit->text().isEmpty()) {
-
-        ui->saveBakery->setDisabled(true);
-    }
-
-    else {
-
-        ui->saveBakery->setDisabled(false);
-    }
+    ui->saveBakery->setDisabled(ui->bakeryNameEdit->text().isEmpty() || ui->bakeryCityEdit->text().isEmpty());
 }
 
 /**
@@ -148,14 +129,5 @@ void BakeryEdit::validateEditBakeInput() {
  * and saving the same values it's redundant and some reources can be saved.
  */
 void BakeryEdit::stateSelectChanged () {
-
-    if (ui->stateListEdit->currentText() == selectedBakery->get_state()) {
-
-        ui->saveBakery->setDisabled(true);
-    }
-
-    else {
-
-        ui->saveBakery->setDisabled(false);
-    }
+    ui->saveBakery->setDisabled(ui->stateListEdit->currentText() == selectedBakery->get_state());
 }

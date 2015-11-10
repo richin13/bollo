@@ -1,14 +1,9 @@
 #include <QDebug>
 
 #include "preferencespanel.h"
-#include "ui_headers/ui_preferencespanel.h"
-#include "../core/bollo_constants.h"
-#include "../core/bollo.h"
-#include "../logger/easylogging++.h"
 
 PreferencesPanel::PreferencesPanel(QWidget* parent) : QDialog(parent),
                                                       ui(new Ui::PreferencesPanel) {
-
     ui->setupUi(this);
     fillSettingsValue();
     connectEventChangeManagers();
@@ -35,11 +30,11 @@ void PreferencesPanel::fillSettingsValue() {
     ui->dbPassword->setText(Constants::DB_PASSWORD);
 
     // Bakery tab
-    ui->averageBreadSP->setValue(BolloApp::get().get_setting("Operations", "average_production").toInt());
-    ui->doughPerBatchSP->setValue(BolloApp::get().get_setting("Operations", "dough_per_batch").toInt());
-    ui->pollutantsProbabilitySP->setValue(BolloApp::get().get_setting("Operations", "poll_probability").toInt());
+    ui->averageBreadSP->setValue(get_setting("Operations", "average_production").toInt());
+    ui->doughPerBatchSP->setValue(get_setting("Operations", "dough_per_batch").toInt());
+    ui->pollutantsProbabilitySP->setValue(get_setting("Operations", "poll_probability").toInt());
     ui->badDoughCB->setChecked(true);
-    ui->badDoughProbabilitySP->setValue(BolloApp::get().get_setting("Operations", "badyeast_probability").toInt());
+    ui->badDoughProbabilitySP->setValue(get_setting("Operations", "badyeast_probability").toInt());
 }
 
 /**
@@ -103,12 +98,12 @@ void PreferencesPanel::writePreferencesToFile() {
         QString db_username = ui->dbUserName->text();
         QString db_password = ui->dbPassword->text();
 
-        BolloApp::get().set_setting("Networking", QStringLiteral("host_url"), QVariant(host_url));
+        set_setting("Networking", QStringLiteral("host_url"), QVariant(host_url));
 
-        BolloApp::get().set_setting("Database", QStringLiteral("db_host"), QVariant(db_host));
-        BolloApp::get().set_setting("Database", QStringLiteral("db_user"), QVariant(db_username));
-        BolloApp::get().set_setting("Database", QStringLiteral("db_pass"), QVariant(db_password));
-        BolloApp::get().set_setting("Database", QStringLiteral("db_schema"), QVariant(db_scheme));
+        set_setting("Database", QStringLiteral("db_host"), QVariant(db_host));
+        set_setting("Database", QStringLiteral("db_user"), QVariant(db_username));
+        set_setting("Database", QStringLiteral("db_pass"), QVariant(db_password));
+        set_setting("Database", QStringLiteral("db_schema"), QVariant(db_scheme));
 
         LOG(DEBUG) << "Updated networking || database settings";
     }
@@ -121,10 +116,10 @@ void PreferencesPanel::writePreferencesToFile() {
         int poll_prob = ui->pollutantsProbabilitySP->value();
         int bad_yeast_prob = ui->badDoughProbabilitySP->value();
 
-        BolloApp::get().set_setting("Operations", QStringLiteral("average_production"), QVariant(averageBread));
-        BolloApp::get().set_setting("Operations", QStringLiteral("dough_per_batch"), QVariant(doughPerBatch));
-        BolloApp::get().set_setting("Operations", QStringLiteral("poll_probability"), QVariant(poll_prob));
-        BolloApp::get().set_setting("Operations", QStringLiteral("badyeast_probability"), QVariant(bad_yeast_prob));
+        set_setting("Operations", QStringLiteral("average_production"), QVariant(averageBread));
+        set_setting("Operations", QStringLiteral("dough_per_batch"), QVariant(doughPerBatch));
+        set_setting("Operations", QStringLiteral("poll_probability"), QVariant(poll_prob));
+        set_setting("Operations", QStringLiteral("badyeast_probability"), QVariant(bad_yeast_prob));
 
         //TODO: Missing 'Ministry of health raid' probability
         LOG(DEBUG) << "Updated operations settings";

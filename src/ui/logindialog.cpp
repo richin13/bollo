@@ -2,12 +2,8 @@
 // Created by ricardo on 12/10/15.
 //
 
-#include <QtCore/qjsonobject.h>
-#include <QtWidgets/qmessagebox.h>
+
 #include "logindialog.h"
-#include "../io/http.h"
-#include "../logger/easylogging++.h"
-#include "assets.h"
 
 LoginDialog::LoginDialog(QWidget* parent) :
         QDialog(parent),

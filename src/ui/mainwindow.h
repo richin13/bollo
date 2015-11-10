@@ -80,8 +80,8 @@ private:
 
 
     //****SLOTS****//
-    void progress_operation(bakery_operation current_operation);
-    void update_bakery_operations(bakery_operation bakery_progress);
+    void progress_operation(_operation current_operation);
+    void update_bakery_operations(_operation bakery_progress);
 
 
 

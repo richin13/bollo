@@ -10,8 +10,11 @@
 #include <QtNetwork/QNetworkRequest>
 #include <QtNetwork/QNetworkReply>
 #include <QtCore/qjsondocument.h>
+#include <QtCore/qjsonobject.h>
+#include <QtWidgets/qmessagebox.h>
 
 #include "../core/bollo.h"
+#include "assets.h"
 #include "ui_headers/ui_logindialog.h"
 
 namespace Ui {
