@@ -46,6 +46,12 @@ void SelectWindow::buildBakeriesList() {
     }
 }
 
+/**
+ * Creates a custom QCommandLinkButton and then added to the bakeriesView. After
+ * the button is added a Horizontal line is added to separate each bakery button, also
+ * the bakery id is assigned to the button accessible name, to know which bakery was selected.
+ * Finally the buttons is connected to the slot.
+ */
 void SelectWindow::addBakery(const Bakery& bakery) {
 
     QCommandLinkButton* button = new QCommandLinkButton();
@@ -62,6 +68,13 @@ void SelectWindow::addBakery(const Bakery& bakery) {
     connect(button, SIGNAL(clicked()), this, SLOT(bakeryButtonClicked()));
 }
 
+/**
+ * Custom slot which all the created bakeries buttons are connected to. Since this slot
+ * is ONLY used to the bakeries button the sender object is casted to a QCommandLinkButton
+ * (inherited by the bakeries button) then the button accessible name is extracted, in which
+ * the bakery id was encapsulated. Then a "bakerySelected" signal is emmited with the selected
+ * bakery id.
+ */
 void SelectWindow::bakeryButtonClicked() {
 
     QCommandLinkButton* button = dynamic_cast<QCommandLinkButton*>(sender());
@@ -69,6 +82,9 @@ void SelectWindow::bakeryButtonClicked() {
     emit bakerySelected(button->accessibleName().toInt());
 }
 
+/**
+ * Creates a Horizontal line used to separete bakeries buttons.
+ */
 QWidget* SelectWindow::createHorizontalLine() {
 
     QWidget *hLine = new QWidget;
@@ -80,6 +96,11 @@ QWidget* SelectWindow::createHorizontalLine() {
     return hLine;
 }
 
+/**
+ * @param url The website which is going to be displayed. It must contain https:// or http://
+ * Displays a given website with JavaScript enabled. Note: OpenSSL needs to be installed in the client,
+ * otherwise some web pages will block the access and redirect the request to an http.
+ */
 void SelectWindow::displayWebPage(QString url) {
 
     QWebView *viewer = new QWebView();

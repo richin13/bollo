@@ -8,6 +8,7 @@
 #include "bakeryselect.h"
 #include "preferencespanel.h"
 #include "logbookdialog.h"
+#include "bakeryedit.h"
 
 using namespace std;
 
@@ -73,7 +74,9 @@ void MenuActionManager::showBakeryLog() {
 
 void MenuActionManager::bakeryEdit() {
 
-
+    BakeryEdit* bakeryEdit = new BakeryEdit();
+    bakeryEdit->show();
+    connect(bakeryEdit, &QDialog::finished, bakeryEdit, &BakeryEdit::deleteLater);
 }
 
 void MenuActionManager::signOut() {
@@ -99,11 +102,6 @@ void MenuActionManager::setDarkTheme() {
 
     Ui::setDarkTheme();
     mainWindow->setChecked(Ui::DARK);
-}
-
-void MenuActionManager::changePassword() {
-
-
 }
 
 void MenuActionManager::preferencesPanel() {

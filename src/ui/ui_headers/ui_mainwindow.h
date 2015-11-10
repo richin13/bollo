@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'mainwindowKB5218.ui'
+** Form generated from reading UI file 'mainwindowPS3860.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.4.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef MAINWINDOWKB5218_H
-#define MAINWINDOWKB5218_H
+#ifndef MAINWINDOWPS3860_H
+#define MAINWINDOWPS3860_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
@@ -403,7 +403,6 @@ public:
         menuFile->addAction(actionSignOut);
         menuFile->addSeparator();
         menuFile->addAction(actionExit);
-        menuEdit->addAction(actionChangePassword);
         menuEdit->addAction(actionEditBakerys);
         menuEdit->addAction(menuThemes->menuAction());
         menuEdit->addAction(actionPreferencesPanel);
@@ -430,7 +429,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Bollo - Pre-alpha [Codename: Ajonjoli]", 0));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Bollo - Pre-alpha [Codename: Baguette]", 0));
         actionBakeryList->setText(QApplication::translate("MainWindow", "bakeryList", 0));
 #ifndef QT_NO_TOOLTIP
         actionBakeryList->setToolTip(QApplication::translate("MainWindow", "Lista de panaderias", 0));
@@ -539,4 +538,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // MAINWINDOWKB5218_H
+#endif // MAINWINDOWPS3860_H

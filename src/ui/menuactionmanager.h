@@ -32,7 +32,6 @@ public slots:
     // Edit menu
     void setDefaultTheme();
     void setDarkTheme();
-    void changePassword();
     void preferencesPanel();
 
     // Tools menu

@@ -72,10 +72,6 @@ private:
     void connectToolBarActions();
 
     void connectMenuActions();
-    void connectHelpMenuActions();
-    void connectFileMenuActions();
-    void connectToolMenuActions();
-    void connectEditMenuActions();
 
 
     //***********Bakery Variables*************//
