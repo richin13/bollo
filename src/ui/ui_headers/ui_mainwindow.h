@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'mainwindowPS3860.ui'
+** Form generated from reading UI file 'mainwindowfo2713.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.4.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef MAINWINDOWPS3860_H
-#define MAINWINDOWPS3860_H
+#ifndef MAINWINDOWFO2713_H
+#define MAINWINDOWFO2713_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
@@ -95,37 +95,40 @@ public:
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
         MainWindow->resize(1027, 552);
+        QIcon icon;
+        icon.addFile(QStringLiteral(":/images/assets/hbread.png"), QSize(), QIcon::Normal, QIcon::Off);
+        MainWindow->setWindowIcon(icon);
         MainWindow->setWindowFilePath(QStringLiteral(""));
         actionBakeryList = new QAction(MainWindow);
         actionBakeryList->setObjectName(QStringLiteral("actionBakeryList"));
-        QIcon icon;
-        icon.addFile(QStringLiteral(":/images/assets/bread-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
-        actionBakeryList->setIcon(icon);
+        QIcon icon1;
+        icon1.addFile(QStringLiteral(":/images/assets/bread-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionBakeryList->setIcon(icon1);
         actionShowGraphs = new QAction(MainWindow);
         actionShowGraphs->setObjectName(QStringLiteral("actionShowGraphs"));
-        QIcon icon1;
-        icon1.addFile(QStringLiteral(":/images/assets/graph-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
-        actionShowGraphs->setIcon(icon1);
+        QIcon icon2;
+        icon2.addFile(QStringLiteral(":/images/assets/graph-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionShowGraphs->setIcon(icon2);
         actionContinueProcess = new QAction(MainWindow);
         actionContinueProcess->setObjectName(QStringLiteral("actionContinueProcess"));
-        QIcon icon2;
-        icon2.addFile(QStringLiteral(":/images/assets/continue-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
-        actionContinueProcess->setIcon(icon2);
+        QIcon icon3;
+        icon3.addFile(QStringLiteral(":/images/assets/continue-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionContinueProcess->setIcon(icon3);
         actionPauseProcess = new QAction(MainWindow);
         actionPauseProcess->setObjectName(QStringLiteral("actionPauseProcess"));
-        QIcon icon3;
-        icon3.addFile(QStringLiteral(":/images/assets/pause-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
-        actionPauseProcess->setIcon(icon3);
+        QIcon icon4;
+        icon4.addFile(QStringLiteral(":/images/assets/pause-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionPauseProcess->setIcon(icon4);
         actionCancelProcess = new QAction(MainWindow);
         actionCancelProcess->setObjectName(QStringLiteral("actionCancelProcess"));
-        QIcon icon4;
-        icon4.addFile(QStringLiteral(":/images/assets/cancel-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
-        actionCancelProcess->setIcon(icon4);
+        QIcon icon5;
+        icon5.addFile(QStringLiteral(":/images/assets/cancel-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionCancelProcess->setIcon(icon5);
         actionBakeryLog = new QAction(MainWindow);
         actionBakeryLog->setObjectName(QStringLiteral("actionBakeryLog"));
-        QIcon icon5;
-        icon5.addFile(QStringLiteral(":/images/assets/log-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
-        actionBakeryLog->setIcon(icon5);
+        QIcon icon6;
+        icon6.addFile(QStringLiteral(":/images/assets/log-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionBakeryLog->setIcon(icon6);
         actionAbout = new QAction(MainWindow);
         actionAbout->setObjectName(QStringLiteral("actionAbout"));
         actionHelp = new QAction(MainWindow);
@@ -538,4 +541,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // MAINWINDOWPS3860_H
+#endif // MAINWINDOWFO2713_H

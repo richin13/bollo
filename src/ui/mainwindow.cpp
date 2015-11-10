@@ -102,7 +102,7 @@ void MainWindow::widgetsEnabled(bool status) {
     ui->toolBar->setEnabled(status);
 
     // Edit bakeries action
-    ui->menuEdit->actions().at(1)->setEnabled(status);
+    ui->menuEdit->actions().at(2)->setEnabled(status);
 
     // All tool menu actions
     ui->menuTools->actions().at(0)->setEnabled(status);
@@ -240,7 +240,7 @@ void MainWindow::connectMenuActions() {
 
     // Tools menu
     connect(ui->actionTelegram, SIGNAL(triggered(bool)), actManager, SLOT(telegramMenu()));
-    connect(ui->actionBakeryLog, &QAction::triggered, actManager, &MenuActionManager::showLogbook);
+    connect(ui->actionLogBrowser, &QAction::triggered, actManager, &MenuActionManager::showLogbook);
 }
 
 /*

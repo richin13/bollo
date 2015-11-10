@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="/images">
+    <file>assets/hbread.png</file>
     <file>assets/check-icon.png</file>
     <file>assets/log-icon.png</file>
     <file>assets/continue-icon.png</file>
