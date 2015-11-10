@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'preferencespanelc15045.ui'
+** Form generated from reading UI file 'preferencespanelXV2713.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.4.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef PREFERENCESPANELC15045_H
-#define PREFERENCESPANELC15045_H
+#ifndef PREFERENCESPANELXV2713_H
+#define PREFERENCESPANELXV2713_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
@@ -68,6 +68,9 @@ public:
         PreferencesPanel->resize(553, 476);
         PreferencesPanel->setMinimumSize(QSize(553, 476));
         PreferencesPanel->setMaximumSize(QSize(553, 476));
+        QIcon icon;
+        icon.addFile(QStringLiteral(":/images/assets/hbread.png"), QSize(), QIcon::Normal, QIcon::Off);
+        PreferencesPanel->setWindowIcon(icon);
         PreferencesPanel->setModal(true);
         verticalLayout_2 = new QVBoxLayout(PreferencesPanel);
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
@@ -213,4 +216,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // PREFERENCESPANELC15045_H
+#endif // PREFERENCESPANELXV2713_H

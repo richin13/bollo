@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../resources.qrc">
+    <normaloff>:/images/assets/hbread.png</normaloff>:/images/assets/hbread.png</iconset>
+  </property>
   <widget class="QLabel" name="message">
    <property name="geometry">
     <rect>
@@ -33,6 +37,8 @@
    </property>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="../resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

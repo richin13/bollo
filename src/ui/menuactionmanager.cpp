@@ -9,6 +9,7 @@
 #include "preferencespanel.h"
 #include "logbookdialog.h"
 #include "bakeryedit.h"
+#include "about.h"
 
 using namespace std;
 
@@ -95,7 +96,7 @@ void MenuActionManager::exit() {
 void MenuActionManager::setDefaultTheme() {
 
     Ui::setLightTheme();
-    mainWindow->setChecked(Ui::DEFAULT);
+    mainWindow->setChecked(Ui::LIGHT);
 }
 
 void MenuActionManager::setDarkTheme() {
@@ -134,7 +135,9 @@ void MenuActionManager::telegramMenu() {
 
 void MenuActionManager::about() {
 
-
+    About* about = new About();
+    about->show();
+    connect(about, &QDialog::finished, about, &About::deleteLater);
 }
 
 void MenuActionManager::help() {

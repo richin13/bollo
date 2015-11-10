@@ -20,7 +20,6 @@ int main(int argc, char** argv) {
     LOG(INFO) << "Application starting";
     BolloApp& a = BolloApp::get();
 
-    Ui::setDarkTheme();
     MainWindow w;
 
     w.show();

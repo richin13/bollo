@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'popupTi8017.ui'
+** Form generated from reading UI file 'popupJy2713.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.4.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef POPUPTI8017_H
-#define POPUPTI8017_H
+#ifndef POPUPJY2713_H
+#define POPUPJY2713_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
@@ -29,6 +29,9 @@ public:
         if (Popup->objectName().isEmpty())
             Popup->setObjectName(QStringLiteral("Popup"));
         Popup->resize(248, 100);
+        QIcon icon;
+        icon.addFile(QStringLiteral(":/images/assets/hbread.png"), QSize(), QIcon::Normal, QIcon::Off);
+        Popup->setWindowIcon(icon);
         message = new QLabel(Popup);
         message->setObjectName(QStringLiteral("message"));
         message->setGeometry(QRect(20, 10, 221, 81));
@@ -54,4 +57,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // POPUPTI8017_H
+#endif // POPUPJY2713_H

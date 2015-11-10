@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'bakeryEdith34689.ui'
+** Form generated from reading UI file 'bakeryEditVY2713.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.4.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef BAKERYEDITH34689_H
-#define BAKERYEDITH34689_H
+#ifndef BAKERYEDITVY2713_H
+#define BAKERYEDITVY2713_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
@@ -55,6 +55,9 @@ public:
         dialog->setWindowModality(Qt::NonModal);
         dialog->setEnabled(true);
         dialog->resize(333, 279);
+        QIcon icon;
+        icon.addFile(QStringLiteral(":/images/assets/hbread.png"), QSize(), QIcon::Normal, QIcon::Off);
+        dialog->setWindowIcon(icon);
         dialog->setModal(true);
         verticalLayout = new QVBoxLayout(dialog);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
@@ -123,7 +126,7 @@ public:
 
         retranslateUi(dialog);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(dialog);
@@ -172,4 +175,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // BAKERYEDITH34689_H
+#endif // BAKERYEDITVY2713_H

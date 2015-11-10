@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Bollo - Pre-alpha [Codename: Baguette]</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../resources.qrc">
+    <normaloff>:/images/assets/hbread.png</normaloff>:/images/assets/hbread.png</iconset>
+  </property>
   <property name="windowFilePath">
    <string notr="true"/>
   </property>
@@ -994,7 +998,6 @@ QProgressBar::chunk {
   </action>
  </widget>
  <resources>
-  <include location="../resources.qrc"/>
   <include location="../resources.qrc"/>
  </resources>
  <connections/>

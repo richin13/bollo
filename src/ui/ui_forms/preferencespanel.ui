@@ -25,6 +25,10 @@
   <property name="windowTitle">
    <string>Preferencias</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../resources.qrc">
+    <normaloff>:/images/assets/hbread.png</normaloff>:/images/assets/hbread.png</iconset>
+  </property>
   <property name="modal">
    <bool>true</bool>
   </property>
@@ -371,6 +375,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

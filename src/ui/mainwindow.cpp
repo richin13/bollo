@@ -34,12 +34,14 @@ MainWindow::~MainWindow() {
  */
 void MainWindow::applySettings() {
 
+    Ui::setLightTheme();
+
     // Center window
     this->setGeometry(QStyle::alignedRect(Qt::LeftToRight, Qt::AlignCenter,
             this->size(), qApp->desktop()->availableGeometry()));
 
-    // Check dark theme toggle box, since its applied by default
-    setChecked(Ui::DARK);
+    // Check light theme toggle box, since its applied by default
+    setChecked(Ui::LIGHT);
 
     // By default disable toolbar and dashboard
     widgetsEnabled(false);
@@ -103,7 +105,7 @@ void MainWindow::widgetsEnabled(bool status) {
     ui->toolBar->setEnabled(status);
 
     // Edit bakeries action
-    ui->menuEdit->actions().at(1)->setEnabled(status);
+    ui->menuEdit->actions().at(2)->setEnabled(status);
 
     // All tool menu actions
     ui->menuTools->actions().at(0)->setEnabled(status);
@@ -241,7 +243,10 @@ void MainWindow::connectMenuActions() {
 
     // Tools menu
     connect(ui->actionTelegram, SIGNAL(triggered(bool)), actManager, SLOT(telegramMenu()));
-    connect(ui->actionBakeryLog, &QAction::triggered, actManager, &MenuActionManager::showLogbook);
+    connect(ui->actionLogBrowser, &QAction::triggered, actManager, &MenuActionManager::showLogbook);
+
+    // Help menu
+    connect(ui->actionAbout, SIGNAL(triggered(bool)), actManager, SLOT(about()));
 }
 
 /*
