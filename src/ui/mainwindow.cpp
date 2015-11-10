@@ -34,12 +34,14 @@ MainWindow::~MainWindow() {
  */
 void MainWindow::applySettings() {
 
+    Ui::setLightTheme();
+
     // Center window
     this->setGeometry(QStyle::alignedRect(Qt::LeftToRight, Qt::AlignCenter,
             this->size(), qApp->desktop()->availableGeometry()));
 
-    // Check dark theme toggle box, since its applied by default
-    setChecked(Ui::DARK);
+    // Check light theme toggle box, since its applied by default
+    setChecked(Ui::LIGHT);
 
     // By default disable toolbar and dashboard
     widgetsEnabled(false);

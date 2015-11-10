@@ -44,16 +44,15 @@ void Ui::setDarkTheme() {
  * Reverts all the changes made by the dark theme
  * by setting the QT Fusion style and reseting
  * the stylesheet.
- *
- * WARNING: This theme cannot be used by default
- * since it required the mainWindow object to be
- * created. Fix coming soon.
  */
 void Ui::setLightTheme() {
 
-    qApp->setPalette(qApp->activeWindow()->style()->standardPalette());
+    QMainWindow* dummy = new QMainWindow();
     qApp->setStyle(QStyleFactory::create("Fusion"));
+    qApp->setPalette(dummy->style()->standardPalette());
     qApp->setStyleSheet("");
+
+    dummy->deleteLater();
 
     LOG(DEBUG) << "Changing UI theme to: LIGHT";
 }

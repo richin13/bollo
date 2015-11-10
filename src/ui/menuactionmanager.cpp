@@ -96,7 +96,7 @@ void MenuActionManager::exit() {
 void MenuActionManager::setDefaultTheme() {
 
     Ui::setLightTheme();
-    mainWindow->setChecked(Ui::DEFAULT);
+    mainWindow->setChecked(Ui::LIGHT);
 }
 
 void MenuActionManager::setDarkTheme() {

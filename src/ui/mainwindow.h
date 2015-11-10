@@ -29,7 +29,7 @@ namespace Ui {
  * applied to the GUI.
  */
 enum Theme {
-    DARK, DEFAULT
+    DARK, LIGHT
 };
 
 class MainWindow;
