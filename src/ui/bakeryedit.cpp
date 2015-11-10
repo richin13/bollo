@@ -1,7 +1,6 @@
 #include "bakeryedit.h"
 #include "ui_headers/ui_bakeryedit.h"
 #include "../core/bollo.h"
-#include <QDebug>
 
 BakeryEdit::BakeryEdit(QWidget *parent) : QDialog(parent),
     ui(new Ui::BakeryEdit) {
@@ -66,7 +65,7 @@ void BakeryEdit::fillBakeryListComboBox() {
 
         for(int i = 0; i < listSize; ++i) {
 
-           ui->bakeriesList->addItem(BolloApp::get().bakeries.at(i).get_name());
+            ui->bakeriesList->addItem(BolloApp::get().bakeries.at(i)->get_name());
         }
 
         // Fill the edit fields with the first bakery, so its not empty
@@ -89,7 +88,7 @@ void BakeryEdit::fillBakeryListComboBox() {
  */
 void BakeryEdit::loadEditBakeryFields(int index) {
 
-    selectedBakery = &BolloApp::get().bakeries.at(index);
+    selectedBakery = BolloApp::get().bakeries.at(index);
 
     ui->bakeryNameEdit->setText(selectedBakery->get_name());
     ui->stateListEdit->setCurrentText(selectedBakery->get_state());

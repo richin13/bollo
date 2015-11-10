@@ -17,7 +17,7 @@ typedef struct bakery_operation {
     QString description;
 } operation;
 
-class Bakery : public QObject {
+class Bakery : public QThread {
 Q_OBJECT
 private:
     /* Basic information */
@@ -56,6 +56,8 @@ public:
         this->current_operation.progress = (integer_code) progress;
         this->current_operation.description = status;
 
+        this->closed_down = false;//warning with this
+
         connect(this, &Bakery::yeast, baker, &Baker::start_clean);//TODO: May fail
         connect(baker, &Baker::clean_ready, this, &Bakery::set_up);// this 1 too
     }
@@ -73,11 +75,9 @@ public:
     void set_stock(int);
 
     const operation& get_current_op() const;
-    void set_current_op(const operation&);
     bool is_closed_down() const;
     void set_closed_down(bool);
     Baker* get_baker() const;
-    void set_baker(Baker*);
 
 
     /* Operations */
@@ -86,8 +86,11 @@ public:
     void divide_dough(void);
     void shape_dough(void);
     void bake_bread(void);
+    void sell_bread(void);
     void distribute_bread(void);
-    void _run();
+
+    void run() Q_DECL_OVERRIDE;
+
 public slots:
     void close_down(void);
     void set_up(void);

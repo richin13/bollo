@@ -33,11 +33,12 @@ void extract_json_object(QNetworkReply* rep, QJsonObject* json) {
 }
 
 void StatusUpdater::updater(operation op) {
+    LOG(INFO) << "Updating status for bakery: " + to_string(op.bakery_id);
     QNetworkAccessManager* manager = new QNetworkAccessManager(this);
 
     QHash<QString, QString> args;
-    args["id"] = op.bakery_id;
-    args["progress"] = op.progress;
+    args["id"] = QString::number(op.bakery_id);
+    args["progress"] = QString::number(op.progress);
     args["description"] = op.description;
 
     QUrl url;

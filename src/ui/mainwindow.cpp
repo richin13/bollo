@@ -76,6 +76,7 @@ void MainWindow::showSelectPane() {
     LOG(DEBUG) << "Showing select panel";
 
     selectPane = new SelectWindow();
+    selectPane->displayWebPage();
     ui->centralWidget->layout()->addWidget(selectPane);
 
     connect(selectPane, SIGNAL(bakerySelected(int)), this, SLOT(showDashBoard(int)));

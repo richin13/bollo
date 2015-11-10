@@ -23,7 +23,7 @@ public:
     void buildBakeriesList();
     void addBakery(const Bakery& );
     QWidget* createHorizontalLine();
-    void displayWebPage(QString url);
+    void displayWebPage(QString url = "http://bollo-server.bitnamiapp.com/bollo_web/?thisTextMustBeSuperSecret!__-___");
 
 private:
     Ui::selectWindow *ui;

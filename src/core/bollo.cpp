@@ -21,7 +21,6 @@ BolloApp::BolloApp() {
 
     /* Object connections */
     connect(this, &BolloApp::destroyed, this, &BolloApp::deleteLater);
-//    connect(this, &BolloApp::application_exiting, &logbook, &Logger::deleteLater);
 }
 
 BolloApp::~BolloApp() {
@@ -29,7 +28,13 @@ BolloApp::~BolloApp() {
     emit application_exiting();
     delete current_user;
     delete updater;
+    unsigned int size = bakeries.size();
 
+    for(int i = 0; i < size; ++i) {
+        bakeries.at(i)->terminate();
+        bakeries.at(i)->wait();
+        delete bakeries.at(i);
+    }
 }
 
 void BolloApp::init_settings(void) {
@@ -63,16 +68,16 @@ void BolloApp::load_default_settings(void) {
 
     /* Networking settings */
     bollo_settings.beginGroup(QStringLiteral("Networking"));
-    bollo_settings.setValue(QStringLiteral("host_url"), QVariant(""));
-    bollo_settings.setValue(QStringLiteral("api_path"), QVariant(""));
+    bollo_settings.setValue(QStringLiteral("host_url"), QVariant("http://bollo-server.bitnamiapp.com/bollo_web"));
+    bollo_settings.setValue(QStringLiteral("api_path"), QVariant("/api/v1"));
     bollo_settings.endGroup();
 
     /* Db settings */
     bollo_settings.beginGroup(QStringLiteral("Database"));
-    bollo_settings.setValue(QStringLiteral("db_host"), QVariant(""));
-    bollo_settings.setValue(QStringLiteral("db_user"), QVariant(""));
-    bollo_settings.setValue(QStringLiteral("db_pass"), QVariant(""));
-    bollo_settings.setValue(QStringLiteral("db_schema"), QVariant(""));
+    bollo_settings.setValue(QStringLiteral("db_host"), QVariant("104.154.49.207"));
+    bollo_settings.setValue(QStringLiteral("db_user"), QVariant("postgres"));
+    bollo_settings.setValue(QStringLiteral("db_pass"), QVariant("W3aS28yt"));
+    bollo_settings.setValue(QStringLiteral("db_schema"), QVariant("bollo_testing_final"));
     bollo_settings.endGroup();
 
     /* General operations settings */
@@ -153,7 +158,18 @@ void BolloApp::loaded_bakeries(QNetworkReply* reply) {
         LOG(WARNING) << "Error code in response: " + jsonObject.take("message").toString().toStdString();
     }
     init_updater();
+    start_bakeries();
     QObject::connect(reply, &QNetworkReply::finished, reply, &QNetworkReply::deleteLater);
+}
+
+void BolloApp::start_bakeries() {
+    LOG(INFO) << "Starting bakeries";
+    int size = (int) bakeries.size();
+
+    for(unsigned long i = 0; i < size; ++i) {
+        bakeries.at(i)->start();
+    }
+    LOG(DEBUG) << "Started bakeries";
 }
 
 void BolloApp::init_updater() {
@@ -161,8 +177,8 @@ void BolloApp::init_updater() {
     int size = (int) bakeries.size();
 
     for(unsigned long i = 0; i < size; ++i) {
-        Bakery b = bakeries.at(i);
-        QObject::connect(&b,
+        Bakery* b = bakeries.at(i);
+        QObject::connect(b,
                          &Bakery::operation_changed,
                          updater,
                          &StatusUpdater::updater);
@@ -173,9 +189,9 @@ const QString& BolloApp::get_bakery_name(int id) {
     int size = (int) bakeries.size();
 
     for(int i = 0; i < size; ++i) {
-        Bakery current = bakeries.at((unsigned long) i);
-        if(current.get_id() == id) {
-            return current.get_name();
+        Bakery* current = bakeries.at((unsigned long) i);
+        if(current->get_id() == id) {
+            return current->get_name();
         }
     }
 

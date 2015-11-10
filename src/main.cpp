@@ -4,9 +4,7 @@
 #include "ui/mainwindow.h"
 #include "ui/themes.h"
 
-#include "logger/easylogging++.h"
 #include "ui/logbookdialog.h"
-#include "logger/logger.h"
 
 INITIALIZE_EASYLOGGINGPP
 
@@ -15,6 +13,7 @@ std::string* _app_dir();
 
 int main(int argc, char** argv) {
     QApplication app(argc, argv);
+    qRegisterMetaType<operation>("operation");
     START_EASYLOGGINGPP(argc, argv);
     init_log();
 

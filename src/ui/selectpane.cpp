@@ -36,7 +36,7 @@ void SelectWindow::buildBakeriesList() {
 
         for(int i = 0; i < listSize; ++i) {
 
-            addBakery(BolloApp::get().bakeries.at(i));
+            addBakery(*(BolloApp::get().bakeries.at(i)));
         }
     }
 

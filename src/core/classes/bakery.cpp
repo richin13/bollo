@@ -3,6 +3,7 @@
 //
 
 #include "bakery.h"
+#include "../../ui/popup.h"
 
 Logger logbook;
 
@@ -66,10 +67,6 @@ const operation& Bakery::get_current_op() const {
     return current_operation;
 }
 
-void Bakery::set_current_op(const operation& current_operation) {
-    Bakery::current_operation = current_operation;
-}
-
 bool Bakery::is_closed_down() const {
     return closed_down;
 }
@@ -82,10 +79,6 @@ Baker* Bakery::get_baker() const {
     return baker;
 }
 
-void Bakery::set_baker(Baker* baker) {
-    this->baker = baker;
-}
-
 void Bakery::mix_ingredients(void) {
     this->current_operation.progress = 0;
     this->current_operation.description = "Mezclando los ingredientes";
@@ -95,7 +88,7 @@ void Bakery::mix_ingredients(void) {
     for(int i = 0; i < 100; ++i) {
         this->current_operation.progress += 1;
         emit operation_changed(current_operation);
-        QThread::usleep((unsigned long) (seconds * 10));
+        QThread::usleep((unsigned long) (seconds * 100000));
     }
 }
 
@@ -113,9 +106,8 @@ void Bakery::ferment_dough(bool _final_f) {
     for(int i = 0; i < 100; ++i) {
         this->current_operation.progress += 1;
         emit operation_changed(current_operation);
-        QThread::usleep((unsigned long) (seconds * 10));
+        QThread::usleep((unsigned long) (seconds * 100000));
     }
-    //TODO: Missing logging operation
 }
 
 void Bakery::divide_dough(void) {
@@ -127,13 +119,12 @@ void Bakery::divide_dough(void) {
     for(int i = 0; i < 100; ++i) {
         this->current_operation.progress += 1;
         emit operation_changed(current_operation);
-        QThread::usleep((unsigned long) (seconds * 10));
+        QThread::usleep((unsigned long) (seconds * 100000));
     }
-    //TODO: Missing logging operation
 }
 
 void Bakery::shape_dough(void) {
-    this->current_operation.description = "Formando la masa";//FIXME: Ugly!
+    this->current_operation.description = "Formando la masa";
     logbook.general(this->bakery_id) << current_operation.description;
     int seconds = 35;
     emit operation_changed(current_operation);
@@ -141,7 +132,7 @@ void Bakery::shape_dough(void) {
     for(int i = 0; i < 100; ++i) {
         this->current_operation.progress += 1;
         emit operation_changed(current_operation);
-        QThread::usleep((unsigned long) (seconds * 10));
+        QThread::usleep((unsigned long) (seconds * 100000));
     }
 }
 
@@ -154,9 +145,21 @@ void Bakery::bake_bread(void) {
     for(int i = 0; i < 100; ++i) {
         this->current_operation.progress += 1;
         emit operation_changed(current_operation);
-        QThread::usleep((unsigned long) (seconds * 10));
+        QThread::usleep((unsigned long) (seconds * 100000));
     }
-    //TODO: Missing logging operation
+}
+
+void Bakery::sell_bread(void) {
+    this->current_operation.description = "Vendiendo el pan";
+    logbook.general(this->bakery_id) << current_operation.description;
+    int seconds = 35;
+    emit operation_changed(current_operation);
+
+    for(int i = 0; i < 100; ++i) {
+        this->current_operation.progress += 1;
+        emit operation_changed(current_operation);
+        QThread::usleep((unsigned long) (seconds * 100000));
+    }
 }
 
 void Bakery::distribute_bread(void) {
@@ -168,9 +171,8 @@ void Bakery::distribute_bread(void) {
     for(int i = 0; i < 100; ++i) {
         this->current_operation.progress += 1;
         emit operation_changed(current_operation);
-        QThread::usleep((unsigned long) (seconds * 10));
+        QThread::usleep((unsigned long) (seconds * 100000));
     }
-    //TODO: Missing logging operation
 }
 
 /**
@@ -179,6 +181,9 @@ void Bakery::distribute_bread(void) {
  */
 void Bakery::close_down(void) {
 
+    Popup* p = new Popup("Panadería clausarada", bakery_name + " ha sido clausurada");
+    p->show();
+    QObject::connect(p, SIGNAL(destroyed()), p, SLOT(deleteLater()));
 }
 
 /**
@@ -196,8 +201,9 @@ void Bakery::set_up(void) {
 //    this->start();
 }
 
-void Bakery::_run() {
+void Bakery::run() {
     while(!closed_down) {
+        LOG(DEBUG) << "Running: " + to_string(bakery_id);
         mix_ingredients();
         ferment_dough();
         divide_dough();

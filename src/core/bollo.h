@@ -51,6 +51,8 @@ private:
 
     void load_bakeries_from_db();
 
+    void start_bakeries();
+
     void init_updater();
 
     QString config_file_path() const;
@@ -65,7 +67,8 @@ public:
     QDir app_dir;//TODO: Find a way to deallocate this!
 
     /* Application data */
-    std::vector<Bakery> bakeries;
+    std::vector<Bakery*> bakeries;
+    std::vector<QThread*> worker_threads;
 
     /* Status updater */
     StatusUpdater* updater;
@@ -82,6 +85,7 @@ public slots:
     void loaded_bakeries(QNetworkReply*);
 
 signals:
+    void start_bakeries_execution();
     void application_exiting();
 };
 
