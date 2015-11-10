@@ -241,6 +241,9 @@ void MainWindow::connectMenuActions() {
     // Tools menu
     connect(ui->actionTelegram, SIGNAL(triggered(bool)), actManager, SLOT(telegramMenu()));
     connect(ui->actionLogBrowser, &QAction::triggered, actManager, &MenuActionManager::showLogbook);
+
+    // Help menu
+    connect(ui->actionAbout, SIGNAL(triggered(bool)), actManager, SLOT(about()));
 }
 
 /*

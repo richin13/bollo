@@ -9,6 +9,7 @@
 #include "preferencespanel.h"
 #include "logbookdialog.h"
 #include "bakeryedit.h"
+#include "about.h"
 
 using namespace std;
 
@@ -134,7 +135,9 @@ void MenuActionManager::telegramMenu() {
 
 void MenuActionManager::about() {
 
-
+    About* about = new About();
+    about->show();
+    connect(about, &QDialog::finished, about, &About::deleteLater);
 }
 
 void MenuActionManager::help() {
