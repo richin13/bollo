@@ -3,9 +3,6 @@
 //
 
 #include "bakery.h"
-#include "../../ui/popup.h"
-
-Logger logbook;
 
 Bakery::Bakery(const Bakery& cpy) {
     bakery_id = cpy.get_id();
@@ -20,7 +17,7 @@ Bakery::Bakery(const Bakery& cpy) {
 }
 
 Bakery::~Bakery() {
-//    delete baker;
+    delete baker;
 }
 
 unsigned int Bakery::get_id() const {
@@ -63,7 +60,7 @@ void Bakery::set_stock(int stock) {
     this->bakery_stock = stock;
 }
 
-const operation& Bakery::get_current_op() const {
+const _operation& Bakery::get_current_op() const {
     return current_operation;
 }
 
@@ -79,20 +76,20 @@ Baker* Bakery::get_baker() const {
     return baker;
 }
 
-void Bakery::mix_ingredients(void) {
-    this->current_operation.progress = 0;
+void Bakery::mix_ingredients(int _start) {
+    this->current_operation.progress = (integer_code) _start;
     this->current_operation.description = "Mezclando los ingredientes";
     logbook.general(this->bakery_id) << current_operation.description;
-    emit operation_changed(current_operation);
     int seconds = 25;//TODO: Must be configurable.
-    for(int i = 0; i < 100; ++i) {
-        this->current_operation.progress += 1;
+    for(int i = _start; i < 100; ++i) {
         emit operation_changed(current_operation);
+        this->current_operation.progress += 1;
         QThread::usleep((unsigned long) (seconds * 100000));
     }
+    std::cout << "Final value of progress --->>> " << current_operation.progress << std::endl;
 }
 
-void Bakery::ferment_dough(bool _final_f) {
+void Bakery::ferment_dough(int _start, bool _final_f) {
     int seconds;
     if(!_final_f) {
         this->current_operation.description = "Fermentación inicial de la masa";
@@ -102,75 +99,69 @@ void Bakery::ferment_dough(bool _final_f) {
         seconds = 25;
     }
     logbook.general(this->bakery_id) << current_operation.description;
-    emit operation_changed(this->current_operation);
-    for(int i = 0; i < 100; ++i) {
-        this->current_operation.progress += 1;
+    for(int i = _start; i < 100; ++i) {
         emit operation_changed(current_operation);
+        this->current_operation.progress += 1;
         QThread::usleep((unsigned long) (seconds * 100000));
     }
 }
 
-void Bakery::divide_dough(void) {
+void Bakery::divide_dough(int _start) {
     this->current_operation.description = "Divisón de la masa";
     logbook.general(this->bakery_id) << current_operation.description;
     int seconds = 20;
-    emit operation_changed(current_operation);
 
-    for(int i = 0; i < 100; ++i) {
-        this->current_operation.progress += 1;
+    for(int i = _start; i < 100; ++i) {
         emit operation_changed(current_operation);
+        this->current_operation.progress += 1;
         QThread::usleep((unsigned long) (seconds * 100000));
     }
 }
 
-void Bakery::shape_dough(void) {
+void Bakery::shape_dough(int _start) {
     this->current_operation.description = "Formando la masa";
     logbook.general(this->bakery_id) << current_operation.description;
     int seconds = 35;
-    emit operation_changed(current_operation);
 
-    for(int i = 0; i < 100; ++i) {
-        this->current_operation.progress += 1;
+    for(int i = _start; i < 100; ++i) {
         emit operation_changed(current_operation);
+        this->current_operation.progress += 1;
         QThread::usleep((unsigned long) (seconds * 100000));
     }
 }
 
-void Bakery::bake_bread(void) {
+void Bakery::bake_bread(int _start) {
     this->current_operation.description = "Horneando el pan";
     logbook.general(this->bakery_id) << current_operation.description;
     int seconds = 40;
-    emit operation_changed(current_operation);
 
-    for(int i = 0; i < 100; ++i) {
-        this->current_operation.progress += 1;
+    for(int i = _start; i < 100; ++i) {
         emit operation_changed(current_operation);
+        this->current_operation.progress += 1;
         QThread::usleep((unsigned long) (seconds * 100000));
     }
 }
 
-void Bakery::sell_bread(void) {
+void Bakery::sell_bread(int _start) {
     this->current_operation.description = "Vendiendo el pan";
     logbook.general(this->bakery_id) << current_operation.description;
     int seconds = 35;
-    emit operation_changed(current_operation);
 
-    for(int i = 0; i < 100; ++i) {
-        this->current_operation.progress += 1;
+    for(int i = _start; i < 100; ++i) {
         emit operation_changed(current_operation);
+        this->current_operation.progress += 1;
         QThread::usleep((unsigned long) (seconds * 100000));
     }
 }
 
-void Bakery::distribute_bread(void) {
+void Bakery::distribute_bread(int _start) {
     this->current_operation.description = "Distribuyendo el pan";
     logbook.general(this->bakery_id) << current_operation.description;
     int seconds = 20;
-    emit operation_changed(current_operation);
 
-    for(int i = 0; i < 100; ++i) {
-        this->current_operation.progress += 1;
+    for(int i = _start; i < 100; ++i) {
         emit operation_changed(current_operation);
+        this->current_operation.progress += 1;
         QThread::usleep((unsigned long) (seconds * 100000));
     }
 }
@@ -202,14 +193,40 @@ void Bakery::set_up(void) {
 }
 
 void Bakery::run() {
+    LOG(DEBUG) << "Starting bakery thread[" + to_string(bakery_id) + "]";
+    bool first_time = true;
     while(!closed_down) {
-        LOG(DEBUG) << "Running: " + to_string(bakery_id);
+        if(first_time) {
+            first_time = false;
+            switch(current_operation.progress / 100) {
+                case 0:
+                    mix_ingredients(current_operation.progress % 100);
+                case 1:
+                    ferment_dough(current_operation.progress % 100);
+                case 2:
+                    divide_dough(current_operation.progress % 100);
+                case 3:
+                    shape_dough(current_operation.progress % 100);
+                case 4:
+                    ferment_dough(current_operation.progress % 100, true);
+                case 5:
+                    bake_bread(current_operation.progress % 100);
+                case 6:
+                    sell_bread(current_operation.progress % 100);
+                case 7:
+                    distribute_bread(current_operation.progress % 100);
+                default:
+                    LOG(WARNING) << "Other than options established above would be unnexpected at this point";
+            }
+        }
+
         mix_ingredients();
         ferment_dough();
         divide_dough();
         shape_dough();
         ferment_dough(true);
         bake_bread();
+        sell_bread();
         distribute_bread();
     }
 }

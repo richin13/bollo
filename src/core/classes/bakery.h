@@ -6,16 +6,14 @@
 #define BOLLO_BAKERY_H
 
 #include <QtCore/qthread.h>
-#include "baker.h"
+#include <QtCore/qtimer.h>
+#include <QtCore/qdatetime.h>
+
+#include "../bollo.h"
 #include "../../logger/logger.h"
-
-typedef unsigned short int integer_code;
-
-typedef struct bakery_operation {
-    unsigned int bakery_id;
-    integer_code progress;
-    QString description;
-} operation;
+#include "../../ui/popup.h"
+#include "baker.h"
+#include "../operations.h"
 
 class Bakery : public QThread {
 Q_OBJECT
@@ -28,7 +26,7 @@ private:
     int bakery_stock;
 
     /* Ops */
-    operation current_operation;
+    _operation current_operation;
     bool closed_down;
 
     Baker* baker;//Baker thread
@@ -56,9 +54,10 @@ public:
         this->current_operation.progress = (integer_code) progress;
         this->current_operation.description = status;
 
-        this->closed_down = false;//warning with this
+        this->closed_down = progress / 100 == 8;
 
         connect(this, &Bakery::yeast, baker, &Baker::start_clean);//TODO: May fail
+        connect(this, &Bakery::operation_changed, baker, &Baker::find_pollutants);
         connect(baker, &Baker::clean_ready, this, &Bakery::set_up);// this 1 too
     }
 
@@ -74,31 +73,28 @@ public:
     int get_stock() const;
     void set_stock(int);
 
-    const operation& get_current_op() const;
+    const _operation& get_current_op() const;
     bool is_closed_down() const;
     void set_closed_down(bool);
     Baker* get_baker() const;
 
 
     /* Operations */
-    void mix_ingredients(void);
-    void ferment_dough(bool is_final = false);
-    void divide_dough(void);
-    void shape_dough(void);
-    void bake_bread(void);
-    void sell_bread(void);
-    void distribute_bread(void);
+    void mix_ingredients(int _start = 0);
+    void ferment_dough(int _start = 0, bool is_final = false);
+    void divide_dough(int _start = 0);
+    void shape_dough(int _start = 0);
+    void bake_bread(int _start = 0);
+    void sell_bread(int _start = 0);
+    void distribute_bread(int _start = 0);
 
     void run() Q_DECL_OVERRIDE;
-
 public slots:
     void close_down(void);
     void set_up(void);
 signals:
-    void operation_changed(const operation&);
+    void operation_changed(const _operation&);
     void yeast(int dough);
 };
-
-extern Logger logbook;
 
 #endif //BOLLO_BAKERY_H
