@@ -2,10 +2,8 @@
 // Created by ricardo on 30/10/15.
 //
 
-#include <QtCore/qjsonarray.h>
-#include "logbookdialog.h"
-#include "../logger/easylogging++.h"
 
+#include "logbookdialog.h"
 
 LogbookDialog::LogbookDialog(QWidget* parent) :
         QDialog(parent),

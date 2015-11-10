@@ -1,22 +1,13 @@
 //
 // Created by ricardo on 11/10/15.
 //
-
-
-#include <QtWidgets/qmessagebox.h>
 #include <QtWidgets/qapplication.h>
-#include <QtNetwork/qnetworkaccessmanager.h>
-#include <QtCore/qjsondocument.h>
-#include <QtCore/qjsonarray.h>
 #include "bollo.h"
-#include "../logger/easylogging++.h"
-#include "../io/http.h"
-#include "../io/handler.h"
-#include "../logger/logger.h"
 
 BolloApp::BolloApp() {
     this->app_dir = QDir(QDir().homePath() + "/bollo");
 
+    this->updater = new StatusUpdater();
     //TODO: Add a splash screen to make the whole process more user-friendly
 
     /* The app settings stored at home directory */
@@ -37,8 +28,8 @@ BolloApp::~BolloApp() {
     LOG(DEBUG) << "Freeing allocated objects in BolloApp class";
     emit application_exiting();
     delete current_user;
+    delete updater;
 
-    LOG(INFO) << "Done freeing allocated objects in BolloApp class";
 }
 
 void BolloApp::init_settings(void) {
@@ -157,16 +148,26 @@ void BolloApp::loaded_bakeries(QNetworkReply* reply) {
 
     if(!jsonObject.take("code").toInt()) {
         QJsonArray array = jsonObject.take("bakeries").toArray();
-        Handler::get_bakeries_vector(&array);
-
-        LOG(INFO) << "Loaded bakeries: " + std::to_string(BolloApp::get().bakeries.size());
+        Handler::get_bakeries_vector(&bakeries, &array);
     } else {
         LOG(WARNING) << "Error code in response: " + jsonObject.take("message").toString().toStdString();
     }
-
+    init_updater();
     QObject::connect(reply, &QNetworkReply::finished, reply, &QNetworkReply::deleteLater);
 }
 
+void BolloApp::init_updater() {
+    LOG(DEBUG) << "Initialization of status updater";
+    int size = (int) bakeries.size();
+
+    for(unsigned long i = 0; i < size; ++i) {
+        Bakery b = bakeries.at(i);
+        QObject::connect(&b,
+                         &Bakery::operation_changed,
+                         updater,
+                         &StatusUpdater::updater);
+    }
+}
 
 const QString& BolloApp::get_bakery_name(int id) {
     int size = (int) bakeries.size();

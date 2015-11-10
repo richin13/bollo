@@ -10,16 +10,24 @@
 #define VERSION "0.0.2-build-11_1"//[version]-build-{MONTH_week}
 
 #include <QtSql/qsqldatabase.h>
+
 #include <QtCore/qsettings.h>
 #include <QtCore/qstandardpaths.h>
 #include <QtCore/qdir.h>
-#include <QtCore/qvector.h>
+
 #include <QtNetwork/qnetworkreply.h>
+
+#include <QtWidgets/qmessagebox.h>
+#include <QtNetwork/qnetworkaccessmanager.h>
+#include <QtCore/qjsondocument.h>
+#include <QtCore/qjsonarray.h>
 
 #include "build.h"
 #include "classes/person.h"
 #include "classes/bakery.h"
 #include "bollo_constants.h"
+#include "../io/http.h"
+#include "../io/handler.h"
 
 class BolloApp : public QObject {
 Q_OBJECT
@@ -43,10 +51,11 @@ private:
 
     void load_bakeries_from_db();
 
+    void init_updater();
 
     QString config_file_path() const;
 public:
-/* User information */
+    /* User information */
     Person* current_user;
 
     /* Database connection information */
@@ -57,6 +66,9 @@ public:
 
     /* Application data */
     std::vector<Bakery> bakeries;
+
+    /* Status updater */
+    StatusUpdater* updater;
 
     QString windowTittle();
 

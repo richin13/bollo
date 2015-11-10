@@ -4,6 +4,8 @@
 
 #include "bakery.h"
 
+Logger logbook;
+
 Bakery::Bakery(const Bakery& cpy) {
     bakery_id = cpy.get_id();
     bakery_name = cpy.get_name();
@@ -86,7 +88,8 @@ void Bakery::set_baker(Baker* baker) {
 
 void Bakery::mix_ingredients(void) {
     this->current_operation.progress = 0;
-    this->current_operation.description = "Mezcla de ingredientes";
+    this->current_operation.description = "Mezclando los ingredientes";
+    logbook.general(this->bakery_id) << current_operation.description;
     emit operation_changed(current_operation);
     int seconds = 25;//TODO: Must be configurable.
     for(int i = 0; i < 100; ++i) {
@@ -94,19 +97,18 @@ void Bakery::mix_ingredients(void) {
         emit operation_changed(current_operation);
         QThread::usleep((unsigned long) (seconds * 10));
     }
-    //TODO: Missing logging operation
 }
 
 void Bakery::ferment_dough(bool _final_f) {
     int seconds;
     if(!_final_f) {
-        this->current_operation.description = "Fermentación de la masa";
+        this->current_operation.description = "Fermentación inicial de la masa";
         seconds = 20;
     } else {
         this->current_operation.description = "Fermentación final de la masa";
         seconds = 25;
     }
-
+    logbook.general(this->bakery_id) << current_operation.description;
     emit operation_changed(this->current_operation);
     for(int i = 0; i < 100; ++i) {
         this->current_operation.progress += 1;
@@ -118,6 +120,7 @@ void Bakery::ferment_dough(bool _final_f) {
 
 void Bakery::divide_dough(void) {
     this->current_operation.description = "Divisón de la masa";
+    logbook.general(this->bakery_id) << current_operation.description;
     int seconds = 20;
     emit operation_changed(current_operation);
 
@@ -130,7 +133,8 @@ void Bakery::divide_dough(void) {
 }
 
 void Bakery::shape_dough(void) {
-    this->current_operation.description = "Formar la masa";//FIXME: Ugly!
+    this->current_operation.description = "Formando la masa";//FIXME: Ugly!
+    logbook.general(this->bakery_id) << current_operation.description;
     int seconds = 35;
     emit operation_changed(current_operation);
 
@@ -142,7 +146,8 @@ void Bakery::shape_dough(void) {
 }
 
 void Bakery::bake_bread(void) {
-    this->current_operation.description = "Horneo del pan";
+    this->current_operation.description = "Horneando el pan";
+    logbook.general(this->bakery_id) << current_operation.description;
     int seconds = 40;
     emit operation_changed(current_operation);
 
@@ -155,7 +160,8 @@ void Bakery::bake_bread(void) {
 }
 
 void Bakery::distribute_bread(void) {
-    this->current_operation.description = "Distribución del pan";
+    this->current_operation.description = "Distribuyendo el pan";
+    logbook.general(this->bakery_id) << current_operation.description;
     int seconds = 20;
     emit operation_changed(current_operation);
 
