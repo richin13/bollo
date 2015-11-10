@@ -19,13 +19,15 @@
 #include "../core/classes/bakery.h"
 #include "../core/bollo_constants.h"
 
+struct _operation;
+
 class StatusUpdater : public QObject {
 Q_OBJECT
 public:
     StatusUpdater() { }
 
 public slots:
-    void updater(operation);
+    void updater(_operation);
     void notifier(QNetworkReply*);
 };
 

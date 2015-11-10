@@ -2,7 +2,6 @@
 #include "ui/logindialog.h"
 
 #include "ui/mainwindow.h"
-#include "ui/themes.h"
 
 #include "ui/logbookdialog.h"
 
@@ -13,7 +12,7 @@ std::string* _app_dir();
 
 int main(int argc, char** argv) {
     QApplication app(argc, argv);
-    qRegisterMetaType<operation>("operation");
+    qRegisterMetaType<_operation>("_operation");
     START_EASYLOGGINGPP(argc, argv);
     init_log();
 

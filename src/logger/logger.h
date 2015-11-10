@@ -20,8 +20,6 @@
 #include <QtCore/qwaitcondition.h>
 #include <QtCore/qmutex.h>
 
-#include <pthread.h>//Officially not multiplatform.
-
 #include "../core/build.h"
 #include "easylogging++.h"
 #include "../core/classes/logbook.h"

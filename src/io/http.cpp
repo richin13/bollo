@@ -32,7 +32,7 @@ void extract_json_object(QNetworkReply* rep, QJsonObject* json) {
     *json = QJsonDocument::fromJson(rep->readAll()).object();
 }
 
-void StatusUpdater::updater(operation op) {
+void StatusUpdater::updater(_operation op) {
     LOG(INFO) << "Updating status for bakery: " + to_string(op.bakery_id);
     QNetworkAccessManager* manager = new QNetworkAccessManager(this);
 

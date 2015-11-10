@@ -7,13 +7,11 @@
 
 #define APP_NAME "Bollo"
 #define CODENAME "Baguette"
-#define VERSION "0.0.2-build-11_1"//[version]-build-{MONTH_week}
+#define VERSION "0.0.2-build-11_3"//[version]-build-{MONTH_week}
+
+#include <QtWidgets/qapplication.h>
 
 #include <QtSql/qsqldatabase.h>
-
-#include <QtCore/qsettings.h>
-#include <QtCore/qstandardpaths.h>
-#include <QtCore/qdir.h>
 
 #include <QtNetwork/qnetworkreply.h>
 
@@ -26,8 +24,14 @@
 #include "classes/person.h"
 #include "classes/bakery.h"
 #include "bollo_constants.h"
+
 #include "../io/http.h"
 #include "../io/handler.h"
+#include "../io/settings.h"
+
+class StatusUpdater;
+
+class Bakery;
 
 class BolloApp : public QObject {
 Q_OBJECT
@@ -40,14 +44,7 @@ private:
 
     void operator=(BolloApp const&) { }
 
-
     void init_database(void);
-
-    void init_settings(void);
-
-    void load_default_settings(void);
-
-    void load_settings(void);
 
     void load_bakeries_from_db();
 
@@ -55,7 +52,6 @@ private:
 
     void init_updater();
 
-    QString config_file_path() const;
 public:
     /* User information */
     Person* current_user;
@@ -63,12 +59,8 @@ public:
     /* Database connection information */
     QSqlDatabase bollo_db;
 
-    /* Settings and directories */
-    QDir app_dir;//TODO: Find a way to deallocate this!
-
     /* Application data */
     std::vector<Bakery*> bakeries;
-    std::vector<QThread*> worker_threads;
 
     /* Status updater */
     StatusUpdater* updater;
@@ -76,9 +68,6 @@ public:
     QString windowTittle();
 
     static BolloApp& get();
-
-    void set_setting(const QString&, const QString&, const QVariant&);
-    QVariant get_setting(const QString&, const QString&);
 
     const QString& get_bakery_name(int);
 public slots:
@@ -88,6 +77,5 @@ signals:
     void start_bakeries_execution();
     void application_exiting();
 };
-
 
 #endif //BOLLO_BOLLO_H

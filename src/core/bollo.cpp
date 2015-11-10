@@ -1,12 +1,11 @@
 //
 // Created by ricardo on 11/10/15.
 //
-#include <QtWidgets/qapplication.h>
+
 #include "bollo.h"
 
-BolloApp::BolloApp() {
-    this->app_dir = QDir(QDir().homePath() + "/bollo");
 
+BolloApp::BolloApp() {
     this->updater = new StatusUpdater();
     //TODO: Add a splash screen to make the whole process more user-friendly
 
@@ -28,90 +27,13 @@ BolloApp::~BolloApp() {
     emit application_exiting();
     delete current_user;
     delete updater;
-    unsigned int size = bakeries.size();
+    unsigned long size = bakeries.size();
 
-    for(int i = 0; i < size; ++i) {
+    for(unsigned long i = 0; i < size; ++i) {
         bakeries.at(i)->terminate();
         bakeries.at(i)->wait();
         delete bakeries.at(i);
     }
-}
-
-void BolloApp::init_settings(void) {
-    LOG(INFO) << "Loading Bollo settings";
-    QString absolute_path = this->app_dir.absolutePath();
-
-    if(!this->app_dir.exists()) {
-        QDir().mkdir(absolute_path);
-        load_default_settings();
-    } else {
-        QFileInfo config_file = QFileInfo(config_file_path());
-        if(!config_file.exists()) {
-            LOG(INFO) << "Settings file not found, creating default...";
-            load_default_settings();
-            LOG(INFO) << "Settings file created";
-        } else {
-            LOG(INFO) << "Settings file found";
-            load_settings();
-        }
-    }
-}
-
-void BolloApp::load_default_settings(void) {
-    QString fullPath = config_file_path();
-
-    if(QFile::exists(fullPath)) {
-        QFile::remove(fullPath);
-    }
-
-    QSettings bollo_settings(fullPath, QSettings::NativeFormat);
-
-    /* Networking settings */
-    bollo_settings.beginGroup(QStringLiteral("Networking"));
-    bollo_settings.setValue(QStringLiteral("host_url"), QVariant("http://bollo-server.bitnamiapp.com/bollo_web"));
-    bollo_settings.setValue(QStringLiteral("api_path"), QVariant("/api/v1"));
-    bollo_settings.endGroup();
-
-    /* Db settings */
-    bollo_settings.beginGroup(QStringLiteral("Database"));
-    bollo_settings.setValue(QStringLiteral("db_host"), QVariant("104.154.49.207"));
-    bollo_settings.setValue(QStringLiteral("db_user"), QVariant("postgres"));
-    bollo_settings.setValue(QStringLiteral("db_pass"), QVariant("W3aS28yt"));
-    bollo_settings.setValue(QStringLiteral("db_schema"), QVariant("bollo_testing_final"));
-    bollo_settings.endGroup();
-
-    /* General operations settings */
-    bollo_settings.beginGroup(QStringLiteral("Operations"));
-    bollo_settings.setValue(QStringLiteral("average_production"), QVariant(55));
-    bollo_settings.setValue(QStringLiteral("dough_per_batch"), QVariant(15));
-    bollo_settings.setValue(QStringLiteral("poll_probability"), QVariant(10));
-    bollo_settings.setValue(QStringLiteral("badyeast_probability"), QVariant(10));//Man, this is hard
-    bollo_settings.endGroup();
-}
-
-void BolloApp::load_settings(void) {
-    QString cf_path = config_file_path();
-
-    if(!QFile::exists(cf_path)) {
-        throw std::exception();
-    }
-
-    QSettings bollo_settings(cf_path, QSettings::NativeFormat);
-
-    /* Networking settings */
-    bollo_settings.beginGroup(QStringLiteral("Networking"));
-    Constants::API_HOST = bollo_settings.value("host_url").toString();
-    Constants::API_PATH = bollo_settings.value("api_path").toString();
-    bollo_settings.endGroup();
-
-    /* Db settings */
-    bollo_settings.beginGroup(QStringLiteral("Database"));
-    Constants::DB_HOST = bollo_settings.value("db_host").toString();
-    Constants::DB_USERNAME = bollo_settings.value("db_user").toString();
-    Constants::DB_PASSWORD = bollo_settings.value("db_pass").toString();
-    Constants::DB_SCHEME = bollo_settings.value("db_schema").toString();
-    bollo_settings.endGroup();
-
 }
 
 void BolloApp::init_database(void) {
@@ -205,28 +127,4 @@ QString BolloApp::windowTittle() {
 BolloApp& BolloApp::get() {
     static BolloApp instance;
     return instance;
-}
-
-QString BolloApp::config_file_path() const {
-    return QString(app_dir.absolutePath() + "/settings/bollo.ini");
-}
-
-void BolloApp::set_setting(const QString& group, const QString& key, const QVariant& value) {
-    static QString cf_path = config_file_path();
-    static QSettings bollo_settings(cf_path, QSettings::NativeFormat);
-
-    bollo_settings.beginGroup(group);
-    bollo_settings.setValue(key, value);
-    bollo_settings.endGroup();
-}
-
-QVariant BolloApp::get_setting(const QString& group, const QString& key) {
-    static QString cf_path = config_file_path();
-    static QSettings bollo_settings(cf_path, QSettings::NativeFormat);
-
-    bollo_settings.beginGroup(group);
-    QVariant result = bollo_settings.value(key);
-    bollo_settings.endGroup();
-
-    return result;
 }
