@@ -5,8 +5,11 @@
 #ifndef BOLLO_LOGBOOKDIALOG_H
 #define BOLLO_LOGBOOKDIALOG_H
 
+#include <QtCore/qjsonarray.h>
 #include <QDialog>
+
 #include "ui_headers/ui_logbookdialog.h"
+#include "../core/bollo.h"
 
 namespace Ui {
     class LogbookDialog;

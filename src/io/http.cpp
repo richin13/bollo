@@ -3,9 +3,7 @@
 //
 
 
-#include <QtCore/qjsondocument.h>
 #include "http.h"
-#include "../logger/easylogging++.h"
 
 /**
  * @brief Builds a new URL to make a request to it.
@@ -30,6 +28,34 @@ void url_builder(QUrl& url, QString section, QString module, QHash<QString, QStr
 
 }
 
-void extract_json_object(QNetworkReply* rep, QJsonObject * json) {
+void extract_json_object(QNetworkReply* rep, QJsonObject* json) {
     *json = QJsonDocument::fromJson(rep->readAll()).object();
+}
+
+void StatusUpdater::updater(operation op) {
+    QNetworkAccessManager* manager = new QNetworkAccessManager(this);
+
+    QHash<QString, QString> args;
+    args["id"] = op.bakery_id;
+    args["progress"] = op.progress;
+    args["description"] = op.description;
+
+    QUrl url;
+    url_builder(url, "bakeries", "status", args);
+    QObject::connect(manager, &QNetworkAccessManager::finished, this, &StatusUpdater::notifier);
+    QObject::connect(manager, &QNetworkAccessManager::finished, manager, &QNetworkAccessManager::deleteLater);
+
+    manager->get(QNetworkRequest(url));
+}
+
+void StatusUpdater::notifier(QNetworkReply* reply) {
+    QJsonObject object;
+
+    extract_json_object(reply, &object);
+    int code = object.take("code").toInt();
+    if(code) {
+        LOG(WARNING) << "API returned with code " + std::to_string(code);
+    }
+
+    QObject::connect(reply, &QNetworkReply::finished, reply, &QNetworkReply::deleteLater);
 }

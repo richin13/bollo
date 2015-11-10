@@ -11,11 +11,23 @@
 #include <QtNetwork/QNetworkReply>
 
 #include <QtCore/qjsonobject.h>
+#include <QtCore/qjsondocument.h>
+
 #include <QtCore/qurl.h>
 #include <QtCore/qurlquery.h>
 
-#include "../core/bollo.h"
+#include "../core/classes/bakery.h"
+#include "../core/bollo_constants.h"
 
+class StatusUpdater : public QObject {
+Q_OBJECT
+public:
+    StatusUpdater() { }
+
+public slots:
+    void updater(operation);
+    void notifier(QNetworkReply*);
+};
 
 void url_builder(QUrl&, QString, QString, QHash<QString, QString>&);
 void extract_json_object(QNetworkReply*, QJsonObject*);

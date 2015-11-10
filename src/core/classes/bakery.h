@@ -6,9 +6,8 @@
 #define BOLLO_BAKERY_H
 
 #include <QtCore/qthread.h>
-#include "../build.h"
 #include "baker.h"
-#include "logbook.h"
+#include "../../logger/logger.h"
 
 typedef unsigned short int integer_code;
 
@@ -31,10 +30,11 @@ private:
     /* Ops */
     operation current_operation;
     bool closed_down;
+
     Baker* baker;//Baker thread
 
     /* Logbook handler */
-    Logbook logbook;
+//    Logger logbook;
 public:
     Bakery(){}
     Bakery(const Bakery&);
@@ -96,5 +96,6 @@ signals:
     void yeast(int dough);
 };
 
+extern Logger logbook;
 
 #endif //BOLLO_BAKERY_H

@@ -34,7 +34,7 @@ private:
     }
 
 public:
-    static void get_bakeries_vector(QJsonArray* array) {
+    static void get_bakeries_vector(std::vector<Bakery>* const b, QJsonArray* const array) {
         int size = array->size();
 
         for(int i = 0; i < size; ++i) {
@@ -48,9 +48,8 @@ public:
             int stock = bakery.take("stock").toString().toInt();
             int progress = bakery.take("progress").toString().toInt();
             QString status = bakery.take("status").toString();
-
-
-            BolloApp::get().bakeries.push_back(Bakery((unsigned int)id, name, province, city, stock, progress, status));
+            LOG(DEBUG) << "Saving new bakery: " + to_string(i);
+            b->push_back(Bakery((unsigned int) id, name, province, city, stock, progress, status));
         }
     }
 };
