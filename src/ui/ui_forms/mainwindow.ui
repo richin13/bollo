@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Bollo - Pre-alpha [Codename: Ajonjoli]</string>
+   <string>Bollo - Pre-alpha [Codename: Baguette]</string>
   </property>
   <property name="windowFilePath">
    <string notr="true"/>
@@ -772,7 +772,6 @@ QProgressBar::chunk {
      <addaction name="actionThemeLight"/>
      <addaction name="actionThemeDark"/>
     </widget>
-    <addaction name="actionChangePassword"/>
     <addaction name="actionEditBakerys"/>
     <addaction name="menuThemes"/>
     <addaction name="actionPreferencesPanel"/>

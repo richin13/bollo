@@ -228,15 +228,19 @@ void MainWindow::connectMenuActions() {
 
     MenuActionManager* actManager = new MenuActionManager(this);
 
-    connect(ui->actionTelegram, SIGNAL(triggered(bool)), actManager, SLOT(telegramMenu()));
-
     // File menu
     connect(ui->actionExit, SIGNAL(triggered(bool)), actManager, SLOT(exit()));
+    connect(ui->actionNewBakery, SIGNAL(triggered(bool)), actManager, SLOT(bakeryEdit()));
 
     // Edit menu
+    connect(ui->actionEditBakerys, SIGNAL(triggered(bool)), actManager, SLOT(bakeryEdit()));
     connect(ui->actionThemeLight, SIGNAL(triggered(bool)), actManager, SLOT(setDefaultTheme()));
     connect(ui->actionThemeDark, SIGNAL(triggered(bool)), actManager, SLOT(setDarkTheme()));
     connect(ui->actionPreferencesPanel, SIGNAL(triggered(bool)), actManager, SLOT(preferencesPanel()));
+
+    // Tools menu
+    connect(ui->actionTelegram, SIGNAL(triggered(bool)), actManager, SLOT(telegramMenu()));
+    connect(ui->actionBakeryLog, &QAction::triggered, actManager, &MenuActionManager::showLogbook);
 }
 
 /*

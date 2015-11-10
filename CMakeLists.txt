@@ -16,8 +16,9 @@ set(SOURCE_FILES src/main.cpp src/core/classes/bakery.cpp src/core/classes/baker
         src/core/classes/ministry.h src/io/http.cpp src/io/http.h src/logger/easylogging++.h src/ui/assets.h src/ui/bakeryselect.cpp
         src/ui/bakeryselect.h src/ui/ui_headers/ui_bakeryselect.h src/ui/preferencespanel.cpp src/ui/preferencespanel.h
         src/ui/ui_headers/ui_preferencespanel.h src/io/handler.h src/core/bollo_constants.h src/core/bollo_constants.cpp
-        src/core/classes/logbook.cpp src/core/classes/logbook.h src/ui/ui_headers/ui_logbookdialog.h src/ui/logbookdialog.cpp src/ui/logbookdialog.h
-        src/ui/selectpane.cpp src/ui/selectpane.h src/ui/ui_headers/ui_selectpane.h)
+        src/core/classes/logbook.cpp src/core/classes/logbook.h src/ui/ui_headers/ui_logbookdialog.h src/ui/logbookdialog.cpp
+        src/ui/logbookdialog.h src/ui/selectpane.cpp src/ui/selectpane.h src/ui/ui_headers/ui_selectpane.h
+        src/ui/bakeryedit.cpp src/ui/bakeryedit.h src/ui/ui_headers/ui_bakeryedit.h)
 
 find_package(Qt5Core REQUIRED)
 find_package(Qt5Widgets REQUIRED)
