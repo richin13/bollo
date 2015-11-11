@@ -38,7 +38,7 @@
      <item>
       <widget class="QTabWidget" name="tabWidget">
        <property name="currentIndex">
-        <number>0</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="networkingTab">
         <attribute name="title">
@@ -358,6 +358,51 @@
           </property>
           <property name="text">
            <string>Probabilidad</string>
+          </property>
+         </widget>
+         <widget class="QSpinBox" name="ministryRaidProbabilitySP">
+          <property name="geometry">
+           <rect>
+            <x>340</x>
+            <y>50</y>
+            <width>61</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="showGroupSeparator" stdset="0">
+           <bool>false</bool>
+          </property>
+          <property name="suffix">
+           <string> %</string>
+          </property>
+          <property name="displayIntegerBase">
+           <number>10</number>
+          </property>
+         </widget>
+         <widget class="QLabel" name="title12">
+          <property name="geometry">
+           <rect>
+            <x>250</x>
+            <y>50</y>
+            <width>91</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Probabilidad</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="title11">
+          <property name="geometry">
+           <rect>
+            <x>230</x>
+            <y>30</y>
+            <width>221</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Inspeccion Ministerio de Salud</string>
           </property>
          </widget>
         </widget>

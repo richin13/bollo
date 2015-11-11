@@ -48,7 +48,55 @@ void BakeryEdit::saveBakery() {
  */
 void BakeryEdit::createBakery() {
 
-    // TODO: Implement this
+    QNetworkAccessManager* manager = new QNetworkAccessManager(this);
+
+    //Build the URL
+    QHash<QString, QString> args;
+    args["name"] = ui->bakeryName->text();
+    args["state"] = QString::number(ui->stateList->currentIndex() + 1);
+    args["city"] = ui->bakeryCity->text();
+
+    QUrl url;
+    url_builder(url, "bakeries", "create", args);
+
+    qDebug() << url;
+
+    connect(manager, &QNetworkAccessManager::finished, this, &BakeryEdit::gotCreateReply);
+    connect(manager, &QNetworkAccessManager::finished, manager, &QNetworkAccessManager::deleteLater);
+    manager->get(QNetworkRequest(url));
+
+    LOG(INFO) << "Sent POST request to URL to API at section 'bakeries' module 'create'";
+}
+
+void BakeryEdit::gotCreateReply(QNetworkReply *reply) {
+
+    LOG(INFO) << "Got reply from server: create bakery request";
+
+    QJsonObject object;
+    extract_json_object(reply, &object);
+
+    int replyCode = object.take("code").toInt();
+
+    qDebug() << replyCode;
+
+    if(!replyCode) {
+
+        LOG(INFO) << "Bakery created succesfully";
+
+    } else {
+
+        switch(replyCode) {
+            case 1:
+                LOG(WARNING) << "An error ocurred while creating bakery or the bakery already exist";
+                break;
+
+            case 15:
+                LOG(DEBUG) << "Missing parameters at create bakery request";
+                break;
+        }
+    }
+
+    connect(reply, &QNetworkReply::finished, reply, &QNetworkReply::deleteLater);
 }
 
 /**

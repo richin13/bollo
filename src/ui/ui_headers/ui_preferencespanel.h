@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'preferencespanelXV2713.ui'
+** Form generated from reading UI file 'preferencespanelPE2963.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.4.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef PREFERENCESPANELXV2713_H
-#define PREFERENCESPANELXV2713_H
+#ifndef PREFERENCESPANELPE2963_H
+#define PREFERENCESPANELPE2963_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
@@ -59,6 +59,9 @@ public:
     QLabel *title9;
     QSpinBox *pollutantsProbabilitySP;
     QLabel *title10;
+    QSpinBox *ministryRaidProbabilitySP;
+    QLabel *title12;
+    QLabel *title11;
     QDialogButtonBox *buttonBox;
 
     void setupUi(QDialog *PreferencesPanel)
@@ -159,6 +162,17 @@ public:
         title10 = new QLabel(eventSettingsGBox);
         title10->setObjectName(QStringLiteral("title10"));
         title10->setGeometry(QRect(30, 50, 91, 21));
+        ministryRaidProbabilitySP = new QSpinBox(eventSettingsGBox);
+        ministryRaidProbabilitySP->setObjectName(QStringLiteral("ministryRaidProbabilitySP"));
+        ministryRaidProbabilitySP->setGeometry(QRect(340, 50, 61, 22));
+        ministryRaidProbabilitySP->setProperty("showGroupSeparator", QVariant(false));
+        ministryRaidProbabilitySP->setDisplayIntegerBase(10);
+        title12 = new QLabel(eventSettingsGBox);
+        title12->setObjectName(QStringLiteral("title12"));
+        title12->setGeometry(QRect(250, 50, 91, 21));
+        title11 = new QLabel(eventSettingsGBox);
+        title11->setObjectName(QStringLiteral("title11"));
+        title11->setGeometry(QRect(230, 30, 221, 16));
         tabWidget->addTab(bakerySettings, QString());
 
         verticalLayout->addWidget(tabWidget);
@@ -175,7 +189,7 @@ public:
 
         retranslateUi(PreferencesPanel);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(PreferencesPanel);
@@ -205,6 +219,9 @@ public:
         title9->setText(QApplication::translate("PreferencesPanel", "Aparicion de contaminantes", 0));
         pollutantsProbabilitySP->setSuffix(QApplication::translate("PreferencesPanel", " %", 0));
         title10->setText(QApplication::translate("PreferencesPanel", "Probabilidad", 0));
+        ministryRaidProbabilitySP->setSuffix(QApplication::translate("PreferencesPanel", " %", 0));
+        title12->setText(QApplication::translate("PreferencesPanel", "Probabilidad", 0));
+        title11->setText(QApplication::translate("PreferencesPanel", "Inspeccion Ministerio de Salud", 0));
         tabWidget->setTabText(tabWidget->indexOf(bakerySettings), QApplication::translate("PreferencesPanel", "Panaderia", 0));
     } // retranslateUi
 
@@ -216,4 +233,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // PREFERENCESPANELXV2713_H
+#endif // PREFERENCESPANELPE2963_H

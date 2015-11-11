@@ -2,6 +2,13 @@
 #define BAKERYEDIT_H
 
 #include <QDialog>
+#include <QtNetwork/qnetworkaccessmanager.h>
+#include <QtNetwork/QNetworkRequest>
+#include <QtNetwork/QNetworkReply>
+#include <QtCore/qjsondocument.h>
+#include <QtCore/qjsonobject.h>
+#include <QDebug>
+
 #include "../core/classes/bakery.h"
 
 namespace Ui {
@@ -33,6 +40,7 @@ private slots:
 
     void saveBakery();
     void createBakery();
+    void gotCreateReply(QNetworkReply *reply);
 };
 
 #endif // BAKERYEDIT_H

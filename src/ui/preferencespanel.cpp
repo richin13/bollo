@@ -64,6 +64,9 @@ void PreferencesPanel::connectEventChangeManagers() {
 
     connect(ui->badDoughProbabilitySP, SIGNAL(editingFinished()), this,
             SLOT(bakerySettingsChanged()));
+
+    connect(ui->ministryRaidProbabilitySP, SIGNAL(editingFinished()), this,
+            SLOT(bakerySettingsChanged()));
 }
 
 void PreferencesPanel::networkingChanged() {
@@ -115,6 +118,9 @@ void PreferencesPanel::writePreferencesToFile() {
 
         int poll_prob = ui->pollutantsProbabilitySP->value();
         int bad_yeast_prob = ui->badDoughProbabilitySP->value();
+
+        // Use me bitch
+        int ministry_raid_prob = ui->ministryRaidProbabilitySP->value();
 
         set_setting("Operations", QStringLiteral("average_production"), QVariant(averageBread));
         set_setting("Operations", QStringLiteral("dough_per_batch"), QVariant(doughPerBatch));
