@@ -31,6 +31,16 @@ void Popup::applySettings() {
                                     qApp->desktop()->availableGeometry()));
 }
 
+void Popup::showPopup() {
+
+    // Show popup for 5 seconds and then close it.
+    QTimer *timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), this, SLOT(close()));
+
+    show();
+    timer->start(TIME_MILIS);
+}
+
 void Popup::close() {
 
     this->done(0);

@@ -18,6 +18,8 @@ public:
     Popup(QString title, QString msg, QWidget *parent = 0);
     ~Popup();
 
+    void showPopup();
+
 private slots:
     void close();
 
