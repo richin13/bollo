@@ -4,6 +4,8 @@
 #include <QObject>
 #include "mainwindow.h"
 
+#define HELP_URL "http://bollo-server.bitnamiapp.com/bollo_web/?faqs"
+
 class MenuActionManager : public QObject {
 
     Q_OBJECT
@@ -16,7 +18,7 @@ public slots:
     // Tool bar action
     void showBakeryList();
     void showGraphs();
-    void showLogbook();
+    void logBrowser(); // Used in tools menu
     void continueProcess();
     void pauseProcess();
     void cancelProcess();
@@ -25,8 +27,7 @@ public slots:
     // Menu bar actions
 
     // File Menu
-    void bakeryEdit(); // Used in edit menu as editBakery
-    void signOut();
+    void bakeryEdit(); // Used in edit menu
     void exit();
 
     // Edit menu
@@ -35,7 +36,6 @@ public slots:
     void preferencesPanel();
 
     // Tools menu
-    void logBrowser();
     void graphViewer();
     void telegramMenu();
 

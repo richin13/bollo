@@ -54,13 +54,14 @@ private slots:
     void exitApp();
     void showSelectPane();
     void showDashBoard(int );
+    void signOut();
 
 private:
     Ui::MainWindow* ui;
     SelectWindow* selectPane;
 
-    void applySettings();
     void showLoginAndValidate();
+    void applySettings();
     void widgetsEnabled(bool);
 
     QMovie* loadingGif;

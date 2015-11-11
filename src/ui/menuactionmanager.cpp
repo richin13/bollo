@@ -1,5 +1,6 @@
 #include <iostream>
 #include <QApplication>
+#include <QDesktopServices>
 
 #include "mainwindow.h"
 #include "menuactionmanager.h"
@@ -39,7 +40,7 @@ void MenuActionManager::showGraphs() {
 
 }
 
-void MenuActionManager::showLogbook() {
+void MenuActionManager::logBrowser() {
 
     LogbookDialog* logbookDialog = new LogbookDialog;
     logbookDialog->show();
@@ -80,11 +81,6 @@ void MenuActionManager::bakeryEdit() {
     connect(bakeryEdit, &QDialog::finished, bakeryEdit, &BakeryEdit::deleteLater);
 }
 
-void MenuActionManager::signOut() {
-
-
-}
-
 void MenuActionManager::exit() {
 
     // Implement proper application closing action.
@@ -114,11 +110,6 @@ void MenuActionManager::preferencesPanel() {
 
 // ============ TOOLS MENU ================
 
-void MenuActionManager::logBrowser() {
-
-
-}
-
 void MenuActionManager::graphViewer() {
 
 
@@ -142,6 +133,6 @@ void MenuActionManager::about() {
 
 void MenuActionManager::help() {
 
-
+    QDesktopServices::openUrl(QUrl(HELP_URL));
 }
 

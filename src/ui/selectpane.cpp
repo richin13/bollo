@@ -18,6 +18,8 @@ SelectWindow::SelectWindow(QWidget *parent) : QWidget(parent),
 
 SelectWindow::~SelectWindow() {
 
+    LOG(DEBUG) << "Select pane deleted";
+
     delete ui;
 }
 
@@ -62,8 +64,8 @@ void SelectWindow::addBakery(const Bakery& bakery) {
     // Used to know which bakery is selected
     button->setAccessibleName(QString::number(bakery.get_id()));
 
-    ui->bakeriesView->addWidget(button);
-    ui->bakeriesView->addWidget(createHorizontalLine());
+    ui->bakeriesView->layout()->addWidget(button);
+    ui->bakeriesView->layout()->addWidget(createHorizontalLine());
 
     connect(button, SIGNAL(clicked()), this, SLOT(bakeryButtonClicked()));
 }
@@ -89,7 +91,7 @@ QWidget* SelectWindow::createHorizontalLine() {
 
     QWidget *hLine = new QWidget;
     hLine->setFixedHeight(2);
-    hLine->setFixedWidth(this->width() - MARGIN);
+    hLine->setFixedWidth(ui->scrollArea->width() - MARGIN);
     hLine->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
     hLine->setStyleSheet(QString("background-color: #c0c0c0;"));
 

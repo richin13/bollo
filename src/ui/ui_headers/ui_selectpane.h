@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'selectpanepN8967.ui'
+** Form generated from reading UI file 'selectpaneVd4037.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.4.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef SELECTPANEPN8967_H
-#define SELECTPANEPN8967_H
+#ifndef SELECTPANEVD4037_H
+#define SELECTPANEVD4037_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
@@ -17,6 +17,7 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QScrollArea>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -27,8 +28,10 @@ public:
     QScrollArea *chartsWebView;
     QWidget *content;
     QLabel *title1;
-    QWidget *formWidget;
-    QFormLayout *bakeriesView;
+    QScrollArea *scrollArea;
+    QWidget *bakeriesView;
+    QVBoxLayout *verticalLayout;
+    QFormLayout *layout;
     QLabel *noAvailableBakeries;
 
     void setupUi(QWidget *selectWindow)
@@ -51,17 +54,27 @@ public:
         font.setBold(true);
         font.setWeight(75);
         title1->setFont(font);
-        formWidget = new QWidget(selectWindow);
-        formWidget->setObjectName(QStringLiteral("formWidget"));
-        formWidget->setGeometry(QRect(10, 30, 341, 401));
-        bakeriesView = new QFormLayout(formWidget);
+        scrollArea = new QScrollArea(selectWindow);
+        scrollArea->setObjectName(QStringLiteral("scrollArea"));
+        scrollArea->setGeometry(QRect(10, 30, 341, 401));
+        scrollArea->setWidgetResizable(true);
+        bakeriesView = new QWidget();
         bakeriesView->setObjectName(QStringLiteral("bakeriesView"));
-        noAvailableBakeries = new QLabel(formWidget);
+        bakeriesView->setGeometry(QRect(0, 0, 339, 399));
+        verticalLayout = new QVBoxLayout(bakeriesView);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        layout = new QFormLayout();
+        layout->setObjectName(QStringLiteral("layout"));
+        noAvailableBakeries = new QLabel(bakeriesView);
         noAvailableBakeries->setObjectName(QStringLiteral("noAvailableBakeries"));
-        noAvailableBakeries->setAlignment(Qt::AlignHCenter|Qt::AlignTop);
+        noAvailableBakeries->setAlignment(Qt::AlignCenter);
 
-        bakeriesView->setWidget(0, QFormLayout::SpanningRole, noAvailableBakeries);
+        layout->setWidget(0, QFormLayout::SpanningRole, noAvailableBakeries);
 
+
+        verticalLayout->addLayout(layout);
+
+        scrollArea->setWidget(bakeriesView);
 
         retranslateUi(selectWindow);
 
@@ -83,4 +96,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // SELECTPANEPN8967_H
+#endif // SELECTPANEVD4037_H

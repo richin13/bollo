@@ -8,7 +8,8 @@
 
 namespace Ui {
 
-    #define MARGIN 35
+#define MARGIN 35
+#define GRAPH_URL "http://bollo-server.bitnamiapp.com/bollo_web/?thisTextMustBeSuperSecret!__-___"
     class selectWindow;
 }
 
@@ -23,7 +24,7 @@ public:
     void buildBakeriesList();
     void addBakery(const Bakery& );
     QWidget* createHorizontalLine();
-    void displayWebPage(QString url = "http://bollo-server.bitnamiapp.com/bollo_web/?thisTextMustBeSuperSecret!__-___");
+    void displayWebPage(QString url = GRAPH_URL);
 
 private:
     Ui::selectWindow *ui;

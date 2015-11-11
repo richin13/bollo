@@ -31,6 +31,7 @@ void BakerySelect::createBakerisList() {
         ui->noAvailableBakeries->setVisible(false);
 
         for(int i = 0; i < listSize; ++i) {
+
             addBakery(*(BolloApp::get().bakeries.at(i)));
         }
     }
@@ -53,8 +54,8 @@ void BakerySelect::addBakery(const Bakery& bakery) {
     button->setText(formatted);
     button->setIcon(QIcon(Ui::SHOP_ICON));
 
-    ui->layout->addWidget(button);
-    ui->layout->addWidget(createHorizontalLine());
+    ui->contents->layout()->addWidget(button);
+    ui->contents->layout()->addWidget(createHorizontalLine());
 }
 
 QWidget* BakerySelect::createHorizontalLine() {

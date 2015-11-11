@@ -44,6 +44,8 @@ void MainWindow::applySettings() {
 
     // By default disable toolbar and dashboard
     widgetsEnabled(false);
+
+    selectPane = nullptr;
 }
 
 /**
@@ -63,6 +65,7 @@ void MainWindow::showLoginAndValidate() {
 }
 
 void MainWindow::exitApp() {
+
     qApp->quit();
 }
 
@@ -91,6 +94,7 @@ void MainWindow::showDashBoard (int bakeryId) {
 
     LOG(DEBUG) << "Showing dashboard for bakery: " + std::to_string(bakeryId);
     selectPane->deleteLater();
+    selectPane = nullptr;
     widgetsEnabled(true);
 }
 
@@ -100,6 +104,8 @@ void MainWindow::showDashBoard (int bakeryId) {
  * and then when the dashboard is shown
  */
 void MainWindow::widgetsEnabled(bool status) {
+
+    LOG(DEBUG) << "Setting widgets status: " << status;
 
     ui->toolBar->setEnabled(status);
 
@@ -212,26 +218,37 @@ void MainWindow::on_incrementBtn_clicked() {
 
 // TODO: Connect all the remaining widgets
 
+/**
+ * The connect tool bar & connect menu actions are called here to start connecting
+ * the actions to each function in MenuActionManager.
+ */
 void MainWindow::connectWidgets() {
 
     connectToolBarActions();
     connectMenuActions();
 }
 
+/**
+ * All Tool bar actions (buttons) are connected here.
+ */
 void MainWindow::connectToolBarActions() {
 
     MenuActionManager* actManager = new MenuActionManager(this);
 
     connect(ui->actionBakeryList, SIGNAL(triggered(bool)), actManager, SLOT(showBakeryList()));
-    connect(ui->actionBakeryLog, &QAction::triggered, actManager, &MenuActionManager::showLogbook);
+    connect(ui->actionBakeryLog, &QAction::triggered, actManager, &MenuActionManager::logBrowser);
 }
 
+/**
+ * All the menu actions are connected here. File, Edit, Tools and Help menus.
+ */
 void MainWindow::connectMenuActions() {
 
     MenuActionManager* actManager = new MenuActionManager(this);
 
     // File menu
     connect(ui->actionExit, SIGNAL(triggered(bool)), actManager, SLOT(exit()));
+    connect(ui->actionSignOut, SIGNAL(triggered(bool)), this, SLOT(signOut()));
     connect(ui->actionNewBakery, SIGNAL(triggered(bool)), actManager, SLOT(bakeryEdit()));
 
     // Edit menu
@@ -242,10 +259,32 @@ void MainWindow::connectMenuActions() {
 
     // Tools menu
     connect(ui->actionTelegram, SIGNAL(triggered(bool)), actManager, SLOT(telegramMenu()));
-    connect(ui->actionLogBrowser, &QAction::triggered, actManager, &MenuActionManager::showLogbook);
+    connect(ui->actionLogBrowser, &QAction::triggered, actManager, &MenuActionManager::logBrowser);
 
     // Help menu
     connect(ui->actionAbout, SIGNAL(triggered(bool)), actManager, SLOT(about()));
+    connect(ui->actionHelp, SIGNAL(triggered(bool)), actManager, SLOT(help()));
+}
+
+/**
+ * Disables and set to not visible the menu, tool bar and dashboard. And if the user
+ * is signing out from the select pane deletes the selectpane, and shows the login dialog.
+ */
+void MainWindow::signOut() {
+
+    LOG(DEBUG) << "Signing out...";
+
+    widgetsEnabled(false);
+
+    if (selectPane) {
+
+        LOG(DEBUG) << "Select pane found while signing out, deleting it...";
+
+        selectPane->deleteLater();
+        selectPane = nullptr;
+    }
+
+    showLoginAndValidate();
 }
 
 /*
