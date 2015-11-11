@@ -31,7 +31,26 @@ void BakeryEdit::settings() {
 
     // Each time a bakery is selected, load its values in to the fields of "Bakery Edit" tab.
     connect(ui->bakeriesList, SIGNAL(activated(int)), this, SLOT(loadEditBakeryFields(int)));
+
+    // When a different bakery is selected clean the modify status of the previus one
+    connect(ui->bakeriesList, SIGNAL(activated(int)), this, SLOT(clearEditStatus()));
+
+    // When changing tabs clean create bakery fields.
+    connect(ui->tabWidget, SIGNAL(currentChanged(int)), this, SLOT(clearCreateFields()));
 }
+
+void BakeryEdit::clearCreateFields() {
+
+    ui->createBakeryStatus->clear();
+    ui->bakeryName->clear();
+    ui->bakeryCity->clear();
+}
+
+void BakeryEdit::clearEditStatus() {
+
+    ui->editBakeryStatus->clear();
+}
+
 
 /**
  * Makes an API request to save the modified bakery name, state or city. No validation
@@ -39,7 +58,56 @@ void BakeryEdit::settings() {
  */
 void BakeryEdit::saveBakery() {
 
-    // TODO: Implement this
+    // Get the bakery object from list
+    Bakery* bake = BolloApp::get().bakeries.at(ui->bakeriesList->currentIndex());
+
+    QNetworkAccessManager* manager = new QNetworkAccessManager(this);
+
+    //Build the URL
+    QHash<QString, QString> args;
+    args["id"] = QString::number(bake->get_id());
+    args["name"] = ui->bakeryNameEdit->text();
+    args["state"] = QString::number(ui->stateListEdit->currentIndex() + 1);
+    args["city"] = ui->bakeryCityEdit->text();
+
+    QUrl url;
+    url_builder(url, "bakeries", "modify", args);
+
+    connect(manager, &QNetworkAccessManager::finished, this, &BakeryEdit::gotModifyReply);
+    connect(manager, &QNetworkAccessManager::finished, manager, &QNetworkAccessManager::deleteLater);
+    manager->get(QNetworkRequest(url));
+
+    LOG(INFO) << "Sent POST request to URL to API at section 'bakeries' module 'modify'";
+}
+
+void BakeryEdit::gotModifyReply(QNetworkReply *reply) {
+
+    LOG(INFO) << "Got reply from server: modify bakery request";
+
+    QJsonObject object;
+    extract_json_object(reply, &object);
+
+    int replyCode = object.take("code").toInt();
+
+    switch(replyCode) {
+
+        case 0:
+            setStatus(Ui::MODIFY, Ui::OK, "Panaderia modificada satisfactoriamente");
+            LOG(INFO) << "Bakery created succesfully";
+            break;
+
+        case 1:
+            setStatus(Ui::MODIFY, Ui::ERROR, "El nombre utilizado ya se encuentra registrado.");
+            LOG(WARNING) << "An error ocurred while modifying bakery";
+            break;
+
+        case 15:
+            setStatus(Ui::MODIFY, Ui::ERROR, "Fatal error");
+            LOG(DEBUG) << "Missing parameters at create bakery request";
+            break;
+    }
+
+    connect(reply, &QNetworkReply::finished, reply, &QNetworkReply::deleteLater);
 }
 
 /**
@@ -59,8 +127,6 @@ void BakeryEdit::createBakery() {
     QUrl url;
     url_builder(url, "bakeries", "create", args);
 
-    qDebug() << url;
-
     connect(manager, &QNetworkAccessManager::finished, this, &BakeryEdit::gotCreateReply);
     connect(manager, &QNetworkAccessManager::finished, manager, &QNetworkAccessManager::deleteLater);
     manager->get(QNetworkRequest(url));
@@ -77,26 +143,55 @@ void BakeryEdit::gotCreateReply(QNetworkReply *reply) {
 
     int replyCode = object.take("code").toInt();
 
-    qDebug() << replyCode;
+    switch(replyCode) {
 
-    if(!replyCode) {
+        case 0:
+            setStatus(Ui::CREATE, Ui::OK, "Panaderia creada satisfactoriamente");
+            LOG(INFO) << "Bakery created succesfully";
+            break;
 
-        LOG(INFO) << "Bakery created succesfully";
+        case 1:
+            setStatus(Ui::CREATE, Ui::ERROR, "Ocurrio un error al crear la panaderia o ya existe");
+            LOG(WARNING) << "An error ocurred while creating bakery or the bakery already exist";
+            break;
 
-    } else {
-
-        switch(replyCode) {
-            case 1:
-                LOG(WARNING) << "An error ocurred while creating bakery or the bakery already exist";
-                break;
-
-            case 15:
-                LOG(DEBUG) << "Missing parameters at create bakery request";
-                break;
-        }
+        case 15:
+            setStatus(Ui::CREATE, Ui::ERROR, "Fatal error");
+            LOG(DEBUG) << "Missing parameters at create bakery request";
+            break;
     }
 
     connect(reply, &QNetworkReply::finished, reply, &QNetworkReply::deleteLater);
+}
+
+void BakeryEdit::setStatus(Ui::Mode mode , Ui::Status status, QString message) {
+
+    QLabel* statusLabel;
+    QString fontColor;
+
+    if (mode == Ui::CREATE) {
+
+        statusLabel = ui->createBakeryStatus;
+    }
+
+    else {
+
+        statusLabel = ui->editBakeryStatus;
+    }
+
+    // Set color of status label depending on the request status
+    if (status == Ui::ERROR) {
+
+       fontColor = "red";
+    }
+
+    else {
+
+        fontColor = "green";
+    }
+
+    statusLabel->setStyleSheet("QLabel { color : " + fontColor +"; }");
+    statusLabel->setText(message);
 }
 
 /**
@@ -122,7 +217,7 @@ void BakeryEdit::fillBakeryListComboBox() {
 
     else {
 
-        ui->tab_2->setEnabled(false);
+        ui->editTab->setEnabled(false);
     }
 }
 

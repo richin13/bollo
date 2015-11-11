@@ -32,7 +32,7 @@
      <property name="currentIndex">
       <number>0</number>
      </property>
-     <widget class="QWidget" name="tab">
+     <widget class="QWidget" name="createTab">
       <attribute name="title">
        <string>Nueva panaderia</string>
       </attribute>
@@ -162,8 +162,24 @@
         <string>Crear</string>
        </property>
       </widget>
+      <widget class="QLabel" name="createBakeryStatus">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>180</y>
+         <width>191</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
      </widget>
-     <widget class="QWidget" name="tab_2">
+     <widget class="QWidget" name="editTab">
       <attribute name="title">
        <string>Editar Panaderia</string>
       </attribute>
@@ -301,6 +317,22 @@
          <width>291</width>
          <height>28</height>
         </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="editBakeryStatus">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>180</y>
+         <width>191</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
        </property>
       </widget>
      </widget>
