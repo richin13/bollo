@@ -80,6 +80,7 @@ void BakeryEdit::fillBakeryListComboBox() {
 
 /**
  * @param index The bakery index at the bakeries list in BolloApp and gui combo box.
+ *
  * When a bakery is selected the signal is directed to this function, in which
  * the index of the bakery at the Bakery list combo box (the same as the BolloApp list)
  * is passed for querying the Bakery object. Then the name, state, and city are extracted
@@ -112,6 +113,7 @@ void BakeryEdit::connectEventChangeManagers() {
  * the button is enabled again.
  */
 void BakeryEdit::validateNewBakeInput() {
+
     ui->createBakeryBtn->setDisabled(ui->bakeryName->text().isEmpty() || ui->bakeryCity->text().isEmpty());
 }
 
@@ -120,6 +122,7 @@ void BakeryEdit::validateNewBakeInput() {
  * the button is enabled again.
  */
 void BakeryEdit::validateEditBakeInput() {
+
     ui->saveBakery->setDisabled(ui->bakeryNameEdit->text().isEmpty() || ui->bakeryCityEdit->text().isEmpty());
 }
 
@@ -129,5 +132,6 @@ void BakeryEdit::validateEditBakeInput() {
  * and saving the same values it's redundant and some reources can be saved.
  */
 void BakeryEdit::stateSelectChanged () {
+
     ui->saveBakery->setDisabled(ui->stateListEdit->currentText() == selectedBakery->get_state());
 }
