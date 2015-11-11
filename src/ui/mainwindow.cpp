@@ -26,6 +26,7 @@ MainWindow::MainWindow(QWidget* parent) :
 MainWindow::~MainWindow() {
 
     delete ui;
+    delete loadingGif;
 }
 
 /**
@@ -97,6 +98,10 @@ void MainWindow::showDashBoard (int bakeryId) {
     selectPane->deleteLater();
     selectPane = nullptr;
     widgetsEnabled(true);
+
+    //***Setting bakery operations****//
+    connectBakeriesOperations();
+    change_bakery_displayed(bakeryId);
 }
 
 /**
@@ -153,7 +158,7 @@ void MainWindow::setLoadingGif(QLabel* label) {
 void MainWindow::setDoneIcon(QLabel* label) {
 
     label->setPixmap(QPixmap(Ui::DONE_ICON));
-    delete loadingGif;
+    //delete loadingGif;
 }
 
 
@@ -167,7 +172,7 @@ void MainWindow::setDoneIcon(QLabel* label) {
  */
 void MainWindow::setDefaultIcon(QLabel* label) {
 
-    label->setPixmap(QPixmap(QString::fromUtf8(":/images/assets/pending-icon.png")));
+    label->setPixmap(QPixmap(Ui::DEFAULT_ICON));
 }
 
 
@@ -199,17 +204,17 @@ void MainWindow::setChecked(Ui::Theme theme) {
 
 void MainWindow::on_firstFermentBar_valueChanged(int value) {
 
-    // Set loading gif the first time the bar value has changed
-    if(value == BAR_INCREMENT) {
-
-        setLoadingGif(ui->firstFermentIcon);
-    }
-
-    if(value == MAX_BAR_VALUE) {
-
-        setDoneIcon(ui->firstFermentIcon);
-        setLoadingGif(ui->doughDivisionIcon);
-    }
+//    // Set loading gif the first time the bar value has changed
+//    if(value == BAR_INCREMENT) {
+//
+//        setLoadingGif(ui->firstFermentIcon);
+//    }
+//
+//    if(value == MAX_BAR_VALUE) {
+//
+//        setDoneIcon(ui->firstFermentIcon);
+//        setLoadingGif(ui->doughDivisionIcon);
+//    }
 }
 
 void MainWindow::on_incrementBtn_clicked() {
@@ -303,9 +308,9 @@ void MainWindow::signOut() {
  */
 void MainWindow::progress_operation(_operation current_operation) {
 
-    if (current_operation.bakery_id == this->current_bakery_id) {
+    if (this->current_bakery->get_id() == current_operation.bakery_id) {
 
-        setProgressBar(current_operation.description, current_operation.progress);
+        setProgressBar(current_operation.progress);
     }
 }
 
@@ -321,7 +326,7 @@ void MainWindow::progress_operation(_operation current_operation) {
  * --> will be incrementing every time this method is called
  *
  */
-void MainWindow::setProgressBar(QString stage, int progress) {
+void MainWindow::setProgressBar(int progress) {
 
     int progress_value = progress % 100;
     switch(progress / 100) {
@@ -350,6 +355,18 @@ void MainWindow::setProgressBar(QString stage, int progress) {
         case 7: set_shippedBar(progress_value);
             break;
 
+        case 8: //display message INACTIVA
+            break;
+
+        case 9: //display message CLAUSURADA
+            break;
+
+        case 10: //display message CERRADA
+            break;
+
+        case 11: //display message EN CUARENTENA
+            break;
+
         default: //progress out of the process range
             break;
     }
@@ -359,7 +376,7 @@ void MainWindow::setProgressBar(QString stage, int progress) {
 
 void MainWindow::set_mixIngredients_progress(int progress_value) {
 
-    if(progress_value == 1) { // 1 is the initial value for the whole process
+    if(progress_value == 0) { // 1 is the initial value for the whole process
 
         setLoadingGif(ui->mixingIcon);
     }
@@ -374,6 +391,7 @@ void MainWindow::set_mixIngredients_progress(int progress_value) {
 void MainWindow::set_firstFermentBar(int progress_value) {
 
     ui->firstFermentBar->setValue(progress_value);
+    ui->firstFermentBar->update();
 
     if(progress_value == MAX_BAR_VALUE) {
 
@@ -385,6 +403,7 @@ void MainWindow::set_firstFermentBar(int progress_value) {
 void MainWindow::set_doughDivisionBar(int progress_value) {
 
     ui->doughDivisionBar->setValue(progress_value);
+    ui->doughDivisionBar->update();
 
     if(progress_value == MAX_BAR_VALUE) {
 
@@ -396,6 +415,7 @@ void MainWindow::set_doughDivisionBar(int progress_value) {
 void MainWindow::set_doughFormingBar(int progress_value) {
 
     ui->doughFormingBar->setValue(MAX_BAR_VALUE);
+    ui->doughFormingBar->update();
 
     if(progress_value == MAX_BAR_VALUE) {
 
@@ -407,6 +427,7 @@ void MainWindow::set_doughFormingBar(int progress_value) {
 void MainWindow::set_finalFermentBar(int progress_value) {
 
     ui->finalFermentBar->setValue(progress_value);
+    ui->finalFermentBar->update();
 
     if(progress_value == MAX_BAR_VALUE) {
 
@@ -418,6 +439,7 @@ void MainWindow::set_finalFermentBar(int progress_value) {
 void MainWindow::set_bakingBar(int progress_value) {
 
     ui->bakingBar->setValue(progress_value);
+    ui->bakingBar->update();
 
     if(progress_value == MAX_BAR_VALUE) {
 
@@ -429,6 +451,7 @@ void MainWindow::set_bakingBar(int progress_value) {
 void MainWindow::set_onSaleBar(int progress_value) {
 
     ui->onSaleBar->setValue(progress_value);
+    ui->onSaleBar->update();
 
     if(progress_value == MAX_BAR_VALUE) {
 
@@ -440,10 +463,13 @@ void MainWindow::set_onSaleBar(int progress_value) {
 void MainWindow::set_shippedBar(int progress_value) {
 
     ui->shippedBar->setValue(progress_value);
+    ui->shippedBar->update();
 
     if(progress_value == MAX_BAR_VALUE) {
 
         setDoneIcon(ui->shippedIcon);
+
+        clean_all();//Once the process finished, it starts over so it's needed to clean all
     }
 }
 
@@ -638,4 +664,100 @@ void MainWindow::clean_shippedBar() {
 
     ui->shippedBar->setValue(MIN_BAR_VALUE);
     setDefaultIcon(ui->shippedIcon);
+}
+
+
+void MainWindow::clean_all() {
+
+    clean_mixIngredients_progress();
+    clean_firstFermentBar();
+    clean_doughDivisionBar();
+    clean_doughFormingBar();
+    clean_finalFermentBar();
+    clean_bakingBar();
+    clean_onSaleBar();
+    clean_shippedBar();
+}
+
+
+/*
+ * @brief MainWindow::change_bakery_displayed --> Sets the bakery_id/Bakery object
+ * for the values of the new bakery selected
+ *
+ * @param --> the ID of the new bakery selected
+ *
+ * --> This method calls 'update_bakery_progress' method that is in charge to update all new GUI
+ * --> Once this slot is called the class variables corresponding to the current bakery
+ * --> are set/changed for the values of the new bakery selected.
+ */
+void MainWindow::change_bakery_displayed(int bakery_id) {
+
+    this->current_bakery_id = bakery_id;
+    set_current_bakery(bakery_id);
+
+    LOG(DEBUG) << "Starting the update of the GUI for: " << this->current_bakery->get_name().toStdString()
+    << "ID: " << to_string(bakery_id);
+    update_bakery_operations(this->current_bakery->get_current_op());
+}
+
+
+/*
+ * @brief MainWindow::connectBakeriesOperations --> Creates the connects between
+ * the operations of the bakeries in order to update and set the GUI
+ *
+ */
+void MainWindow::connectBakeriesOperations() {
+
+    for (int i = 0; i < BolloApp::get().bakeries.size(); ++i) {
+
+        Bakery *bakery = BolloApp::get().bakeries.at(i);
+
+        connect(bakery, &Bakery::operation_changed, this, &MainWindow::progress_operation);
+    }
+
+}
+
+
+/*
+ * @brief MainWindow::set_current_bakery --> Sets the Bakery object that represents the
+ * current_bakery that is being displayed on the screen
+ *
+ * @param --> the bakery_id of the new bakery that will be displayed on the screen
+ *
+ * --> every time that a bakery is selected, the 'current_bakery' object is set
+ * in order to know which is the bakery that is being displayed
+ */
+void MainWindow::set_current_bakery(int bakery_id) {
+
+    for (int i = 0; i < BolloApp::get().bakeries.size(); ++i) {
+
+        Bakery *bakery = BolloApp::get().bakeries.at(i);
+
+        if(bakery->get_id() == bakery_id) {
+
+            this->current_bakery = bakery;
+            break;
+            //i = BolloApp::get().bakeries.size(); //***optional
+        }
+    }
+}
+
+
+void MainWindow::_update() {
+
+    ui->mixingIcon->update();
+    ui->firstFermentBar->update();
+    ui->firstFermentIcon->update();
+    ui->doughDivisionBar->update();
+    ui->doughDivisionIcon->update();
+    ui->doughFormingBar->update();
+    ui->doughFormingIcon->update();
+    ui->finalFermentBar->update();
+    ui->finalFermentIcon->update();
+    ui->bakingBar->update();
+    ui->bakingIcon->update();
+    ui->onSaleBar->update();
+    ui->onSaleIcon->update();
+    ui->shippedBar->update();
+    ui->shippedIcon->update();
 }

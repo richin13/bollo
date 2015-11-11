@@ -13,7 +13,7 @@ namespace Ui {
  * Max value that all the progress bars
  * can have.
  */
-#define MAX_BAR_VALUE 100
+#define MAX_BAR_VALUE 99
 #define MIN_BAR_VALUE 0
 
 /**
@@ -56,6 +56,9 @@ private slots:
     void showDashBoard(int );
     void signOut();
 
+public slots:
+    void progress_operation(_operation current_operation);
+
 private:
     Ui::MainWindow* ui;
     SelectWindow* selectPane;
@@ -74,20 +77,24 @@ private:
 
     void connectMenuActions();
 
+    void connectBakeriesOperations();
+
 
     //***********Bakery Variables*************//
     int current_bakery_id;
-    QString current_bakery_stage;
+    Bakery *current_bakery;
+
+    void set_current_bakery(int bakery_id);
 
 
-    //****SLOTS****//
-    void progress_operation(_operation current_operation);
+    //*******Updating Methods************//
     void update_bakery_operations(_operation bakery_progress);
-
+    void change_bakery_displayed(int bakery_id);
+    void _update();
 
 
     //*************Progress Bars Methods*************//
-    void setProgressBar(QString stage, int progress);
+    void setProgressBar(int progress);
 
     void set_mixIngredients_progress(int progress_value);
     void set_firstFermentBar(int progress_value);
@@ -118,6 +125,7 @@ private:
     void clean_onSaleBar();
     void clean_shippedBar();
 
+    void clean_all();
 };
 
 #endif // MAINWINDOW_H
