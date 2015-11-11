@@ -356,15 +356,23 @@ void MainWindow::setProgressBar(int progress) {
             break;
 
         case 8: //display message INACTIVA
+            set_inactive_bakery();
+            clean_all();
             break;
 
         case 9: //display message CLAUSURADA
+            set_closure_bakery();
+            clean_all();
             break;
 
         case 10: //display message CERRADA
+            set_closed_bakery();
+            clean_all();
             break;
 
         case 11: //display message EN CUARENTENA
+            set_quarantine_bakery();
+            clean_all();
             break;
 
         default: //progress out of the process range
@@ -760,4 +768,21 @@ void MainWindow::_update() {
     ui->onSaleIcon->update();
     ui->shippedBar->update();
     ui->shippedIcon->update();
+}
+
+
+void MainWindow::set_inactive_bakery() {
+
+}
+
+void MainWindow::set_closure_bakery() {
+
+}
+
+void MainWindow::set_closed_bakery() {
+
+}
+
+void MainWindow::set_quarantine_bakery() {
+
 }
