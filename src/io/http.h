@@ -28,6 +28,7 @@ public:
 
 public slots:
     void updater(_operation);
+    void stock_updater(_operation);
     void notifier(QNetworkReply*);
 };
 

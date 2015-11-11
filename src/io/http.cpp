@@ -24,7 +24,6 @@ void url_builder(QUrl& url, QString section, QString module, QHash<QString, QStr
     }
 
     url.setQuery(url_query);
-    LOG(DEBUG) << "Built URL: " + url.toString().toStdString();
 
 }
 
@@ -33,7 +32,6 @@ void extract_json_object(QNetworkReply* rep, QJsonObject* json) {
 }
 
 void StatusUpdater::updater(_operation op) {
-    LOG(INFO) << "Updating status for bakery: " + to_string(op.bakery_id);
     QNetworkAccessManager* manager = new QNetworkAccessManager(this);
 
     QHash<QString, QString> args;
@@ -43,6 +41,25 @@ void StatusUpdater::updater(_operation op) {
 
     QUrl url;
     url_builder(url, "bakeries", "status", args);
+    QObject::connect(manager, &QNetworkAccessManager::finished, this, &StatusUpdater::notifier);
+    QObject::connect(manager, &QNetworkAccessManager::finished, manager, &QNetworkAccessManager::deleteLater);
+
+    manager->get(QNetworkRequest(url));
+
+    if(op.progress / 100 > 4) stock_updater(op);
+}
+
+
+void StatusUpdater::stock_updater(_operation op) {
+//    LOG(INFO) << "Updating stock for bakery " + to_string(op.bakery_id) + ": " + to_string(op.stock);
+    QNetworkAccessManager* manager = new QNetworkAccessManager(this);
+
+    QHash<QString, QString> args;
+    args["id"] = QString::number(op.bakery_id);
+    args["stock"] = QString::number(op.stock);
+
+    QUrl url;
+    url_builder(url, "bakeries", "bakery", args);
     QObject::connect(manager, &QNetworkAccessManager::finished, this, &StatusUpdater::notifier);
     QObject::connect(manager, &QNetworkAccessManager::finished, manager, &QNetworkAccessManager::deleteLater);
 

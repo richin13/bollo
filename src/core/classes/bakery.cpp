@@ -77,26 +77,32 @@ Baker* Bakery::get_baker() const {
 }
 
 void Bakery::mix_ingredients(int _start) {
+    LOG(DEBUG) << QString("Iniciando[%1]: %2").arg(bakery_id).arg("Mezcla de ingredientes").toStdString();
+    qsrand((uint) QTime::currentTime().msec());
+
     this->current_operation.progress = (integer_code) _start;
     this->current_operation.description = "Mezclando los ingredientes";
     logbook.general(this->bakery_id) << current_operation.description;
-    int seconds = 25;//TODO: Must be configurable.
+    int seconds = 20 + (qrand() % 10);//TODO: Must be configurable.
     for(int i = _start; i < 100; ++i) {
         emit operation_changed(current_operation);
         this->current_operation.progress += 1;
         QThread::usleep((unsigned long) (seconds * 100000));
     }
-    std::cout << "Final value of progress --->>> " << current_operation.progress << std::endl;
 }
 
 void Bakery::ferment_dough(int _start, bool _final_f) {
+    qsrand((uint) QTime::currentTime().msec());
+
     int seconds;
     if(!_final_f) {
+        LOG(DEBUG) << QString("Iniciando[%1]: %2").arg(bakery_id).arg("Fermentación primaria").toStdString();
         this->current_operation.description = "Fermentación inicial de la masa";
-        seconds = 20;
+        seconds = 15 + (qrand() % 10);
     } else {
+        LOG(DEBUG) << QString("Iniciando[%1]: %2").arg(bakery_id).arg("Fermentación final").toStdString();
         this->current_operation.description = "Fermentación final de la masa";
-        seconds = 25;
+        seconds = 20 + (qrand() % 10);
     }
     logbook.general(this->bakery_id) << current_operation.description;
     for(int i = _start; i < 100; ++i) {
@@ -107,9 +113,12 @@ void Bakery::ferment_dough(int _start, bool _final_f) {
 }
 
 void Bakery::divide_dough(int _start) {
+    LOG(DEBUG) << QString("Iniciando[%1]: %2").arg(bakery_id).arg("División de la masa").toStdString();
+    qsrand((uint) QTime::currentTime().msec());
+
     this->current_operation.description = "Divisón de la masa";
     logbook.general(this->bakery_id) << current_operation.description;
-    int seconds = 20;
+    int seconds = 15 + (qrand() % 10);
 
     for(int i = _start; i < 100; ++i) {
         emit operation_changed(current_operation);
@@ -119,9 +128,12 @@ void Bakery::divide_dough(int _start) {
 }
 
 void Bakery::shape_dough(int _start) {
+    LOG(DEBUG) << QString("Iniciando[%1]: %2").arg(bakery_id).arg("Formación de la masa").toStdString();
+    qsrand((uint) QTime::currentTime().msec());
+
     this->current_operation.description = "Formando la masa";
     logbook.general(this->bakery_id) << current_operation.description;
-    int seconds = 35;
+    int seconds = 30 + (qrand() % 10);
 
     for(int i = _start; i < 100; ++i) {
         emit operation_changed(current_operation);
@@ -131,9 +143,12 @@ void Bakery::shape_dough(int _start) {
 }
 
 void Bakery::bake_bread(int _start) {
+    LOG(DEBUG) << QString("Iniciando[%1]: %2").arg(bakery_id).arg("Horneo del pan").toStdString();
+    qsrand((uint) QTime::currentTime().msec());
+
     this->current_operation.description = "Horneando el pan";
     logbook.general(this->bakery_id) << current_operation.description;
-    int seconds = 40;
+    int seconds = 35 + (qrand() % 10);
 
     for(int i = _start; i < 100; ++i) {
         emit operation_changed(current_operation);
@@ -143,25 +158,43 @@ void Bakery::bake_bread(int _start) {
 }
 
 void Bakery::sell_bread(int _start) {
+    LOG(DEBUG) << QString("Iniciando[%1]: %2").arg(bakery_id).arg("Venta del pan").toStdString();
+    qsrand((uint) QTime::currentTime().msec());
+
     this->current_operation.description = "Vendiendo el pan";
     logbook.general(this->bakery_id) << current_operation.description;
-    int seconds = 35;
+    int seconds = 30 + (qrand() % 10);
 
     for(int i = _start; i < 100; ++i) {
         emit operation_changed(current_operation);
         this->current_operation.progress += 1;
+
+        if(bakery_stock - 1 > 0) {
+            bakery_stock += (qrand() % 1) - 1;
+            current_operation.stock = bakery_stock;
+        }
+
         QThread::usleep((unsigned long) (seconds * 100000));
     }
 }
 
 void Bakery::distribute_bread(int _start) {
+    LOG(DEBUG) << QString("Iniciando[%1]: %2").arg(bakery_id).arg("Distribución del pan").toStdString();
+    qsrand((uint) QTime::currentTime().msec());
+
     this->current_operation.description = "Distribuyendo el pan";
     logbook.general(this->bakery_id) << current_operation.description;
-    int seconds = 20;
+    int seconds = 20 + (qrand() % 10);
 
     for(int i = _start; i < 100; ++i) {
         emit operation_changed(current_operation);
         this->current_operation.progress += 1;
+
+        if(bakery_stock - 1 > 0) {
+            bakery_stock += (qrand() % 1) - 1;
+            current_operation.stock = bakery_stock;
+        }
+
         QThread::usleep((unsigned long) (seconds * 100000));
     }
 }
@@ -171,7 +204,6 @@ void Bakery::distribute_bread(int _start) {
  * detects a sanity problem in a bakery.
  */
 void Bakery::close_down(void) {
-
     Popup* p = new Popup("Panadería clausarada", bakery_name + " ha sido clausurada");
     p->show();
     QObject::connect(p, SIGNAL(destroyed()), p, SLOT(deleteLater()));
@@ -193,8 +225,8 @@ void Bakery::set_up(void) {
 }
 
 void Bakery::run() {
-    LOG(DEBUG) << "Starting bakery thread[" + to_string(bakery_id) + "]";
     bool first_time = true;
+    qsrand((uint) QTime::currentTime().msec());
     while(!closed_down) {
         if(first_time) {
             first_time = false;
@@ -221,12 +253,23 @@ void Bakery::run() {
         }
 
         mix_ingredients();
+
         ferment_dough();
+
         divide_dough();
+
         shape_dough();
-        ferment_dough(true);
+
+        ferment_dough(0, true);
+
+        int dough = get_setting("Operations", "dough_per_batch").toInt();
+        bakery_stock = ((dough - (dough / 4)) + (qrand() % 30)) * 4;
+        current_operation.stock = bakery_stock;
+        LOG(INFO) << "New stock for bakery {" + to_string(bakery_id) + "}: " + to_string(bakery_stock);
         bake_bread();
+
         sell_bread();
+
         distribute_bread();
     }
 }

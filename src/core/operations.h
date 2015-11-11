@@ -15,6 +15,8 @@ struct _operation {
     unsigned int bakery_id;
     integer_code progress;
     QString description;
+
+    int stock;
 };
 
 #endif //BOLLO_OPERATIONS_H

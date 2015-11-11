@@ -49,10 +49,11 @@ public:
             bakery_city(city),
             bakery_stock(stock) {
 
-        this->baker = new Baker();
-        this->current_operation.bakery_id = this->bakery_id;
-        this->current_operation.progress = (integer_code) progress;
-        this->current_operation.description = status;
+        baker = new Baker();
+        current_operation.bakery_id = this->bakery_id;
+        current_operation.progress = (integer_code) progress;
+        current_operation.description = status;
+        current_operation.stock = stock;
 
         this->closed_down = progress / 100 == 8;
 
