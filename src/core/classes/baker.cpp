@@ -29,6 +29,7 @@ void Baker::find_pollutants(_operation op) {
             QString text = "Se encontró " + pollutants.at(qrand() % pollutants.size());
             logbook.problem(op.bakery_id, (qrand() % (dough - 1)) + 1) << text;
             Popup* notification = new Popup("Contaminante", text);
+            notification->showPopup();
             QObject::connect(notification, SIGNAL(destroyed()), notification, SLOT(deleteLater()));
         }
     }

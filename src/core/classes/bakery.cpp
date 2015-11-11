@@ -205,7 +205,7 @@ void Bakery::distribute_bread(int _start) {
  */
 void Bakery::close_down(void) {
     Popup* p = new Popup("Panadería clausarada", bakery_name + " ha sido clausurada");
-    p->show();
+    p->showPopup();
     QObject::connect(p, SIGNAL(destroyed()), p, SLOT(deleteLater()));
 }
 
