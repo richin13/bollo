@@ -7,17 +7,24 @@
 
 
 #include <QtCore/qthread.h>
+#include "../operations.h"
 
 class Yeast : public QThread {
 Q_OBJECT
 private:
+    bool contaminated;
     bool on;
 public:
     Yeast();
+
     virtual void run() override;
 
+    bool isContaminated() const;
+
+    bool isOn() const;
+
 public slots:
-    void select_yeast(void);
+    void select_yeast(_operation);
 signals:
     void contaminated_yeast(void);
 };

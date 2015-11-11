@@ -4,6 +4,7 @@
 
 #include <QtCore/qdatetime.h>
 #include "yeast.h"
+#include "../../io/settings.h"
 
 Yeast::Yeast() {
     /*
@@ -30,25 +31,42 @@ Yeast::Yeast() {
      * sleep and wake it up when the mentioned signal is emitted
      *
      * */
+    contaminated = false;
 }
 
 void Yeast::run() {
-    QThread::run();
-    //It should read the 'probability of occur' of conta
-    int chance = 5;//to occur contaminated yeast
+    int chance = get_setting("Operations", "badyeast_probability").toInt();
     qsrand((uint) QTime::currentTime().msec());
 
-    while(on) {//Yes! It can be turned off.
-        int rnd = qrand() % 100 - chance;
+    if(on) {//Yes! It can be turned off.
+        int rnd = (qrand() % 100) - chance;
         if(rnd < 0) {
-            //contaminated yeast flag set on
+            contaminated = true;
         }
-        this->wait();
     }
 
 }
 
+void Yeast::select_yeast(_operation op) {
+    if(!(op.progress / 100)) {
+        //Mixing the ingredients. At this point we decide whether contaminate the yeast or not.
+        this->start();
+    } else if(op.progress / 100 == 1 && contaminated) {
+        qsrand((uint) QTime::currentTime().msec());
+        if(qrand() % 1) {
+            contaminated = false;
+            emit contaminated_yeast();
+        }
+    } else if(op.progress / 100 == 4 && contaminated) {
+        contaminated = false;
+        emit contaminated_yeast();
+    }
+}
 
-void Yeast::select_yeast(void) {
-    //this
+bool Yeast::isContaminated() const {
+    return contaminated;
+}
+
+bool Yeast::isOn() const {
+    return on;
 }

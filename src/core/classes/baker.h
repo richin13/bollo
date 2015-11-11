@@ -18,14 +18,20 @@ struct _operation;
 class Baker : public QThread {
 Q_OBJECT
 private:
+    QString bakery_name;
     QStringList pollutants;
 public:
-    Baker();
+    Baker(const QString _name) : bakery_name(_name) {
+        pollutants.append("levadura mala");
+        pollutants.append("bacterias");
+        pollutants.append("coliformes");
+        pollutants.append("otros contaminantes");
+    }
 
     virtual void run() override;
 public slots:
     void find_pollutants(_operation);
-    void start_clean(int);
+    void start_clean();
 signals:
     void clean_ready();
 };

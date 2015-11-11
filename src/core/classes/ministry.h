@@ -11,15 +11,27 @@
 #include "bakery.h"
 #include "../bollo.h"
 
-class Ministry : QThread {
+class Ministry : public QThread {
 private:
-    QVector<Bakery> bakeries;
-    //Bakeries to check
-    BolloApp* app;
     virtual void run() override;
 public:
     Ministry();
 };
 
+class Quarantine : public QThread {
+#define QUARANTINE_MSECS 120000
+private:
+    Bakery* bakery;
+
+    Quarantine() { }
+
+public:
+    Quarantine(Bakery* _bak) : bakery(_bak) {
+        logbook.general(bakery->get_id()) << "Entrando en cuarentena";
+    }
+
+protected:
+    virtual void run() override;
+};
 
 #endif //BOLLO_MINISTRY_H

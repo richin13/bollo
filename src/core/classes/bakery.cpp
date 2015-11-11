@@ -12,12 +12,13 @@ Bakery::Bakery(const Bakery& cpy) {
     bakery_stock = cpy.get_stock();
 
     current_operation = cpy.get_current_op();
-    closed_down = cpy.is_closed_down();
+    stopped = cpy.is_closed_down();
     baker = cpy.get_baker();
 }
 
 Bakery::~Bakery() {
     delete baker;
+    delete yeast;
 }
 
 unsigned int Bakery::get_id() const {
@@ -65,11 +66,11 @@ const _operation& Bakery::get_current_op() const {
 }
 
 bool Bakery::is_closed_down() const {
-    return closed_down;
+    return stopped;
 }
 
 void Bakery::set_closed_down(bool closed_down) {
-    Bakery::closed_down = closed_down;
+    Bakery::stopped = closed_down;
 }
 
 Baker* Bakery::get_baker() const {
@@ -105,7 +106,7 @@ void Bakery::ferment_dough(int _start, bool _final_f) {
         seconds = 20 + (qrand() % 10);
     }
     logbook.general(this->bakery_id) << current_operation.description;
-    for(int i = _start; i < 100; ++i) {
+    for(int i = _start; i < 100 && !stopped; ++i) {
         emit operation_changed(current_operation);
         this->current_operation.progress += 1;
         QThread::usleep((unsigned long) (seconds * 100000));
@@ -120,7 +121,7 @@ void Bakery::divide_dough(int _start) {
     logbook.general(this->bakery_id) << current_operation.description;
     int seconds = 15 + (qrand() % 10);
 
-    for(int i = _start; i < 100; ++i) {
+    for(int i = _start; i < 100 && !stopped; ++i) {
         emit operation_changed(current_operation);
         this->current_operation.progress += 1;
         QThread::usleep((unsigned long) (seconds * 100000));
@@ -135,7 +136,7 @@ void Bakery::shape_dough(int _start) {
     logbook.general(this->bakery_id) << current_operation.description;
     int seconds = 30 + (qrand() % 10);
 
-    for(int i = _start; i < 100; ++i) {
+    for(int i = _start; i < 100 && !stopped; ++i) {
         emit operation_changed(current_operation);
         this->current_operation.progress += 1;
         QThread::usleep((unsigned long) (seconds * 100000));
@@ -150,11 +151,16 @@ void Bakery::bake_bread(int _start) {
     logbook.general(this->bakery_id) << current_operation.description;
     int seconds = 35 + (qrand() % 10);
 
-    for(int i = _start; i < 100; ++i) {
+    for(int i = _start; i < 100 && !stopped; ++i) {
         emit operation_changed(current_operation);
         this->current_operation.progress += 1;
         QThread::usleep((unsigned long) (seconds * 100000));
     }
+
+    int dough = get_setting("Operations", "dough_per_batch").toInt();
+    bakery_stock = ((dough - (dough / 4)) + (qrand() % 30)) * 4;
+    current_operation.stock = bakery_stock;
+    LOG(INFO) << "New stock for bakery {" + to_string(bakery_id) + "}: " + to_string(bakery_stock);
 }
 
 void Bakery::sell_bread(int _start) {
@@ -165,7 +171,7 @@ void Bakery::sell_bread(int _start) {
     logbook.general(this->bakery_id) << current_operation.description;
     int seconds = 30 + (qrand() % 10);
 
-    for(int i = _start; i < 100; ++i) {
+    for(int i = _start; i < 100 && !stopped; ++i) {
         emit operation_changed(current_operation);
         this->current_operation.progress += 1;
 
@@ -186,7 +192,7 @@ void Bakery::distribute_bread(int _start) {
     logbook.general(this->bakery_id) << current_operation.description;
     int seconds = 20 + (qrand() % 10);
 
-    for(int i = _start; i < 100; ++i) {
+    for(int i = _start; i < 100 && !stopped; ++i) {
         emit operation_changed(current_operation);
         this->current_operation.progress += 1;
 
@@ -200,10 +206,70 @@ void Bakery::distribute_bread(int _start) {
 }
 
 /**
+ * @brief Use to stop the bread production at the bakery.
+ * @param forever Set this parameter to true to delete the whole process. False
+ * to pause it.
+ */
+void Bakery::stop_operations(bool f) {
+    stopped = true;
+    this->terminate();
+    this->wait();
+
+    if(f) {
+        current_operation.progress = 910;
+        current_operation.description = "Cerrada";
+        emit operation_changed(current_operation);
+    }
+
+    Popup* p = new Popup("Se detuvo", "Se ha detenido la producción de pan en " + bakery_name);
+    p->showPopup();
+    QObject::connect(p, SIGNAL(destroyed()), p, SLOT(deleteLater()));
+
+    LOG(DEBUG) << "Bakery [" + to_string(bakery_id) + "] stopped";
+}
+
+void Bakery::resume_operations(void) {
+    stopped = false;
+    this->start();
+    LOG(DEBUG) << "Bakery [" + to_string(bakery_id) + "] started";
+}
+
+
+void Bakery::bad_yeast(void) {
+    stopped = true;
+    this->terminate();
+    this->wait();
+
+    logbook.general(bakery_id) << "Intervención de levadura mala";
+
+    LOG(DEBUG) << "Bakery [" + to_string(bakery_id) + "] affected by bad yeast";
+
+    Popup* p = new Popup("Levadura mala", bakery_name +
+                                          " ha sufrido levadura mala");//FIXME: 'Are you serious?' You could say. I am, will I say.
+    p->showPopup();
+    QObject::connect(p, SIGNAL(destroyed()), p, SLOT(deleteLater()));
+
+    current_operation.progress = 0;
+    current_operation.description = "Levadura mala";
+
+    this->start();
+}
+
+/**
  * Method called by the Ministry of Health when it
  * detects a sanity problem in a bakery.
  */
 void Bakery::close_down(void) {
+    stopped = true;
+    this->terminate();
+    this->wait();
+
+    current_operation.progress = 905;
+    current_operation.description = "Clausarada por el ministerio de salud";
+    emit operation_changed(current_operation);
+
+    LOG(DEBUG) << "Bakery [" + to_string(bakery_id) + "] being closed down";
+
     Popup* p = new Popup("Panadería clausarada", bakery_name + " ha sido clausurada");
     p->showPopup();
     QObject::connect(p, SIGNAL(destroyed()), p, SLOT(deleteLater()));
@@ -214,20 +280,25 @@ void Bakery::close_down(void) {
  * functional one more time after a close down.
  */
 void Bakery::set_up(void) {
-    closed_down = false;
+    stopped = false;
+
+    /* The operation start from the beggining */
     current_operation.progress = 0;
     current_operation.description = "";
-    /* TODO: Should emmit a signal saying: "Hey, I am ready"
-        so we can notify, through the UI or, why not, an email to
-        the administrator.
-     */
-//    this->start();
+
+    LOG(DEBUG) << "Bakery [" + to_string(bakery_id) + "] being set up";
+
+    Popup* p = new Popup("Panadería lista", bakery_name + " ha salido de cuarentena.");
+    p->showPopup();
+    QObject::connect(p, SIGNAL(destroyed()), p, SLOT(deleteLater()));
+
+    this->start();
 }
 
 void Bakery::run() {
     bool first_time = true;
     qsrand((uint) QTime::currentTime().msec());
-    while(!closed_down) {
+    while(!stopped) {
         if(first_time) {
             first_time = false;
             switch(current_operation.progress / 100) {
@@ -247,6 +318,7 @@ void Bakery::run() {
                     sell_bread(current_operation.progress % 100);
                 case 7:
                     distribute_bread(current_operation.progress % 100);
+                    break;
                 default:
                     LOG(WARNING) << "Other than options established above would be unnexpected at this point";
             }
@@ -262,10 +334,6 @@ void Bakery::run() {
 
         ferment_dough(0, true);
 
-        int dough = get_setting("Operations", "dough_per_batch").toInt();
-        bakery_stock = ((dough - (dough / 4)) + (qrand() % 30)) * 4;
-        current_operation.stock = bakery_stock;
-        LOG(INFO) << "New stock for bakery {" + to_string(bakery_id) + "}: " + to_string(bakery_stock);
         bake_bread();
 
         sell_bread();

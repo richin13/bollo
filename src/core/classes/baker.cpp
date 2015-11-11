@@ -4,16 +4,14 @@
 
 #include "baker.h"
 
-Baker::Baker() {
-    pollutants.append("Levadura mala");
-    pollutants.append("Bacterias");
-    pollutants.append("Coliformes");
-    pollutants.append("Otros contaminantes");
-}
 
 void Baker::run() {
-    QTimer timer;
-    //TODO: should emmit a signal saying clean is ready
+    QThread::wait(5000);//Apparently, it just take 5 secs to clean all the mess.
+    Popup* p = new Popup("Limpieza lista", "El panadero ha terminado la limpieza de " + bakery_name);
+    p->showPopup();
+    QObject::connect(p, SIGNAL(destroyed()), p, SLOT(deleteLater()));
+
+    emit clean_ready();
 }
 
 void Baker::find_pollutants(_operation op) {
@@ -35,7 +33,6 @@ void Baker::find_pollutants(_operation op) {
     }
 }
 
-void Baker::start_clean(int dough) {
-    //TODO: Log this!
+void Baker::start_clean() {
     this->start();
 }

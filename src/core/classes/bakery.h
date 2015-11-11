@@ -14,6 +14,7 @@
 #include "../../ui/popup.h"
 #include "baker.h"
 #include "../operations.h"
+#include "yeast.h"
 
 class Bakery : public QThread {
 Q_OBJECT
@@ -27,9 +28,10 @@ private:
 
     /* Ops */
     _operation current_operation;
-    bool closed_down;
+    bool stopped;
 
     Baker* baker;//Baker thread
+    Yeast* yeast;//Bad yeast thread
 
     /* Logbook handler */
 //    Logger logbook;
@@ -49,17 +51,23 @@ public:
             bakery_city(city),
             bakery_stock(stock) {
 
-        baker = new Baker();
+        baker = new Baker(bakery_name);
+        yeast = new Yeast;
+
         current_operation.bakery_id = this->bakery_id;
         current_operation.progress = (integer_code) progress;
         current_operation.description = status;
         current_operation.stock = stock;
 
-        this->closed_down = progress / 100 == 8;
+        this->stopped = progress / 100 == 8;
 
-        connect(this, &Bakery::yeast, baker, &Baker::start_clean);//TODO: May fail
-        connect(this, &Bakery::operation_changed, baker, &Baker::find_pollutants);
-        connect(baker, &Baker::clean_ready, this, &Bakery::set_up);// this 1 too
+        QObject::connect(this, &Bakery::operation_changed, baker, &Baker::find_pollutants);
+        QObject::connect(baker, &Baker::clean_ready, this, &Bakery::set_up);
+
+        QObject::connect(this, &Bakery::operation_changed, yeast, &Yeast::select_yeast);
+        QObject::connect(yeast, &Yeast::contaminated_yeast, this, &Bakery::bad_yeast);
+
+
     }
 
 //Kinda unneeded
@@ -91,11 +99,19 @@ public:
 
     void run() Q_DECL_OVERRIDE;
 public slots:
+
+    /* Called by GUI buttons */
+    void stop_operations(bool f = false);
+    void resume_operations(void);
+
+    /* Called by Yeast thread */
+    void bad_yeast(void);
+
+    /* Called by Ministry of health and the like */
     void close_down(void);
     void set_up(void);
 signals:
     void operation_changed(const _operation&);
-    void yeast(int dough);
 };
 
 #endif //BOLLO_BAKERY_H
