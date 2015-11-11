@@ -1,5 +1,6 @@
 #include "popup.h"
 #include "ui_headers/ui_popup.h"
+#include "../logger/easylogging++.h"
 #include <QTimer>
 #include <QDesktopWidget>
 
@@ -18,6 +19,7 @@ Popup::Popup(QString title, QString msg, QWidget *parent) : QDialog(parent),
     // Show popup for 5 seconds and then close it.
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(close()));
+    connect(this, SIGNAL(close()), this, SLOT(deleteLater()));
     timer->start(TIME_MILIS);
 }
 
@@ -36,6 +38,7 @@ void Popup::showPopup() {
     // Show popup for 5 seconds and then close it.
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(close()));
+    connect(this, SIGNAL(destroyed()), this, SLOT(deleteLater()));
 
     show();
     timer->start(TIME_MILIS);
@@ -47,6 +50,6 @@ void Popup::close() {
 }
 
 Popup::~Popup() {
-
+    LOG(DEBUG) << "Deleting POPUP!";
     delete ui;
 }
