@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'mainwindowfo2713.ui'
+** Form generated from reading UI file 'mainwindowTi4882.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.4.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef MAINWINDOWFO2713_H
-#define MAINWINDOWFO2713_H
+#ifndef MAINWINDOWTI4882_H
+#define MAINWINDOWTI4882_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
@@ -20,7 +20,6 @@
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QProgressBar>
-#include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QVBoxLayout>
@@ -76,10 +75,7 @@ public:
     QLabel *title6;
     QLabel *title7;
     QLabel *title8;
-    QPushButton *incrementBtn;
     QLabel *statusLabel;
-    QLabel *timeRemainingLabel;
-    QLabel *elapsedTimeLabel;
     QLabel *createdBreadsLabel;
     QMenuBar *menubar;
     QMenu *menuFile;
@@ -358,21 +354,12 @@ public:
         title8->setMaximumSize(QSize(120, 16777215));
         title8->setAlignment(Qt::AlignCenter);
         title8->setWordWrap(true);
-        incrementBtn = new QPushButton(groupBox);
-        incrementBtn->setObjectName(QStringLiteral("incrementBtn"));
-        incrementBtn->setGeometry(QRect(20, 260, 80, 21));
         statusLabel = new QLabel(groupBox);
         statusLabel->setObjectName(QStringLiteral("statusLabel"));
         statusLabel->setGeometry(QRect(20, 180, 111, 16));
-        timeRemainingLabel = new QLabel(groupBox);
-        timeRemainingLabel->setObjectName(QStringLiteral("timeRemainingLabel"));
-        timeRemainingLabel->setGeometry(QRect(20, 200, 151, 16));
-        elapsedTimeLabel = new QLabel(groupBox);
-        elapsedTimeLabel->setObjectName(QStringLiteral("elapsedTimeLabel"));
-        elapsedTimeLabel->setGeometry(QRect(20, 220, 151, 20));
         createdBreadsLabel = new QLabel(groupBox);
         createdBreadsLabel->setObjectName(QStringLiteral("createdBreadsLabel"));
-        createdBreadsLabel->setGeometry(QRect(220, 180, 111, 16));
+        createdBreadsLabel->setGeometry(QRect(20, 200, 111, 16));
 
         verticalLayout->addWidget(groupBox);
 
@@ -520,10 +507,7 @@ public:
         title6->setText(QApplication::translate("MainWindow", "Horneo", 0));
         title7->setText(QApplication::translate("MainWindow", "Venta", 0));
         title8->setText(QApplication::translate("MainWindow", "Distribucion", 0));
-        incrementBtn->setText(QApplication::translate("MainWindow", "Increment", 0));
         statusLabel->setText(QApplication::translate("MainWindow", "Estado:  ----", 0));
-        timeRemainingLabel->setText(QApplication::translate("MainWindow", "Tiempo restante:       --:--", 0));
-        elapsedTimeLabel->setText(QApplication::translate("MainWindow", "Tiempo transcurrido:  --:--", 0));
         createdBreadsLabel->setText(QApplication::translate("MainWindow", "Panes creados: ----", 0));
         menuFile->setTitle(QApplication::translate("MainWindow", "File", 0));
         menuEdit->setTitle(QApplication::translate("MainWindow", "Edit", 0));
@@ -541,4 +525,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // MAINWINDOWFO2713_H
+#endif // MAINWINDOWTI4882_H

@@ -31,8 +31,11 @@ MenuActionManager::~MenuActionManager() {
 
 void MenuActionManager::showBakeryList() {
 
-    BakerySelect* bakeryList = new BakerySelect ();
-    bakeryList->show();
+    BakerySelect*bakerySelect = new BakerySelect ();
+    bakerySelect->show();
+
+    connect(bakerySelect, SIGNAL(bakerySelected(int)), mainWindow, SLOT(showDashBoard(int)));
+    connect(bakerySelect, &QDialog::finished, bakerySelect, &BakerySelect::deleteLater);
 }
 
 void MenuActionManager::showGraphs() {

@@ -54,8 +54,28 @@ void BakerySelect::addBakery(const Bakery& bakery) {
     button->setText(formatted);
     button->setIcon(QIcon(Ui::SHOP_ICON));
 
+    // Used to know which bakery is selected
+    button->setAccessibleName(QString::number(bakery.get_id()));
+
     ui->contents->layout()->addWidget(button);
     ui->contents->layout()->addWidget(createHorizontalLine());
+
+    connect(button, SIGNAL(clicked()), this, SLOT(bakeryButtonClicked()));
+}
+
+/**
+ * Custom slot which all the created bakeries buttons are connected to. Since this slot
+ * is ONLY used to the bakeries button the sender object is casted to a QCommandLinkButton
+ * (inherited by the bakeries button) then the button accessible name is extracted, in which
+ * the bakery id was encapsulated. Then a "bakerySelected" signal is emmited with the selected
+ * bakery id.
+ */
+void BakerySelect::bakeryButtonClicked() {
+
+    QCommandLinkButton* button = dynamic_cast<QCommandLinkButton*>(sender());
+
+    emit bakerySelected(button->accessibleName().toInt());
+    this->close();
 }
 
 QWidget* BakerySelect::createHorizontalLine() {

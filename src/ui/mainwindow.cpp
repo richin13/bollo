@@ -5,7 +5,6 @@
 #include "themes.h"
 #include "assets.h"
 #include "logindialog.h"
-#include "popup.h"
 
 #include <QDesktopWidget>
 #include <QMovie>
@@ -95,11 +94,17 @@ void MainWindow::showSelectPane() {
 void MainWindow::showDashBoard (int bakeryId) {
 
     LOG(DEBUG) << "Showing dashboard for bakery: " + std::to_string(bakeryId);
-    selectPane->deleteLater();
-    selectPane = nullptr;
+
+    // If select pane is being shown, remove it.
+    if (selectPane) {
+
+        selectPane->deleteLater();
+        selectPane = nullptr;
+    }
+
     widgetsEnabled(true);
 
-    //***Setting bakery operations****//
+    // Set bakery operations
     connectBakeriesOperations();
     change_bakery_displayed(bakeryId);
 }
@@ -198,28 +203,6 @@ void MainWindow::setChecked(Ui::Theme theme) {
         ui->actionThemeDark->setChecked(false);
         ui->actionThemeLight->setChecked(true);
     }
-}
-
-// USED FOR TESTING
-
-void MainWindow::on_firstFermentBar_valueChanged(int value) {
-
-//    // Set loading gif the first time the bar value has changed
-//    if(value == BAR_INCREMENT) {
-//
-//        setLoadingGif(ui->firstFermentIcon);
-//    }
-//
-//    if(value == MAX_BAR_VALUE) {
-//
-//        setDoneIcon(ui->firstFermentIcon);
-//        setLoadingGif(ui->doughDivisionIcon);
-//    }
-}
-
-void MainWindow::on_incrementBtn_clicked() {
-
-    ui->firstFermentBar->setValue(value += BAR_INCREMENT);
 }
 
 // TODO: Connect all the remaining widgets

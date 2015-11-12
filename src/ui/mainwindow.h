@@ -49,15 +49,13 @@ signals:
     void setProgBarValue(int);
 
 private slots:
-    void on_firstFermentBar_valueChanged(int value);
-    void on_incrementBtn_clicked();
     void exitApp();
     void showSelectPane();
-    void showDashBoard(int );
     void signOut();
 
 public slots:
     void progress_operation(_operation current_operation);
+    void showDashBoard(int );
 
 private:
     Ui::MainWindow* ui;
@@ -80,20 +78,20 @@ private:
     void connectBakeriesOperations();
 
 
-    //***********Bakery Variables*************//
+    // Bakery Variables
     int current_bakery_id;
     Bakery *current_bakery;
 
     void set_current_bakery(int bakery_id);
 
 
-    //*******Updating Methods************//
+    // Updating Methods
     void update_bakery_operations(_operation bakery_progress);
     void change_bakery_displayed(int bakery_id);
     void _update();
 
 
-    //*************Progress Bars Methods*************//
+    // Progress Bars Methods
     void setProgressBar(int progress);
 
     void set_mixIngredients_progress(int progress_value);
@@ -105,7 +103,7 @@ private:
     void set_onSaleBar(int progress_value);
     void set_shippedBar(int progress_value);
 
-    //*********Update Bakery Progress Operations Methods***********//
+    // Update Bakery Progress Operations Methods
     void update_from_mix_ingredients();
     void update_from_first_fermentation();
     void update_from_bread_distribution();
@@ -115,7 +113,7 @@ private:
     void update_from_forming_dough();
     void update_from_divide_dough();
 
-    //*******Cleaning Progress Bars Methods**********//
+    // Cleaning Progress Bars Methods
     void clean_mixIngredients_progress();
     void clean_firstFermentBar();
     void clean_doughDivisionBar();
