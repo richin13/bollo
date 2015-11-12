@@ -26,7 +26,10 @@ MainWindow::MainWindow(QWidget* parent) :
 MainWindow::~MainWindow() {
 
     delete ui;
-    delete loadingGif;
+
+    if(!loadingGif) {
+        delete loadingGif;
+    }
 }
 
 /**
@@ -177,20 +180,68 @@ void MainWindow::setDefaultIcon(QLabel* label) {
 
 
 /*
- * @brief MainWindow::setProblemIcon --> Sets the a icon or label corresponding
- * to a process of the bakery
+ * @brief MainWindow::setInactiveIcon --> Sets the icons or labels corresponding
+ * to the processes of the bakery, representing that the Bakery is 'Inactive'
  *
- * @param --> The label that will be set with a 'problem icon'
+ * @param --> The label that will be set with a 'inactive icon'
  *
- * --> This method is used every time a problem is found in a process, so it
- * --> shows in the GUI a icon indicating that a problem has ocurred in that process
+ * --> This method is used every time a Bakery is set as 'inactive', so it
+ * --> shows in the GUI all the icons indicating it
  *
  */
-void MainWindow::setProblemIcon(QLabel *label) {
+void MainWindow::setInactiveIcon(QLabel *label) {
 
     //missing implementation
 }
 
+
+/*
+ * @brief MainWindow::setClosedIcon --> Sets the icons or labels corresponding
+ * to the processes of the bakery, representing that the Bakery is 'Closed'
+ *
+ * @param --> The label that will be set with a 'closed icon'
+ *
+ * --> This method is used every time a Bakery is set as 'closed', so it
+ * --> shows in the GUI all the icons indicating it
+ *
+ */
+void MainWindow::setClosedIcon(QLabel *label) {
+
+    //missing implementation
+}
+
+
+/*
+ * @brief MainWindow::setClosureIcon --> Sets the icons or labels corresponding
+ * to the processes of the bakery, representing that the Bakery is 'Closure'
+ *
+ * @param --> The label that will be set with a 'closure icon'
+ *
+ * --> This method is used every time a Bakery is set as 'closure', so it
+ * --> shows in the GUI all the icons indicating it
+ *
+ */
+void MainWindow::setClosureIcon(QLabel *label) {
+
+    //missing implementation
+}
+
+
+
+/*
+ * @brief MainWindow::setQuarantineIcon --> Sets the icons or labels corresponding
+ * to the processes of the bakery, representing that the Bakery is 'Quarantine'
+ *
+ * @param --> The label that will be set with a 'quarantine icon'
+ *
+ * --> This method is used every time a Bakery is set as 'quarantine', so it
+ * --> shows in the GUI all the icons indicating it
+ *
+ */
+void MainWindow::setQuarantineIcon(QLabel *label) {
+
+    //missing implementation
+}
 
 /**
  * @brief MainWindow::setChecked Encapsulates theme action
@@ -325,12 +376,12 @@ void MainWindow::signOut() {
 void MainWindow::progress_operation(_operation current_operation) {
 
 
-    std::string request = "*** Current Bakery ID: " + to_string(this->current_bakery->get_id()) + " Request from Bakery with ID: " + to_string(current_operation.bakery_id) + " ***";
-    LOG(DEBUG) << request;
+//    std::string request = "*** Current Bakery ID: " + to_string(this->current_bakery->get_id()) + " Request from Bakery with ID: " + to_string(current_operation.bakery_id) + " ***";
+//    LOG(DEBUG) << request;
 
     if (this->current_bakery->get_id() == current_operation.bakery_id) {
 
-        LOG(DEBUG) << "Setting the GUI for Bakery with ID: " << to_string(this->current_bakery->get_id());
+//        LOG(DEBUG) << "Setting the GUI for Bakery with ID: " << to_string(this->current_bakery->get_id());
         setProgressBar(current_operation.progress);
     }
 }
@@ -351,7 +402,7 @@ void MainWindow::setProgressBar(int progress) {
 
     int progress_value = progress % 100;
 
-    LOG(DEBUG) << "Stage: " << to_string(progress / 100) << " ||| Progress Value: " << to_string(progress_value);
+//    LOG(DEBUG) << "Stage: " << to_string(progress / 100) << " ||| Progress Value: " << to_string(progress_value);
 
     switch(progress / 100) {
 
@@ -446,7 +497,7 @@ void MainWindow::set_doughDivisionBar(int progress_value) {
 
 void MainWindow::set_doughFormingBar(int progress_value) {
 
-    ui->doughFormingBar->setValue(MAX_BAR_VALUE);
+    ui->doughFormingBar->setValue(progress_value);
     ui->doughFormingBar->update();
 
     if(progress_value == MAX_BAR_VALUE) {
