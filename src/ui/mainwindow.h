@@ -71,23 +71,22 @@ private:
     void setLoadingGif (QLabel* );
     void setDoneIcon (QLabel* );
     void setDefaultIcon(QLabel* );
+    void setProblemIcon(QLabel* );
 
+    //*********Connects**********//
     void connectWidgets();
     void connectToolBarActions();
-
     void connectMenuActions();
-
     void connectBakeriesOperations();
 
 
     //***********Bakery Variables*************//
-    int current_bakery_id;
     Bakery *current_bakery;
 
     void set_current_bakery(int bakery_id);
 
 
-    //*******Updating Methods************//
+    //*****************Updating Methods**************************//
     void update_bakery_operations(_operation bakery_progress);
     void change_bakery_displayed(int bakery_id);
     void _update();

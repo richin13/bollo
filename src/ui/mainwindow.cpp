@@ -176,6 +176,22 @@ void MainWindow::setDefaultIcon(QLabel* label) {
 }
 
 
+/*
+ * @brief MainWindow::setProblemIcon --> Sets the a icon or label corresponding
+ * to a process of the bakery
+ *
+ * @param --> The label that will be set with a 'problem icon'
+ *
+ * --> This method is used every time a problem is found in a process, so it
+ * --> shows in the GUI a icon indicating that a problem has ocurred in that process
+ *
+ */
+void MainWindow::setProblemIcon(QLabel *label) {
+
+    //missing implementation
+}
+
+
 /**
  * @brief MainWindow::setChecked Encapsulates theme action
  * toggle box to be toggled by other objects.
@@ -308,8 +324,13 @@ void MainWindow::signOut() {
  */
 void MainWindow::progress_operation(_operation current_operation) {
 
+
+    std::string request = "*** Current Bakery ID: " + to_string(this->current_bakery->get_id()) + " Request from Bakery with ID: " + to_string(current_operation.bakery_id) + " ***";
+    LOG(DEBUG) << request;
+
     if (this->current_bakery->get_id() == current_operation.bakery_id) {
 
+        LOG(DEBUG) << "Setting the GUI for Bakery with ID: " << to_string(this->current_bakery->get_id());
         setProgressBar(current_operation.progress);
     }
 }
@@ -329,6 +350,9 @@ void MainWindow::progress_operation(_operation current_operation) {
 void MainWindow::setProgressBar(int progress) {
 
     int progress_value = progress % 100;
+
+    LOG(DEBUG) << "Stage: " << to_string(progress / 100) << " ||| Progress Value: " << to_string(progress_value);
+
     switch(progress / 100) {
 
         case 0: set_mixIngredients_progress(progress_value);
@@ -365,13 +389,13 @@ void MainWindow::setProgressBar(int progress) {
             clean_all();
             break;
 
-        case 10: //display message CERRADA
-            set_closed_bakery();
+        case 10: //display message EN CUARENTENA
+            set_quarantine_bakery();
             clean_all();
             break;
 
-        case 11: //display message EN CUARENTENA
-            set_quarantine_bakery();
+        case 11: //display message CERRADA
+            set_closed_bakery();
             clean_all();
             break;
 
@@ -538,6 +562,26 @@ void MainWindow::update_bakery_operations(_operation bakery_progress) {
             set_shippedBar(progress_value);
             break;
 
+        case 8: //display message INACTIVA
+            set_inactive_bakery();
+            clean_all();
+            break;
+
+        case 9: //display message CLAUSURADA
+            set_closure_bakery();
+            clean_all();
+            break;
+
+        case 10: //display message EN CUARENTENA
+            set_quarantine_bakery();
+            clean_all();
+            break;
+
+        case 11: //display message CERRADA
+            set_closed_bakery();
+            clean_all();
+            break;
+
         default: //progress out of the process range
             break;
     }
@@ -700,11 +744,10 @@ void MainWindow::clean_all() {
  */
 void MainWindow::change_bakery_displayed(int bakery_id) {
 
-    this->current_bakery_id = bakery_id;
     set_current_bakery(bakery_id);
 
     LOG(DEBUG) << "Starting the update of the GUI for: " << this->current_bakery->get_name().toStdString()
-    << "ID: " << to_string(bakery_id);
+    << " with the ID: " << to_string(bakery_id);
     update_bakery_operations(this->current_bakery->get_current_op());
 }
 
