@@ -72,7 +72,7 @@ public slots:
 
             if(id) {
                 if(LogbookProblem* p = dynamic_cast<LogbookProblem*>(_entry)) {
-                    LOG(DEBUG) << "Sending new problem logbook entry";
+//                    LOG(DEBUG) << "Sending new problem logbook entry";
                     query.prepare(QStringLiteral("INSERT INTO bollo_logbook_problem VALUES(:1, :2)"));
                     query.bindValue(":1", QVariant(id));
                     query.bindValue(":2", QVariant(p->get_dough()));
@@ -80,7 +80,7 @@ public slots:
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "OCDFAInspection"
                 } else {//Ignore the stupid CLion warning about unreachable code
-                    LOG(DEBUG) << "Sending new event logbook entry";
+//                    LOG(DEBUG) << "Sending new event logbook entry";
                     query.prepare(QStringLiteral("INSERT INTO bollo_logbook_general VALUES(:1)"));
                     query.bindValue(":1", QVariant(id));
                 }
@@ -88,8 +88,6 @@ public slots:
                 delete _entry;
                 if(!query.exec()) {
                     LOG(WARNING) << "Failed to execute query -> " << query.lastError().text().toStdString();
-                } else {
-                    LOG(INFO) << "Sent logbook entry!";
                 }
 
             } else {
