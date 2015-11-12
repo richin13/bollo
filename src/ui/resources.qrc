@@ -1,5 +1,9 @@
 <RCC>
   <qresource prefix="/images">
+    <file>assets/shutDown.png</file>
+    <file>assets/quarantine.png</file>
+    <file>assets/idle.png</file>
+    <file>assets/closed.png</file>
     <file>assets/hbread.png</file>
     <file>assets/check-icon.png</file>
     <file>assets/log-icon.png</file>

@@ -678,19 +678,6 @@ QProgressBar::chunk {
         <bool>true</bool>
        </property>
       </widget>
-      <widget class="QPushButton" name="incrementBtn">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>260</y>
-         <width>80</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Increment</string>
-       </property>
-      </widget>
       <widget class="QLabel" name="statusLabel">
        <property name="geometry">
         <rect>
@@ -704,37 +691,11 @@ QProgressBar::chunk {
         <string>Estado:  ----</string>
        </property>
       </widget>
-      <widget class="QLabel" name="timeRemainingLabel">
+      <widget class="QLabel" name="createdBreadsLabel">
        <property name="geometry">
         <rect>
          <x>20</x>
          <y>200</y>
-         <width>151</width>
-         <height>16</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Tiempo restante:       --:--</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="elapsedTimeLabel">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>220</y>
-         <width>151</width>
-         <height>20</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Tiempo transcurrido:  --:--</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="createdBreadsLabel">
-       <property name="geometry">
-        <rect>
-         <x>220</x>
-         <y>180</y>
          <width>111</width>
          <height>16</height>
         </rect>

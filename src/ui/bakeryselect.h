@@ -25,6 +25,13 @@ private:
 
     void addBakery(const Bakery&);
     QWidget* createHorizontalLine();
+
+signals:
+    void bakerySelected(int);
+
+private slots:
+    void bakeryButtonClicked();
+
 };
 
 #endif // BAKERYSELECT_H
