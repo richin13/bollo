@@ -16,6 +16,8 @@
 #include "../operations.h"
 #include "yeast.h"
 
+#define LAPSE_TIME 100000
+
 class Bakery : public QThread {
 Q_OBJECT
 private:

@@ -93,7 +93,7 @@ void Bakery::mix_ingredients(int _start) {
     for(int i = _start; i < 100; ++i) {
         emit operation_changed(current_operation);
         this->current_operation.progress += 1;
-        QThread::usleep((unsigned long) (seconds * 100000));
+        QThread::usleep((unsigned long) (seconds * LAPSE_TIME));
     }
 }
 
@@ -114,7 +114,7 @@ void Bakery::ferment_dough(int _start, bool _final_f) {
     for(int i = _start; i < 100 && !stopped; ++i) {
         emit operation_changed(current_operation);
         this->current_operation.progress += 1;
-        QThread::usleep((unsigned long) (seconds * 100000));
+        QThread::usleep((unsigned long) (seconds * LAPSE_TIME));
     }
 }
 
@@ -129,7 +129,7 @@ void Bakery::divide_dough(int _start) {
     for(int i = _start; i < 100 && !stopped; ++i) {
         emit operation_changed(current_operation);
         this->current_operation.progress += 1;
-        QThread::usleep((unsigned long) (seconds * 100000));
+        QThread::usleep((unsigned long) (seconds * LAPSE_TIME));
     }
 }
 
@@ -144,7 +144,7 @@ void Bakery::shape_dough(int _start) {
     for(int i = _start; i < 100 && !stopped; ++i) {
         emit operation_changed(current_operation);
         this->current_operation.progress += 1;
-        QThread::usleep((unsigned long) (seconds * 100000));
+        QThread::usleep((unsigned long) (seconds * LAPSE_TIME));
     }
 }
 
@@ -159,7 +159,7 @@ void Bakery::bake_bread(int _start) {
     for(int i = _start; i < 100 && !stopped; ++i) {
         emit operation_changed(current_operation);
         this->current_operation.progress += 1;
-        QThread::usleep((unsigned long) (seconds * 100000));
+        QThread::usleep((unsigned long) (seconds * LAPSE_TIME));
     }
 
     int dough = get_setting("Operations", "dough_per_batch").toInt();
@@ -185,7 +185,7 @@ void Bakery::sell_bread(int _start) {
             current_operation.stock = bakery_stock;
         }
 
-        QThread::usleep((unsigned long) (seconds * 100000));
+        QThread::usleep((unsigned long) (seconds * LAPSE_TIME));
     }
 }
 
@@ -206,7 +206,7 @@ void Bakery::distribute_bread(int _start) {
             current_operation.stock = bakery_stock;
         }
 
-        QThread::usleep((unsigned long) (seconds * 100000));
+        QThread::usleep((unsigned long) (seconds * LAPSE_TIME));
     }
 }
 
