@@ -35,6 +35,7 @@ void PreferencesPanel::fillSettingsValue() {
     ui->pollutantsProbabilitySP->setValue(get_setting("Operations", "poll_probability").toInt());
     ui->badDoughCB->setChecked(true);
     ui->badDoughProbabilitySP->setValue(get_setting("Operations", "badyeast_probability").toInt());
+    ui->ministryRaidProbabilitySP->setValue(get_setting("Operations", "raid_probability").toInt());
 }
 
 /**
@@ -119,15 +120,15 @@ void PreferencesPanel::writePreferencesToFile() {
         int poll_prob = ui->pollutantsProbabilitySP->value();
         int bad_yeast_prob = ui->badDoughProbabilitySP->value();
 
-        // Use me bitch
+        // Use me bitch | I already did
         int ministry_raid_prob = ui->ministryRaidProbabilitySP->value();
 
         set_setting("Operations", QStringLiteral("average_production"), QVariant(averageBread));
         set_setting("Operations", QStringLiteral("dough_per_batch"), QVariant(doughPerBatch));
         set_setting("Operations", QStringLiteral("poll_probability"), QVariant(poll_prob));
         set_setting("Operations", QStringLiteral("badyeast_probability"), QVariant(bad_yeast_prob));
+        set_setting("Operations", QStringLiteral("raid_probability"), QVariant(ministry_raid_prob));
 
-        //TODO: Missing 'Ministry of health raid' probability
         LOG(DEBUG) << "Updated operations settings";
     }
 }
