@@ -6,7 +6,7 @@
 
 
 BolloApp::BolloApp() {
-    this->updater = new StatusUpdater();
+    updater = new StatusUpdater();
     //TODO: Add a splash screen to make the whole process more user-friendly
 
     /* The app settings stored at home directory */
@@ -30,10 +30,13 @@ BolloApp::~BolloApp() {
     unsigned long size = bakeries.size();
 
     for(unsigned long i = 0; i < size; ++i) {
+        Bakery* b = bakeries.at(i);
+        QObject::connect(b, SIGNAL(finished()), b, SLOT(deleteLater()));
         bakeries.at(i)->terminate();
         bakeries.at(i)->wait();
-        delete bakeries.at(i);
     }
+
+    delete ministry;
 }
 
 void BolloApp::init_database(void) {
@@ -91,7 +94,15 @@ void BolloApp::start_bakeries() {
     for(unsigned long i = 0; i < size; ++i) {
         bakeries.at(i)->start();
     }
-    LOG(DEBUG) << "Started bakeries";
+
+    init_ministry();
+}
+
+
+void BolloApp::init_ministry() {
+    LOG(INFO) << "Starting ministry thread";
+    ministry = new Ministry;
+    ministry->start();
 }
 
 void BolloApp::init_updater() {

@@ -28,10 +28,13 @@
 #include "../io/http.h"
 #include "../io/handler.h"
 #include "../io/settings.h"
+#include "classes/ministry.h"
 
 class StatusUpdater;
 
 class Bakery;
+
+class Ministry;
 
 class BolloApp : public QObject {
 Q_OBJECT
@@ -50,6 +53,8 @@ private:
 
     void start_bakeries();
 
+    void init_ministry();
+
     void init_updater();
 
 public:
@@ -64,6 +69,9 @@ public:
 
     /* Status updater */
     StatusUpdater* updater;
+
+    /* Ministry of health */
+    Ministry* ministry;
 
     QString windowTittle();
 

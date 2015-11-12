@@ -10,6 +10,11 @@
 #include <QtCore/qvector.h>
 #include "bakery.h"
 #include "../bollo.h"
+#include "../operations.h"
+
+#define QUARANTINE_MSECS 12000
+
+class Bakery;
 
 class Ministry : public QThread {
 private:
@@ -19,7 +24,7 @@ public:
 };
 
 class Quarantine : public QThread {
-#define QUARANTINE_MSECS 120000
+Q_OBJECT
 private:
     Bakery* bakery;
 
@@ -27,8 +32,14 @@ private:
 
 public:
     Quarantine(Bakery* _bak) : bakery(_bak) {
-        logbook.general(bakery->get_id()) << "Entrando en cuarentena";
+
     }
+
+public slots:
+    void notify_exit_quarantine();
+
+signals:
+    void exiting_quarantine();
 
 protected:
     virtual void run() override;
