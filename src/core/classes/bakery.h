@@ -83,6 +83,7 @@ public:
     void set_stock(int);
 
     const _operation& get_current_op() const;
+    void set_current_op(const _operation&);
     bool is_closed_down() const;
     void set_closed_down(bool);
     Baker* get_baker() const;
@@ -112,6 +113,7 @@ public slots:
     void set_up(void);
 signals:
     void operation_changed(const _operation&);
+    void enter_quarantine(Bakery*);
 };
 
 #endif //BOLLO_BAKERY_H

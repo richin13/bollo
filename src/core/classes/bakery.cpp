@@ -65,6 +65,11 @@ const _operation& Bakery::get_current_op() const {
     return current_operation;
 }
 
+
+void Bakery::set_current_op(const _operation& operation) {
+    this->current_operation = operation;
+}
+
 bool Bakery::is_closed_down() const {
     return stopped;
 }
@@ -175,8 +180,8 @@ void Bakery::sell_bread(int _start) {
         emit operation_changed(current_operation);
         this->current_operation.progress += 1;
 
-        if(bakery_stock - 1 > 0) {
-            bakery_stock += (qrand() % 1) - 1;
+        if(bakery_stock - 1 > 0 && qrand() % 2) {
+            bakery_stock += (qrand() % 2) - 1;
             current_operation.stock = bakery_stock;
         }
 
@@ -196,8 +201,8 @@ void Bakery::distribute_bread(int _start) {
         emit operation_changed(current_operation);
         this->current_operation.progress += 1;
 
-        if(bakery_stock - 1 > 0) {
-            bakery_stock += (qrand() % 1) - 1;
+        if(bakery_stock - 1 > 0 && qrand() % 2) {
+            bakery_stock += (qrand() % 2) - 1;
             current_operation.stock = bakery_stock;
         }
 
@@ -216,7 +221,7 @@ void Bakery::stop_operations(bool f) {
     this->wait();
 
     if(f) {
-        current_operation.progress = 910;
+        current_operation.progress = 1100;
         current_operation.description = "Cerrada";
         emit operation_changed(current_operation);
     }
@@ -264,7 +269,7 @@ void Bakery::close_down(void) {
     this->terminate();
     this->wait();
 
-    current_operation.progress = 905;
+    current_operation.progress = 900;
     current_operation.description = "Clausarada por el ministerio de salud";
     emit operation_changed(current_operation);
 
@@ -297,7 +302,6 @@ void Bakery::set_up(void) {
 
 void Bakery::run() {
     bool first_time = true;
-    qsrand((uint) QTime::currentTime().msec());
     while(!stopped) {
         if(first_time) {
             first_time = false;
@@ -319,25 +323,38 @@ void Bakery::run() {
                 case 7:
                     distribute_bread(current_operation.progress % 100);
                     break;
+                case 8:
+                    stopped = true;
+                    break;
+                case 9:
+                case 10: {
+                    stopped = true;
+                    Quarantine* quarantine = new Quarantine(this);
+                    QObject::connect(quarantine, SIGNAL(exiting_quarantine()), quarantine, SLOT(deleteLater()));
+                    quarantine->start();
+                    break;
+                }
                 default:
                     LOG(WARNING) << "Other than options established above would be unnexpected at this point";
             }
+        } else {
+            mix_ingredients();
+
+            ferment_dough();
+
+            divide_dough();
+
+            shape_dough();
+
+            ferment_dough(0, true);
+
+            bake_bread();
+
+            sell_bread();
+
+            distribute_bread();
         }
 
-        mix_ingredients();
 
-        ferment_dough();
-
-        divide_dough();
-
-        shape_dough();
-
-        ferment_dough(0, true);
-
-        bake_bread();
-
-        sell_bread();
-
-        distribute_bread();
     }
 }

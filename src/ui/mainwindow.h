@@ -69,12 +69,12 @@ private:
     void setLoadingGif (QLabel* );
     void setDoneIcon (QLabel* );
     void setDefaultIcon(QLabel* );
+    void setProblemIcon(QLabel* );
 
+    //*********Connects**********//
     void connectWidgets();
     void connectToolBarActions();
-
     void connectMenuActions();
-
     void connectBakeriesOperations();
 
 
@@ -83,7 +83,6 @@ private:
     Bakery *current_bakery;
 
     void set_current_bakery(int bakery_id);
-
 
     // Updating Methods
     void update_bakery_operations(_operation bakery_progress);
@@ -124,6 +123,14 @@ private:
     void clean_shippedBar();
 
     void clean_all();
+
+    //****Bakery Status*****//
+    void set_inactive_bakery();
+    void set_closure_bakery();
+    void set_closed_bakery();
+    void set_quarantine_bakery();
+
+
 };
 
 #endif // MAINWINDOW_H

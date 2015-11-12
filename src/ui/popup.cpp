@@ -19,7 +19,7 @@ Popup::Popup(QString title, QString msg, QWidget *parent) : QDialog(parent),
     // Show popup for 5 seconds and then close it.
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(close()));
-    connect(this, SIGNAL(close()), this, SLOT(deleteLater()));
+    connect(this, SIGNAL(destroyed()), this, SLOT(deleteLater()));
     timer->start(TIME_MILIS);
 }
 

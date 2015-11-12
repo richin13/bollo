@@ -18,11 +18,9 @@ void init_settings(void) {
             LOG(INFO) << "Settings file not found, creating default...";
             load_default_settings();
             LOG(INFO) << "Settings file created";
-        } else {
-            LOG(INFO) << "Settings file found";
-            load_settings();
         }
     }
+    load_settings();
 }
 
 void load_default_settings(void) {
@@ -54,6 +52,7 @@ void load_default_settings(void) {
     bollo_settings.setValue(QStringLiteral("dough_per_batch"), QVariant(15));
     bollo_settings.setValue(QStringLiteral("poll_probability"), QVariant(10));
     bollo_settings.setValue(QStringLiteral("badyeast_probability"), QVariant(10));//Man, this is hard
+    bollo_settings.setValue(QStringLiteral("raid_probability"), QVariant(2));
     bollo_settings.endGroup();
 }
 
