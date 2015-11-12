@@ -69,7 +69,10 @@ private:
     void setLoadingGif (QLabel* );
     void setDoneIcon (QLabel* );
     void setDefaultIcon(QLabel* );
-    void setProblemIcon(QLabel* );
+    void setClosedIcon(QLabel* );
+    void setClosureIcon(QLabel* );
+    void setInactiveIcon(QLabel* );
+    void setQuarantineIcon(QLabel* );
 
     //*********Connects**********//
     void connectWidgets();
