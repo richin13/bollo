@@ -17,7 +17,7 @@ int main(int argc, char** argv) {
     init_log();
 
     LOG(INFO) << "Application starting";
-    BolloApp& a = BolloApp::get();
+    BolloApp::get();
 
     MainWindow w;
 
