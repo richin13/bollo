@@ -41,7 +41,7 @@ public:
 
         query.prepare(
                 QStringLiteral("INSERT INTO bollo_logbook "
-                                       "VALUES(DEFAULT, :1, NOW() at time zone 'utc-6', :2) "
+                                       "VALUES(DEFAULT, :1, DEFAULT, :2) "
                                        "RETURNING logbook_id"));
 
         query.bindValue(":1", QVariant(d));
