@@ -196,7 +196,7 @@ void MainWindow::setDefaultIcon(QLabel* label) {
  */
 void MainWindow::setInactiveIcon(QLabel *label) {
 
-    //missing implementation
+    label->setPixmap(QPixmap(Ui::IDLE_ICON));
 }
 
 
@@ -212,7 +212,7 @@ void MainWindow::setInactiveIcon(QLabel *label) {
  */
 void MainWindow::setClosedIcon(QLabel *label) {
 
-    //missing implementation
+    label->setPixmap(QPixmap(Ui::CLOSED_ICON));
 }
 
 
@@ -228,7 +228,7 @@ void MainWindow::setClosedIcon(QLabel *label) {
  */
 void MainWindow::setClosureIcon(QLabel *label) {
 
-    //missing implementation
+    label->setPixmap(QPixmap(Ui::SHUT_DOWN));
 }
 
 
@@ -245,7 +245,8 @@ void MainWindow::setClosureIcon(QLabel *label) {
  */
 void MainWindow::setQuarantineIcon(QLabel *label) {
 
-    //missing implementation
+    LOG(DEBUG) << "Setting quarantine icon***************";
+    label->setPixmap(QPixmap(Ui::QUARANTINE_ICON));
 }
 
 /**
@@ -385,7 +386,7 @@ void MainWindow::setProgressBar(int progress) {
 
     int progress_value = progress % 100;
 
-//    LOG(DEBUG) << "Stage: " << to_string(progress / 100) << " ||| Progress Value: " << to_string(progress_value);
+    LOG(DEBUG) << "Stage: " << to_string(progress / 100) << " ||| Progress Value: " << to_string(progress_value);
 
     switch(progress / 100) {
 
@@ -414,23 +415,23 @@ void MainWindow::setProgressBar(int progress) {
             break;
 
         case 8: //display message INACTIVA
-            set_inactive_bakery();
             clean_all();
+            set_inactive_bakery();
             break;
 
         case 9: //display message CLAUSURADA
-            set_closure_bakery();
             clean_all();
+            set_closure_bakery();
             break;
 
         case 10: //display message EN CUARENTENA
-            set_quarantine_bakery();
             clean_all();
+            set_quarantine_bakery();
             break;
 
         case 11: //display message CERRADA
-            set_closed_bakery();
             clean_all();
+            set_closed_bakery();
             break;
 
         default: //progress out of the process range
@@ -597,23 +598,23 @@ void MainWindow::update_bakery_operations(_operation bakery_progress) {
             break;
 
         case 8: //display message INACTIVA
-            set_inactive_bakery();
             clean_all();
+            set_inactive_bakery();
             break;
 
         case 9: //display message CLAUSURADA
-            set_closure_bakery();
             clean_all();
+            set_closure_bakery();
             break;
 
         case 10: //display message EN CUARENTENA
-            set_quarantine_bakery();
             clean_all();
+            set_quarantine_bakery();
             break;
 
         case 11: //display message CERRADA
-            set_closed_bakery();
             clean_all();
+            set_closed_bakery();
             break;
 
         default: //progress out of the process range
@@ -850,16 +851,48 @@ void MainWindow::_update() {
 
 void MainWindow::set_inactive_bakery() {
 
+    setInactiveIcon(ui->mixingIcon);
+    setInactiveIcon(ui->firstFermentIcon);
+    setInactiveIcon(ui->doughDivisionIcon);
+    setInactiveIcon(ui->doughFormingIcon);
+    setInactiveIcon(ui->finalFermentIcon);
+    setInactiveIcon(ui->bakingIcon);
+    setInactiveIcon(ui->onSaleIcon);
+    setInactiveIcon(ui->shippedIcon);
 }
 
 void MainWindow::set_closure_bakery() {
 
+    setClosureIcon(ui->mixingIcon);
+    setClosureIcon(ui->firstFermentIcon);
+    setClosureIcon(ui->doughDivisionIcon);
+    setClosureIcon(ui->doughFormingIcon);
+    setClosureIcon(ui->finalFermentIcon);
+    setClosureIcon(ui->bakingIcon);
+    setClosureIcon(ui->onSaleIcon);
+    setClosureIcon(ui->shippedIcon);
 }
 
 void MainWindow::set_closed_bakery() {
 
+    setClosedIcon(ui->mixingIcon);
+    setClosedIcon(ui->firstFermentIcon);
+    setClosedIcon(ui->doughDivisionIcon);
+    setClosedIcon(ui->doughFormingIcon);
+    setClosedIcon(ui->finalFermentIcon);
+    setClosedIcon(ui->bakingIcon);
+    setClosedIcon(ui->onSaleIcon);
+    setClosedIcon(ui->shippedIcon);
 }
 
 void MainWindow::set_quarantine_bakery() {
 
+    setQuarantineIcon(ui->mixingIcon);
+    setQuarantineIcon(ui->firstFermentIcon);
+    setQuarantineIcon(ui->doughDivisionIcon);
+    setQuarantineIcon(ui->doughFormingIcon);
+    setQuarantineIcon(ui->finalFermentIcon);
+    setQuarantineIcon(ui->bakingIcon);
+    setQuarantineIcon(ui->onSaleIcon);
+    setQuarantineIcon(ui->shippedIcon);
 }
