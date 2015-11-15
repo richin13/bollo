@@ -245,7 +245,6 @@ void MainWindow::setClosureIcon(QLabel *label) {
  */
 void MainWindow::setQuarantineIcon(QLabel *label) {
 
-    LOG(DEBUG) << "Setting quarantine icon***************";
     label->setPixmap(QPixmap(Ui::QUARANTINE_ICON));
 }
 
@@ -386,7 +385,7 @@ void MainWindow::setProgressBar(int progress) {
 
     int progress_value = progress % 100;
 
-    LOG(DEBUG) << "Stage: " << to_string(progress / 100) << " ||| Progress Value: " << to_string(progress_value);
+    //LOG(DEBUG) << "Stage: " << to_string(progress / 100) << " ||| Progress Value: " << to_string(progress_value);
 
     switch(progress / 100) {
 

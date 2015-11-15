@@ -354,6 +354,7 @@ void Bakery::run() {
 
             distribute_bread();
         }
+        QThread::sleep(4);
 
 
     }

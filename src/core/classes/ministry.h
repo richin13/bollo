@@ -12,7 +12,7 @@
 #include "../bollo.h"
 #include "../operations.h"
 
-#define QUARANTINE_MSECS 12000
+#define QUARANTINE_MSECS 30000
 
 class Bakery;
 

@@ -45,7 +45,7 @@ void Quarantine::run() {
     emit bakery->operation_changed(bakery->get_current_op());//Watch out fah dis
 
     logbook.general(bakery->get_id()) << "Entrando en cuarentena";
-    QThread::sleep(13);
+    QThread::sleep(40);
 
 //    QTimer::singleShot(QUARANTINE_MSECS, bakery->get_baker(), SLOT(start_clean()));
 //    QTimer::singleShot(QUARANTINE_MSECS, this, SLOT(notify_exit_quarantine()));
