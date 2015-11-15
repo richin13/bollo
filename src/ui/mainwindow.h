@@ -6,6 +6,7 @@
 #include <QtWidgets/QLabel>
 
 #include "selectpane.h"
+#include "menuactionmanager.h"
 
 namespace Ui {
 
@@ -133,6 +134,7 @@ private:
     void set_closed_bakery();
     void set_quarantine_bakery();
 
+    friend class MenuActionManager;
 
 };
 

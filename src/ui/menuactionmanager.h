@@ -6,6 +6,8 @@
 
 #define HELP_URL "http://bollo-server.bitnamiapp.com/bollo_web/?faqs"
 
+class MainWindow;
+
 class MenuActionManager : public QObject {
 
     Q_OBJECT

@@ -3,7 +3,6 @@
 #include <QDesktopServices>
 
 #include "mainwindow.h"
-#include "menuactionmanager.h"
 #include "telegramcpanel.h"
 #include "themes.h"
 #include "bakeryselect.h"
@@ -51,17 +50,17 @@ void MenuActionManager::logBrowser() {
 }
 
 void MenuActionManager::continueProcess() {
-
+    mainWindow->current_bakery->resume_operations();
 
 }
 
 void MenuActionManager::pauseProcess() {
-
+    mainWindow->current_bakery->stop_operations();
 
 }
 
 void MenuActionManager::cancelProcess() {
-
+    mainWindow->current_bakery->stop_operations(true);
 
 }
 
