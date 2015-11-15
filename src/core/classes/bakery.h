@@ -15,8 +15,9 @@
 #include "baker.h"
 #include "../operations.h"
 #include "yeast.h"
+#include "../../io/production_updater.h"
 
-#define LAPSE_TIME 100000
+#define LAPSE_TIME 90000
 
 class Bakery : public QThread {
 Q_OBJECT
@@ -35,8 +36,7 @@ private:
     Baker* baker;//Baker thread
     Yeast* yeast;//Bad yeast thread
 
-    /* Logbook handler */
-//    Logger logbook;
+    StockUpdater* updater;
 public:
     Bakery(){}
     Bakery(const Bakery&);
@@ -55,13 +55,14 @@ public:
 
         baker = new Baker(bakery_name);
         yeast = new Yeast;
+        updater = new StockUpdater;
 
         current_operation.bakery_id = this->bakery_id;
         current_operation.progress = (integer_code) progress;
         current_operation.description = status;
         current_operation.stock = stock;
 
-        this->stopped = progress / 100 == 8;
+        this->stopped = progress / 100 == 8 || progress / 100 == 11;
 
         QObject::connect(this, &Bakery::operation_changed, baker, &Baker::find_pollutants);
         QObject::connect(baker, &Baker::clean_ready, this, &Bakery::set_up);
@@ -69,25 +70,18 @@ public:
         QObject::connect(this, &Bakery::operation_changed, yeast, &Yeast::select_yeast);
         QObject::connect(yeast, &Yeast::contaminated_yeast, this, &Bakery::bad_yeast);
 
-
+        QObject::connect(this, &Bakery::updated_stock, updater, &StockUpdater::updater);
     }
 
-//Kinda unneeded
     unsigned int get_id() const;
-    void set_id(unsigned int);
     const QString& get_name() const;
-    void set_name(const QString&);
     QString get_state() const;
-    void set_state(QString);
     QString get_city() const;
-    void set_city(const QString&);
     int get_stock() const;
-    void set_stock(int);
 
     const _operation& get_current_op() const;
     void set_current_op(const _operation&);
     bool is_closed_down() const;
-    void set_closed_down(bool);
     Baker* get_baker() const;
 
 
@@ -114,6 +108,7 @@ public slots:
     void close_down(void);
     void set_up(void);
 signals:
+    void updated_stock(int, int);
     void operation_changed(const _operation&);
     void enter_quarantine(Bakery*);
 };

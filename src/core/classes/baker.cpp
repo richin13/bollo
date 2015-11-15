@@ -6,8 +6,9 @@
 
 
 void Baker::run() {
-    QThread::sleep(5);//Apparently, it just take 5 secs to clean all the mess.
-    showPopup("Limpieza lista", "El panadero ha terminado la limpieza de " + bakery_name.toStdString());
+    QThread::sleep(10);
+
+    showInfoPopup("Liempieza lista!", "El panadero ha terminado la limpieza de " + bakery_name.toStdString());
 
     emit clean_ready();
     LOG(DEBUG) << "Finished clean";
@@ -23,9 +24,10 @@ void Baker::find_pollutants(_operation op) {
 
         if(rnd < 0) {
             LOG(INFO) << "Found a pollutant in bakery " + to_string(op.bakery_id);
-            QString text = "Se encontró " + pollutants.at(qrand() % pollutants.size());
+            QString text = "Se encontró " + pollutants.at(qrand() % pollutants.size()) + " en panadería " + bakery_name;
             logbook.problem(op.bakery_id, (qrand() % (dough - 1)) + 1) << text;
-            showPopup("Contaminante", text.toStdString());
+
+            showInfoPopup("Contaminante", text.toStdString());
         }
     }
 }

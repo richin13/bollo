@@ -4,6 +4,7 @@
 
 #include "bakery.h"
 
+
 Bakery::Bakery(const Bakery& cpy) {
     bakery_id = cpy.get_id();
     bakery_name = cpy.get_name();
@@ -19,46 +20,27 @@ Bakery::Bakery(const Bakery& cpy) {
 Bakery::~Bakery() {
     delete baker;
     delete yeast;
+    delete updater;
 }
 
 unsigned int Bakery::get_id() const {
     return this->bakery_id;
 }
 
-void Bakery::set_id(unsigned int bakery_id) {
-    this->bakery_id = bakery_id;
-}
-
 const QString& Bakery::get_name() const {
     return bakery_name;
-}
-
-void Bakery::set_name(const QString& bakery_name) {
-    this->bakery_name = bakery_name;
 }
 
 QString Bakery::get_state() const {
     return bakery_state;
 }
 
-void Bakery::set_state(QString bakery_state) {
-    this->bakery_state = bakery_state;
-}
-
 QString Bakery::get_city() const {
     return bakery_city;
 }
 
-void Bakery::set_city(const QString& bakery_city) {
-    this->bakery_city = bakery_city;
-}
-
 int Bakery::get_stock() const {
     return this->bakery_stock;
-}
-
-void Bakery::set_stock(int stock) {
-    this->bakery_stock = stock;
 }
 
 const _operation& Bakery::get_current_op() const {
@@ -74,10 +56,6 @@ bool Bakery::is_closed_down() const {
     return stopped;
 }
 
-void Bakery::set_closed_down(bool closed_down) {
-    Bakery::stopped = closed_down;
-}
-
 Baker* Bakery::get_baker() const {
     return baker;
 }
@@ -89,7 +67,7 @@ void Bakery::mix_ingredients(int _start) {
     this->current_operation.progress = (integer_code) _start;
     this->current_operation.description = "Mezclando los ingredientes";
     logbook.general(this->bakery_id) << current_operation.description;
-    int seconds = 20 + (qrand() % 10);//TODO: Must be configurable.
+    int seconds = 20 + (qrand() % 10);
     for(int i = _start; i < 100; ++i) {
         emit operation_changed(current_operation);
         this->current_operation.progress += 1;
@@ -163,9 +141,10 @@ void Bakery::bake_bread(int _start) {
     }
 
     int dough = get_setting("Operations", "dough_per_batch").toInt();
-    bakery_stock = ((dough - (dough / 4)) + (qrand() % 30)) * 4;
+    bakery_stock = ((dough - (dough / 4)) + (qrand() % 30)) * 5;
     current_operation.stock = bakery_stock;
     LOG(INFO) << "New stock for bakery {" + to_string(bakery_id) + "}: " + to_string(bakery_stock);
+    emit updated_stock(bakery_id, bakery_stock);
 }
 
 void Bakery::sell_bread(int _start) {
@@ -220,23 +199,29 @@ void Bakery::stop_operations(bool f) {
     this->terminate();
     this->wait();
 
+    string msg = "Se ha pausado ";
+
     if(f) {
         current_operation.progress = 1100;
         current_operation.description = "Cerrada";
+        msg = "Se ha detenido ";
         emit operation_changed(current_operation);
     }
 
-    showPopup("Se detuvo", "Se ha detenido la producción de pan en " + bakery_name.toStdString());
-
+    showInfoPopup("Panadería detenida", msg + "la producción de pan en " + bakery_name.toStdString());
     LOG(DEBUG) << "Bakery [" + to_string(bakery_id) + "] stopped";
 }
 
 void Bakery::resume_operations(void) {
     stopped = false;
+
+    if(current_operation.progress / 100 == 11) {
+        current_operation.progress = 0;
+    }
+
     this->start();
     LOG(DEBUG) << "Bakery [" + to_string(bakery_id) + "] started";
 }
-
 
 void Bakery::bad_yeast(void) {
     stopped = true;
@@ -247,11 +232,11 @@ void Bakery::bad_yeast(void) {
 
     LOG(DEBUG) << "Bakery [" + to_string(bakery_id) + "] affected by bad yeast";
 
-    showPopup("Levadura mala", bakery_name.toStdString() + " ha sufrido levadura mala");//FIXME: 'Are you serious?' You could say. I am, will I say.
+    showWarningPopup("Levadura mala", bakery_name.toStdString() + " ha sido afectada por levadura mala");
 
     current_operation.progress = 0;
-    current_operation.description = "Levadura mala";
 
+    stopped = false;
     this->start();
 }
 
@@ -270,7 +255,8 @@ void Bakery::close_down(void) {
 
     LOG(DEBUG) << "Bakery [" + to_string(bakery_id) + "] being closed down";
 
-    showPopup("Panadería clausarada", bakery_name.toStdString() + " ha sido clausurada");
+    showWarningPopup("Panadería clausarada",
+                     bakery_name.toStdString() + " ha sido clausurada por el ministerio de salud");
 }
 
 /**
@@ -282,11 +268,10 @@ void Bakery::set_up(void) {
 
     /* The operation start from the beggining */
     current_operation.progress = 0;
-    current_operation.description = "";
 
     LOG(DEBUG) << "Bakery [" + to_string(bakery_id) + "] being set up";
 
-    showPopup("Panadería lista", bakery_name.toStdString() + " ha salido de cuarentena.");
+    showInfoPopup("Panadería lista", bakery_name.toStdString() + " ha salido de cuarentena.");
 
     this->start();
 }
@@ -315,8 +300,10 @@ void Bakery::run() {
                     distribute_bread(current_operation.progress % 100);
                     break;
                 case 8:
+                case 11:
                     stopped = true;
                     break;
+                    emit operation_changed(current_operation);
                 case 9:
                 case 10: {
                     stopped = true;
@@ -345,8 +332,5 @@ void Bakery::run() {
 
             distribute_bread();
         }
-        QThread::sleep(4);
-
-
     }
 }
