@@ -11,7 +11,7 @@ set(SOURCE_FILES src/main.cpp src/core/classes/bakery.cpp src/core/classes/baker
         src/ui/logindialog.cpp src/ui/logindialog.h src/ui/ui_headers/ui_logindialog.h
         src/core/classes/yeast.cpp src/core/classes/yeast.h src/ui/mainwindow.cpp
         src/ui/mainwindow.h src/ui/ui_headers/ui_mainwindow.h src/ui/menuactionmanager.cpp src/ui/menuactionmanager.h
-        src/ui/popup.cpp src/ui/popup.h src/ui/telegramcpanel.cpp src/ui/telegramcpanel.h
+        src/ui/popup.cpp src/ui/popup.h src/ui/ui_headers/ui_popup.h src/ui/telegramcpanel.cpp src/ui/telegramcpanel.h
         src/ui/ui_headers/ui_telegramcpanel.h src/ui/themes.cpp src/ui/themes.h src/core/classes/ministry.cpp
         src/core/classes/ministry.h src/io/http.cpp src/io/http.h src/logger/easylogging++.h src/ui/assets.h src/ui/bakeryselect.cpp
         src/ui/bakeryselect.h src/ui/ui_headers/ui_bakeryselect.h src/ui/preferencespanel.cpp src/ui/preferencespanel.h
@@ -20,7 +20,8 @@ set(SOURCE_FILES src/main.cpp src/core/classes/bakery.cpp src/core/classes/baker
         src/ui/logbookdialog.h src/ui/selectpane.cpp src/ui/selectpane.h src/ui/ui_headers/ui_selectpane.h
         src/ui/bakeryedit.cpp src/ui/bakeryedit.h src/ui/ui_headers/ui_bakeryedit.h src/ui/about.cpp src/ui/about.h
         src/ui/ui_headers/ui_about.h src/io/handler.cpp src/core/classes/baker.cpp src/core/classes/baker.h
-        src/io/settings.cpp src/io/settings.h src/core/operations.h src/core/operations.cpp src/io/teleBot.cpp src/io/teleBot.h)
+        src/io/settings.cpp src/io/settings.h src/core/operations.h src/core/operations.cpp
+        src/io/production_updater.h src/io/production_updater.cpp)
 
 find_package(Qt5Core REQUIRED)
 find_package(Qt5Widgets REQUIRED)
