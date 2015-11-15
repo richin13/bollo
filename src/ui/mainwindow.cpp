@@ -293,6 +293,10 @@ void MainWindow::connectToolBarActions() {
 
     connect(ui->actionBakeryList, SIGNAL(triggered(bool)), actManager, SLOT(showBakeryList()));
     connect(ui->actionBakeryLog, &QAction::triggered, actManager, &MenuActionManager::logBrowser);
+    connect(ui->actionContinueProcess, SIGNAL(triggered(bool)), actManager, SLOT(continueProcess()));
+    connect(ui->actionPauseProcess, SIGNAL(triggered(bool)), actManager, SLOT(pauseProcess()));
+    connect(ui->actionCancelProcess, SIGNAL(triggered(bool)), actManager, SLOT(cancelProcess()));
+
 }
 
 /**

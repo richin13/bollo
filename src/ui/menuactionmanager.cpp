@@ -65,11 +65,6 @@ void MenuActionManager::cancelProcess() {
 
 }
 
-void MenuActionManager::showBakeryLog() {
-
-
-}
-
 
 // =======================================
 //          Menu bar actions

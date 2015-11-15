@@ -22,7 +22,6 @@ public slots:
     void continueProcess();
     void pauseProcess();
     void cancelProcess();
-    void showBakeryLog();
 
     // Menu bar actions
 
