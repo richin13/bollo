@@ -1,55 +1,16 @@
 #include "popup.h"
-#include "ui_headers/ui_popup.h"
 #include "../logger/easylogging++.h"
-#include <QTimer>
-#include <QDesktopWidget>
 
 using namespace std;
 
-Popup::Popup(QString title, QString msg, QWidget *parent) : QDialog(parent),
-                                                             ui(new Ui::Popup) {
+void showPopup(std::string title, std::string message) {
 
-    ui->setupUi(this);
-    applySettings();
+    string command = "notify-send '" + title + "' '" + message + "' --icon=dialog-information";
 
-    // Set title and message
-    this->setWindowTitle(title);
-    ui->message->setText(msg);
+    int returnCode = system(command.c_str());
 
-    // Show popup for 5 seconds and then close it.
-    QTimer *timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()), this, SLOT(close()));
-    connect(this, SIGNAL(destroyed()), this, SLOT(deleteLater()));
-    timer->start(TIME_MILIS);
-}
+    if (returnCode < 0) {
 
-void Popup::applySettings() {
-
-    setAttribute(Qt::WA_ShowWithoutActivating);
-    setWindowFlags(Qt::Window | Qt::WindowCloseButtonHint |
-                   Qt::WindowDoesNotAcceptFocus | Qt::WindowStaysOnTopHint);
-
-    setGeometry(QStyle::alignedRect(Qt::RightToLeft,Qt::AlignBottom,size(),
-                                    qApp->desktop()->availableGeometry()));
-}
-
-void Popup::showPopup() {
-
-    // Show popup for 5 seconds and then close it.
-    QTimer *timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()), this, SLOT(close()));
-    connect(this, SIGNAL(destroyed()), this, SLOT(deleteLater()));
-
-    show();
-    timer->start(TIME_MILIS);
-}
-
-void Popup::close() {
-
-    this->done(0);
-}
-
-Popup::~Popup() {
-    LOG(DEBUG) << "Deleting POPUP!";
-    delete ui;
+        LOG(WARNING) << "An error ocurred while showing event notification";
+    }
 }

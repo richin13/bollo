@@ -226,9 +226,7 @@ void Bakery::stop_operations(bool f) {
         emit operation_changed(current_operation);
     }
 
-    Popup* p = new Popup("Se detuvo", "Se ha detenido la producción de pan en " + bakery_name);
-    p->showPopup();
-    QObject::connect(p, SIGNAL(destroyed()), p, SLOT(deleteLater()));
+    showPopup("Se detuvo", "Se ha detenido la producción de pan en " + bakery_name.toStdString());
 
     LOG(DEBUG) << "Bakery [" + to_string(bakery_id) + "] stopped";
 }
@@ -249,10 +247,7 @@ void Bakery::bad_yeast(void) {
 
     LOG(DEBUG) << "Bakery [" + to_string(bakery_id) + "] affected by bad yeast";
 
-    Popup* p = new Popup("Levadura mala", bakery_name +
-                                          " ha sufrido levadura mala");//FIXME: 'Are you serious?' You could say. I am, will I say.
-    p->showPopup();
-    QObject::connect(p, SIGNAL(destroyed()), p, SLOT(deleteLater()));
+    showPopup("Levadura mala", bakery_name.toStdString() + " ha sufrido levadura mala");//FIXME: 'Are you serious?' You could say. I am, will I say.
 
     current_operation.progress = 0;
     current_operation.description = "Levadura mala";
@@ -275,9 +270,7 @@ void Bakery::close_down(void) {
 
     LOG(DEBUG) << "Bakery [" + to_string(bakery_id) + "] being closed down";
 
-    Popup* p = new Popup("Panadería clausarada", bakery_name + " ha sido clausurada");
-    p->showPopup();
-    QObject::connect(p, SIGNAL(destroyed()), p, SLOT(deleteLater()));
+    showPopup("Panadería clausarada", bakery_name.toStdString() + " ha sido clausurada");
 }
 
 /**
@@ -293,9 +286,7 @@ void Bakery::set_up(void) {
 
     LOG(DEBUG) << "Bakery [" + to_string(bakery_id) + "] being set up";
 
-    Popup* p = new Popup("Panadería lista", bakery_name + " ha salido de cuarentena.");
-    p->showPopup();
-    QObject::connect(p, SIGNAL(destroyed()), p, SLOT(deleteLater()));
+    showPopup("Panadería lista", bakery_name.toStdString() + " ha salido de cuarentena.");
 
     this->start();
 }

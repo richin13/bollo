@@ -7,9 +7,7 @@
 
 void Baker::run() {
     QThread::sleep(5);//Apparently, it just take 5 secs to clean all the mess.
-    Popup* p = new Popup("Limpieza lista", "El panadero ha terminado la limpieza de " + bakery_name);
-    p->showPopup();
-    QObject::connect(p, SIGNAL(destroyed()), p, SLOT(deleteLater()));
+    showPopup("Limpieza lista", "El panadero ha terminado la limpieza de " + bakery_name.toStdString());
 
     emit clean_ready();
     LOG(DEBUG) << "Finished clean";
@@ -27,9 +25,7 @@ void Baker::find_pollutants(_operation op) {
             LOG(INFO) << "Found a pollutant in bakery " + to_string(op.bakery_id);
             QString text = "Se encontró " + pollutants.at(qrand() % pollutants.size());
             logbook.problem(op.bakery_id, (qrand() % (dough - 1)) + 1) << text;
-            Popup* notification = new Popup("Contaminante", text);
-            notification->showPopup();
-            QObject::connect(notification, SIGNAL(destroyed()), notification, SLOT(deleteLater()));
+            showPopup("Contaminante", text.toStdString());
         }
     }
 }
