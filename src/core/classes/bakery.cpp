@@ -21,6 +21,9 @@ Bakery::~Bakery() {
     delete baker;
     delete yeast;
     delete updater;
+    delete logbook;
+
+    LOG(DEBUG) << "Deallocated memory at Bakery class with id [" + to_string(bakery_id) + "]";
 }
 
 unsigned int Bakery::get_id() const {
@@ -43,6 +46,11 @@ int Bakery::get_stock() const {
     return this->bakery_stock;
 }
 
+
+void Bakery::stop() {
+    stopped = true;
+}
+
 const _operation& Bakery::get_current_op() const {
     return current_operation;
 }
@@ -61,131 +69,160 @@ Baker* Bakery::get_baker() const {
 }
 
 void Bakery::mix_ingredients(int _start) {
-    LOG(DEBUG) << QString("Iniciando[%1]: %2").arg(bakery_id).arg("Mezcla de ingredientes").toStdString();
-    qsrand((uint) QTime::currentTime().msec());
+    if(!stopped) {
+//        LOG(DEBUG) << QString("Iniciando[%1]: %2").arg(bakery_id).arg("Mezcla de ingredientes").toStdString();
+        qsrand((uint) QTime::currentTime().msec());
 
-    this->current_operation.progress = (integer_code) _start;
-    this->current_operation.description = "Mezclando los ingredientes";
-    logbook.general(this->bakery_id) << current_operation.description;
-    int seconds = 20 + (qrand() % 10);
-    for(int i = _start; i < 100; ++i) {
-        emit operation_changed(current_operation);
-        this->current_operation.progress += 1;
-        QThread::usleep((unsigned long) (seconds * LAPSE_TIME));
+        this->current_operation.progress = (integer_code) _start;
+        this->current_operation.description = "Mezclando los ingredientes";
+        if(!_start)
+                emit notify_(bakery_id, current_operation.description);
+
+        int seconds = 20 + (qrand() % 10);
+
+        for(int i = _start; i < 100; ++i) {
+            emit operation_changed(current_operation);
+            this->current_operation.progress += 1;
+            QThread::usleep((unsigned long) (seconds * LAPSE_TIME));
+        }
     }
 }
 
 void Bakery::ferment_dough(int _start, bool _final_f) {
-    qsrand((uint) QTime::currentTime().msec());
+    if(!stopped) {
+        qsrand((uint) QTime::currentTime().msec());
 
-    int seconds;
-    if(!_final_f) {
-        LOG(DEBUG) << QString("Iniciando[%1]: %2").arg(bakery_id).arg("Fermentación primaria").toStdString();
-        this->current_operation.description = "Fermentación inicial de la masa";
-        seconds = 15 + (qrand() % 10);
-    } else {
-        LOG(DEBUG) << QString("Iniciando[%1]: %2").arg(bakery_id).arg("Fermentación final").toStdString();
-        this->current_operation.description = "Fermentación final de la masa";
-        seconds = 20 + (qrand() % 10);
-    }
-    logbook.general(this->bakery_id) << current_operation.description;
-    for(int i = _start; i < 100 && !stopped; ++i) {
-        emit operation_changed(current_operation);
-        this->current_operation.progress += 1;
-        QThread::usleep((unsigned long) (seconds * LAPSE_TIME));
+        int seconds;
+        if(!_final_f) {
+//            LOG(DEBUG) << QString("Iniciando[%1]: %2").arg(bakery_id).arg("Fermentación primaria").toStdString();
+            this->current_operation.description = "Fermentación inicial de la masa";
+            seconds = 15 + (qrand() % 10);
+        } else {
+//            LOG(DEBUG) << QString("Iniciando[%1]: %2").arg(bakery_id).arg("Fermentación final").toStdString();
+            this->current_operation.description = "Fermentación final de la masa";
+            seconds = 20 + (qrand() % 10);
+        }
+
+        if(!_start)
+                emit notify_(bakery_id, current_operation.description);
+
+        for(int i = _start; i < 100 && !stopped; ++i) {
+            emit operation_changed(current_operation);
+            this->current_operation.progress += 1;
+            QThread::usleep((unsigned long) (seconds * LAPSE_TIME));
+        }
     }
 }
 
 void Bakery::divide_dough(int _start) {
-    LOG(DEBUG) << QString("Iniciando[%1]: %2").arg(bakery_id).arg("División de la masa").toStdString();
-    qsrand((uint) QTime::currentTime().msec());
+    if(!stopped) {
+//        LOG(DEBUG) << QString("Iniciando[%1]: %2").arg(bakery_id).arg("División de la masa").toStdString();
+        qsrand((uint) QTime::currentTime().msec());
 
-    this->current_operation.description = "Divisón de la masa";
-    logbook.general(this->bakery_id) << current_operation.description;
-    int seconds = 15 + (qrand() % 10);
+        this->current_operation.description = "Divisón de la masa";
+        if(!_start)
+                emit notify_(bakery_id, current_operation.description);
 
-    for(int i = _start; i < 100 && !stopped; ++i) {
-        emit operation_changed(current_operation);
-        this->current_operation.progress += 1;
-        QThread::usleep((unsigned long) (seconds * LAPSE_TIME));
+        int seconds = 15 + (qrand() % 10);
+
+        for(int i = _start; i < 100 && !stopped; ++i) {
+            emit operation_changed(current_operation);
+            this->current_operation.progress += 1;
+            QThread::usleep((unsigned long) (seconds * LAPSE_TIME));
+        }
     }
 }
 
 void Bakery::shape_dough(int _start) {
-    LOG(DEBUG) << QString("Iniciando[%1]: %2").arg(bakery_id).arg("Formación de la masa").toStdString();
-    qsrand((uint) QTime::currentTime().msec());
+    if(!stopped) {
+//        LOG(DEBUG) << QString("Iniciando[%1]: %2").arg(bakery_id).arg("Formación de la masa").toStdString();
+        qsrand((uint) QTime::currentTime().msec());
 
-    this->current_operation.description = "Formando la masa";
-    logbook.general(this->bakery_id) << current_operation.description;
-    int seconds = 30 + (qrand() % 10);
+        this->current_operation.description = "Formando la masa";
+        if(!_start)
+                emit notify_(bakery_id, current_operation.description);
 
-    for(int i = _start; i < 100 && !stopped; ++i) {
-        emit operation_changed(current_operation);
-        this->current_operation.progress += 1;
-        QThread::usleep((unsigned long) (seconds * LAPSE_TIME));
+        int seconds = 30 + (qrand() % 10);
+
+        for(int i = _start; i < 100 && !stopped; ++i) {
+            emit operation_changed(current_operation);
+            this->current_operation.progress += 1;
+            QThread::usleep((unsigned long) (seconds * LAPSE_TIME));
+        }
     }
 }
 
 void Bakery::bake_bread(int _start) {
-    LOG(DEBUG) << QString("Iniciando[%1]: %2").arg(bakery_id).arg("Horneo del pan").toStdString();
-    qsrand((uint) QTime::currentTime().msec());
+    if(!stopped) {
+//        LOG(DEBUG) << QString("Iniciando[%1]: %2").arg(bakery_id).arg("Horneo del pan").toStdString();
+        qsrand((uint) QTime::currentTime().msec());
 
-    this->current_operation.description = "Horneando el pan";
-    logbook.general(this->bakery_id) << current_operation.description;
-    int seconds = 35 + (qrand() % 10);
+        this->current_operation.description = "Horneando el pan";
+        if(!_start)
+                emit notify_(bakery_id, current_operation.description);
 
-    for(int i = _start; i < 100 && !stopped; ++i) {
-        emit operation_changed(current_operation);
-        this->current_operation.progress += 1;
-        QThread::usleep((unsigned long) (seconds * LAPSE_TIME));
+        int seconds = 35 + (qrand() % 10);
+        for(int i = _start; i < 100 && !stopped; ++i) {
+            emit operation_changed(current_operation);
+            this->current_operation.progress += 1;
+            QThread::usleep((unsigned long) (seconds * LAPSE_TIME));
+        }
+
+        int dough = get_setting("Operations", "dough_per_batch").toInt();
+        bakery_stock = ((dough - (dough / 4)) + (qrand() % 30)) * 5;
+        current_operation.stock = bakery_stock;
+        LOG(INFO) << "New stock for bakery {" + to_string(bakery_id) + "}: " + to_string(bakery_stock);
+        emit updated_stock(bakery_id, bakery_stock);
     }
-
-    int dough = get_setting("Operations", "dough_per_batch").toInt();
-    bakery_stock = ((dough - (dough / 4)) + (qrand() % 30)) * 5;
-    current_operation.stock = bakery_stock;
-    LOG(INFO) << "New stock for bakery {" + to_string(bakery_id) + "}: " + to_string(bakery_stock);
-    emit updated_stock(bakery_id, bakery_stock);
 }
 
 void Bakery::sell_bread(int _start) {
-    LOG(DEBUG) << QString("Iniciando[%1]: %2").arg(bakery_id).arg("Venta del pan").toStdString();
-    qsrand((uint) QTime::currentTime().msec());
+    if(!stopped) {
+//        LOG(DEBUG) << QString("Iniciando[%1]: %2").arg(bakery_id).arg("Venta del pan").toStdString();
+        qsrand((uint) QTime::currentTime().msec());
 
-    this->current_operation.description = "Vendiendo el pan";
-    logbook.general(this->bakery_id) << current_operation.description;
-    int seconds = 30 + (qrand() % 10);
+        this->current_operation.description = "Vendiendo el pan";
+        if(!_start)
+                emit notify_(bakery_id, current_operation.description);
 
-    for(int i = _start; i < 100 && !stopped; ++i) {
-        emit operation_changed(current_operation);
-        this->current_operation.progress += 1;
+        int seconds = 30 + (qrand() % 10);
 
-        if(bakery_stock - 1 > 0 && qrand() % 2) {
-            bakery_stock += (qrand() % 2) - 1;
-            current_operation.stock = bakery_stock;
+        for(int i = _start; i < 100 && !stopped; ++i) {
+            emit operation_changed(current_operation);
+            this->current_operation.progress += 1;
+
+            if(bakery_stock - 1 > 0 && qrand() % 2) {
+                bakery_stock += (qrand() % 2) - 1;
+                current_operation.stock = bakery_stock;
+            }
+
+            QThread::usleep((unsigned long) (seconds * LAPSE_TIME));
         }
-
-        QThread::usleep((unsigned long) (seconds * LAPSE_TIME));
     }
 }
 
 void Bakery::distribute_bread(int _start) {
-    LOG(DEBUG) << QString("Iniciando[%1]: %2").arg(bakery_id).arg("Distribución del pan").toStdString();
-    qsrand((uint) QTime::currentTime().msec());
+    if(!stopped) {
+//        LOG(DEBUG) << QString("Iniciando[%1]: %2").arg(bakery_id).arg("Distribución del pan").toStdString();
+        qsrand((uint) QTime::currentTime().msec());
 
-    this->current_operation.description = "Distribuyendo el pan";
-    logbook.general(this->bakery_id) << current_operation.description;
-    int seconds = 20 + (qrand() % 10);
+        this->current_operation.description = "Distribuyendo el pan";
+        if(!_start)
+                emit notify_(bakery_id, current_operation.description);
 
-    for(int i = _start; i < 100 && !stopped; ++i) {
-        emit operation_changed(current_operation);
-        this->current_operation.progress += 1;
+        int seconds = 20 + (qrand() % 10);
 
-        if(bakery_stock - 1 > 0 && qrand() % 2) {
-            bakery_stock += (qrand() % 2) - 1;
-            current_operation.stock = bakery_stock;
+        for(int i = _start; i < 100 && !stopped; ++i) {
+            emit operation_changed(current_operation);
+            this->current_operation.progress += 1;
+
+            if(bakery_stock - 1 > 0 && qrand() % 2) {
+                bakery_stock += (qrand() % 2) - 1;
+                current_operation.stock = bakery_stock;
+            }
+
+            QThread::usleep((unsigned long) (seconds * LAPSE_TIME));
         }
-
-        QThread::usleep((unsigned long) (seconds * LAPSE_TIME));
     }
 }
 
@@ -206,6 +243,7 @@ void Bakery::stop_operations(bool f) {
         current_operation.description = "Cerrada";
         msg = "Se ha detenido ";
         emit operation_changed(current_operation);
+        emit notify_(bakery_id, "Cierre de la panadería");
     }
 
     showInfoPopup("Panadería detenida", msg + "la producción de pan en " + bakery_name.toStdString());
@@ -228,7 +266,7 @@ void Bakery::bad_yeast(void) {
     this->terminate();
     this->wait();
 
-    logbook.general(bakery_id) << "Intervención de levadura mala";
+    emit notify_(bakery_id, "Intervención del hilo 'Levadura mala'");
 
     LOG(DEBUG) << "Bakery [" + to_string(bakery_id) + "] affected by bad yeast";
 

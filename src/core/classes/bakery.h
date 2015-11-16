@@ -9,12 +9,12 @@
 #include <QtCore/qtimer.h>
 #include <QtCore/qdatetime.h>
 
-#include "../bollo.h"
+#include "baker.h"
+#include "yeast.h"
+#include "ministry.h"
+#include "../operations.h"
 #include "../../logger/logger.h"
 #include "../../ui/popup.h"
-#include "baker.h"
-#include "../operations.h"
-#include "yeast.h"
 #include "../../io/production_updater.h"
 
 #define LAPSE_TIME 90000
@@ -36,6 +36,7 @@ private:
     Baker* baker;//Baker thread
     Yeast* yeast;//Bad yeast thread
 
+    Logger* logbook;
     StockUpdater* updater;
 public:
     Bakery(){}
@@ -53,6 +54,7 @@ public:
             bakery_city(city),
             bakery_stock(stock) {
 
+        logbook = new Logger;
         baker = new Baker(bakery_name);
         yeast = new Yeast;
         updater = new StockUpdater;
@@ -70,7 +72,11 @@ public:
         QObject::connect(this, &Bakery::operation_changed, yeast, &Yeast::select_yeast);
         QObject::connect(yeast, &Yeast::contaminated_yeast, this, &Bakery::bad_yeast);
 
+
+        QObject::connect(this, &Bakery::notify_, logbook, &Logger::send_logbook_entry);
         QObject::connect(this, &Bakery::updated_stock, updater, &StockUpdater::updater);
+
+
     }
 
     unsigned int get_id() const;
@@ -78,6 +84,7 @@ public:
     QString get_state() const;
     QString get_city() const;
     int get_stock() const;
+    void stop();
 
     const _operation& get_current_op() const;
     void set_current_op(const _operation&);
@@ -110,7 +117,7 @@ public slots:
 signals:
     void updated_stock(int, int);
     void operation_changed(const _operation&);
-    void enter_quarantine(Bakery*);
+    void notify_(int, QString);
 };
 
 #endif //BOLLO_BAKERY_H
