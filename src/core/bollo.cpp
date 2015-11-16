@@ -12,11 +12,8 @@ BolloApp::BolloApp() {
     /* The app settings stored at home directory */
     init_settings();
 
-    /* The database connection - Only need to be done once */
-    init_database();
-
     /* Fetch the information of the bakeries through the API - What happens when somebody adds a new bakery? */
-    load_bakeries_from_db();
+    load_bakeries();
 
     /* Object connections */
     connect(this, &BolloApp::destroyed, this, &BolloApp::deleteLater);
@@ -26,41 +23,33 @@ BolloApp::~BolloApp() {
     LOG(DEBUG) << "Freeing allocated objects in BolloApp class";
     emit application_exiting();
     delete current_user;
-    delete updater;
-    unsigned long size = bakeries.size();
 
-    for(unsigned long i = 0; i < size; ++i) {
+    updater->deleteLater();
+
+    ministry->terminate();
+    ministry->wait();
+
+    ministry->deleteLater();
+
+    ulong size = bakeries.size();
+
+    for(ulong i = 0; i < size; ++i) {
         Bakery* b = bakeries.at(i);
-        QObject::connect(b, SIGNAL(finished()), b, SLOT(deleteLater()));
-        bakeries.at(i)->terminate();
-        bakeries.at(i)->wait();
-    }
+        b->stop();
+        b->wait();
 
-    delete ministry;
-}
-
-void BolloApp::init_database(void) {
-    LOG(INFO) << "Starting database server connection";
-    this->bollo_db = QSqlDatabase::addDatabase("QPSQL");
-    bollo_db.setHostName(Constants::DB_HOST);
-    bollo_db.setDatabaseName(Constants::DB_SCHEME);
-    bollo_db.setUserName(Constants::DB_USERNAME);
-    bollo_db.setPassword(Constants::DB_PASSWORD);
-
-    if(!bollo_db.open()) {
-        LOG(FATAL) << "Unable to reach the database server";
-        QMessageBox::critical(QApplication::activeWindow(),
-                              "Revisa tu conexión a Internet",
-                              "Ocurrió un error mientras intentabámos comunicarnos con el servidor de base de datos.");
+        b->deleteLater();
     }
 }
 
-void BolloApp::load_bakeries_from_db() {
+void BolloApp::load_bakeries() {
     LOG(DEBUG) << "Loading bakeries through web API";
     QNetworkAccessManager* manager = new QNetworkAccessManager(this);
+
     //Request all
     QHash<QString, QString> args;
     args["all"];
+
     QUrl url;
     url_builder(url, "bakeries", "bakery", args);
     LOG(INFO) << "Sending GET request to " + url.toString().toStdString();
@@ -71,7 +60,6 @@ void BolloApp::load_bakeries_from_db() {
 }
 
 void BolloApp::loaded_bakeries(QNetworkReply* reply) {
-    LOG(INFO) << "Got reply from server: Load bakeries";
     QJsonObject jsonObject;
 
     extract_json_object(reply, &jsonObject);
@@ -129,10 +117,6 @@ const QString& BolloApp::get_bakery_name(int id) {
     }
 
     return QStringLiteral("Not found");//Should never happen.
-}
-
-QString BolloApp::windowTittle() {
-    return QString("%1-[%2]_%3").arg(APP_NAME, CODENAME, VERSION);
 }
 
 BolloApp& BolloApp::get() {

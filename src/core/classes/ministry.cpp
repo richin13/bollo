@@ -5,7 +5,10 @@
 #include <QtCore/qdatetime.h>
 #include "ministry.h"
 
-Ministry::Ministry() { }
+Ministry::~Ministry() {
+    delete logbook;
+    LOG(DEBUG) << "Deallocated memory at Ministry class";
+}
 
 void Ministry::run() {
 #pragma clang diagnostic push
@@ -21,6 +24,8 @@ void Ministry::run() {
             if(probability < 0) {
                 b->close_down();
 
+                emit notify_(b->get_id(), "Intervención del hilo 'Ministerio de salud'");
+
                 Quarantine* quarantine = new Quarantine(b);
                 QObject::connect(quarantine, SIGNAL(exiting_quarantine()), quarantine, SLOT(deleteLater()));
                 quarantine->start();
@@ -32,6 +37,7 @@ void Ministry::run() {
 #pragma clang diagnostic pop
 }
 
+
 void Quarantine::run() {
     LOG(DEBUG) << "Entering quarantine [" + to_string(bakery->get_id()) + "]";
 
@@ -42,13 +48,12 @@ void Quarantine::run() {
     op.description = "En cuarentena";
 
     bakery->set_current_op(op);
-    emit bakery->operation_changed(bakery->get_current_op());//Watch out fah dis
+    emit bakery->operation_changed(bakery->get_current_op());
 
-    logbook.general(bakery->get_id()) << "Entrando en cuarentena";
-    QThread::sleep(40);
+    emit notify_(bakery->get_id(), "Entrando en cuarentena");
 
-//    QTimer::singleShot(QUARANTINE_MSECS, bakery->get_baker(), SLOT(start_clean()));
-//    QTimer::singleShot(QUARANTINE_MSECS, this, SLOT(notify_exit_quarantine()));
+    QThread::sleep(QUARANTINE_SECS);
+
     bakery->get_baker()->start_clean();
     this->notify_exit_quarantine();
 

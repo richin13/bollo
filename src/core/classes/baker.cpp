@@ -24,9 +24,9 @@ void Baker::find_pollutants(_operation op) {
 
         if(rnd < 0) {
             LOG(INFO) << "Found a pollutant in bakery " + to_string(op.bakery_id);
-            QString text = "Se encontró " + pollutants.at(qrand() % pollutants.size()) + " en panadería " + bakery_name;
-            logbook.problem(op.bakery_id, (qrand() % (dough - 1)) + 1) << text;
+            QString text = "Se encontró " + pollutants.at(qrand() % pollutants.size());
 
+            emit found_pollutants(op.bakery_id, text, (qrand() % (dough - 1)) + 1);
             showInfoPopup("Contaminante", text.toStdString());
         }
     }

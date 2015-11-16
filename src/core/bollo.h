@@ -47,9 +47,7 @@ private:
 
     void operator=(BolloApp const&) { }
 
-    void init_database(void);
-
-    void load_bakeries_from_db();
+    void load_bakeries();
 
     void start_bakeries();
 
@@ -61,9 +59,6 @@ public:
     /* User information */
     Person* current_user;
 
-    /* Database connection information */
-    QSqlDatabase bollo_db;
-
     /* Application data */
     std::vector<Bakery*> bakeries;
 
@@ -72,8 +67,6 @@ public:
 
     /* Ministry of health */
     Ministry* ministry;
-
-    QString windowTittle();
 
     static BolloApp& get();
 
