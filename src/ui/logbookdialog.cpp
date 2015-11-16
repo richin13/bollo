@@ -115,7 +115,7 @@ void LogbookDialog::setup_problems(const QJsonArray& data) {
         QString bakery_name = BolloApp::get().get_bakery_name(current.take("bakery").toInt());
         ui->qtProblem->setItem(i, 1, new QTableWidgetItem(bakery_name));
         ui->qtProblem->setItem(i, 2, new QTableWidgetItem(current.take("description").toString()));
-        ui->qtProblem->setItem(i, 3, new QTableWidgetItem(current.take("dough").toString()));
+        ui->qtProblem->setItem(i, 3, new QTableWidgetItem(QString::number(current.take("dough").toInt())));
         ui->qtProblem->setItem(i, 4, new QTableWidgetItem(current.take("date").toString()));
         ui->qtProblem->setItem(i, 5, new QTableWidgetItem(current.take("hour").toString()));
     }
