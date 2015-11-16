@@ -51,7 +51,6 @@ void StatusUpdater::updater(_operation op) {
 
 
 void StatusUpdater::stock_updater(_operation op) {
-//    LOG(INFO) << "Updating stock for bakery " + to_string(op.bakery_id) + ": " + to_string(op.stock);
     QNetworkAccessManager* manager = new QNetworkAccessManager(this);
 
     QHash<QString, QString> args;

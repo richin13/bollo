@@ -5,9 +5,7 @@
 #ifndef BOLLO_OPERATIONS_H
 #define BOLLO_OPERATIONS_H
 
-#include "../logger/logger.h"
-
-extern Logger logbook;
+#include <QtCore/qstring.h>
 
 typedef unsigned short int integer_code;
 

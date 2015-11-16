@@ -16,10 +16,10 @@
 #include <QtCore/qurl.h>
 #include <QtCore/qurlquery.h>
 
-#include "../core/classes/bakery.h"
-#include "../core/bollo_constants.h"
+#include "../logger/easylogging++.h"
 
-struct _operation;
+#include "../core/operations.h"
+#include "../core/bollo_constants.h"
 
 class StatusUpdater : public QObject {
 Q_OBJECT
