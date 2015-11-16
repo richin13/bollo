@@ -38,17 +38,11 @@ public:
     virtual ~Logbook() { }
 
     int get_id() const;
-    void setId(int id);
     const QString& getBakery() const;
-    void setBakery(const QString& bakery);
     int getBakeryId() const;
-    void setBakery(int);
     const QString& getDescription() const;
-    void setDescription(const QString& description);
     const QString& getDate() const;
-    void setDate(const QString& date);
     const QString& getHour() const;
-    void setHour(const QString& hour);
 
     bool operator==(const Logbook&);
     bool operator==(const QString&);//Compare to bakery name!

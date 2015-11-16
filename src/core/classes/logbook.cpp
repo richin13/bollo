@@ -8,51 +8,25 @@ int Logbook::get_id() const {
     return id;
 }
 
-void Logbook::setId(int id) {
-    Logbook::id = id;
-}
-
 const QString& Logbook::getBakery() const {
     return bakery;
 }
 
-void Logbook::setBakery(const QString& bakery) {
-    Logbook::bakery = bakery;
-}
-
-
 int Logbook::getBakeryId() const {
     return bakery_id;
-}
-
-void Logbook::setBakery(int i) {
-    Logbook::bakery_id = i;
 }
 
 const QString& Logbook::getDescription() const {
     return description;
 }
 
-void Logbook::setDescription(const QString& description) {
-    Logbook::description = description;
-}
-
 const QString& Logbook::getDate() const {
     return date;
-}
-
-void Logbook::setDate(const QString& date) {
-    Logbook::date = date;
 }
 
 const QString& Logbook::getHour() const {
     return hour;
 }
-
-void Logbook::setHour(const QString& hour) {
-    Logbook::hour = hour;
-}
-
 
 bool Logbook::operator==(const Logbook& logbook) {
     return id == logbook.get_id();
