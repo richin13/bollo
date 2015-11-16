@@ -38,14 +38,6 @@ void load_default_settings(void) {
     bollo_settings.setValue(QStringLiteral("api_path"), QVariant("/api/v1"));
     bollo_settings.endGroup();
 
-    /* Db settings */
-    bollo_settings.beginGroup(QStringLiteral("Database"));
-    bollo_settings.setValue(QStringLiteral("db_host"), QVariant("104.154.49.207"));
-    bollo_settings.setValue(QStringLiteral("db_user"), QVariant("postgres"));
-    bollo_settings.setValue(QStringLiteral("db_pass"), QVariant("W3aS28yt"));
-    bollo_settings.setValue(QStringLiteral("db_schema"), QVariant("bollo_testing_final"));
-    bollo_settings.endGroup();
-
     /* General operations settings */
     bollo_settings.beginGroup(QStringLiteral("Operations"));
     bollo_settings.setValue(QStringLiteral("average_production"), QVariant(55));
@@ -70,15 +62,6 @@ void load_settings(void) {
     Constants::API_HOST = bollo_settings.value("host_url").toString();
     Constants::API_PATH = bollo_settings.value("api_path").toString();
     bollo_settings.endGroup();
-
-    /* Db settings */
-    bollo_settings.beginGroup(QStringLiteral("Database"));
-    Constants::DB_HOST = bollo_settings.value("db_host").toString();
-    Constants::DB_USERNAME = bollo_settings.value("db_user").toString();
-    Constants::DB_PASSWORD = bollo_settings.value("db_pass").toString();
-    Constants::DB_SCHEME = bollo_settings.value("db_schema").toString();
-    bollo_settings.endGroup();
-
 }
 
 QString config_file_path() {

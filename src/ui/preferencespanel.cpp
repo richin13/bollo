@@ -7,6 +7,9 @@ PreferencesPanel::PreferencesPanel(QWidget* parent) : QDialog(parent),
     ui->setupUi(this);
     fillSettingsValue();
     connectEventChangeManagers();
+
+    networkingHasChanged = false;
+    bakerySettingsHasChanged = false;
 }
 
 PreferencesPanel::~PreferencesPanel() {
@@ -24,10 +27,10 @@ void PreferencesPanel::fillSettingsValue() {
 
     // NetWorking tab
     ui->apiHostUrl->setText(Constants::API_HOST);
-    ui->dbHostUrl->setText(Constants::DB_HOST);
-    ui->dbName->setText(Constants::DB_SCHEME);
-    ui->dbUserName->setText(Constants::DB_USERNAME);
-    ui->dbPassword->setText(Constants::DB_PASSWORD);
+    ui->dbHostUrl->setText("NULL");
+    ui->dbName->setText("NULL");
+    ui->dbUserName->setText("NULL");
+    ui->dbPassword->setText("NULL");
 
     // Bakery tab
     ui->averageBreadSP->setValue(get_setting("Operations", "average_production").toInt());
