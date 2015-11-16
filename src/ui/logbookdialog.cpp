@@ -5,12 +5,42 @@
 
 #include "logbookdialog.h"
 
-LogbookDialog::LogbookDialog(QWidget* parent) :
-        QDialog(parent),
+LogbookDialog::LogbookDialog(QWidget* parent) : QDialog(parent),
         ui(new Ui::LogbookDialog()) {
+
     ui->setupUi(this);
+    fillBakeryListComboBox();
+
+    // Load and display the events & problems of all the bakeries
+    this->setWindowTitle("Bitacoras para panaderias: TODAS");
     load_events();
     load_problems();
+
+    // When a bakery is selected load its problems and events.
+    connect(ui->bakeryList, SIGNAL(activated(int)), this, SLOT(filter(int)));
+}
+
+void LogbookDialog::filter(int bakeryIndex) {
+
+    // All the bakeries
+    if (bakeryIndex == 0) {
+
+        LOG(INFO) << "Showing events & problems for bakery: ALL";
+
+        this->setWindowTitle("Bitacoras para panaderias: TODAS");
+        load_events();
+        load_problems();
+    }
+
+    else {
+
+        LOG(INFO) << "Showing events & problems for bakery " + to_string(bakeryIndex);
+
+        Bakery* bakery = BolloApp::get().bakeries.at(bakeryIndex - 1);
+        this->setWindowTitle("Bitacoras para panaderias: " + bakery->get_name());
+        load_events(bakery->get_id());
+        load_problems(bakery->get_id());
+    }
 }
 
 LogbookDialog::~LogbookDialog() {
@@ -120,4 +150,18 @@ void LogbookDialog::setup_problems(const QJsonArray& data) {
         ui->qtProblem->setItem(i, 5, new QTableWidgetItem(current.take("hour").toString()));
     }
 
+}
+
+void LogbookDialog::fillBakeryListComboBox() {
+
+    int listSize = (int) BolloApp::get().bakeries.size();
+
+    if (listSize != 0) {
+
+        for(int i = 0; i < listSize; ++i) {
+
+            ui->bakeryList->addItem(BolloApp::get().bakeries.at(i)->get_name());
+        }
+
+    }
 }
