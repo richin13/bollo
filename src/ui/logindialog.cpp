@@ -24,7 +24,6 @@ void LoginDialog::on_qb_exit_clicked() {
 void LoginDialog::on_qb_login_clicked() {
     QString username = ui->qle_username->text();
     QByteArray password = ui->qle_password->text().toUtf8();
-    LOG(INFO) << "Logging in user " + username.toStdString();
     ui->qb_login->setEnabled(false);
 
     QNetworkAccessManager* manager = new QNetworkAccessManager(this);
@@ -40,11 +39,9 @@ void LoginDialog::on_qb_login_clicked() {
     connect(manager, &QNetworkAccessManager::finished, this, &LoginDialog::got_login_reply);
     connect(manager, &QNetworkAccessManager::finished, manager, &QNetworkAccessManager::deleteLater);
     manager->get(QNetworkRequest(url));
-    LOG(INFO) << "Sent GET request to URL to API at section 'users' module 'login'";
 }
 
 void LoginDialog::got_login_reply(QNetworkReply* reply) {
-    LOG(INFO) << "Got reply from server: Login request";
     QJsonObject object;
 
     extract_json_object(reply, &object);
@@ -61,6 +58,7 @@ void LoginDialog::got_login_reply(QNetworkReply* reply) {
         BolloApp::get().current_user = new Person(id, fn, ln, un, email);
         this->close();
         emit logged_in();
+        LOG(INFO) << "Logged in [" + fn.toStdString() + "]";
     } else {
         ui->qb_login->setEnabled(true);
         switch(code_reply) {
