@@ -6,7 +6,6 @@
 #define BOLLO_PERSON_H
 
 #include <QtCore/qstring.h>
-#include "../build.h"
 
 class Person {
 private:

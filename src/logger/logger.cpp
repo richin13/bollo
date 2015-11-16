@@ -2,97 +2,41 @@
 // Created by ricardo on 05/10/15.
 //
 
-
 #include "logger.h"
 
+void Logger::send_logbook_entry(int bid, QString txt) {
+    LOG(DEBUG) << "Sending new logbook entry: " + txt.toStdString();
+    QNetworkAccessManager* manager = new QNetworkAccessManager(this);
 
-LogBook _log;
+    //Build the url
+    QHash<QString, QString> args;
+    args["id"] = QString::number(bid);
+    args["message"] = txt;
 
-QSemaphore mtx(1);
-QSemaphore mtx_logger(1);
-QSemaphore mtx_writer(1);
+    QUrl url;
+    url_builder(url, "reports", "report", args);
 
-/**
- * Overloaded function for the '<<' operator.
- * Please use _log.bakery(bakery_id) to add an entry
- * to the logbook.
- * @param x QString Event information.
- */
-LogBook& LogBook::operator<<(const QString& x) {
-    QSqlQuery query;
-    QString sql;
+    QObject::connect(manager, &QNetworkAccessManager::finished, manager, &QNetworkAccessManager::deleteLater);
 
-    int id = insert_logbook_entry(x, bakery_id);
-
-    if(id) {
-        if(normal) {
-            query.prepare(QStringLiteral("INSERT INTO bollo_logbook_general VALUES(:1)"));
-            query.bindValue(":1", QVariant(id));
-        } else {
-            query.prepare(QStringLiteral("INSERT INTO bollo_logbook_problem VALUES(:1, :2)"));
-            query.bindValue(":1", QVariant(id));
-            query.bindValue(":2", QVariant(dough));
-        }
-
-        if(!query.exec()) {
-            qDebug() << query.lastError();
-            cerr << "Failed to execute\n";//TODO: Real logging.
-        }
-
-    } else {
-        //TODO: Add real loggin here
-        qDebug() << "Couldn't add the record!";
-        qDebug() << query.lastError();
-    }
-
-
-    mtx.release();
-    return *this;
+    manager->get(QNetworkRequest(url));
+    LOG(DEBUG) << "Sent: " + txt.toStdString();
 }
 
-/**
- * Saves an entry into the logbook associated to the specified
- * bakery.
- *
- * @param bakery_id int Bakery id.
- */
-LogBook& LogBook::general(int bakery_id) {
-    mtx.acquire();//One thread at a time
-    this->bakery_id = bakery_id;
-    this->normal = true;
-    return *this;
-}
+void Logger::send_logbook_problem(int bid, QString txt, int dough) {
+    LOG(DEBUG) << "Sending new logbook problem: " + txt.toStdString();
+    QNetworkAccessManager* manager = new QNetworkAccessManager(this);
 
-/**
- * Saves an entry into the logbook associated to the specified
- * bakery.
- *
- * @param bakery_id int Bakery id.
- */
-LogBook& LogBook::problem(int bakery_id, int dough) {
-    mtx.acquire();//One thread at a time
-    this->bakery_id = bakery_id;
-    this->dough = dough;
-    this->normal = false;
-    return *this;
-}
+    //Build the url
+    QHash<QString, QString> args;
+    args["id"] = QString::number(bid);
+    args["message"] = txt;
+    args["dough"] = QString::number(dough);
 
+    QUrl url;
+    url_builder(url, "reports", "report", args);
 
-int LogBook::insert_logbook_entry(QString d, int b) {
-    QSqlQuery query;
+    QObject::connect(manager, &QNetworkAccessManager::finished, manager, &QNetworkAccessManager::deleteLater);
 
-    query.prepare(QStringLiteral("INSERT INTO bollo_logbook " \
-                  "VALUES(DEFAULT, ?, DEFAULT, ?) RETURNING logbook_id"));
-
-    query.addBindValue(QVariant(d));
-    query.addBindValue(QVariant(b));
-
-    if(query.exec()) {
-        if(query.next()) {
-            return query.value(0).toInt();
-        }
-    }
-    //if it reaches here there were a problem.
-    return 0;
-
+    manager->get(QNetworkRequest(url));
+    LOG(DEBUG) << "Sent: " + txt.toStdString();
 }

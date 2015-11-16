@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>dialog</class>
+ <widget class="QDialog" name="dialog">
+  <property name="windowModality">
+   <enum>Qt::NonModal</enum>
+  </property>
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>333</width>
+    <height>279</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Panaderias</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../resources.qrc">
+    <normaloff>:/images/assets/hbread.png</normaloff>:/images/assets/hbread.png</iconset>
+  </property>
+  <property name="modal">
+   <bool>true</bool>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="createTab">
+      <attribute name="title">
+       <string>Nueva panaderia</string>
+      </attribute>
+      <widget class="QLabel" name="label">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>17</y>
+         <width>61</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Nombre</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="bakeryName">
+       <property name="geometry">
+        <rect>
+         <x>80</x>
+         <y>20</y>
+         <width>211</width>
+         <height>28</height>
+        </rect>
+       </property>
+       <property name="clearButtonEnabled">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_2">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>57</y>
+         <width>71</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Provincia</string>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="stateList">
+       <property name="geometry">
+        <rect>
+         <x>80</x>
+         <y>60</y>
+         <width>111</width>
+         <height>28</height>
+        </rect>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <item>
+        <property name="text">
+         <string>San Jose</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Alajuela</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Cartago</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Heredia</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Guanacaste</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Puntarenas</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Limon</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="QLabel" name="label_3">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>100</y>
+         <width>61</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Ciudad</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="bakeryCity">
+       <property name="geometry">
+        <rect>
+         <x>80</x>
+         <y>100</y>
+         <width>211</width>
+         <height>28</height>
+        </rect>
+       </property>
+       <property name="clearButtonEnabled">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="createBakeryBtn">
+       <property name="geometry">
+        <rect>
+         <x>210</x>
+         <y>190</y>
+         <width>85</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Crear</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="createBakeryStatus">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>180</y>
+         <width>191</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="editTab">
+      <attribute name="title">
+       <string>Editar Panaderia</string>
+      </attribute>
+      <widget class="QLabel" name="label_4">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>57</y>
+         <width>61</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Nombre</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="bakeryNameEdit">
+       <property name="geometry">
+        <rect>
+         <x>80</x>
+         <y>60</y>
+         <width>211</width>
+         <height>28</height>
+        </rect>
+       </property>
+       <property name="clearButtonEnabled">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="bakeryCityEdit">
+       <property name="geometry">
+        <rect>
+         <x>80</x>
+         <y>140</y>
+         <width>211</width>
+         <height>28</height>
+        </rect>
+       </property>
+       <property name="clearButtonEnabled">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="saveBakery">
+       <property name="geometry">
+        <rect>
+         <x>210</x>
+         <y>190</y>
+         <width>85</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Guardar</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_5">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>97</y>
+         <width>71</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Provincia</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_6">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>140</y>
+         <width>61</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Ciudad</string>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="stateListEdit">
+       <property name="geometry">
+        <rect>
+         <x>80</x>
+         <y>100</y>
+         <width>111</width>
+         <height>28</height>
+        </rect>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <item>
+        <property name="text">
+         <string>San Jose</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Alajuela</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Cartago</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Heredia</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Guanacaste</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Puntarenas</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Limon</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="QComboBox" name="bakeriesList">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>291</width>
+         <height>28</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="editBakeryStatus">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>180</y>
+         <width>191</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../resources.qrc"/>
+ </resources>
+ <connections/>
+</ui>

@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="windowModality">
+   <enum>Qt::WindowModal</enum>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>612</width>
+    <height>368</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string notr="true">Bitácora</string>
+  </property>
+  <property name="toolTip">
+   <string notr="true"/>
+  </property>
+  <property name="windowFilePath">
+   <string notr="true"/>
+  </property>
+  <property name="modal">
+   <bool>true</bool>
+  </property>
+  <widget class="QPushButton" name="qbClose">
+   <property name="geometry">
+    <rect>
+     <x>500</x>
+     <y>330</y>
+     <width>87</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string notr="true">Cerrar</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="qcbType">
+   <property name="geometry">
+    <rect>
+     <x>500</x>
+     <y>20</y>
+     <width>78</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="currentText">
+    <string notr="true">General</string>
+   </property>
+   <item>
+    <property name="text">
+     <string>General</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string notr="true">Problemas</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QStackedWidget" name="stackedWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>59</y>
+     <width>581</width>
+     <height>261</height>
+    </rect>
+   </property>
+   <property name="currentIndex">
+    <number>0</number>
+   </property>
+   <widget class="QWidget" name="page">
+    <widget class="QTableWidget" name="qtGeneral">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>561</width>
+       <height>241</height>
+      </rect>
+     </property>
+     <attribute name="horizontalHeaderDefaultSectionSize">
+      <number>100</number>
+     </attribute>
+     <row>
+      <property name="text">
+       <string>1</string>
+      </property>
+     </row>
+     <column>
+      <property name="text">
+       <string notr="true">Código</string>
+      </property>
+      <property name="toolTip">
+       <string notr="true"/>
+      </property>
+      <property name="whatsThis">
+       <string notr="true"/>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string notr="true">Panadería</string>
+      </property>
+      <property name="toolTip">
+       <string notr="true"/>
+      </property>
+      <property name="whatsThis">
+       <string notr="true"/>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string notr="true">Descripción</string>
+      </property>
+      <property name="toolTip">
+       <string notr="true"/>
+      </property>
+      <property name="whatsThis">
+       <string notr="true"/>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string notr="true">Fecha</string>
+      </property>
+      <property name="toolTip">
+       <string notr="true"/>
+      </property>
+      <property name="whatsThis">
+       <string notr="true"/>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string notr="true">Hora</string>
+      </property>
+      <property name="toolTip">
+       <string notr="true"/>
+      </property>
+      <property name="whatsThis">
+       <string notr="true"/>
+      </property>
+     </column>
+     <item row="0" column="0">
+      <property name="text">
+       <string notr="true">1</string>
+      </property>
+      <property name="toolTip">
+       <string notr="true"/>
+      </property>
+      <property name="whatsThis">
+       <string notr="true"/>
+      </property>
+     </item>
+     <item row="0" column="1">
+      <property name="text">
+       <string>Delipan Centro</string>
+      </property>
+     </item>
+     <item row="0" column="2">
+      <property name="text">
+       <string>Mezcla de ingredientes</string>
+      </property>
+     </item>
+     <item row="0" column="3">
+      <property name="text">
+       <string>30-10-2015</string>
+      </property>
+     </item>
+     <item row="0" column="4">
+      <property name="text">
+       <string>20:00:30</string>
+      </property>
+     </item>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="page_2">
+    <widget class="QTableWidget" name="qtProblem">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>561</width>
+       <height>241</height>
+      </rect>
+     </property>
+     <row>
+      <property name="text">
+       <string>1</string>
+      </property>
+     </row>
+     <column>
+      <property name="text">
+       <string>Código</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Panadería</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Descripción</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Cant. Masa</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Fecha</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Hora</string>
+      </property>
+     </column>
+     <item row="0" column="0">
+      <property name="text">
+       <string>2</string>
+      </property>
+     </item>
+     <item row="0" column="1">
+      <property name="text">
+       <string>Delipan</string>
+      </property>
+     </item>
+     <item row="0" column="2">
+      <property name="text">
+       <string>Restos fecales</string>
+      </property>
+     </item>
+     <item row="0" column="3">
+      <property name="text">
+       <string>15</string>
+      </property>
+     </item>
+     <item row="0" column="4">
+      <property name="text">
+       <string>30-10-2015</string>
+      </property>
+     </item>
+     <item row="0" column="5">
+      <property name="text">
+       <string>16:59:59</string>
+      </property>
+     </item>
+    </widget>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>qcbType</sender>
+   <signal>activated(int)</signal>
+   <receiver>stackedWidget</receiver>
+   <slot>setCurrentIndex(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>438</x>
+     <y>41</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>260</x>
+     <y>189</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

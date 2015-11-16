@@ -10,8 +10,11 @@
 #include <QtNetwork/QNetworkRequest>
 #include <QtNetwork/QNetworkReply>
 #include <QtCore/qjsondocument.h>
+#include <QtCore/qjsonobject.h>
+#include <QtWidgets/qmessagebox.h>
 
 #include "../core/bollo.h"
+#include "assets.h"
 #include "ui_headers/ui_logindialog.h"
 
 namespace Ui {
@@ -32,12 +35,14 @@ public slots:
 
     void on_qb_login_clicked();
 
-    void gotReply(QNetworkReply*);
+    void got_login_reply(QNetworkReply*);
+
+signals:
+    void logged_in();
 
 private:
     Ui::LoginDialog* ui;
     int user_id;
-    QNetworkAccessManager* manager;
 };
 
 #endif //BOLLO_LOGINDIALOG_H

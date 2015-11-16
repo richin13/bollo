@@ -1,12 +1,15 @@
 #include <iostream>
 #include <QApplication>
+#include <QDesktopServices>
 
 #include "mainwindow.h"
-#include "menuactionmanager.h"
 #include "telegramcpanel.h"
 #include "themes.h"
 #include "bakeryselect.h"
 #include "preferencespanel.h"
+#include "logbookdialog.h"
+#include "bakeryedit.h"
+#include "about.h"
 
 using namespace std;
 
@@ -27,8 +30,11 @@ MenuActionManager::~MenuActionManager() {
 
 void MenuActionManager::showBakeryList() {
 
-    BakerySelect* bakeryList = new BakerySelect ();
-    bakeryList->show();
+    BakerySelect*bakerySelect = new BakerySelect ();
+    bakerySelect->show();
+
+    connect(bakerySelect, SIGNAL(bakerySelected(int)), mainWindow, SLOT(showDashBoard(int)));
+    connect(bakerySelect, &QDialog::finished, bakerySelect, &BakerySelect::deleteLater);
 }
 
 void MenuActionManager::showGraphs() {
@@ -36,23 +42,25 @@ void MenuActionManager::showGraphs() {
 
 }
 
-void MenuActionManager::continueProcess() {
+void MenuActionManager::logBrowser() {
 
+    LogbookDialog* logbookDialog = new LogbookDialog;
+    logbookDialog->show();
+    connect(logbookDialog, &QDialog::finished, logbookDialog, &LogbookDialog::deleteLater);
+}
+
+void MenuActionManager::continueProcess() {
+    mainWindow->current_bakery->resume_operations();
 
 }
 
 void MenuActionManager::pauseProcess() {
-
+    mainWindow->current_bakery->stop_operations();
 
 }
 
 void MenuActionManager::cancelProcess() {
-
-
-}
-
-void MenuActionManager::showBakeryLog() {
-
+    mainWindow->current_bakery->stop_operations(true);
 
 }
 
@@ -65,12 +73,9 @@ void MenuActionManager::showBakeryLog() {
 
 void MenuActionManager::bakeryEdit() {
 
-
-}
-
-void MenuActionManager::signOut() {
-
-
+    BakeryEdit* bakeryEdit = new BakeryEdit();
+    bakeryEdit->show();
+    connect(bakeryEdit, &QDialog::finished, bakeryEdit, &BakeryEdit::deleteLater);
 }
 
 void MenuActionManager::exit() {
@@ -83,8 +88,8 @@ void MenuActionManager::exit() {
 
 void MenuActionManager::setDefaultTheme() {
 
-    Ui::setDefaultTheme();
-    mainWindow->setChecked(Ui::DEFAULT);
+    Ui::setLightTheme();
+    mainWindow->setChecked(Ui::LIGHT);
 }
 
 void MenuActionManager::setDarkTheme() {
@@ -93,23 +98,14 @@ void MenuActionManager::setDarkTheme() {
     mainWindow->setChecked(Ui::DARK);
 }
 
-void MenuActionManager::changePassword() {
-
-
-}
-
 void MenuActionManager::preferencesPanel() {
 
     PreferencesPanel* prefPanel = new PreferencesPanel();
     prefPanel->show();
+    connect(prefPanel, &QDialog::finished, prefPanel, &PreferencesPanel::deleteLater);
 }
 
 // ============ TOOLS MENU ================
-
-void MenuActionManager::logBrowser() {
-
-
-}
 
 void MenuActionManager::graphViewer() {
 
@@ -119,19 +115,21 @@ void MenuActionManager::graphViewer() {
 void MenuActionManager::telegramMenu() {
 
     TelegramCpanel* teleCpanel = new TelegramCpanel();
-
     teleCpanel->show();
+    connect(teleCpanel, &QDialog::finished, teleCpanel, &TelegramCpanel::deleteLater);
 }
 
 // ============ HELP MENU ================
 
 void MenuActionManager::about() {
 
-
+    About* about = new About();
+    about->show();
+    connect(about, &QDialog::finished, about, &About::deleteLater);
 }
 
 void MenuActionManager::help() {
 
-
+    QDesktopServices::openUrl(QUrl(HELP_URL));
 }
 

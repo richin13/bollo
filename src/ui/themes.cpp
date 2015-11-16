@@ -4,6 +4,7 @@
 
 #include "themes.h"
 #include "mainwindow.h"
+#include "../logger/easylogging++.h"
 
 /**
  * @brief Ui::setDarkTheme Modern GUI dark theme
@@ -35,21 +36,23 @@ void Ui::setDarkTheme() {
     qApp->setPalette(darkPalette);
 
     qApp->setStyleSheet("QToolTip { color: #ffffff; background-color: #2a82da; border: 1px solid white; }");
+    LOG(DEBUG) << "Changing UI theme to: DARK";
 }
 
 /**
- * @brief Ui::setDefaultTheme Default theme
+ * @brief Ui::setLightTheme Default theme
  * Reverts all the changes made by the dark theme
  * by setting the QT Fusion style and reseting
  * the stylesheet.
- *
- * WARNING: This theme cannot be used by default
- * since it required the mainWindow object to be
- * created. Fix coming soon.
  */
-void Ui::setDefaultTheme() {
+void Ui::setLightTheme() {
 
-    qApp->setPalette(qApp->activeWindow()->style()->standardPalette());
+    QMainWindow* dummy = new QMainWindow();
     qApp->setStyle(QStyleFactory::create("Fusion"));
+    qApp->setPalette(dummy->style()->standardPalette());
     qApp->setStyleSheet("");
+
+    dummy->deleteLater();
+
+    LOG(DEBUG) << "Changing UI theme to: LIGHT";
 }

@@ -46,6 +46,9 @@ public:
         if(LoginDialog->objectName().isEmpty())
             LoginDialog->setObjectName(QStringLiteral("LoginDialog"));
         LoginDialog->resize(273, 225);
+        LoginDialog->setWindowModality(Qt::ApplicationModal);
+        LoginDialog->setModal(true);
+
         verticalLayoutWidget_3 = new QWidget(LoginDialog);
         verticalLayoutWidget_3->setObjectName(QStringLiteral("verticalLayoutWidget_3"));
         verticalLayoutWidget_3->setGeometry(QRect(30, 30, 214, 160));

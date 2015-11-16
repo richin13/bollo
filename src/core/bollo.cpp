@@ -2,83 +2,121 @@
 // Created by ricardo on 11/10/15.
 //
 
-
-#include <QtWidgets/qmessagebox.h>
-#include <QtWidgets/qapplication.h>
 #include "bollo.h"
-#include "../logger/easylogging++.h"
+
 
 BolloApp::BolloApp() {
-    this->app_dir = new QDir(QDir().homePath() + "/bollo");
-
+    updater = new StatusUpdater();
     //TODO: Add a splash screen to make the whole process more user-friendly
-    /* The database connection - Only need to be done once */
-    init_database();
 
     /* The app settings stored at home directory */
     init_settings();
+
+    /* Fetch the information of the bakeries through the API - What happens when somebody adds a new bakery? */
+    load_bakeries();
+
+    /* Object connections */
+    connect(this, &BolloApp::destroyed, this, &BolloApp::deleteLater);
 }
 
+BolloApp::~BolloApp() {
+    LOG(DEBUG) << "Freeing allocated objects in BolloApp class";
+    emit application_exiting();
+    delete current_user;
 
-void BolloApp::init_database(void) {
-    LOG(INFO) << "Starting database server connection";
-    this->bollo_db = QSqlDatabase::addDatabase("QPSQL");
-    bollo_db.setHostName(HOST);
-    bollo_db.setDatabaseName(SCHEMA);
-    bollo_db.setUserName(USER);
-    bollo_db.setPassword(PASSWORD);
+    updater->deleteLater();
 
-    if(!bollo_db.open()) {
-        LOG(FATAL) << "Unable to reach the database server";
-        QMessageBox::critical(QApplication::activeWindow(),
-                              "Unable to connect to the database server",
-                              "An error occurred while trying to reach the PosgreSQL server");
+    ministry->terminate();
+    ministry->wait();
+
+    ministry->deleteLater();
+
+    ulong size = bakeries.size();
+
+    for(ulong i = 0; i < size; ++i) {
+        Bakery* b = bakeries.at(i);
+        b->stop();
+        b->wait();
+
+        b->deleteLater();
     }
 }
 
-//TODO: Load bakeries from DB >> Assigned to @Castle0721
+void BolloApp::load_bakeries() {
+    LOG(DEBUG) << "Loading bakeries through web API";
+    QNetworkAccessManager* manager = new QNetworkAccessManager(this);
 
-void BolloApp::init_settings(void) {
-    QString absolute_path = this->app_dir->absolutePath();
+    //Request all
+    QHash<QString, QString> args;
+    args["all"];
 
-    if(!this->app_dir->exists()) {
-        QDir().mkdir(absolute_path);
-        load_default_settings();
+    QUrl url;
+    url_builder(url, "bakeries", "bakery", args);
+    LOG(INFO) << "Sending GET request to " + url.toString().toStdString();
+
+    QObject::connect(manager, &QNetworkAccessManager::finished, this, &BolloApp::loaded_bakeries);
+    QObject::connect(manager, &QNetworkAccessManager::finished, manager, &QNetworkAccessManager::deleteLater);
+    manager->get(QNetworkRequest(url));
+}
+
+void BolloApp::loaded_bakeries(QNetworkReply* reply) {
+    QJsonObject jsonObject;
+
+    extract_json_object(reply, &jsonObject);
+
+    if(!jsonObject.take("code").toInt()) {
+        QJsonArray array = jsonObject.take("bakeries").toArray();
+        Handler::get_bakeries_vector(&bakeries, &array);
     } else {
-        QFileInfo config_file = QFileInfo(absolute_path + "/settings/bollo.ini");
-        if(!config_file.exists()) {
-            load_default_settings();
+        LOG(WARNING) << "Error code in response: " + jsonObject.take("message").toString().toStdString();
+    }
+    init_updater();
+    start_bakeries();
+    QObject::connect(reply, &QNetworkReply::finished, reply, &QNetworkReply::deleteLater);
+}
+
+void BolloApp::start_bakeries() {
+    LOG(INFO) << "Starting bakeries";
+    int size = (int) bakeries.size();
+
+    for(unsigned long i = 0; i < size; ++i) {
+        bakeries.at(i)->start();
+    }
+
+    init_ministry();
+}
+
+
+void BolloApp::init_ministry() {
+    LOG(INFO) << "Starting ministry thread";
+    ministry = new Ministry;
+    ministry->start();
+}
+
+void BolloApp::init_updater() {
+    LOG(DEBUG) << "Initialization of status updater";
+    int size = (int) bakeries.size();
+
+    for(unsigned long i = 0; i < size; ++i) {
+        Bakery* b = bakeries.at(i);
+        QObject::connect(b,
+                         &Bakery::operation_changed,
+                         updater,
+                         &StatusUpdater::updater);
+    }
+}
+
+const QString& BolloApp::get_bakery_name(int id) {
+    int size = (int) bakeries.size();
+
+    for(int i = 0; i < size; ++i) {
+        Bakery* current = bakeries.at((unsigned long) i);
+        if(current->get_id() == id) {
+            return current->get_name();
         }
     }
-}
 
-void BolloApp::load_default_settings(void) {
-    QString fullPath = this->app_dir->absolutePath() + "/settings/bollo.ini";
-
-    if(QFile::exists(fullPath)) {
-        QFile::remove(fullPath);
-    }
-
-    QFileInfo config_file = QFileInfo(fullPath);
-    QSettings bollo_settings(config_file.absoluteFilePath(), QSettings::NativeFormat);
-
-    /* Networking settings */
-    bollo_settings.beginGroup(QStringLiteral("Networking"));
-    bollo_settings.setValue(QStringLiteral("host_url"), QVariant(WEB_HOST));
-    bollo_settings.setValue(QStringLiteral("api_path"), QVariant(API_PATH));
-    bollo_settings.endGroup();
-
-    /* Db settings */
-    bollo_settings.beginGroup(QStringLiteral("Database"));
-    bollo_settings.setValue(QStringLiteral("db_host"), QVariant(HOST));
-    bollo_settings.setValue(QStringLiteral("db_user"), QVariant(USER));
-    bollo_settings.setValue(QStringLiteral("db_pass"), QVariant(PASSWORD));
-    bollo_settings.setValue(QStringLiteral("db_schema"), QVariant(SCHEMA));
-    bollo_settings.endGroup();
-}
-
-QString BolloApp::windowTittle() {
-    return QString("%1-[%2]_%3").arg(APP_NAME, CODENAME, VERSION);
+    return QStringLiteral("Not found");//Should never happen.
 }
 
 BolloApp& BolloApp::get() {

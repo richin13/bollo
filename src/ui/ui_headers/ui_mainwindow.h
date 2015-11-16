@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'mainwindowTi5290.ui'
+** Form generated from reading UI file 'mainwindowTi4882.ui'
 **
-** Created by: Qt User Interface Compiler version 5.5.1
+** Created by: Qt User Interface Compiler version 5.4.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef MAINWINDOWTI5290_H
-#define MAINWINDOWTI5290_H
+#ifndef MAINWINDOWTI4882_H
+#define MAINWINDOWTI4882_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
@@ -20,9 +20,9 @@
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QProgressBar>
-#include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolBar>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -50,6 +50,7 @@ public:
     QAction *actionEditBakerys;
     QAction *actionPreferencesPanel;
     QWidget *centralWidget;
+    QVBoxLayout *verticalLayout;
     QGroupBox *groupBox;
     QLabel *mixingIcon;
     QLabel *firstFermentIcon;
@@ -74,16 +75,13 @@ public:
     QLabel *title6;
     QLabel *title7;
     QLabel *title8;
-    QPushButton *incrementBtn;
     QLabel *statusLabel;
-    QLabel *timeRemainingLabel;
-    QLabel *elapsedTimeLabel;
     QLabel *createdBreadsLabel;
     QMenuBar *menubar;
     QMenu *menuFile;
     QMenu *menuEdit;
-    QMenu *menuTemas;
-    QMenu *menuLog;
+    QMenu *menuThemes;
+    QMenu *menuTools;
     QMenu *menuHelp;
     QStatusBar *statusbar;
     QToolBar *toolBar;
@@ -92,37 +90,41 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(1022, 552);
+        MainWindow->resize(1027, 552);
+        QIcon icon;
+        icon.addFile(QStringLiteral(":/images/assets/hbread.png"), QSize(), QIcon::Normal, QIcon::Off);
+        MainWindow->setWindowIcon(icon);
+        MainWindow->setWindowFilePath(QStringLiteral(""));
         actionBakeryList = new QAction(MainWindow);
         actionBakeryList->setObjectName(QStringLiteral("actionBakeryList"));
-        QIcon icon;
-        icon.addFile(QStringLiteral(":/images/assets/bread-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
-        actionBakeryList->setIcon(icon);
+        QIcon icon1;
+        icon1.addFile(QStringLiteral(":/images/assets/bread-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionBakeryList->setIcon(icon1);
         actionShowGraphs = new QAction(MainWindow);
         actionShowGraphs->setObjectName(QStringLiteral("actionShowGraphs"));
-        QIcon icon1;
-        icon1.addFile(QStringLiteral(":/images/assets/graph-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
-        actionShowGraphs->setIcon(icon1);
+        QIcon icon2;
+        icon2.addFile(QStringLiteral(":/images/assets/graph-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionShowGraphs->setIcon(icon2);
         actionContinueProcess = new QAction(MainWindow);
         actionContinueProcess->setObjectName(QStringLiteral("actionContinueProcess"));
-        QIcon icon2;
-        icon2.addFile(QStringLiteral(":/images/assets/continue-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
-        actionContinueProcess->setIcon(icon2);
+        QIcon icon3;
+        icon3.addFile(QStringLiteral(":/images/assets/continue-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionContinueProcess->setIcon(icon3);
         actionPauseProcess = new QAction(MainWindow);
         actionPauseProcess->setObjectName(QStringLiteral("actionPauseProcess"));
-        QIcon icon3;
-        icon3.addFile(QStringLiteral(":/images/assets/pause-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
-        actionPauseProcess->setIcon(icon3);
+        QIcon icon4;
+        icon4.addFile(QStringLiteral(":/images/assets/pause-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionPauseProcess->setIcon(icon4);
         actionCancelProcess = new QAction(MainWindow);
         actionCancelProcess->setObjectName(QStringLiteral("actionCancelProcess"));
-        QIcon icon4;
-        icon4.addFile(QStringLiteral(":/images/assets/cancel-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
-        actionCancelProcess->setIcon(icon4);
+        QIcon icon5;
+        icon5.addFile(QStringLiteral(":/images/assets/cancel-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionCancelProcess->setIcon(icon5);
         actionBakeryLog = new QAction(MainWindow);
         actionBakeryLog->setObjectName(QStringLiteral("actionBakeryLog"));
-        QIcon icon5;
-        icon5.addFile(QStringLiteral(":/images/assets/log-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
-        actionBakeryLog->setIcon(icon5);
+        QIcon icon6;
+        icon6.addFile(QStringLiteral(":/images/assets/log-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionBakeryLog->setIcon(icon6);
         actionAbout = new QAction(MainWindow);
         actionAbout->setObjectName(QStringLiteral("actionAbout"));
         actionHelp = new QAction(MainWindow);
@@ -153,9 +155,10 @@ public:
         actionPreferencesPanel->setObjectName(QStringLiteral("actionPreferencesPanel"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
+        verticalLayout = new QVBoxLayout(centralWidget);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         groupBox = new QGroupBox(centralWidget);
         groupBox->setObjectName(QStringLiteral("groupBox"));
-        groupBox->setGeometry(QRect(9, 9, 1004, 311));
         mixingIcon = new QLabel(groupBox);
         mixingIcon->setObjectName(QStringLiteral("mixingIcon"));
         mixingIcon->setGeometry(QRect(20, 60, 48, 48));
@@ -351,33 +354,27 @@ public:
         title8->setMaximumSize(QSize(120, 16777215));
         title8->setAlignment(Qt::AlignCenter);
         title8->setWordWrap(true);
-        incrementBtn = new QPushButton(groupBox);
-        incrementBtn->setObjectName(QStringLiteral("incrementBtn"));
-        incrementBtn->setGeometry(QRect(20, 260, 80, 21));
         statusLabel = new QLabel(groupBox);
         statusLabel->setObjectName(QStringLiteral("statusLabel"));
         statusLabel->setGeometry(QRect(20, 180, 111, 16));
-        timeRemainingLabel = new QLabel(groupBox);
-        timeRemainingLabel->setObjectName(QStringLiteral("timeRemainingLabel"));
-        timeRemainingLabel->setGeometry(QRect(20, 200, 151, 16));
-        elapsedTimeLabel = new QLabel(groupBox);
-        elapsedTimeLabel->setObjectName(QStringLiteral("elapsedTimeLabel"));
-        elapsedTimeLabel->setGeometry(QRect(20, 220, 151, 20));
         createdBreadsLabel = new QLabel(groupBox);
         createdBreadsLabel->setObjectName(QStringLiteral("createdBreadsLabel"));
-        createdBreadsLabel->setGeometry(QRect(220, 180, 111, 16));
+        createdBreadsLabel->setGeometry(QRect(20, 200, 111, 16));
+
+        verticalLayout->addWidget(groupBox);
+
         MainWindow->setCentralWidget(centralWidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QStringLiteral("menubar"));
-        menubar->setGeometry(QRect(0, 0, 1022, 26));
+        menubar->setGeometry(QRect(0, 0, 1027, 26));
         menuFile = new QMenu(menubar);
         menuFile->setObjectName(QStringLiteral("menuFile"));
         menuEdit = new QMenu(menubar);
         menuEdit->setObjectName(QStringLiteral("menuEdit"));
-        menuTemas = new QMenu(menuEdit);
-        menuTemas->setObjectName(QStringLiteral("menuTemas"));
-        menuLog = new QMenu(menubar);
-        menuLog->setObjectName(QStringLiteral("menuLog"));
+        menuThemes = new QMenu(menuEdit);
+        menuThemes->setObjectName(QStringLiteral("menuThemes"));
+        menuTools = new QMenu(menubar);
+        menuTools->setObjectName(QStringLiteral("menuTools"));
         menuHelp = new QMenu(menubar);
         menuHelp->setObjectName(QStringLiteral("menuHelp"));
         MainWindow->setMenuBar(menubar);
@@ -390,21 +387,20 @@ public:
 
         menubar->addAction(menuFile->menuAction());
         menubar->addAction(menuEdit->menuAction());
-        menubar->addAction(menuLog->menuAction());
+        menubar->addAction(menuTools->menuAction());
         menubar->addAction(menuHelp->menuAction());
         menuFile->addAction(actionNewBakery);
         menuFile->addAction(actionSignOut);
         menuFile->addSeparator();
         menuFile->addAction(actionExit);
-        menuEdit->addAction(actionChangePassword);
         menuEdit->addAction(actionEditBakerys);
-        menuEdit->addAction(menuTemas->menuAction());
+        menuEdit->addAction(menuThemes->menuAction());
         menuEdit->addAction(actionPreferencesPanel);
-        menuTemas->addAction(actionThemeLight);
-        menuTemas->addAction(actionThemeDark);
-        menuLog->addAction(actionLogBrowser);
-        menuLog->addAction(actionGraphViewer);
-        menuLog->addAction(actionTelegram);
+        menuThemes->addAction(actionThemeLight);
+        menuThemes->addAction(actionThemeDark);
+        menuTools->addAction(actionLogBrowser);
+        menuTools->addAction(actionGraphViewer);
+        menuTools->addAction(actionTelegram);
         menuHelp->addAction(actionAbout);
         menuHelp->addAction(actionHelp);
         toolBar->addAction(actionBakeryList);
@@ -423,7 +419,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Bollo - Pre-alpha [Codename: Ajonjoli]", 0));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Bollo - Pre-alpha [Codename: Baguette]", 0));
         actionBakeryList->setText(QApplication::translate("MainWindow", "bakeryList", 0));
 #ifndef QT_NO_TOOLTIP
         actionBakeryList->setToolTip(QApplication::translate("MainWindow", "Lista de panaderias", 0));
@@ -511,15 +507,12 @@ public:
         title6->setText(QApplication::translate("MainWindow", "Horneo", 0));
         title7->setText(QApplication::translate("MainWindow", "Venta", 0));
         title8->setText(QApplication::translate("MainWindow", "Distribucion", 0));
-        incrementBtn->setText(QApplication::translate("MainWindow", "Increment", 0));
         statusLabel->setText(QApplication::translate("MainWindow", "Estado:  ----", 0));
-        timeRemainingLabel->setText(QApplication::translate("MainWindow", "Tiempo restante:       --:--", 0));
-        elapsedTimeLabel->setText(QApplication::translate("MainWindow", "Tiempo transcurrido:  --:--", 0));
         createdBreadsLabel->setText(QApplication::translate("MainWindow", "Panes creados: ----", 0));
         menuFile->setTitle(QApplication::translate("MainWindow", "File", 0));
         menuEdit->setTitle(QApplication::translate("MainWindow", "Edit", 0));
-        menuTemas->setTitle(QApplication::translate("MainWindow", "Temas", 0));
-        menuLog->setTitle(QApplication::translate("MainWindow", "Tools", 0));
+        menuThemes->setTitle(QApplication::translate("MainWindow", "Temas", 0));
+        menuTools->setTitle(QApplication::translate("MainWindow", "Tools", 0));
         menuHelp->setTitle(QApplication::translate("MainWindow", "Help", 0));
         toolBar->setWindowTitle(QApplication::translate("MainWindow", "toolBar", 0));
     } // retranslateUi
@@ -532,4 +525,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // MAINWINDOWTI5290_H
+#endif // MAINWINDOWTI4882_H

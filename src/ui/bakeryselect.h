@@ -2,6 +2,7 @@
 #define BAKERYSELECT_H
 
 #include <QDialog>
+#include "../core/classes/bakery.h"
 
 namespace Ui {
 
@@ -20,10 +21,17 @@ public:
 private:
     Ui::bakerySelect *ui;
 
-    void checkAvailableBakeries();
+    void createBakerisList();
 
-    void addBakery(QString , QString, int);
+    void addBakery(const Bakery&);
     QWidget* createHorizontalLine();
+
+signals:
+    void bakerySelected(int);
+
+private slots:
+    void bakeryButtonClicked();
+
 };
 
 #endif // BAKERYSELECT_H

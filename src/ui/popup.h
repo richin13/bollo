@@ -1,27 +1,17 @@
 #ifndef POPUP_H
 #define POPUP_H
 
-#include <QDialog>
-#include <QString>
-namespace Ui {
+#include <string>
+#include "../logger/easylogging++.h"
 
-class Popup;
-}
+using namespace std;
 
-class Popup : public QDialog {
+void showPopup(string, string, string);
 
-    Q_OBJECT
+void showInfoPopup(string, string);
 
-public:
-    explicit Popup(QWidget *parent = 0);
-    void showPopup (QString title, QString message);
-    ~Popup();
+void showWarningPopup(string, string);
 
-private slots:
-    void on_closeButton_clicked();
-
-private:
-    Ui::Popup *ui;
-};
+void showQuestionPopup(string, string);
 
 #endif // POPUP_H
