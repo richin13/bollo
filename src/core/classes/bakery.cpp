@@ -390,7 +390,7 @@ void Bakery::set_up(void) {
     current_operation.progress = 0;
 
     LOG(DEBUG) << "Bakery [" + to_string(bakery_id) + "] being set up";
-
+    emit internal_oc();
     showInfoPopup("Panadería lista", bakery_name.toStdString() + " ha salido de cuarentena.");
 
     this->start();
