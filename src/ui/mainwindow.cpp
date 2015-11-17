@@ -120,7 +120,7 @@ void MainWindow::showDashBoard (int bakeryId) {
 
     // Set the status bar label (already in the status bar) in which the bakery name is displayed
     ui->statusBarLabel->setText(bakery);
-    this->setWindowTitle(this->windowTitle() + bakery);
+    this->setWindowTitle(WINDOW_TITLE + bakery);
 }
 
 /**
