@@ -62,6 +62,7 @@ void ChartsBrowser::loadPage(int bakeryIndex) {
  * Build the url need to acces de charts for each bakery in the server.
  */
 QUrl ChartsBrowser::buildUrl(int bakeryId) {
+    qDebug() << Constants::API_HOST + "/?charts=" + QString::number(bakeryId) + "&thisTextMustBeSuperSecret!__-___";
     return Constants::API_HOST + "/?charts=" + QString::number(bakeryId) + "&thisTextMustBeSuperSecret!__-___";
 }
 

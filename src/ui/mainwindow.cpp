@@ -136,14 +136,13 @@ void MainWindow::widgetsEnabled(bool status) {
 
     LOG(DEBUG) << "Setting widgets status: " << status;
 
-    ui->toolBar->setEnabled(status);
+    // Disable all tool bar actions except charts and log browsers.
+    ui->toolBar->actions().at(0)->setEnabled(status);
+    ui->toolBar->actions().at(3)->setEnabled(status);
+    ui->toolBar->actions().at(4)->setEnabled(status);
+    ui->toolBar->actions().at(5)->setEnabled(status);
 
-    // Edit bakeries action
-    ui->menuEdit->actions().at(2)->setEnabled(status);
-
-    // All tool menu actions
-    ui->menuTools->actions().at(0)->setEnabled(status);
-    ui->menuTools->actions().at(1)->setEnabled(status);
+    // Telegram menu
     ui->menuTools->actions().at(2)->setEnabled(status);
 
     ui->groupBox->setVisible(status);
