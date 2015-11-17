@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'graphbrowser.ui'
+** Form generated from reading UI file 'chartsbrowsern13091.ui'
 **
-** Created by: Qt User Interface Compiler version 5.5.1
+** Created by: Qt User Interface Compiler version 5.4.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef UI_GRAPHBROWSER_H
-#define UI_GRAPHBROWSER_H
+#ifndef CHARTSBROWSERN13091_H
+#define CHARTSBROWSERN13091_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
@@ -34,8 +34,11 @@ public:
     void setupUi(QDialog *ChartsBrowser)
     {
         if (ChartsBrowser->objectName().isEmpty())
-            ChartsBrowser->setObjectName(QStringLiteral("GraphBrowser"));
+            ChartsBrowser->setObjectName(QStringLiteral("ChartsBrowser"));
         ChartsBrowser->resize(808, 527);
+        QIcon icon;
+        icon.addFile(QStringLiteral(":/images/assets/hbread.png"), QSize(), QIcon::Normal, QIcon::Off);
+        ChartsBrowser->setWindowIcon(icon);
         verticalLayout_2 = new QVBoxLayout(ChartsBrowser);
         verticalLayout_2->setSpacing(6);
         verticalLayout_2->setContentsMargins(11, 11, 11, 11);
@@ -69,10 +72,10 @@ public:
 
     void retranslateUi(QDialog *ChartsBrowser)
     {
-        ChartsBrowser->setWindowTitle(QApplication::translate("GraphBrowser", "Navegador de Graficos", 0));
+        ChartsBrowser->setWindowTitle(QApplication::translate("ChartsBrowser", "Navegador de Graficos", 0));
         bakeriesList->clear();
         bakeriesList->insertItems(0, QStringList()
-                                     << QApplication::translate("GraphBrowser", "General", 0)
+                                     << QApplication::translate("ChartsBrowser", "General", 0)
         );
     } // retranslateUi
 
@@ -84,4 +87,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // UI_GRAPHBROWSER_H
+#endif // CHARTSBROWSERN13091_H

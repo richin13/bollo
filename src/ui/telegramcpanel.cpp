@@ -1,3 +1,11 @@
+/**
+ * @author Daniel Aguilar
+ * 
+ * Shows the instructions need to configure telebot to work
+ * with BolloApp. The user must enter the chat id with the bot,
+ * a message is send to check if its working, if its working
+ * the chat id is save to the database.
+ */
 #include <QString>
 #include <QDebug>
 

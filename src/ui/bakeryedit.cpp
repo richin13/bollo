@@ -1,3 +1,10 @@
+/**
+ * @author Daniel Aguilar
+ *
+ * Used to modify and create a new bakery. When a new bakery is created or modified a HTTP
+ * request is send to the server.
+ */
+
 #include "bakeryedit.h"
 #include "ui_headers/ui_bakeryedit.h"
 

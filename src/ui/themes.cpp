@@ -1,10 +1,14 @@
+/**
+ * @author Daniel Aguilar
+ *
+ * Color themes that can be applied to the GUI.
+ */
 #include <QApplication>
 #include <QStyleFactory>
 #include <QPalette>
 
 #include "themes.h"
 #include "mainwindow.h"
-#include "../logger/easylogging++.h"
 
 /**
  * @brief Ui::setDarkTheme Modern GUI dark theme

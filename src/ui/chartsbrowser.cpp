@@ -1,3 +1,10 @@
+/**
+ * @author Daniel Aguilar
+ *
+ * Used to browse the general charts or a bakery chart. Displays a dialog
+ * in which a a web page is displayed from the server.
+ */
+
 #include "chartsbrowser.h"
 #include "ui_headers/ui_chartsBrowser.h"
 

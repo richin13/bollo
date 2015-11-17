@@ -1,3 +1,9 @@
+/**
+ * @author Daniel Aguilar, Ricardo Madriz
+ *
+ * Dialog in which some app settings are applied, like API server url,
+ * database settings, and other bakery settings.
+ */
 #include <QDebug>
 
 #include "preferencespanel.h"

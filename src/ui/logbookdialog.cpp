@@ -1,7 +1,9 @@
-//
-// Created by ricardo on 30/10/15.
-//
-
+/**
+ * @author Ricardo Madriz, Daniel Aguilar
+ *
+ * Used to show all the bakeries events and problems,
+ * or view each problem or event for a specific bakery.
+ */
 
 #include "logbookdialog.h"
 

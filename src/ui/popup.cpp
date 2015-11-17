@@ -1,3 +1,11 @@
+/**
+ * @author Daniel Aguilar, Ricardo Madriz
+ *
+ * Simple wrapper used to make notifications to the user with libnotify library.
+ * A system call is made to the system, since this app is linux only we used this
+ * method in order to use less dependencies, since the libnotify library for C++
+ * it's not installed by default in most linux distros.
+ */
 #include "popup.h"
 
 void showPopup(string title, string msg, string icon) {

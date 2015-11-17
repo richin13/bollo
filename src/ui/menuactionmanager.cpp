@@ -1,3 +1,8 @@
+/**
+ * @author Daniel Aguilar, Ricardo Madriz
+ *
+ * All the menu actions (tool bar, menu bar) are connected to this class.
+ */
 #include <iostream>
 #include <QApplication>
 #include <QDesktopServices>

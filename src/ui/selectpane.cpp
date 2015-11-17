@@ -1,3 +1,9 @@
+/**
+ * @author Daniel Aguilar
+ *
+ * Shows a bakery list and chart viewer to the user after a successful login.
+ */
+
 #include <QtWebKitWidgets/QWebView>
 #include <QCommandLinkButton>
 
