@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'logbookdialogJy5106.ui'
+** Form generated from reading UI file 'logbookdialogVw5106.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.4.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef LOGBOOKDIALOGJY5106_H
-#define LOGBOOKDIALOGJY5106_H
+#ifndef LOGBOOKDIALOGVW5106_H
+#define LOGBOOKDIALOGVW5106_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
@@ -47,6 +47,9 @@ public:
         sizePolicy.setHeightForWidth(Dialog->sizePolicy().hasHeightForWidth());
         Dialog->setSizePolicy(sizePolicy);
         Dialog->setWindowTitle(QString::fromUtf8("Bit\303\241cora"));
+        QIcon icon;
+        icon.addFile(QStringLiteral(":/images/assets/hbread.png"), QSize(), QIcon::Normal, QIcon::Off);
+        Dialog->setWindowIcon(icon);
 #ifndef QT_NO_TOOLTIP
         Dialog->setToolTip(QStringLiteral(""));
 #endif // QT_NO_TOOLTIP
@@ -231,4 +234,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // LOGBOOKDIALOGJY5106_H
+#endif // LOGBOOKDIALOGVW5106_H

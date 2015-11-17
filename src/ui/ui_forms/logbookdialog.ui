@@ -22,6 +22,10 @@
   <property name="windowTitle">
    <string notr="true">Bitácora</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../resources.qrc">
+    <normaloff>:/images/assets/hbread.png</normaloff>:/images/assets/hbread.png</iconset>
+  </property>
   <property name="toolTip">
    <string notr="true"/>
   </property>
@@ -309,7 +313,9 @@
    </item>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="../resources.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>qcbType</sender>

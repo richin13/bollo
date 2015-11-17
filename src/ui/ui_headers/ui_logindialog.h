@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'logindialog.ui'
+** Form generated from reading UI file 'logindialogPu5106.ui'
 **
-** Created by: Qt User Interface Compiler version 5.5.1
+** Created by: Qt User Interface Compiler version 5.4.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef UI_LOGINDIALOG_H
-#define UI_LOGINDIALOG_H
+#ifndef LOGINDIALOGPU5106_H
+#define LOGINDIALOGPU5106_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
@@ -25,30 +25,33 @@
 
 QT_BEGIN_NAMESPACE
 
-class Ui_LoginDialog {
+class Ui_LoginDialog
+{
 public:
-    QWidget* verticalLayoutWidget_3;
-    QVBoxLayout* verticalLayout_3;
-    QVBoxLayout* verticalLayout_4;
-    QLabel* label;
-    QVBoxLayout* verticalLayout_5;
-    QFormLayout* formLayout;
-    QLabel* label_2;
-    QLineEdit* qle_username;
-    QLabel* label_3;
-    QLineEdit* qle_password;
-    QVBoxLayout* verticalLayout_6;
-    QHBoxLayout* horizontalLayout;
-    QPushButton* qb_login;
-    QPushButton* qb_exit;
+    QWidget *verticalLayoutWidget_3;
+    QVBoxLayout *verticalLayout_3;
+    QVBoxLayout *verticalLayout_4;
+    QLabel *label;
+    QVBoxLayout *verticalLayout_5;
+    QFormLayout *formLayout;
+    QLabel *label_2;
+    QLineEdit *qle_username;
+    QLabel *label_3;
+    QLineEdit *qle_password;
+    QVBoxLayout *verticalLayout_6;
+    QHBoxLayout *horizontalLayout;
+    QPushButton *qb_login;
+    QPushButton *qb_exit;
 
-    void setupUi(QDialog* LoginDialog) {
-        if(LoginDialog->objectName().isEmpty())
+    void setupUi(QDialog *LoginDialog)
+    {
+        if (LoginDialog->objectName().isEmpty())
             LoginDialog->setObjectName(QStringLiteral("LoginDialog"));
         LoginDialog->resize(273, 225);
-        LoginDialog->setWindowModality(Qt::ApplicationModal);
+        QIcon icon;
+        icon.addFile(QStringLiteral(":/images/assets/hbread.png"), QSize(), QIcon::Normal, QIcon::Off);
+        LoginDialog->setWindowIcon(icon);
         LoginDialog->setModal(true);
-
         verticalLayoutWidget_3 = new QWidget(LoginDialog);
         verticalLayoutWidget_3->setObjectName(QStringLiteral("verticalLayoutWidget_3"));
         verticalLayoutWidget_3->setGeometry(QRect(30, 30, 214, 160));
@@ -134,7 +137,8 @@ public:
         QMetaObject::connectSlotsByName(LoginDialog);
     } // setupUi
 
-    void retranslateUi(QDialog* LoginDialog) {
+    void retranslateUi(QDialog *LoginDialog)
+    {
         LoginDialog->setWindowTitle(QApplication::translate("LoginDialog", "LoginDialog", 0));
         label->setText(QString());
         label_2->setText(QApplication::translate("LoginDialog", "Usuario:", 0));
@@ -148,10 +152,9 @@ public:
 };
 
 namespace Ui {
-    class LoginDialog : public Ui_LoginDialog {
-    };
+    class LoginDialog: public Ui_LoginDialog {};
 } // namespace Ui
 
 QT_END_NAMESPACE
 
-#endif // UI_LOGINDIALOG_H
+#endif // LOGINDIALOGPU5106_H
