@@ -141,6 +141,7 @@ void MainWindow::widgetsEnabled(bool status) {
     ui->toolBar->actions().at(3)->setEnabled(status);
     ui->toolBar->actions().at(4)->setEnabled(status);
     ui->toolBar->actions().at(5)->setEnabled(status);
+    ui->toolBar->actions().at(6)->setEnabled(status);
 
     // Telegram menu
     ui->menuTools->actions().at(2)->setEnabled(status);
