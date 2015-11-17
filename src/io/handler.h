@@ -16,10 +16,8 @@ class Bakery;
 struct _operation;
 
 class Handler {
-private:
-    static QString get_province_name(int code);
-
 public:
+    static QString get_province_name(int code);
     static void get_bakeries_vector(std::vector<Bakery*>* const b, QJsonArray* const array);
 };
 

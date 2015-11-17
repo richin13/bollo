@@ -81,7 +81,8 @@ void MenuActionManager::bakeryEdit() {
 void MenuActionManager::exit() {
 
     // Implement proper application closing action.
-    qApp->quit();
+//    qApp->quit();
+    QApplication::quit();
 }
 
 // ============ EDIT MENU ================

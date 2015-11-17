@@ -141,25 +141,27 @@ void BakeryEdit::gotCreateReply(QNetworkReply *reply) {
     QJsonObject object;
     extract_json_object(reply, &object);
 
-    int replyCode = object.take("code").toInt();
+    if(!object.take("code").toInt()) {
+        QJsonObject _bk = object.take("bakery").toObject();
 
-    switch(replyCode) {
+        //information
+        int id = _bk.take("id").toInt();
+        QString name = _bk.take("name").toString();
+        QString province = Handler::get_province_name(_bk.take("province").toInt());
+        QString city = _bk.take("city").toString();
+        int stock = _bk.take("stock").toInt();
+        int progress = _bk.take("progress").toInt();
+        QString status = _bk.take("status").toString();
+        Bakery* new_bakery = new Bakery((unsigned int) id, name, province, city, stock, progress, status);
+        BolloApp::get().bakeries.push_back(new_bakery);
 
-        case 0:
-            setStatus(Ui::CREATE, Ui::OK, "Panaderia creada satisfactoriamente");
-            LOG(INFO) << "Bakery created succesfully";
-            break;
-
-        case 1:
-            setStatus(Ui::CREATE, Ui::ERROR, "Ocurrio un error al crear la panaderia o ya existe");
-            LOG(WARNING) << "An error ocurred while creating bakery or the bakery already exist";
-            break;
-
-        case 15:
-            setStatus(Ui::CREATE, Ui::ERROR, "Fatal error");
-            LOG(DEBUG) << "Missing parameters at create bakery request";
-            break;
+        setStatus(Ui::CREATE, Ui::OK, "Panaderia creada satisfactoriamente");
+        LOG(INFO) << "Bakery created succesfully";
+    } else {
+        setStatus(Ui::CREATE, Ui::ERROR, "Ocurrio un error al crear la panaderia o ya existe");
+        LOG(WARNING) << "An error ocurred while creating bakery or the bakery already exist";
     }
+
 
     connect(reply, &QNetworkReply::finished, reply, &QNetworkReply::deleteLater);
 }
@@ -170,7 +172,6 @@ void BakeryEdit::setStatus(Ui::Mode mode , Ui::Status status, QString message) {
     QString fontColor;
 
     if (mode == Ui::CREATE) {
-
         statusLabel = ui->createBakeryStatus;
     }
 
