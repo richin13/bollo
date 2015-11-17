@@ -683,12 +683,12 @@ QProgressBar::chunk {
         <rect>
          <x>20</x>
          <y>180</y>
-         <width>111</width>
+         <width>341</width>
          <height>16</height>
         </rect>
        </property>
        <property name="text">
-        <string>Estado:  ----</string>
+        <string>Estado:</string>
        </property>
       </widget>
       <widget class="QLabel" name="createdBreadsLabel">
@@ -696,12 +696,12 @@ QProgressBar::chunk {
         <rect>
          <x>20</x>
          <y>200</y>
-         <width>111</width>
+         <width>151</width>
          <height>16</height>
         </rect>
        </property>
        <property name="text">
-        <string>Panes creados: ----</string>
+        <string>Panes creados:</string>
        </property>
       </widget>
      </widget>

@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'mainwindowTi4882.ui'
+** Form generated from reading UI file 'mainwindowBb5106.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.4.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef MAINWINDOWTI4882_H
-#define MAINWINDOWTI4882_H
+#ifndef MAINWINDOWBB5106_H
+#define MAINWINDOWBB5106_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
@@ -60,6 +60,7 @@ public:
     QLabel *bakingIcon;
     QLabel *shippedIcon;
     QLabel *onSaleIcon;
+    QLabel *statusBarLabel;
     QProgressBar *firstFermentBar;
     QProgressBar *doughDivisionBar;
     QProgressBar *doughFormingBar;
@@ -207,6 +208,7 @@ public:
         onSaleIcon->setMinimumSize(QSize(48, 48));
         onSaleIcon->setMaximumSize(QSize(48, 48));
         onSaleIcon->setPixmap(QPixmap(QString::fromUtf8(":/images/assets/pending-icon.png")));
+        statusBarLabel = new QLabel();
         firstFermentBar = new QProgressBar(groupBox);
         firstFermentBar->setObjectName(QStringLiteral("firstFermentBar"));
         firstFermentBar->setGeometry(QRect(70, 80, 81, 6));
@@ -356,10 +358,10 @@ public:
         title8->setWordWrap(true);
         statusLabel = new QLabel(groupBox);
         statusLabel->setObjectName(QStringLiteral("statusLabel"));
-        statusLabel->setGeometry(QRect(20, 180, 111, 16));
+        statusLabel->setGeometry(QRect(20, 180, 341, 16));
         createdBreadsLabel = new QLabel(groupBox);
         createdBreadsLabel->setObjectName(QStringLiteral("createdBreadsLabel"));
-        createdBreadsLabel->setGeometry(QRect(20, 200, 111, 16));
+        createdBreadsLabel->setGeometry(QRect(20, 200, 151, 16));
 
         verticalLayout->addWidget(groupBox);
 
@@ -507,8 +509,8 @@ public:
         title6->setText(QApplication::translate("MainWindow", "Horneo", 0));
         title7->setText(QApplication::translate("MainWindow", "Venta", 0));
         title8->setText(QApplication::translate("MainWindow", "Distribucion", 0));
-        statusLabel->setText(QApplication::translate("MainWindow", "Estado:  ----", 0));
-        createdBreadsLabel->setText(QApplication::translate("MainWindow", "Panes creados: ----", 0));
+        statusLabel->setText(QApplication::translate("MainWindow", "Estado:", 0));
+        createdBreadsLabel->setText(QApplication::translate("MainWindow", "Panes creados:", 0));
         menuFile->setTitle(QApplication::translate("MainWindow", "File", 0));
         menuEdit->setTitle(QApplication::translate("MainWindow", "Edit", 0));
         menuThemes->setTitle(QApplication::translate("MainWindow", "Temas", 0));
@@ -525,4 +527,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // MAINWINDOWTI4882_H
+#endif // MAINWINDOWBB5106_H

@@ -16,6 +16,7 @@ namespace Ui {
  */
 #define MAX_BAR_VALUE 99
 #define MIN_BAR_VALUE 0
+#define WINDOW_TITLE "Bollo - Pre-alpha [Codename: Croissant] "
 
 /**
  * Value used to set the progress bars

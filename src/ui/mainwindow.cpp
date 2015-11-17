@@ -27,6 +27,7 @@ MainWindow::~MainWindow() {
     delete ui;
 
     if(!loadingGif) {
+
         delete loadingGif;
     }
 }
@@ -49,7 +50,10 @@ void MainWindow::applySettings() {
     // By default disable toolbar and dashboard
     widgetsEnabled(false);
 
+    // Set select pane pointer to null
     selectPane = nullptr;
+
+    ui->statusbar->addPermanentWidget(ui->statusBarLabel);
 }
 
 /**
@@ -110,6 +114,13 @@ void MainWindow::showDashBoard (int bakeryId) {
     // Set bakery operations
     connectBakeriesOperations();
     change_bakery_displayed(bakeryId);
+
+    // Set the selected bakery name in status bar and window title
+    QString bakery = "Panaderia: " + current_bakery->get_name();
+
+    // Set the status bar label (already in the status bar) in which the bakery name is displayed
+    ui->statusBarLabel->setText(bakery);
+    this->setWindowTitle(WINDOW_TITLE + bakery);
 }
 
 /**
@@ -272,8 +283,6 @@ void MainWindow::setChecked(Ui::Theme theme) {
     }
 }
 
-// TODO: Connect all the remaining widgets
-
 /**
  * The connect tool bar & connect menu actions are called here to start connecting
  * the actions to each function in MenuActionManager.
@@ -369,6 +378,13 @@ void MainWindow::progress_operation(_operation current_operation) {
     if (this->current_bakery->get_id() == current_operation.bakery_id) {
 
 //        LOG(DEBUG) << "Setting the GUI for Bakery with ID: " << to_string(this->current_bakery->get_id());
+
+        // Set "created breads label" and "status label"
+        ui->statusLabel->setText("Estado: " + current_operation.description
+                                 + " (" + QString::number(current_operation.progress % 100) + "%)");
+
+        ui->createdBreadsLabel->setText("Panes creados: " + QString::number(current_operation.stock));
+
         setProgressBar(current_operation.progress);
     }
 }

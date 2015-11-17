@@ -19,7 +19,7 @@ class LogbookDialog : public QDialog {
 Q_OBJECT
 
 public:
-    explicit LogbookDialog(QWidget* parent = 0);
+    LogbookDialog(QWidget* parent = 0);
     ~LogbookDialog();
     void load_events(int filtering = 0);
     void load_problems(int filtering = 0);
@@ -29,9 +29,11 @@ private slots:
     void setup_events(const QJsonArray&);
     void loaded_problems(QNetworkReply*);
     void setup_problems(const QJsonArray&);
+    void filter(int);
 
 private:
     Ui::LogbookDialog* ui;
+    void fillBakeryListComboBox();
 };
 
 
