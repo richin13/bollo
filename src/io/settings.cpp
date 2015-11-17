@@ -5,7 +5,7 @@
 #include "settings.h"
 
 /**
- * @brief Method used to retrieve the basic Bollo configuration stored
+ * Method used to retrieve the basic Bollo configuration stored
  * in a file at user's home. In case that such file does not exists, it
  * will create a new one.
  */
@@ -29,7 +29,7 @@ void init_settings(void) {
 }
 
 /**
- * @brief Method used to generated a default settings file when
+ * Method used to generated a default settings file when
  * a previous one is not found in the user's home directory.
  */
 void load_default_settings(void) {
@@ -58,7 +58,7 @@ void load_default_settings(void) {
 }
 
 /**
- * @brief Method used to load the stored settings of the app.
+ * Method used to load the stored settings of the app.
  */
 void load_settings(void) {
     QString cf_path = config_file_path();
@@ -77,7 +77,7 @@ void load_settings(void) {
 }
 
 /**
- * @brief Method the returns the absolute path of settings folder at
+ * Method the returns the absolute path of settings folder at
  * user's home directory.
  * @return A string with the absolute path to settings folder.
  */
@@ -87,7 +87,7 @@ QString config_file_path() {
 }
 
 /**
- * @brief Sets a new configuration at the specified group. See QSettings API
+ * Sets a new configuration at the specified group. See QSettings API
  *  documentation for details about 'groups'.
  * @group The setting group.
  * @key The key of the setting.
@@ -103,7 +103,7 @@ void set_setting(const QString& group, const QString& key, const QVariant& value
 }
 
 /**
- * @brief Retrieves the value of a specific setting at a specific group.
+ * Retrieves the value of a specific setting at a specific group.
  *  See QSettings API documentation for details about 'groups'
  * @param group The setting group.
  * @param key The key of the setting.

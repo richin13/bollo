@@ -15,6 +15,11 @@ class Bakery;
 
 struct _operation;
 
+/**
+ * Helper class to handle a API response.
+ *
+ * @author Ricardo Madriz
+ */
 class Handler {
 public:
     static QString get_province_name(int code);

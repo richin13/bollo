@@ -5,7 +5,7 @@
 #include "baker.h"
 
 /**
- * @brief Runs the baker to perform a cleaning after a bakery leaves quarantine.
+ * Runs the baker to perform a cleaning after a bakery leaves quarantine.
  */
 void Baker::run() {
     QThread::sleep(10);
@@ -17,7 +17,7 @@ void Baker::run() {
 }
 
 /**
- * @brief Activate the baker in order to find any pollutant in the bakery.
+ * Activate the baker in order to find any pollutant in the bakery.
  * @param op Struct that contains the bakery's operation information.
  */
 void Baker::find_pollutants(_operation op) {
@@ -39,7 +39,7 @@ void Baker::find_pollutants(_operation op) {
 }
 
 /**
- * @brief Starts the bakery cleaning
+ * Starts the bakery cleaning
  */
 void Baker::start_clean() {
     LOG(DEBUG) << "Starting to clean bakery";

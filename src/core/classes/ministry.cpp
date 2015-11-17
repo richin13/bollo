@@ -8,7 +8,7 @@
 #define RAID_FREQUENCY 20000000
 
 /**
- * @brief The class destructor.
+ * The class destructor.
  */
 Ministry::~Ministry() {
     delete logbook;
@@ -16,7 +16,7 @@ Ministry::~Ministry() {
 }
 
 /**
- * @brief Run method of Ministry of health thread.
+ * Run method of Ministry of health thread.
  */
 void Ministry::run() {
     while(!stopped) {
@@ -43,14 +43,14 @@ void Ministry::run() {
 }
 
 /**
- * @brief Stops the execution of ministry thread.
+ * Stops the execution of ministry thread.
  */
 void Ministry::stop() {
     stopped = true;
 }
 
 /**
- * @brief Run of Quarantine thread.
+ * Run of Quarantine thread.
  */
 void Quarantine::run() {
     LOG(DEBUG) << "Entering quarantine [" + to_string(bakery->get_id()) + "]";
@@ -74,7 +74,7 @@ void Quarantine::run() {
 }
 
 /**
- * @brief Slot used to notify when a bakery is leaving quarantine.
+ * Slot used to notify when a bakery is leaving quarantine.
  */
 void Quarantine::notify_exit_quarantine() {
     emit exiting_quarantine();

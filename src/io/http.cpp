@@ -6,7 +6,7 @@
 #include "http.h"
 
 /**
- * @brief Builds a new URL to make a request to it.
+ * Builds a new URL to make a request to it.
  * @param section API section to use in the URL.
  * @param module API module to use in the URL.
  * @param args QHash that contains the parameters of the url query.
@@ -28,7 +28,7 @@ void url_builder(QUrl& url, QString section, QString module, QHash<QString, QStr
 }
 
 /**
- * @brief Extracts the json object from a server response/reply.
+ * Extracts the json object from a server response/reply.
  * @param rep Server raw reply.
  * @param json Pointer to a JsonObject where the information will be stored.
  */
@@ -37,7 +37,7 @@ void extract_json_object(QNetworkReply* rep, QJsonObject* json) {
 }
 
 /**
- * @brief Slot used to update the bakery status by sending a GET request
+ * Slot used to update the bakery status by sending a GET request
  * to the API server.
  * @param op The operation information.
  */
@@ -60,7 +60,7 @@ void StatusUpdater::updater(_operation op) {
 }
 
 /**
- * @brief Slot used to send the stock information of a bakery to the API
+ * Slot used to send the stock information of a bakery to the API
  *  server.
  *  @para op The current operation information.
  */
@@ -80,7 +80,7 @@ void StatusUpdater::stock_updater(_operation op) {
 }
 
 /**
- * @brief Slot used to report any API error comming from server response.
+ * Slot used to report any API error comming from server response.
  * @reply Raw reply from server.
  */
 void StatusUpdater::notifier(QNetworkReply* reply) {

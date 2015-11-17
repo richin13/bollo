@@ -21,6 +21,12 @@
 #include "../core/operations.h"
 #include "../core/bollo_constants.h"
 
+/**
+ * Class used to communicate with the API server to notify
+ * about a bakery status change.
+ *
+ * @author Ricardo Madriz
+ */
 class StatusUpdater : public QObject {
 Q_OBJECT
 public:

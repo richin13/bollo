@@ -7,7 +7,7 @@
 #include "../../io/settings.h"
 
 /**
- * @brief Run method of 'Yeast' thread. Used to determine whether
+ * Run method of 'Yeast' thread. Used to determine whether
  * a batch is affected by contaminated yeast or not.
  */
 void Yeast::run() {
@@ -21,7 +21,7 @@ void Yeast::run() {
 }
 
 /**
- * @brief Algorithm that performs a yeast selection based of the current
+ * Algorithm that performs a yeast selection based of the current
  * stage of bread production in a bakery. The bad yeast can only appear or
  * be detected when dough is being fermented so here we decide if the bad
  * yeast with strike at the initial ferment of dough or the final one.
@@ -46,7 +46,7 @@ void Yeast::select_yeast(_operation op) {
 }
 
 /**
- * @brief Checks whether the yeast is contaminated or not.
+ * Checks whether the yeast is contaminated or not.
  * @return true if the yeast is contaminated, false otherwise.
  */
 bool Yeast::isContaminated() const {

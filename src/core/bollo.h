@@ -36,6 +36,13 @@ class Bakery;
 
 class Ministry;
 
+/**
+ * This is the central class of Bollo application,
+ * here converges all the modules to make the application
+ * functional.
+ *
+ * @author Ricardo Madriz
+ */
 class BolloApp : public QObject {
 Q_OBJECT
 private:

@@ -5,7 +5,7 @@
 #include "bakery.h"
 
 /**
- * @brief Copy constructor of class Bakery
+ * Copy constructor of class Bakery
  * @param cpy Another bakery instance.
  */
 Bakery::Bakery(const Bakery& cpy) {
@@ -21,7 +21,7 @@ Bakery::Bakery(const Bakery& cpy) {
 }
 
 /**
- * @brief Class destructor
+ * Class destructor
  */
 Bakery::~Bakery() {
     delete baker;
@@ -31,7 +31,7 @@ Bakery::~Bakery() {
 }
 
 /**
- * @brief Gets the bakery id.
+ * Gets the bakery id.
  * @return The bakery id.
  */
 unsigned int Bakery::get_id() const {
@@ -39,7 +39,7 @@ unsigned int Bakery::get_id() const {
 }
 
 /**
- * @brief Gets the bakery name.
+ * Gets the bakery name.
  * @return The bakery name
  */
 const QString& Bakery::get_name() const {
@@ -47,7 +47,7 @@ const QString& Bakery::get_name() const {
 }
 
 /**
- * @brief Gets the bakery state.
+ * Gets the bakery state.
  * @return The bakery state
  */
 QString Bakery::get_state() const {
@@ -55,7 +55,7 @@ QString Bakery::get_state() const {
 }
 
 /**
- * @brief Gets the bakery city.
+ * Gets the bakery city.
  * @return The bakery city
  */
 QString Bakery::get_city() const {
@@ -63,7 +63,7 @@ QString Bakery::get_city() const {
 }
 
 /**
- * @brief Gets the bakery stock.
+ * Gets the bakery stock.
  * @return The bakery stock
  */
 int Bakery::get_stock() const {
@@ -71,14 +71,14 @@ int Bakery::get_stock() const {
 }
 
 /**
- * @brief Stops the execution of bakery thread.
+ * Stops the execution of bakery thread.
  */
 void Bakery::stop() {
     stopped = true;
 }
 
 /**
- * @brief Gets the bakery's current operation struct.
+ * Gets the bakery's current operation struct.
  * @return The bakery's current operation struct.
  */
 const _operation& Bakery::get_current_op() const {
@@ -86,7 +86,7 @@ const _operation& Bakery::get_current_op() const {
 }
 
 /**
- * @brief Sets a new bakery current operation.
+ * Sets a new bakery current operation.
  * @param operation Struct with the new operation information.
  */
 void Bakery::set_current_op(const _operation& operation) {
@@ -94,7 +94,7 @@ void Bakery::set_current_op(const _operation& operation) {
 }
 
 /**
- * @brief Checks wheter the bakery is closed down or not.
+ * Checks wheter the bakery is closed down or not.
  * @return true if the bakery is closed down, false otherwise.
  */
 bool Bakery::is_closed_down() const {
@@ -102,7 +102,7 @@ bool Bakery::is_closed_down() const {
 }
 
 /**
- * @brief Gets the bakery's baker.
+ * Gets the bakery's baker.
  * @return A baker pointer.
  */
 Baker* Bakery::get_baker() const {
@@ -110,7 +110,7 @@ Baker* Bakery::get_baker() const {
 }
 
 /**
- * @brief The first stage of bread production.
+ * The first stage of bread production.
  * @param _start If specified, the process is started at _start value
  * in order the retrieve a previuos status of the bakery.
  */
@@ -134,7 +134,7 @@ void Bakery::mix_ingredients(int _start) {
 }
 
 /**
- * @brief Second stage of bakery production.
+ * Second stage of bakery production.
  * @param _start If specified, the process is started at _start value
  *  in order the retrieve a previuos status of the bakery.
  * @param _final_f If specified, it will perform the final
@@ -166,7 +166,7 @@ void Bakery::ferment_dough(int _start, bool _final_f) {
 }
 
 /**
- * @brief Third stage of bakery production.
+ * Third stage of bakery production.
  * @param _start If specified, the process is started at _start value
  * in order the retrieve a previuos status of the bakery.
  */
@@ -189,7 +189,7 @@ void Bakery::divide_dough(int _start) {
 }
 
 /**
- * @brief The forth stage of bread production.
+ * The forth stage of bread production.
  * @param _start If specified, the process is started at _start value
  * in order the retrieve a previuos status of the bakery.
  */
@@ -212,7 +212,7 @@ void Bakery::shape_dough(int _start) {
 }
 
 /**
- * @brief The sixth stage of bread production.
+ * The sixth stage of bread production.
  * @param _start If specified, the process is started at _start value
  * in order the retrieve a previuos status of the bakery.
  */
@@ -241,7 +241,7 @@ void Bakery::bake_bread(int _start) {
 }
 
 /**
- * @brief The seventh stage of bread production.
+ * The seventh stage of bread production.
  * @param _start If specified, the process is started at _start value
  * in order the retrieve a previuos status of the bakery.
  */
@@ -270,7 +270,7 @@ void Bakery::sell_bread(int _start) {
 }
 
 /**
- * @brief The eighth stage of bread production.
+ * The eighth stage of bread production.
  * @param _start If specified, the process is started at _start value
  * in order the retrieve a previuos status of the bakery.
  */
@@ -299,7 +299,7 @@ void Bakery::distribute_bread(int _start) {
 }
 
 /**
- * @brief Use to stop the bread production at the bakery.
+ * Use to stop the bread production at the bakery.
  * @param forever Set this parameter to true to delete the whole process. False
  * to pause it.
  */
@@ -323,7 +323,7 @@ void Bakery::stop_operations(bool f) {
 }
 
 /**
- * @brief Resume the bread production at the bakery.
+ * Resume the bread production at the bakery.
  */
 void Bakery::resume_operations(void) {
     if(stopped) {
@@ -341,7 +341,7 @@ void Bakery::resume_operations(void) {
 }
 
 /**
- * @brief Slot called when 'Bad yeast' thread attacks!
+ * Slot called when 'Bad yeast' thread attacks!
  */
 void Bakery::bad_yeast(void) {
     stopped = true;
@@ -361,7 +361,7 @@ void Bakery::bad_yeast(void) {
 }
 
 /**
- * @brief Method called by the Ministry of Health when it
+ * Method called by the Ministry of Health when it
  *  detects a sanity problem in a bakery.
  */
 void Bakery::close_down(void) {
@@ -380,7 +380,7 @@ void Bakery::close_down(void) {
 }
 
 /**
- * @brief Method called by the Baker in order to make the bakery
+ * Method called by the Baker in order to make the bakery
  * functional one more time after a close down.
  */
 void Bakery::set_up(void) {
@@ -397,7 +397,7 @@ void Bakery::set_up(void) {
 }
 
 /**
- * @brief Slot that select whether a 'status_changed' notification
+ * Slot that select whether a 'status_changed' notification
  * must be send to the server or not. It is specially useful to
  * avoid the operation_changed signal being overloaded hence other
  * application components do not get its correspondent buffers full
@@ -418,7 +418,7 @@ void Bakery::select_notification() {
 }
 
 /**
- * @brief The run of the Bakery thread.
+ * The run of the Bakery thread.
  */
 void Bakery::run() {
     bool first_time = true;

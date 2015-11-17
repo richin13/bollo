@@ -19,6 +19,16 @@
 
 #define LAPSE_TIME 90000
 
+/**
+ * Bakery class
+ * Here all the bread production process occur in a sequential
+ * way, every time a new process start the information corresponding
+ * the new process starting is send to the API server.
+ * Also, every single step inside a process is notified through a
+ * signal to the GUI in order to perform the necessary GUI-refreshing.
+ *
+ * @author Ricardo Madriz
+ */
 class Bakery : public QThread {
 Q_OBJECT
 private:

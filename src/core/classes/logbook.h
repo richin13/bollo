@@ -8,6 +8,11 @@
 
 #include <QtCore/qstring.h>
 
+/**
+ * This class contains the information of a Logbook entry.
+ *
+ * @author Ricardo Madriz
+ */
 class Logbook {
 protected:
     /**
@@ -84,6 +89,12 @@ public:
     bool operator==(const QString&);//Compare to bakery name!
 };
 
+/**
+ * This class contains the information of a logbook problem entry.
+ * @see Logbook
+ *
+ * @author Ricardo Madriz
+ */
 class LogbookProblem : public Logbook {
 private:
     int dough;

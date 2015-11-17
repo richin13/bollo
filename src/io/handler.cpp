@@ -5,8 +5,8 @@
 #include "handler.h"
 
 /**
- * @brief Given a positive number returns the name of the
- * Costa Rican province that is represented by such integer.
+ * Given a positive number returns the name of the
+ * Costa Rica province that is represented by such integer.
  * @param code The province code.
  * @return The province name.
  */
@@ -33,7 +33,7 @@ QString Handler::get_province_name(int code) {
 }
 
 /**
- * @brief Translated a QJsonArray object into a std::vector that
+ * Translated a QJsonArray object into a std::vector that
  * contains the information of all the bakeries.
  */
 void Handler::get_bakeries_vector(std::vector<Bakery*>* const b,

@@ -7,6 +7,12 @@
 #ifndef BOLLO_STOCK_UPDATER_H
 #define BOLLO_STOCK_UPDATER_H
 
+/**
+ * Class used to communicate with the API server to notify
+ * about bakery's production.
+ *
+ * @author Ricardo Madriz
+ */
 class ProductionUpdater : public QObject {
 Q_OBJECT
 

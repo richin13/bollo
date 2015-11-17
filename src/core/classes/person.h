@@ -7,6 +7,13 @@
 
 #include <QtCore/qstring.h>
 
+/**
+ * Class that contains the information of the logged in user.
+ *
+ * This is useless, btw.
+ *
+ * @author Ricardo Madriz
+ */
 class Person {
 
 private:
@@ -38,12 +45,12 @@ private:
 
 public:
     /**
-     * @brief Empty constructor of the class.
+     * Empty constructor of the class.
      */
     Person();
 
     /**
-     * @brief Parametrized constructor of the class
+     * Parametrized constructor of the class
      * @param id The id
      * @param first_name The first name.
      * @param last_name The last name.

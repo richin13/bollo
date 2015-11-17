@@ -11,17 +11,23 @@
 #include "../io/http.h"
 #include "easylogging++.h"
 
+/**
+ * Class used to communicate with the API server to notify
+ * about a bakery process change.
+ *
+ * @author Ricardo Madriz
+ */
 class Logger : public QObject {
 Q_OBJECT
 public:
 
     /**
-     * @brief Class constructor.
+     * Class constructor.
      */
     Logger() { }
 
     /**
-     * @brief Class destructor.
+     * Class destructor.
      */
     ~Logger() { }
 

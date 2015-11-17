@@ -7,20 +7,28 @@
 
 #include <QtCore/qstring.h>
 
+/**
+ * Class that contains all the constants of the application.
+ * Those constants are widely available through all the code
+ * and are not actually 'constants' as defined in C++ programming
+ * language, but constants for the application execution.
+ *
+ * @author Ricardo Madriz
+ */
 class Constants {
 private:
     /**
-     * @brief Class constructor
+     * Class constructor
      */
     Constants() { }
 
     /**
-     * @brief Class destructor.
+     * Class destructor.
      */
     ~Constants() { }
 
     /**
-     * @brief Copy constructor
+     * Copy constructor
      */
     Constants(const Constants&) { }
 

@@ -16,6 +16,12 @@
 
 struct _operation;
 
+/**
+ * Baker class, this handles the pollutants found in a bakery,
+ * also a baker is invoked when the bakery is exiting quarantine.
+ *
+ * @author Ricardo Madriz
+ */
 class Baker : public QThread {
 Q_OBJECT
 private:
@@ -38,7 +44,7 @@ private:
 public:
 
     /**
-     * @brief Baker constructor.
+     * Baker constructor.
      * @param _name The name of the bakery where this baker works
      */
     Baker(const QString _name) : bakery_name(_name) {

@@ -5,7 +5,7 @@
 #include "bollo.h"
 
 /**
- * @brief Class constructor.
+ * Class constructor.
  */
 BolloApp::BolloApp() {
     updater = new StatusUpdater();
@@ -22,7 +22,7 @@ BolloApp::BolloApp() {
 }
 
 /**
- * @brief Class destructor.
+ * Class destructor.
  */
 BolloApp::~BolloApp() {
     LOG(DEBUG) << "Freeing allocated objects in BolloApp class";
@@ -43,7 +43,7 @@ BolloApp::~BolloApp() {
 }
 
 /**
- * @brief Method that sends a GET request to the API server
+ * Method that sends a GET request to the API server
  * in order the fetch the information of the bakeries stored
  * at the database.
  */
@@ -65,7 +65,7 @@ void BolloApp::load_bakeries() {
 }
 
 /**
- * @brief Slot invoked once the information of the bakeries have arrived
+ * Slot invoked once the information of the bakeries have arrived
  * from API server.
  * @param reply Object that contains the response information.
  */
@@ -86,7 +86,7 @@ void BolloApp::loaded_bakeries(QNetworkReply* reply) {
 }
 
 /**
- * @brief Method used to start the execution of every individual bakery.
+ * Method used to start the execution of every individual bakery.
  */
 void BolloApp::start_bakeries() {
     LOG(INFO) << "Starting bakeries";
@@ -100,7 +100,7 @@ void BolloApp::start_bakeries() {
 }
 
 /**
- * @brief Method used to start the execution of the 'Ministry of health'
+ * Method used to start the execution of the 'Ministry of health'
  *  thread.
  */
 void BolloApp::init_ministry() {
@@ -110,7 +110,7 @@ void BolloApp::init_ministry() {
 }
 
 /**
- * @brief Method used to connect the status updater with every bakery.
+ * Method used to connect the status updater with every bakery.
  */
 void BolloApp::init_updater() {
     LOG(DEBUG) << "Initialization of status updater";
@@ -126,7 +126,7 @@ void BolloApp::init_updater() {
 }
 
 /**
- * @brief Gets the literal name of a given bakery.
+ * Gets the literal name of a given bakery.
  * @param id The bakery id
  * @return the name of the bakery with the id provided.
  */
@@ -144,7 +144,7 @@ const QString& BolloApp::get_bakery_name(int id) {
 }
 
 /**
- * @brief Singletton pattern.
+ * Singletton pattern.
  * @return A copy of this instance.
  */
 BolloApp& BolloApp::get() {

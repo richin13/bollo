@@ -18,6 +18,13 @@
 
 class Bakery;
 
+/**
+ * Thread that performs a random raid on a bakery in order to find
+ * any major salubrity problem. In case it finds something will
+ * close the bakery down.
+ *
+ * @author Ricardo Madriz
+ */
 class Ministry : public QThread {
 Q_OBJECT
 private:
@@ -34,7 +41,7 @@ private:
 public:
 
     /**
-     * @brief The class constructor.
+     * The class constructor.
      */
     Ministry() {
         logbook = new Logger;
@@ -51,6 +58,13 @@ signals:
     void notify_(int, QString);
 };
 
+/**
+ * Thread invoked when a bakery is found contaminated by
+ * the Ministry thread. It will put the bakery in a 'pause' state,
+ * after that time, will invoke the Baker in order to clean the bakery.
+ *
+ * @author Ricardo Madriz
+ */
 class Quarantine : public QThread {
 Q_OBJECT
 private:
@@ -65,14 +79,14 @@ private:
     Logger* logbook;
 
     /**
-     * @brief Class constructor. Private because bakery pointer is necessary.
+     * Class constructor. Private because bakery pointer is necessary.
      */
     Quarantine() { }
 
 public:
 
     /**
-     * @brief Quarantine class constructor.
+     * Quarantine class constructor.
      * @param _bak Bakery that is entering quarantine.
      */
     Quarantine(Bakery* _bak) : bakery(_bak) {
@@ -81,7 +95,7 @@ public:
     }
 
     /**
-     * @brief Class destructor.
+     * Class destructor.
      */
     ~Quarantine() {
         delete logbook;

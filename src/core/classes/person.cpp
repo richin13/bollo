@@ -7,7 +7,7 @@
 Person::Person() { }
 
 /**
- * @brief Gets the person's id.
+ * Gets the person's id.
  * @return The person id.
  */
 int Person::getId() const {
@@ -15,7 +15,7 @@ int Person::getId() const {
 }
 
 /**
- * @brief Gets the person's first name.
+ * Gets the person's first name.
  * @return The person first name.
  */
 const QString &Person::getFirst_name() const {
@@ -23,7 +23,7 @@ const QString &Person::getFirst_name() const {
 }
 
 /**
- * @brief Gets the person's last name.
+ * Gets the person's last name.
  * @return The person last name.
  */
 const QString &Person::getLast_name() const {
@@ -31,7 +31,7 @@ const QString &Person::getLast_name() const {
 }
 
 /**
- * @brief Gets the person's username.
+ * Gets the person's username.
  * @return The person username.
  */
 const QString &Person::getUsername() const {
@@ -39,7 +39,7 @@ const QString &Person::getUsername() const {
 }
 
 /**
- * @brief Gets the person's email address.
+ * Gets the person's email address.
  * @return The person email address.
  */
 const QString &Person::getEmail() const {
