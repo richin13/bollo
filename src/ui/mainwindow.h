@@ -46,6 +46,8 @@ public:
     ~MainWindow();
 
     void setChecked(Ui::Theme);
+    void pause_process(int progress);
+    void continue_process(int progress);
 
 signals:
     void setProgBarValue(int);
@@ -54,6 +56,7 @@ private slots:
     void exitApp();
     void showSelectPane();
     void signOut();
+    void start_cleaning();
 
 public slots:
     void progress_operation(_operation current_operation);
@@ -75,6 +78,7 @@ private:
     void setClosureIcon(QLabel* );
     void setInactiveIcon(QLabel* );
     void setQuarantineIcon(QLabel* );
+    void setPauseIcon(QLabel* );
 
     //*********Connects**********//
     void connectWidgets();

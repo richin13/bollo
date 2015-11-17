@@ -264,6 +264,13 @@ void MainWindow::setQuarantineIcon(QLabel *label) {
     label->setPixmap(QPixmap(Ui::QUARANTINE_ICON));
 }
 
+
+void MainWindow::setPauseIcon(QLabel *label) {
+
+    label->setPixmap(QPixmap(Ui::IDLE_ICON));
+}
+
+
 /**
  * @brief MainWindow::setChecked Encapsulates theme action
  * toggle box to be toggled by other objects.
@@ -650,6 +657,13 @@ void MainWindow::update_bakery_operations(_operation bakery_progress) {
 }
 
 
+void MainWindow::start_cleaning() {
+
+    LOG(DEBUG) << "Exiting of quarantine || Bakery: " + this->current_bakery->get_name().toStdString() + " ****";
+    clean_all();
+}
+
+
 void MainWindow::update_from_bread_distribution() {
     set_mixIngredients_progress(MAX_BAR_VALUE);
     set_firstFermentBar(MAX_BAR_VALUE);
@@ -921,4 +935,69 @@ void MainWindow::set_quarantine_bakery() {
     setQuarantineIcon(ui->bakingIcon);
     setQuarantineIcon(ui->onSaleIcon);
     setQuarantineIcon(ui->shippedIcon);
+}
+
+
+void MainWindow::continue_process(int progress) {
+
+    switch(progress / 100) {
+
+        case 0 : setLoadingGif(ui->mixingIcon);
+            break;
+
+        case 1 : setLoadingGif(ui->firstFermentIcon);
+            break;
+
+        case 2 : setLoadingGif(ui->doughDivisionIcon);
+            break;
+
+        case 3 : setLoadingGif(ui->doughFormingIcon);
+            break;
+
+        case 4 : setLoadingGif(ui->finalFermentIcon);
+            break;
+
+        case 5 : setLoadingGif(ui->bakingIcon);
+            break;
+
+        case 6 : setLoadingGif(ui->onSaleIcon);
+            break;
+
+        case 7 : setLoadingGif(ui->shippedIcon);
+            break;
+
+    }
+}
+
+
+void MainWindow::pause_process(int progress) {
+
+    switch(progress / 100) {
+
+        case 0 : setPauseIcon(ui->mixingIcon);
+            break;
+
+        case 1 : setPauseIcon(ui->firstFermentIcon);
+            break;
+
+        case 2 : setPauseIcon(ui->doughDivisionIcon);
+            break;
+
+        case 3 : setPauseIcon(ui->doughFormingIcon);
+            break;
+
+        case 4 : setPauseIcon(ui->finalFermentIcon);
+            break;
+
+        case 5 : setPauseIcon(ui->bakingIcon);
+            break;
+
+        case 6 : setPauseIcon(ui->onSaleIcon);
+            break;
+
+        case 7 : setPauseIcon(ui->shippedIcon);
+            break;
+
+    }
+
 }
