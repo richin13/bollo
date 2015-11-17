@@ -1,7 +1,9 @@
-//
-// Created by ricardo on 12/10/15.
-//
-
+/**
+ * @author Ricardo Madriz
+ *
+ * Simple login dialog, in which the user credentials are validated by sending
+ * a HTTP request to the server and validating the server response code.
+ */
 
 #include "logindialog.h"
 

@@ -8,7 +8,12 @@
 #include <QDesktopWidget>
 #include <QMovie>
 
-int value = 0;
+/**
+ * @author Daniel Aguilar
+ *
+ * All the MainWindow functions used to set settings, update dashboard, and connect
+ * widgets are located here.
+ */
 
 MainWindow::MainWindow(QWidget* parent) :
         QMainWindow(parent), ui(new Ui::MainWindow) {
@@ -168,7 +173,7 @@ void MainWindow::setLoadingGif(QLabel* label) {
 }
 
 /**
- * @brief MainWindow::setDoneIcon Set a "done" icon in the
+ * @param MainWindow::setDoneIcon Set a "done" icon in the
  * specied label (icon)
  * @param label Where the icon is going to be set.
  *

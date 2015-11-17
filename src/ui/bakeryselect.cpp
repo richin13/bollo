@@ -1,9 +1,15 @@
+/**
+ * @author Daniel Aguilar
+ *
+ * A simple Dialog in which the bakery list is shown, when a bakery is clicked
+ * a signal is emitted to notify @see MainWindow that a bakery was selected.
+ */
+
 #include <QCommandLinkButton>
 
 #include "bakeryselect.h"
 #include "ui_headers/ui_bakeryselect.h"
 #include "assets.h"
-#include "../core/bollo.h"
 
 BakerySelect::BakerySelect(QWidget *parent) : QDialog(parent),
     ui(new Ui::bakerySelect) {
