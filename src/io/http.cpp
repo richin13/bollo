@@ -27,10 +27,20 @@ void url_builder(QUrl& url, QString section, QString module, QHash<QString, QStr
 
 }
 
+/**
+ * @brief Extracts the json object from a server response/reply.
+ * @param rep Server raw reply.
+ * @param json Pointer to a JsonObject where the information will be stored.
+ */
 void extract_json_object(QNetworkReply* rep, QJsonObject* json) {
     *json = QJsonDocument::fromJson(rep->readAll()).object();
 }
 
+/**
+ * @brief Slot used to update the bakery status by sending a GET request
+ * to the API server.
+ * @param op The operation information.
+ */
 void StatusUpdater::updater(_operation op) {
     QNetworkAccessManager* manager = new QNetworkAccessManager(this);
 
@@ -49,7 +59,11 @@ void StatusUpdater::updater(_operation op) {
     if(op.progress / 100 > 4) stock_updater(op);
 }
 
-
+/**
+ * @brief Slot used to send the stock information of a bakery to the API
+ *  server.
+ *  @para op The current operation information.
+ */
 void StatusUpdater::stock_updater(_operation op) {
     QNetworkAccessManager* manager = new QNetworkAccessManager(this);
 
@@ -65,6 +79,10 @@ void StatusUpdater::stock_updater(_operation op) {
     manager->get(QNetworkRequest(url));
 }
 
+/**
+ * @brief Slot used to report any API error comming from server response.
+ * @reply Raw reply from server.
+ */
 void StatusUpdater::notifier(QNetworkReply* reply) {
     QJsonObject object;
 

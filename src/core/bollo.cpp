@@ -4,7 +4,9 @@
 
 #include "bollo.h"
 
-
+/**
+ * @brief Class constructor.
+ */
 BolloApp::BolloApp() {
     updater = new StatusUpdater();
     //TODO: Add a splash screen to make the whole process more user-friendly
@@ -19,6 +21,9 @@ BolloApp::BolloApp() {
     connect(this, &BolloApp::destroyed, this, &BolloApp::deleteLater);
 }
 
+/**
+ * @brief Class destructor.
+ */
 BolloApp::~BolloApp() {
     LOG(DEBUG) << "Freeing allocated objects in BolloApp class";
 
@@ -37,6 +42,11 @@ BolloApp::~BolloApp() {
     delete ministry;
 }
 
+/**
+ * @brief Method that sends a GET request to the API server
+ * in order the fetch the information of the bakeries stored
+ * at the database.
+ */
 void BolloApp::load_bakeries() {
     LOG(DEBUG) << "Loading bakeries through web API";
     QNetworkAccessManager* manager = new QNetworkAccessManager(this);
@@ -54,6 +64,11 @@ void BolloApp::load_bakeries() {
     manager->get(QNetworkRequest(url));
 }
 
+/**
+ * @brief Slot invoked once the information of the bakeries have arrived
+ * from API server.
+ * @param reply Object that contains the response information.
+ */
 void BolloApp::loaded_bakeries(QNetworkReply* reply) {
     QJsonObject jsonObject;
 
@@ -70,6 +85,9 @@ void BolloApp::loaded_bakeries(QNetworkReply* reply) {
     QObject::connect(reply, &QNetworkReply::finished, reply, &QNetworkReply::deleteLater);
 }
 
+/**
+ * @brief Method used to start the execution of every individual bakery.
+ */
 void BolloApp::start_bakeries() {
     LOG(INFO) << "Starting bakeries";
     int size = (int) bakeries.size();
@@ -81,13 +99,19 @@ void BolloApp::start_bakeries() {
     init_ministry();
 }
 
-
+/**
+ * @brief Method used to start the execution of the 'Ministry of health'
+ *  thread.
+ */
 void BolloApp::init_ministry() {
     LOG(INFO) << "Starting ministry thread";
     ministry = new Ministry;
     ministry->start();
 }
 
+/**
+ * @brief Method used to connect the status updater with every bakery.
+ */
 void BolloApp::init_updater() {
     LOG(DEBUG) << "Initialization of status updater";
     int size = (int) bakeries.size();
@@ -101,6 +125,11 @@ void BolloApp::init_updater() {
     }
 }
 
+/**
+ * @brief Gets the literal name of a given bakery.
+ * @param id The bakery id
+ * @return the name of the bakery with the id provided.
+ */
 const QString& BolloApp::get_bakery_name(int id) {
     int size = (int) bakeries.size();
 
@@ -114,6 +143,10 @@ const QString& BolloApp::get_bakery_name(int id) {
     return QStringLiteral("Not found");//Should never happen.
 }
 
+/**
+ * @brief Singletton pattern.
+ * @return A copy of this instance.
+ */
 BolloApp& BolloApp::get() {
     static BolloApp instance;
     return instance;

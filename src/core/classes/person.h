@@ -8,48 +8,64 @@
 #include <QtCore/qstring.h>
 
 class Person {
+
 private:
+
+    /**
+     * The person's id.
+     */
     int id;
+
+    /**
+     * The person's first name.
+     */
     QString first_name;
+
+    /**
+     * The person's last name.
+     */
     QString last_name;
+
+    /**
+     * The person's username.
+     */
     QString username;
+
+    /**
+     * The person's email.
+     */
     QString email;
-    QString telegram;//TODO: Either the telegram number or the user.
 
 public:
+    /**
+     * @brief Empty constructor of the class.
+     */
     Person();
 
+    /**
+     * @brief Parametrized constructor of the class
+     * @param id The id
+     * @param first_name The first name.
+     * @param last_name The last name.
+     * @param username The username.
+     * @param email The email address.
+     */
     Person(int id, const QString &first_name,
            const QString &last_name,
            const QString &username,
-           const QString &email,
-           const QString &telegram = "") :
+           const QString& email) :
             id(id), first_name(first_name), last_name(last_name),
-            username(username), email(email), telegram(telegram) { };
+            username(username), email(email) { };
 
     int getId() const;
 
-    void setId(int id);
-
     const QString &getFirst_name() const;
-
-    void setFirst_name(const QString);
 
     const QString &getLast_name() const;
 
-    void setLast_name(const QString);
-
     const QString &getUsername() const;
 
-    void setUsername(const QString);
-
     const QString &getEmail() const;
-
-    void setEmail(const QString);
-
-    const QString &getTelegram() const;
-
-    void setTelegram(const QString);
 };
 
 

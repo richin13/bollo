@@ -15,8 +15,14 @@ class Logger : public QObject {
 Q_OBJECT
 public:
 
+    /**
+     * @brief Class constructor.
+     */
     Logger() { }
 
+    /**
+     * @brief Class destructor.
+     */
     ~Logger() { }
 
 public slots:

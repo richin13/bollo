@@ -12,9 +12,20 @@
 class Yeast : public QThread {
 Q_OBJECT
 private:
+
+    /**
+     * A flag that determines whether the yeast is
+     * contaminated or not.
+     */
     bool contaminated;
+
 public:
-    Yeast();
+    /**
+     * @brief Empty constructor of class.
+     */
+    Yeast() {
+        contaminated = false;
+    }
 
     virtual void run() override;
 

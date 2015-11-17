@@ -7,7 +7,7 @@
 #ifndef BOLLO_STOCK_UPDATER_H
 #define BOLLO_STOCK_UPDATER_H
 
-class StockUpdater : public QObject {
+class ProductionUpdater : public QObject {
 Q_OBJECT
 
 public slots:

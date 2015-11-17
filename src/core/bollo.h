@@ -57,15 +57,27 @@ private:
 
 public:
     /* User information */
+    /**
+     * The logged in user.
+     */
     Person* current_user;
 
     /* Application data */
+    /**
+     * A vector that holds all the bakeries being managed with Bollo.
+     */
     std::vector<Bakery*> bakeries;
 
     /* Status updater */
+    /**
+     * The bakery status updater.
+     */
     StatusUpdater* updater;
 
     /* Ministry of health */
+    /**
+     * 'Ministry of health' thread.
+     */
     Ministry* ministry;
 
     static BolloApp& get();
