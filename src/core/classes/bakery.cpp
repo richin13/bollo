@@ -442,8 +442,8 @@ void Bakery::run() {
                 case 8:
                 case 11:
                     stopped = true;
-                    break;
                     emit operation_changed(current_operation);
+                    break;
                 case 9:
                 case 10: {
                     stopped = true;

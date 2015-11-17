@@ -1,7 +1,6 @@
 #include "ui_headers/ui_mainwindow.h"
 #include "../logger/easylogging++.h"
 #include "mainwindow.h"
-#include "menuactionmanager.h"
 #include "themes.h"
 #include "assets.h"
 #include "logindialog.h"
@@ -385,15 +384,11 @@ void MainWindow::signOut() {
  */
 void MainWindow::progress_operation(_operation current_operation) {
 
-
-//    std::string request = "*** Current Bakery ID: " + to_string(this->current_bakery->get_id()) + " Request from Bakery with ID: " + to_string(current_operation.bakery_id) + " ***";
-//    LOG(DEBUG) << request;
-
     if (this->current_bakery->get_id() == current_operation.bakery_id) {
+        if(!current_operation.progress) {//if progress is 0
+            clean_all();
+        }
 
-//        LOG(DEBUG) << "Setting the GUI for Bakery with ID: " << to_string(this->current_bakery->get_id());
-
-        // Set "created breads label" and "status label"
         ui->statusLabel->setText("Estado: " + current_operation.description
                                  + " (" + QString::number(current_operation.progress % 100) + "%)");
 
