@@ -33,7 +33,7 @@ void Baker::find_pollutants(_operation op) {
             QString text = "Se encontró " + pollutants.at(qrand() % pollutants.size());
 
             emit found_pollutants(op.bakery_id, text, (qrand() % (dough - 1)) + 1);
-            showInfoPopup("Contaminante", text.toStdString());
+            showInfoPopup(bakery_name.toStdString(), text.toStdString());
         }
     }
 }

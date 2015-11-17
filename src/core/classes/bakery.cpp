@@ -326,14 +326,18 @@ void Bakery::stop_operations(bool f) {
  * @brief Resume the bread production at the bakery.
  */
 void Bakery::resume_operations(void) {
-    stopped = false;
+    if(stopped) {
+        stopped = false;
 
-    if(current_operation.progress / 100 == 11 || current_operation.progress / 100 == 8) {
-        current_operation.progress = 0;
+        if(current_operation.progress / 100 == 11 || current_operation.progress / 100 == 8) {
+            current_operation.progress = 0;
+        }
+
+        this->start();
+        LOG(DEBUG) << "Bakery [" + to_string(bakery_id) + "] started";
+    } else {
+        showInfoPopup(bakery_name.toStdString(), "La panadería ya se encuentra corriendo");
     }
-
-    this->start();
-    LOG(DEBUG) << "Bakery [" + to_string(bakery_id) + "] started";
 }
 
 /**
