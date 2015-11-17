@@ -27,76 +27,42 @@
 
 QT_BEGIN_NAMESPACE
 
-class Ui_MainWindow
-{
+class Ui_MainWindow {
 public:
-    QAction *actionBakeryList;
-    QAction *actionShowGraphs;
-    QAction *actionContinueProcess;
-    QAction *actionPauseProcess;
-    QAction *actionCancelProcess;
-    QAction *actionBakeryLog;
-    QAction *actionAbout;
-    QAction *actionHelp;
-    QAction *actionNewBakery;
-    QAction *actionExit;
-    QAction *actionSignOut;
-    QAction *actionLogBrowser;
-    QAction *actionGraphViewer;
-    QAction *actionTelegram;
-    QAction *actionThemeLight;
-    QAction *actionThemeDark;
-    QAction *actionChangePassword;
-    QAction *actionEditBakerys;
-    QAction *actionPreferencesPanel;
-    QWidget *centralWidget;
-    QVBoxLayout *verticalLayout;
-    QGroupBox *groupBox;
-    QLabel *mixingIcon;
-    QLabel *firstFermentIcon;
-    QLabel *doughDivisionIcon;
-    QLabel *doughFormingIcon;
-    QLabel *finalFermentIcon;
-    QLabel *bakingIcon;
-    QLabel *shippedIcon;
-    QLabel *onSaleIcon;
-    QLabel *statusBarLabel;
-    QProgressBar *firstFermentBar;
-    QProgressBar *doughDivisionBar;
-    QProgressBar *doughFormingBar;
-    QProgressBar *finalFermentBar;
-    QProgressBar *bakingBar;
-    QProgressBar *onSaleBar;
-    QProgressBar *shippedBar;
-    QLabel *title1;
-    QLabel *title2;
-    QLabel *title3;
-    QLabel *title4;
-    QLabel *title5;
-    QLabel *title6;
-    QLabel *title7;
-    QLabel *title8;
-    QLabel *statusLabel;
-    QLabel *createdBreadsLabel;
-    QLabel *bakeryName;
-    QMenuBar *menubar;
-    QMenu *menuFile;
-    QMenu *menuEdit;
-    QMenu *menuThemes;
-    QMenu *menuTools;
-    QMenu *menuHelp;
-    QStatusBar *statusbar;
-    QToolBar *toolBar;
+    QAction* actionBakeryList, * actionShowGraphs, * actionContinueProcess, * actionPauseProcess;
+    QAction* actionCancelProcess, * actionBakeryLog, * actionAbout, * actionHelp, * actionNewBakery;
+    QAction* actionExit, * actionSignOut, * actionLogBrowser, * actionGraphViewer, * actionTelegram;
+    QAction* actionThemeLight, * actionThemeDark, * actionChangePassword, * actionEditBakeries, * actionPreferencesPanel;
 
-    void setupUi(QMainWindow *MainWindow)
-    {
-        if (MainWindow->objectName().isEmpty())
+    QWidget* centralWidget;
+    QVBoxLayout* verticalLayout;
+    QGroupBox* groupBox;
+
+    QLabel* mixingIcon, * firstFermentIcon, * doughDivisionIcon, * doughFormingIcon, * finalFermentIcon;
+    QLabel* bakingIcon, * shippedIcon, * onSaleIcon;
+    QLabel *statusBarLabel;
+
+    QProgressBar* firstFermentBar, * doughDivisionBar, * doughFormingBar, * finalFermentBar;
+    QProgressBar* bakingBar, * onSaleBar, * shippedBar;
+
+    QLabel* title1, * title2, * title3, * title4, * title5, * title6, * title7, * title8;
+    QLabel* statusLabel, * createdBreadsLabel, * bakeryName;
+
+    QMenuBar* menuBar;
+    QMenu* menuFile, * menuEdit, * menuThemes, * menuTools, * menuHelp;
+    QStatusBar* statusbar;
+    QToolBar* toolBar;
+
+    void setupUi(QMainWindow* MainWindow) {
+        if(MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
         MainWindow->resize(1027, 552);
+        MainWindow->setWindowTitle(QStringLiteral("Bollo"));
         QIcon icon;
         icon.addFile(QStringLiteral(":/images/assets/hbread.png"), QSize(), QIcon::Normal, QIcon::Off);
         MainWindow->setWindowIcon(icon);
         MainWindow->setWindowFilePath(QStringLiteral(""));
+
         actionBakeryList = new QAction(MainWindow);
         actionBakeryList->setObjectName(QStringLiteral("actionBakeryList"));
         QIcon icon1;
@@ -151,8 +117,8 @@ public:
         actionThemeDark->setCheckable(true);
         actionChangePassword = new QAction(MainWindow);
         actionChangePassword->setObjectName(QStringLiteral("actionChangePassword"));
-        actionEditBakerys = new QAction(MainWindow);
-        actionEditBakerys->setObjectName(QStringLiteral("actionEditBakerys"));
+        actionEditBakeries = new QAction(MainWindow);
+        actionEditBakeries->setObjectName(QStringLiteral("actionEditBakeries"));
         actionPreferencesPanel = new QAction(MainWindow);
         actionPreferencesPanel->setObjectName(QStringLiteral("actionPreferencesPanel"));
         centralWidget = new QWidget(MainWindow);
@@ -161,54 +127,71 @@ public:
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         groupBox = new QGroupBox(centralWidget);
         groupBox->setObjectName(QStringLiteral("groupBox"));
+
         mixingIcon = new QLabel(groupBox);
         mixingIcon->setObjectName(QStringLiteral("mixingIcon"));
         mixingIcon->setGeometry(QRect(20, 60, 48, 48));
         mixingIcon->setMinimumSize(QSize(48, 48));
         mixingIcon->setMaximumSize(QSize(48, 48));
         mixingIcon->setPixmap(QPixmap(QString::fromUtf8(":/images/assets/pending-icon.png")));
+        mixingIcon->setText(QStringLiteral(""));
+
         firstFermentIcon = new QLabel(groupBox);
         firstFermentIcon->setObjectName(QStringLiteral("firstFermentIcon"));
         firstFermentIcon->setGeometry(QRect(150, 60, 48, 48));
         firstFermentIcon->setMinimumSize(QSize(48, 48));
         firstFermentIcon->setMaximumSize(QSize(48, 48));
         firstFermentIcon->setPixmap(QPixmap(QString::fromUtf8(":/images/assets/pending-icon.png")));
+        firstFermentIcon->setText(QStringLiteral(""));
+
         doughDivisionIcon = new QLabel(groupBox);
         doughDivisionIcon->setObjectName(QStringLiteral("doughDivisionIcon"));
         doughDivisionIcon->setGeometry(QRect(280, 60, 48, 48));
         doughDivisionIcon->setMinimumSize(QSize(48, 48));
         doughDivisionIcon->setMaximumSize(QSize(48, 48));
         doughDivisionIcon->setPixmap(QPixmap(QString::fromUtf8(":/images/assets/pending-icon.png")));
+        doughDivisionIcon->setText(QStringLiteral(""));
+
         doughFormingIcon = new QLabel(groupBox);
         doughFormingIcon->setObjectName(QStringLiteral("doughFormingIcon"));
         doughFormingIcon->setGeometry(QRect(410, 60, 48, 48));
         doughFormingIcon->setMinimumSize(QSize(48, 48));
         doughFormingIcon->setMaximumSize(QSize(48, 48));
         doughFormingIcon->setPixmap(QPixmap(QString::fromUtf8(":/images/assets/pending-icon.png")));
+        doughFormingIcon->setText(QStringLiteral(""));
+
         finalFermentIcon = new QLabel(groupBox);
         finalFermentIcon->setObjectName(QStringLiteral("finalFermentIcon"));
         finalFermentIcon->setGeometry(QRect(540, 60, 48, 48));
         finalFermentIcon->setMinimumSize(QSize(48, 48));
         finalFermentIcon->setMaximumSize(QSize(48, 48));
         finalFermentIcon->setPixmap(QPixmap(QString::fromUtf8(":/images/assets/pending-icon.png")));
+        finalFermentIcon->setText(QStringLiteral(""));
+
         bakingIcon = new QLabel(groupBox);
         bakingIcon->setObjectName(QStringLiteral("bakingIcon"));
         bakingIcon->setGeometry(QRect(670, 60, 48, 48));
         bakingIcon->setMinimumSize(QSize(48, 48));
         bakingIcon->setMaximumSize(QSize(48, 48));
         bakingIcon->setPixmap(QPixmap(QString::fromUtf8(":/images/assets/pending-icon.png")));
+        bakingIcon->setText(QStringLiteral(""));
+
         shippedIcon = new QLabel(groupBox);
         shippedIcon->setObjectName(QStringLiteral("shippedIcon"));
         shippedIcon->setGeometry(QRect(930, 60, 48, 48));
         shippedIcon->setMinimumSize(QSize(48, 48));
         shippedIcon->setMaximumSize(QSize(48, 48));
         shippedIcon->setPixmap(QPixmap(QString::fromUtf8(":/images/assets/pending-icon.png")));
+        shippedIcon->setText(QStringLiteral(""));
+
         onSaleIcon = new QLabel(groupBox);
         onSaleIcon->setObjectName(QStringLiteral("onSaleIcon"));
         onSaleIcon->setGeometry(QRect(800, 60, 48, 48));
         onSaleIcon->setMinimumSize(QSize(48, 48));
         onSaleIcon->setMaximumSize(QSize(48, 48));
         onSaleIcon->setPixmap(QPixmap(QString::fromUtf8(":/images/assets/pending-icon.png")));
+        onSaleIcon->setText(QStringLiteral(""));
+
         statusBarLabel = new QLabel();
         firstFermentBar = new QProgressBar(groupBox);
         firstFermentBar->setObjectName(QStringLiteral("firstFermentBar"));
@@ -308,61 +291,71 @@ public:
                                                         " }"));
         shippedBar->setValue(0);
         shippedBar->setTextVisible(false);
+
         title1 = new QLabel(groupBox);
         title1->setObjectName(QStringLiteral("title1"));
         title1->setGeometry(QRect(4, 110, 81, 31));
         title1->setMaximumSize(QSize(100, 16777215));
-        title1->setStyleSheet(QStringLiteral(""));
         title1->setAlignment(Qt::AlignCenter);
         title1->setWordWrap(true);
+        title1->setText(QStringLiteral("Mezcla de ingredientes"));
+
         title2 = new QLabel(groupBox);
         title2->setObjectName(QStringLiteral("title2"));
         title2->setGeometry(QRect(125, 110, 101, 31));
         title2->setMaximumSize(QSize(120, 16777215));
         title2->setAlignment(Qt::AlignCenter);
         title2->setWordWrap(true);
+        title2->setText(QStringLiteral("Fermentación primaria"));
+
         title3 = new QLabel(groupBox);
         title3->setObjectName(QStringLiteral("title3"));
         title3->setGeometry(QRect(265, 110, 81, 31));
         title3->setMaximumSize(QSize(100, 16777215));
         title3->setAlignment(Qt::AlignCenter);
         title3->setWordWrap(true);
+        title3->setText(QStringLiteral("División de la masa"));
+
         title4 = new QLabel(groupBox);
         title4->setObjectName(QStringLiteral("title4"));
         title4->setGeometry(QRect(394, 110, 81, 31));
         title4->setMaximumSize(QSize(100, 16777215));
         title4->setAlignment(Qt::AlignCenter);
         title4->setWordWrap(true);
+        title4->setText(QStringLiteral("Formando panes"));
+
         title5 = new QLabel(groupBox);
         title5->setObjectName(QStringLiteral("title5"));
         title5->setGeometry(QRect(513, 110, 101, 31));
         title5->setMaximumSize(QSize(120, 16777215));
         title5->setAlignment(Qt::AlignCenter);
         title5->setWordWrap(true);
+        title5->setText(QStringLiteral("Fermentación final"));
+
         title6 = new QLabel(groupBox);
         title6->setObjectName(QStringLiteral("title6"));
         title6->setGeometry(QRect(660, 110, 71, 21));
         title6->setMaximumSize(QSize(120, 16777215));
         title6->setAlignment(Qt::AlignCenter);
         title6->setWordWrap(true);
+        title6->setText(QStringLiteral("Horneo"));
+
         title7 = new QLabel(groupBox);
         title7->setObjectName(QStringLiteral("title7"));
         title7->setGeometry(QRect(790, 110, 71, 21));
         title7->setMaximumSize(QSize(120, 16777215));
         title7->setAlignment(Qt::AlignCenter);
         title7->setWordWrap(true);
+        title7->setText(QStringLiteral("Venta"));
+
         title8 = new QLabel(groupBox);
         title8->setObjectName(QStringLiteral("title8"));
         title8->setGeometry(QRect(910, 110, 91, 21));
         title8->setMaximumSize(QSize(120, 16777215));
         title8->setAlignment(Qt::AlignCenter);
         title8->setWordWrap(true);
-        statusLabel = new QLabel(groupBox);
-        statusLabel->setObjectName(QStringLiteral("statusLabel"));
-        statusLabel->setGeometry(QRect(20, 180, 341, 16));
-        createdBreadsLabel = new QLabel(groupBox);
-        createdBreadsLabel->setObjectName(QStringLiteral("createdBreadsLabel"));
-        createdBreadsLabel->setGeometry(QRect(20, 200, 151, 16));
+        title8->setText(QStringLiteral("Distribución"));
+
         bakeryName = new QLabel(groupBox);
         bakeryName->setObjectName(QStringLiteral("bakeryName"));
         bakeryName->setGeometry(QRect(20, 160, 221, 18));
@@ -370,40 +363,63 @@ public:
         font.setBold(true);
         font.setWeight(75);
         bakeryName->setFont(font);
+        bakeryName->setText(QStringLiteral("Panaderia:"));
+
+        statusLabel = new QLabel(groupBox);
+        statusLabel->setObjectName(QStringLiteral("statusLabel"));
+        statusLabel->setGeometry(QRect(20, 180, 341, 16));
+        statusLabel->setText(QStringLiteral("Estado:"));
+
+        createdBreadsLabel = new QLabel(groupBox);
+        createdBreadsLabel->setObjectName(QStringLiteral("createdBreadsLabel"));
+        createdBreadsLabel->setGeometry(QRect(20, 200, 151, 16));
+        createdBreadsLabel->setText(QStringLiteral("Panes creados:"));
 
         verticalLayout->addWidget(groupBox);
 
         MainWindow->setCentralWidget(centralWidget);
-        menubar = new QMenuBar(MainWindow);
-        menubar->setObjectName(QStringLiteral("menubar"));
-        menubar->setGeometry(QRect(0, 0, 1027, 26));
-        menuFile = new QMenu(menubar);
+        menuBar = new QMenuBar(MainWindow);
+        menuBar->setObjectName(QStringLiteral("menuBar"));
+        menuBar->setGeometry(QRect(0, 0, 1027, 26));
+
+        menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QStringLiteral("menuFile"));
-        menuEdit = new QMenu(menubar);
+        menuFile->setTitle(QStringLiteral("Bollo"));
+
+        menuEdit = new QMenu(menuBar);
         menuEdit->setObjectName(QStringLiteral("menuEdit"));
+        menuEdit->setTitle(QStringLiteral("Editar"));
+
         menuThemes = new QMenu(menuEdit);
         menuThemes->setObjectName(QStringLiteral("menuThemes"));
-        menuTools = new QMenu(menubar);
+        menuThemes->setTitle(QStringLiteral("Temas"));
+
+        menuTools = new QMenu(menuBar);
         menuTools->setObjectName(QStringLiteral("menuTools"));
-        menuHelp = new QMenu(menubar);
+        menuTools->setTitle(QStringLiteral("Herramientas"));
+
+        menuHelp = new QMenu(menuBar);
         menuHelp->setObjectName(QStringLiteral("menuHelp"));
-        MainWindow->setMenuBar(menubar);
+        menuHelp->setTitle(QStringLiteral("Ayuda"));
+        MainWindow->setMenuBar(menuBar);
+
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QStringLiteral("statusbar"));
         MainWindow->setStatusBar(statusbar);
+
         toolBar = new QToolBar(MainWindow);
         toolBar->setObjectName(QStringLiteral("toolBar"));
         MainWindow->addToolBar(Qt::TopToolBarArea, toolBar);
 
-        menubar->addAction(menuFile->menuAction());
-        menubar->addAction(menuEdit->menuAction());
-        menubar->addAction(menuTools->menuAction());
-        menubar->addAction(menuHelp->menuAction());
+        menuBar->addAction(menuFile->menuAction());
+        menuBar->addAction(menuEdit->menuAction());
+        menuBar->addAction(menuTools->menuAction());
+        menuBar->addAction(menuHelp->menuAction());
         menuFile->addAction(actionNewBakery);
         menuFile->addAction(actionSignOut);
         menuFile->addSeparator();
         menuFile->addAction(actionExit);
-        menuEdit->addAction(actionEditBakerys);
+        menuEdit->addAction(actionEditBakeries);
         menuEdit->addAction(menuThemes->menuAction());
         menuEdit->addAction(actionPreferencesPanel);
         menuThemes->addAction(actionThemeLight);
@@ -421,118 +437,58 @@ public:
         toolBar->addAction(actionPauseProcess);
         toolBar->addAction(actionCancelProcess);
         toolBar->addSeparator();
+        toolBar->setWindowTitle(QStringLiteral("Barra de herramientas"));
 
         retranslateUi(MainWindow);
 
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
 
-    void retranslateUi(QMainWindow *MainWindow)
-    {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Bollo - Pre-alpha [Codename: Baguette]", 0));
-        actionBakeryList->setText(QApplication::translate("MainWindow", "bakeryList", 0));
-#ifndef QT_NO_TOOLTIP
-        actionBakeryList->setToolTip(QApplication::translate("MainWindow", "Lista de panaderias", 0));
-#endif // QT_NO_TOOLTIP
-        actionShowGraphs->setText(QApplication::translate("MainWindow", "showGraphs", 0));
-#ifndef QT_NO_TOOLTIP
-        actionShowGraphs->setToolTip(QApplication::translate("MainWindow", "Estadisticas y Graficos de la panaderia", 0));
-#endif // QT_NO_TOOLTIP
-        actionContinueProcess->setText(QApplication::translate("MainWindow", "continueProcess", 0));
-#ifndef QT_NO_TOOLTIP
-        actionContinueProcess->setToolTip(QApplication::translate("MainWindow", "Reanuda el proceso de creacion del pan.", 0));
-#endif // QT_NO_TOOLTIP
-        actionPauseProcess->setText(QApplication::translate("MainWindow", "pauseProcess", 0));
-#ifndef QT_NO_TOOLTIP
-        actionPauseProcess->setToolTip(QApplication::translate("MainWindow", "Detiene el proceso de creacion del pan.", 0));
-#endif // QT_NO_TOOLTIP
-        actionCancelProcess->setText(QApplication::translate("MainWindow", "cancelProcess", 0));
-#ifndef QT_NO_TOOLTIP
-        actionCancelProcess->setToolTip(QApplication::translate("MainWindow", "Cancela el proceso de creacion del pan (Irreversible)", 0));
-#endif // QT_NO_TOOLTIP
-        actionBakeryLog->setText(QApplication::translate("MainWindow", "bakeryLog", 0));
-#ifndef QT_NO_TOOLTIP
-        actionBakeryLog->setToolTip(QApplication::translate("MainWindow", "Bitacora de eventos de la panaderia", 0));
-#endif // QT_NO_TOOLTIP
-        actionAbout->setText(QApplication::translate("MainWindow", "About", 0));
-#ifndef QT_NO_TOOLTIP
-        actionAbout->setToolTip(QApplication::translate("MainWindow", "Informacion de la aplicacion", 0));
-#endif // QT_NO_TOOLTIP
-        actionHelp->setText(QApplication::translate("MainWindow", "Help", 0));
-#ifndef QT_NO_TOOLTIP
-        actionHelp->setToolTip(QApplication::translate("MainWindow", "Guia de ayuda", 0));
-#endif // QT_NO_TOOLTIP
-        actionNewBakery->setText(QApplication::translate("MainWindow", "Nueva panaderia", 0));
-#ifndef QT_NO_TOOLTIP
-        actionNewBakery->setToolTip(QApplication::translate("MainWindow", "Agregar nueva panaderia", 0));
-#endif // QT_NO_TOOLTIP
-        actionExit->setText(QApplication::translate("MainWindow", "Salir", 0));
-#ifndef QT_NO_TOOLTIP
-        actionExit->setToolTip(QApplication::translate("MainWindow", "Cerrar la aplicacion", 0));
-#endif // QT_NO_TOOLTIP
-        actionSignOut->setText(QApplication::translate("MainWindow", "Cerrar sesion", 0));
-        actionLogBrowser->setText(QApplication::translate("MainWindow", "Navegador de bitacoras", 0));
-#ifndef QT_NO_TOOLTIP
-        actionLogBrowser->setToolTip(QApplication::translate("MainWindow", "Explorar las bitacoras del sistema", 0));
-#endif // QT_NO_TOOLTIP
-        actionGraphViewer->setText(QApplication::translate("MainWindow", "Visor de graficos", 0));
-#ifndef QT_NO_TOOLTIP
-        actionGraphViewer->setToolTip(QApplication::translate("MainWindow", "Graficos estadisticos de las panaderias", 0));
-#endif // QT_NO_TOOLTIP
-        actionTelegram->setText(QApplication::translate("MainWindow", "Telegram", 0));
-#ifndef QT_NO_TOOLTIP
-        actionTelegram->setToolTip(QApplication::translate("MainWindow", "Ajustes de integracion con Telegram", 0));
-#endif // QT_NO_TOOLTIP
-        actionThemeLight->setText(QApplication::translate("MainWindow", "Light", 0));
-#ifndef QT_NO_TOOLTIP
-        actionThemeLight->setToolTip(QApplication::translate("MainWindow", "Tema por defecto (Light)", 0));
-#endif // QT_NO_TOOLTIP
-        actionThemeDark->setText(QApplication::translate("MainWindow", "Dark", 0));
-#ifndef QT_NO_TOOLTIP
-        actionThemeDark->setToolTip(QApplication::translate("MainWindow", "Tema oscuro (Dark)", 0));
-#endif // QT_NO_TOOLTIP
-        actionChangePassword->setText(QApplication::translate("MainWindow", "Cambiar contrasena", 0));
-#ifndef QT_NO_TOOLTIP
-        actionChangePassword->setToolTip(QApplication::translate("MainWindow", "Cambiar contrasena de usuario", 0));
-#endif // QT_NO_TOOLTIP
-        actionEditBakerys->setText(QApplication::translate("MainWindow", "Editar panaderias", 0));
-        actionPreferencesPanel->setText(QApplication::translate("MainWindow", "Preferencias", 0));
-#ifndef QT_NO_TOOLTIP
-        actionPreferencesPanel->setToolTip(QApplication::translate("MainWindow", "Preferencias de la aplicacion", 0));
-#endif // QT_NO_TOOLTIP
-        groupBox->setTitle(QApplication::translate("MainWindow", "Estado de panaderia", 0));
-        mixingIcon->setText(QString());
-        firstFermentIcon->setText(QString());
-        doughDivisionIcon->setText(QString());
-        doughFormingIcon->setText(QString());
-        finalFermentIcon->setText(QString());
-        bakingIcon->setText(QString());
-        shippedIcon->setText(QString());
-        onSaleIcon->setText(QString());
-        title1->setText(QApplication::translate("MainWindow", "Mezcla de ingredientes", 0));
-        title2->setText(QApplication::translate("MainWindow", "Fermentacion primaria", 0));
-        title3->setText(QApplication::translate("MainWindow", "Division de la masa", 0));
-        title4->setText(QApplication::translate("MainWindow", "Formando panes", 0));
-        title5->setText(QApplication::translate("MainWindow", "Fermentacion final", 0));
-        title6->setText(QApplication::translate("MainWindow", "Horneo", 0));
-        title7->setText(QApplication::translate("MainWindow", "Venta", 0));
-        title8->setText(QApplication::translate("MainWindow", "Distribucion", 0));
-        statusLabel->setText(QApplication::translate("MainWindow", "Estado:", 0));
-        createdBreadsLabel->setText(QApplication::translate("MainWindow", "Panes creados:", 0));
-        bakeryName->setText(QApplication::translate("MainWindow", "Panaderia:", 0));
-        menuFile->setTitle(QApplication::translate("MainWindow", "File", 0));
-        menuEdit->setTitle(QApplication::translate("MainWindow", "Edit", 0));
-        menuThemes->setTitle(QApplication::translate("MainWindow", "Temas", 0));
-        menuTools->setTitle(QApplication::translate("MainWindow", "Tools", 0));
-        menuHelp->setTitle(QApplication::translate("MainWindow", "Help", 0));
-        toolBar->setWindowTitle(QApplication::translate("MainWindow", "toolBar", 0));
-    } // retranslateUi
-
+    void retranslateUi(QMainWindow* MainWindow) {
+        actionBakeryList->setText(QStringLiteral("bakeryList"));
+        actionBakeryList->setToolTip(QStringLiteral("Lista de panaderías"));
+        actionShowGraphs->setText(QStringLiteral("showGraphs"));
+        actionShowGraphs->setToolTip(QStringLiteral("Estadisticas y Gráficos de la panadería"));
+        actionContinueProcess->setText(QStringLiteral("continueProcess"));
+        actionContinueProcess->setToolTip(QStringLiteral("Reanuda el proceso de creación del pan."));
+        actionPauseProcess->setText(QStringLiteral("pauseProcess"));
+        actionPauseProcess->setToolTip(QStringLiteral("Detiene el proceso de creación del pan."));
+        actionCancelProcess->setText(QStringLiteral("cancelProcess"));
+        actionCancelProcess->setToolTip(QStringLiteral("Cancela el proceso de creación del pan (Irreversible)"));
+        actionBakeryLog->setText(QStringLiteral("bakeryLog"));
+        actionBakeryLog->setToolTip(QStringLiteral("Bitacora de eventos de la panadería"));
+        actionAbout->setText(QStringLiteral("Acerca"));
+        actionAbout->setToolTip(QStringLiteral("Información de la aplicación"));
+        actionHelp->setText(QStringLiteral("Ayuda"));
+        actionHelp->setToolTip(QStringLiteral("Guia de ayuda"));
+        actionNewBakery->setText(QStringLiteral("Nueva panadería"));
+        actionNewBakery->setToolTip(QStringLiteral("Agregar nueva panadería"));
+        actionExit->setText(QStringLiteral("Salir"));
+        actionExit->setToolTip(QStringLiteral("Cerrar la aplicación"));
+        actionSignOut->setText(QStringLiteral("Cerrar sesión"));
+        actionLogBrowser->setText(QStringLiteral("Navegador de bitácoras"));
+        actionLogBrowser->setToolTip(QStringLiteral("Explorar las bitácoras del sistema"));
+        actionGraphViewer->setText(QStringLiteral("Visor de graficos"));
+        actionGraphViewer->setToolTip(QStringLiteral("Gráficos estadísticos de las panaderías"));
+        actionTelegram->setText(QStringLiteral("Telegram"));
+        actionTelegram->setToolTip(QStringLiteral("Ajustes de integración con Telegram"));
+        actionThemeLight->setText(QStringLiteral("Light"));
+        actionThemeLight->setToolTip(QStringLiteral("Tema por defecto (Light)"));
+        actionThemeDark->setText(QStringLiteral("Dark"));
+        actionThemeDark->setToolTip(QStringLiteral("Tema oscuro (Dark)"));
+        actionChangePassword->setText(QStringLiteral("Cambiar constraseña"));
+        actionChangePassword->setToolTip(QStringLiteral("Cambiar constraseña de usuario"));
+        actionEditBakeries->setText(QStringLiteral("Editar panaderías"));
+        actionPreferencesPanel->setText(QStringLiteral("Preferencias"));
+        actionPreferencesPanel->setToolTip(QStringLiteral("Preferencias de la aplicación"));
+        groupBox->setTitle(QStringLiteral("Estado de panadería"));
+    }
 };
 
 namespace Ui {
-    class MainWindow: public Ui_MainWindow {};
-} // namespace Ui
+    class MainWindow : public Ui_MainWindow {
+    };
+}
 
 QT_END_NAMESPACE
 

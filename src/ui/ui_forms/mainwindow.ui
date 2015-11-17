@@ -727,7 +727,7 @@ QProgressBar::chunk {
     </item>
    </layout>
   </widget>
-  <widget class="QMenuBar" name="menubar">
+  <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
@@ -756,7 +756,7 @@ QProgressBar::chunk {
      <addaction name="actionThemeLight"/>
      <addaction name="actionThemeDark"/>
     </widget>
-    <addaction name="actionEditBakerys"/>
+    <addaction name="actionEditBakeries"/>
     <addaction name="menuThemes"/>
     <addaction name="actionPreferencesPanel"/>
    </widget>
@@ -963,7 +963,7 @@ QProgressBar::chunk {
     <string>Cambiar contrasena de usuario</string>
    </property>
   </action>
-  <action name="actionEditBakerys">
+  <action name="actionEditBakeries">
    <property name="text">
     <string>Editar panaderias</string>
    </property>
