@@ -5,6 +5,8 @@
 #include <QtCore/qdatetime.h>
 #include "ministry.h"
 
+#define RAID_FREQUENCY 20000000
+
 /**
  * @brief The class destructor.
  */
@@ -36,7 +38,7 @@ void Ministry::run() {
             }
         }
 
-        QThread::usleep(9500000);
+        QThread::usleep(RAID_FREQUENCY);//Every 15 seconds
     }
 }
 

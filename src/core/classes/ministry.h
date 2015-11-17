@@ -38,7 +38,7 @@ public:
      */
     Ministry() {
         logbook = new Logger;
-
+        stopped = false;
         QObject::connect(this, &Ministry::notify_, logbook, &Logger::send_logbook_entry);
     }
 
