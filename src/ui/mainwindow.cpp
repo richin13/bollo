@@ -94,7 +94,7 @@ void MainWindow::showSelectPane() {
 }
 
 /**
- * After a bakery is selected in the select pane, the toolbar, menubar actions and
+ * After a bakery is selected in the select pane, the toolbar, menuBar actions and
  * dashboard are enabled and the dashboard for the selected bakery is shown.
  */
 void MainWindow::showDashBoard (int bakeryId) {
@@ -128,7 +128,7 @@ void MainWindow::showDashBoard (int bakeryId) {
 }
 
 /**
- * Enable and disable the select pane, the toolbar, and some menubar actions,
+ * Enable and disable the select pane, the toolbar, and some menuBar actions,
  * used when the application is launched in the bakery select pane and login,
  * and then when the dashboard is shown
  */
@@ -333,7 +333,7 @@ void MainWindow::connectMenuActions() {
     connect(ui->actionNewBakery, SIGNAL(triggered(bool)), actManager, SLOT(bakeryEdit()));
 
     // Edit menu
-    connect(ui->actionEditBakerys, SIGNAL(triggered(bool)), actManager, SLOT(bakeryEdit()));
+    connect(ui->actionEditBakeries, SIGNAL(triggered(bool)), actManager, SLOT(bakeryEdit()));
     connect(ui->actionThemeLight, SIGNAL(triggered(bool)), actManager, SLOT(setDefaultTheme()));
     connect(ui->actionThemeDark, SIGNAL(triggered(bool)), actManager, SLOT(setDarkTheme()));
     connect(ui->actionPreferencesPanel, SIGNAL(triggered(bool)), actManager, SLOT(preferencesPanel()));

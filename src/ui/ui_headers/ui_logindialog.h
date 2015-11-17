@@ -1,11 +1,3 @@
-/********************************************************************************
-** Form generated from reading UI file 'logindialogPu5106.ui'
-**
-** Created by: Qt User Interface Compiler version 5.4.2
-**
-** WARNING! All changes made in this file will be lost when recompiling UI file!
-********************************************************************************/
-
 #ifndef LOGINDIALOGPU5106_H
 #define LOGINDIALOGPU5106_H
 
@@ -52,6 +44,8 @@ public:
         icon.addFile(QStringLiteral(":/images/assets/hbread.png"), QSize(), QIcon::Normal, QIcon::Off);
         LoginDialog->setWindowIcon(icon);
         LoginDialog->setModal(true);
+        LoginDialog->setWindowTitle(QStringLiteral("Ingreso al sistema"));
+
         verticalLayoutWidget_3 = new QWidget(LoginDialog);
         verticalLayoutWidget_3->setObjectName(QStringLiteral("verticalLayoutWidget_3"));
         verticalLayoutWidget_3->setGeometry(QRect(30, 30, 214, 160));
@@ -139,7 +133,6 @@ public:
 
     void retranslateUi(QDialog *LoginDialog)
     {
-        LoginDialog->setWindowTitle(QApplication::translate("LoginDialog", "LoginDialog", 0));
         label->setText(QString());
         label_2->setText(QApplication::translate("LoginDialog", "Usuario:", 0));
         qle_username->setPlaceholderText(QString());
