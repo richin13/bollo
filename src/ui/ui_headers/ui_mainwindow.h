@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'mainwindowBb5106.ui'
+** Form generated from reading UI file 'mainwindowjd3343.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.4.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef MAINWINDOWBB5106_H
-#define MAINWINDOWBB5106_H
+#ifndef MAINWINDOWJD3343_H
+#define MAINWINDOWJD3343_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
@@ -78,6 +78,7 @@ public:
     QLabel *title8;
     QLabel *statusLabel;
     QLabel *createdBreadsLabel;
+    QLabel *bakeryName;
     QMenuBar *menubar;
     QMenu *menuFile;
     QMenu *menuEdit;
@@ -362,6 +363,13 @@ public:
         createdBreadsLabel = new QLabel(groupBox);
         createdBreadsLabel->setObjectName(QStringLiteral("createdBreadsLabel"));
         createdBreadsLabel->setGeometry(QRect(20, 200, 151, 16));
+        bakeryName = new QLabel(groupBox);
+        bakeryName->setObjectName(QStringLiteral("bakeryName"));
+        bakeryName->setGeometry(QRect(20, 160, 221, 18));
+        QFont font;
+        font.setBold(true);
+        font.setWeight(75);
+        bakeryName->setFont(font);
 
         verticalLayout->addWidget(groupBox);
 
@@ -511,6 +519,7 @@ public:
         title8->setText(QApplication::translate("MainWindow", "Distribucion", 0));
         statusLabel->setText(QApplication::translate("MainWindow", "Estado:", 0));
         createdBreadsLabel->setText(QApplication::translate("MainWindow", "Panes creados:", 0));
+        bakeryName->setText(QApplication::translate("MainWindow", "Panaderia:", 0));
         menuFile->setTitle(QApplication::translate("MainWindow", "File", 0));
         menuEdit->setTitle(QApplication::translate("MainWindow", "Edit", 0));
         menuThemes->setTitle(QApplication::translate("MainWindow", "Temas", 0));
@@ -527,4 +536,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // MAINWINDOWBB5106_H
+#endif // MAINWINDOWJD3343_H

@@ -704,6 +704,25 @@ QProgressBar::chunk {
         <string>Panes creados:</string>
        </property>
       </widget>
+      <widget class="QLabel" name="bakeryName">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>160</y>
+         <width>221</width>
+         <height>18</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Panaderia:</string>
+       </property>
+      </widget>
      </widget>
     </item>
    </layout>
