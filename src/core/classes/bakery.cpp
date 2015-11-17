@@ -400,16 +400,17 @@ void Bakery::set_up(void) {
  * of signals.
  */
 void Bakery::select_notification() {
-    static int have_not_sent_since = 0;
-    qsrand((uint) QTime::currentTime().msec());
+//    static int have_not_sent_since = 0;
+//    qsrand((uint) QTime::currentTime().msec());
 
-    if(((qrand() % 8) - 5) > 0 || have_not_sent_since > 5) {
-        //then send it
-        emit operation_changed(current_operation);
-        have_not_sent_since = 0;
-    } else {
-        have_not_sent_since++;
-    }
+//    if(((qrand() % 8) - 5) > 0 || have_not_sent_since > 5) {
+//    if(1) {
+    //then send it
+    emit operation_changed(current_operation);
+//        have_not_sent_since = 0;
+//    } else {
+//        have_not_sent_since++;
+//    }
 }
 
 /**

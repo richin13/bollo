@@ -119,7 +119,6 @@ public:
         QObject::connect(this, &Bakery::updated_stock, updater, &ProductionUpdater::updater);
 
         QObject::connect(this, &Bakery::internal_oc, this, &Bakery::select_notification);
-        QObject::connect(this, &Bakery::finished, this, &Bakery::deleteLater);
     }
 
     unsigned int get_id() const;
