@@ -46,12 +46,21 @@ void MenuActionManager::logBrowser() {
 }
 
 void MenuActionManager::continueProcess() {
+    //mainWindow->current_bakery->resume_operations();
+    if(mainWindow->current_bakery->get_current_op().progress / 100 == 11 ||
+       mainWindow->current_bakery->get_current_op().progress / 100 == 8) {
+        mainWindow->clean_all();
+    }
     mainWindow->current_bakery->resume_operations();
+    mainWindow->continue_process(mainWindow->current_bakery->get_current_op().progress);
+
 
 }
 
 void MenuActionManager::pauseProcess() {
+    //mainWindow->current_bakery->stop_operations();
     mainWindow->current_bakery->stop_operations();
+    mainWindow->pause_process(mainWindow->current_bakery->get_current_op().progress);
 
 }
 
