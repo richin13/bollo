@@ -47,9 +47,14 @@ void ChartsBrowser::settings() {
  */
 void ChartsBrowser::loadPage(int bakeryIndex) {
 
+    // General chart
     if(bakeryIndex == 0) {
+
         viewer->load(Constants::CHARTS_URL);
-    } else {
+    }
+
+    else {
+
         LOG(INFO) << "Displaying charts for bakery: " + to_string(bakeryIndex);
         viewer->load(buildUrl(BolloApp::get().bakeries.at((ulong) bakeryIndex - 1)->get_id()));
     }
@@ -62,6 +67,7 @@ void ChartsBrowser::loadPage(int bakeryIndex) {
  * Build the url need to acces de charts for each bakery in the server.
  */
 QUrl ChartsBrowser::buildUrl(int bakeryId) {
+
     return Constants::API_HOST + "/?charts=" + QString::number(bakeryId) + "&thisTextMustBeSuperSecret!__-___";
 }
 
