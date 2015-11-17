@@ -73,10 +73,6 @@ public:
     const QString& get_bakery_name(int);
 public slots:
     void loaded_bakeries(QNetworkReply*);
-
-signals:
-    void start_bakeries_execution();
-    void application_exiting();
 };
 
 #endif //BOLLO_BOLLO_H

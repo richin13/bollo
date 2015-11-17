@@ -36,7 +36,6 @@ public:
 
     ~Baker() {
         delete logbook;
-        LOG(DEBUG) << "Deallocated memory of Baker class";
     }
 
     virtual void run() override;

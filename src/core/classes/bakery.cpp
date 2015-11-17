@@ -22,8 +22,6 @@ Bakery::~Bakery() {
     delete yeast;
     delete updater;
     delete logbook;
-
-    LOG(DEBUG) << "Deallocated memory at Bakery class with id [" + to_string(bakery_id) + "]";
 }
 
 unsigned int Bakery::get_id() const {
@@ -81,7 +79,7 @@ void Bakery::mix_ingredients(int _start) {
         int seconds = 20 + (qrand() % 10);
 
         for(int i = _start; i < 100; ++i) {
-            emit operation_changed(current_operation);
+            emit internal_oc();
             this->current_operation.progress += 1;
             QThread::usleep((unsigned long) (seconds * LAPSE_TIME));
         }
@@ -107,7 +105,7 @@ void Bakery::ferment_dough(int _start, bool _final_f) {
                 emit notify_(bakery_id, current_operation.description);
 
         for(int i = _start; i < 100 && !stopped; ++i) {
-            emit operation_changed(current_operation);
+            emit internal_oc();
             this->current_operation.progress += 1;
             QThread::usleep((unsigned long) (seconds * LAPSE_TIME));
         }
@@ -126,7 +124,7 @@ void Bakery::divide_dough(int _start) {
         int seconds = 15 + (qrand() % 10);
 
         for(int i = _start; i < 100 && !stopped; ++i) {
-            emit operation_changed(current_operation);
+            emit internal_oc();
             this->current_operation.progress += 1;
             QThread::usleep((unsigned long) (seconds * LAPSE_TIME));
         }
@@ -145,7 +143,7 @@ void Bakery::shape_dough(int _start) {
         int seconds = 30 + (qrand() % 10);
 
         for(int i = _start; i < 100 && !stopped; ++i) {
-            emit operation_changed(current_operation);
+            emit internal_oc();
             this->current_operation.progress += 1;
             QThread::usleep((unsigned long) (seconds * LAPSE_TIME));
         }
@@ -163,7 +161,7 @@ void Bakery::bake_bread(int _start) {
 
         int seconds = 35 + (qrand() % 10);
         for(int i = _start; i < 100 && !stopped; ++i) {
-            emit operation_changed(current_operation);
+            emit internal_oc();
             this->current_operation.progress += 1;
             QThread::usleep((unsigned long) (seconds * LAPSE_TIME));
         }
@@ -188,7 +186,7 @@ void Bakery::sell_bread(int _start) {
         int seconds = 30 + (qrand() % 10);
 
         for(int i = _start; i < 100 && !stopped; ++i) {
-            emit operation_changed(current_operation);
+            emit internal_oc();
             this->current_operation.progress += 1;
 
             if(bakery_stock - 1 > 0 && qrand() % 2) {
@@ -213,7 +211,7 @@ void Bakery::distribute_bread(int _start) {
         int seconds = 20 + (qrand() % 10);
 
         for(int i = _start; i < 100 && !stopped; ++i) {
-            emit operation_changed(current_operation);
+            emit internal_oc();
             this->current_operation.progress += 1;
 
             if(bakery_stock - 1 > 0 && qrand() % 2) {
@@ -253,7 +251,7 @@ void Bakery::stop_operations(bool f) {
 void Bakery::resume_operations(void) {
     stopped = false;
 
-    if(current_operation.progress / 100 == 11) {
+    if(current_operation.progress / 100 == 11 || current_operation.progress / 100 == 8) {
         current_operation.progress = 0;
     }
 
@@ -312,6 +310,20 @@ void Bakery::set_up(void) {
     showInfoPopup("Panadería lista", bakery_name.toStdString() + " ha salido de cuarentena.");
 
     this->start();
+}
+
+
+void Bakery::select_notification() {
+    static int have_not_sent_since = 0;
+    qsrand((uint) QTime::currentTime().msec());
+
+    if(((qrand() % 8) - 5) > 0 || have_not_sent_since > 5) {
+        //then send it
+        emit operation_changed(current_operation);
+        have_not_sent_since = 0;
+    } else {
+        have_not_sent_since++;
+    }
 }
 
 void Bakery::run() {

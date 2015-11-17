@@ -22,7 +22,7 @@ class Ministry : public QThread {
 Q_OBJECT
 private:
     Logger* logbook;
-    virtual void run() override;
+    bool stopped;
 public:
     Ministry() {
         logbook = new Logger;
@@ -32,6 +32,9 @@ public:
 
     ~Ministry();
 
+    void stop();
+protected:
+    virtual void run() override;
 signals:
     void notify_(int, QString);
 };

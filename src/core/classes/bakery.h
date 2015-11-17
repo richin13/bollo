@@ -76,7 +76,8 @@ public:
         QObject::connect(this, &Bakery::notify_, logbook, &Logger::send_logbook_entry);
         QObject::connect(this, &Bakery::updated_stock, updater, &StockUpdater::updater);
 
-
+        QObject::connect(this, &Bakery::internal_oc, this, &Bakery::select_notification);
+        QObject::connect(this, &Bakery::finished, this, &Bakery::deleteLater);
     }
 
     unsigned int get_id() const;
@@ -114,8 +115,12 @@ public slots:
     /* Called by Ministry of health and the like */
     void close_down(void);
     void set_up(void);
+
+    /* Used to select whether a status update goes to upstream or not */
+    void select_notification();
 signals:
     void updated_stock(int, int);
+    void internal_oc();
     void operation_changed(const _operation&);
     void notify_(int, QString);
 };

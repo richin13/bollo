@@ -21,25 +21,20 @@ BolloApp::BolloApp() {
 
 BolloApp::~BolloApp() {
     LOG(DEBUG) << "Freeing allocated objects in BolloApp class";
-    emit application_exiting();
+
     delete current_user;
 
-    updater->deleteLater();
-
-    ministry->terminate();
-    ministry->wait();
-
-    ministry->deleteLater();
+    delete updater;
+    ministry->stop();
 
     ulong size = bakeries.size();
 
     for(ulong i = 0; i < size; ++i) {
         Bakery* b = bakeries.at(i);
-        b->stop();
-        b->wait();
-
-        b->deleteLater();
+        delete b;
     }
+
+    delete ministry;
 }
 
 void BolloApp::load_bakeries() {

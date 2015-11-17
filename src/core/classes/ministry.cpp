@@ -11,9 +11,7 @@ Ministry::~Ministry() {
 }
 
 void Ministry::run() {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wmissing-noreturn"
-    for(; ;) {
+    while(!stopped) {
         int chance = get_setting("Operations", "raid_probability").toInt();
         qsrand((uint) QTime::currentTime().msec());
         unsigned long rnd = qrand() % BolloApp::get().bakeries.size();
@@ -34,9 +32,15 @@ void Ministry::run() {
 
         QThread::usleep(9500000);
     }
-#pragma clang diagnostic pop
 }
 
+
+void Ministry::stop() {
+    stopped = true;
+    while(this->isRunning()) {
+        cout << "Stopping...";
+    }
+}
 
 void Quarantine::run() {
     LOG(DEBUG) << "Entering quarantine [" + to_string(bakery->get_id()) + "]";
