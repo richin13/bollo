@@ -22,22 +22,64 @@
 class Bakery : public QThread {
 Q_OBJECT
 private:
-    /* Basic information */
+    /**
+     * The bakery id
+     */
     unsigned int bakery_id;
+
+    /**
+     * The bakery name
+     */
     QString bakery_name;
+
+    /**
+     * The bakery state.
+     */
     QString bakery_state;
-    QString bakery_city;//address
+
+    /**
+     * The bakery city.
+     */
+    QString bakery_city;
+
+    /**
+     * The bakery stock
+     */
     int bakery_stock;
 
     /* Ops */
+
+    /**
+     * The current operation of the bakery.
+     */
     _operation current_operation;
+
+    /**
+     * The bakery production status.
+     */
     bool stopped;
 
-    Baker* baker;//Baker thread
-    Yeast* yeast;//Bad yeast thread
+    /**
+     * Pointer to the baker that works in this bakery.
+     */
+    Baker* baker;
 
+    /**
+     * Pointer to the yeast used in this bakery.
+     */
+    Yeast* yeast;
+
+    /**
+     * Pointer to the logger used to send the status notification
+     * to the server.
+     */
     Logger* logbook;
-    StockUpdater* updater;
+
+    /**
+     * Pointer to the stock updater.
+     */
+    ProductionUpdater* updater;
+
 public:
     Bakery(){}
     Bakery(const Bakery&);
@@ -57,7 +99,7 @@ public:
         logbook = new Logger;
         baker = new Baker(bakery_name);
         yeast = new Yeast;
-        updater = new StockUpdater;
+        updater = new ProductionUpdater;
 
         current_operation.bakery_id = this->bakery_id;
         current_operation.progress = (integer_code) progress;
@@ -74,10 +116,9 @@ public:
 
 
         QObject::connect(this, &Bakery::notify_, logbook, &Logger::send_logbook_entry);
-        QObject::connect(this, &Bakery::updated_stock, updater, &StockUpdater::updater);
+        QObject::connect(this, &Bakery::updated_stock, updater, &ProductionUpdater::updater);
 
         QObject::connect(this, &Bakery::internal_oc, this, &Bakery::select_notification);
-        QObject::connect(this, &Bakery::finished, this, &Bakery::deleteLater);
     }
 
     unsigned int get_id() const;
@@ -102,7 +143,9 @@ public:
     void sell_bread(int _start = 0);
     void distribute_bread(int _start = 0);
 
+protected:
     void run() Q_DECL_OVERRIDE;
+
 public slots:
 
     /* Called by GUI buttons */
@@ -118,6 +161,7 @@ public slots:
 
     /* Used to select whether a status update goes to upstream or not */
     void select_notification();
+
 signals:
     void updated_stock(int, int);
     void internal_oc();

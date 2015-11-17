@@ -4,7 +4,10 @@
 
 #include "bakery.h"
 
-
+/**
+ * @brief Copy constructor of class Bakery
+ * @param cpy Another bakery instance.
+ */
 Bakery::Bakery(const Bakery& cpy) {
     bakery_id = cpy.get_id();
     bakery_name = cpy.get_name();
@@ -17,6 +20,9 @@ Bakery::Bakery(const Bakery& cpy) {
     baker = cpy.get_baker();
 }
 
+/**
+ * @brief Class destructor
+ */
 Bakery::~Bakery() {
     delete baker;
     delete yeast;
@@ -24,51 +30,92 @@ Bakery::~Bakery() {
     delete logbook;
 }
 
+/**
+ * @brief Gets the bakery id.
+ * @return The bakery id.
+ */
 unsigned int Bakery::get_id() const {
     return this->bakery_id;
 }
 
+/**
+ * @brief Gets the bakery name.
+ * @return The bakery name
+ */
 const QString& Bakery::get_name() const {
     return bakery_name;
 }
 
+/**
+ * @brief Gets the bakery state.
+ * @return The bakery state
+ */
 QString Bakery::get_state() const {
     return bakery_state;
 }
 
+/**
+ * @brief Gets the bakery city.
+ * @return The bakery city
+ */
 QString Bakery::get_city() const {
     return bakery_city;
 }
 
+/**
+ * @brief Gets the bakery stock.
+ * @return The bakery stock
+ */
 int Bakery::get_stock() const {
     return this->bakery_stock;
 }
 
-
+/**
+ * @brief Stops the execution of bakery thread.
+ */
 void Bakery::stop() {
     stopped = true;
 }
 
+/**
+ * @brief Gets the bakery's current operation struct.
+ * @return The bakery's current operation struct.
+ */
 const _operation& Bakery::get_current_op() const {
     return current_operation;
 }
 
-
+/**
+ * @brief Sets a new bakery current operation.
+ * @param operation Struct with the new operation information.
+ */
 void Bakery::set_current_op(const _operation& operation) {
     this->current_operation = operation;
 }
 
+/**
+ * @brief Checks wheter the bakery is closed down or not.
+ * @return true if the bakery is closed down, false otherwise.
+ */
 bool Bakery::is_closed_down() const {
     return stopped;
 }
 
+/**
+ * @brief Gets the bakery's baker.
+ * @return A baker pointer.
+ */
 Baker* Bakery::get_baker() const {
     return baker;
 }
 
+/**
+ * @brief The first stage of bread production.
+ * @param _start If specified, the process is started at _start value
+ * in order the retrieve a previuos status of the bakery.
+ */
 void Bakery::mix_ingredients(int _start) {
     if(!stopped) {
-//        LOG(DEBUG) << QString("Iniciando[%1]: %2").arg(bakery_id).arg("Mezcla de ingredientes").toStdString();
         qsrand((uint) QTime::currentTime().msec());
 
         this->current_operation.progress = (integer_code) _start;
@@ -86,17 +133,23 @@ void Bakery::mix_ingredients(int _start) {
     }
 }
 
+/**
+ * @brief Second stage of bakery production.
+ * @param _start If specified, the process is started at _start value
+ *  in order the retrieve a previuos status of the bakery.
+ * @param _final_f If specified, it will perform the final
+ *  fermentation of the dough that corresponds to the fifth stage
+ *  of bakery production.
+ */
 void Bakery::ferment_dough(int _start, bool _final_f) {
     if(!stopped) {
         qsrand((uint) QTime::currentTime().msec());
 
         int seconds;
         if(!_final_f) {
-//            LOG(DEBUG) << QString("Iniciando[%1]: %2").arg(bakery_id).arg("Fermentación primaria").toStdString();
             this->current_operation.description = "Fermentación inicial de la masa";
             seconds = 15 + (qrand() % 10);
         } else {
-//            LOG(DEBUG) << QString("Iniciando[%1]: %2").arg(bakery_id).arg("Fermentación final").toStdString();
             this->current_operation.description = "Fermentación final de la masa";
             seconds = 20 + (qrand() % 10);
         }
@@ -112,12 +165,16 @@ void Bakery::ferment_dough(int _start, bool _final_f) {
     }
 }
 
+/**
+ * @brief Third stage of bakery production.
+ * @param _start If specified, the process is started at _start value
+ * in order the retrieve a previuos status of the bakery.
+ */
 void Bakery::divide_dough(int _start) {
     if(!stopped) {
-//        LOG(DEBUG) << QString("Iniciando[%1]: %2").arg(bakery_id).arg("División de la masa").toStdString();
         qsrand((uint) QTime::currentTime().msec());
 
-        this->current_operation.description = "Divisón de la masa";
+        this->current_operation.description = "Dividiendo la masa";
         if(!_start)
                 emit notify_(bakery_id, current_operation.description);
 
@@ -131,9 +188,13 @@ void Bakery::divide_dough(int _start) {
     }
 }
 
+/**
+ * @brief The forth stage of bread production.
+ * @param _start If specified, the process is started at _start value
+ * in order the retrieve a previuos status of the bakery.
+ */
 void Bakery::shape_dough(int _start) {
     if(!stopped) {
-//        LOG(DEBUG) << QString("Iniciando[%1]: %2").arg(bakery_id).arg("Formación de la masa").toStdString();
         qsrand((uint) QTime::currentTime().msec());
 
         this->current_operation.description = "Formando la masa";
@@ -150,9 +211,13 @@ void Bakery::shape_dough(int _start) {
     }
 }
 
+/**
+ * @brief The sixth stage of bread production.
+ * @param _start If specified, the process is started at _start value
+ * in order the retrieve a previuos status of the bakery.
+ */
 void Bakery::bake_bread(int _start) {
     if(!stopped) {
-//        LOG(DEBUG) << QString("Iniciando[%1]: %2").arg(bakery_id).arg("Horneo del pan").toStdString();
         qsrand((uint) QTime::currentTime().msec());
 
         this->current_operation.description = "Horneando el pan";
@@ -160,6 +225,7 @@ void Bakery::bake_bread(int _start) {
                 emit notify_(bakery_id, current_operation.description);
 
         int seconds = 35 + (qrand() % 10);
+
         for(int i = _start; i < 100 && !stopped; ++i) {
             emit internal_oc();
             this->current_operation.progress += 1;
@@ -174,9 +240,13 @@ void Bakery::bake_bread(int _start) {
     }
 }
 
+/**
+ * @brief The seventh stage of bread production.
+ * @param _start If specified, the process is started at _start value
+ * in order the retrieve a previuos status of the bakery.
+ */
 void Bakery::sell_bread(int _start) {
     if(!stopped) {
-//        LOG(DEBUG) << QString("Iniciando[%1]: %2").arg(bakery_id).arg("Venta del pan").toStdString();
         qsrand((uint) QTime::currentTime().msec());
 
         this->current_operation.description = "Vendiendo el pan";
@@ -199,9 +269,13 @@ void Bakery::sell_bread(int _start) {
     }
 }
 
+/**
+ * @brief The eighth stage of bread production.
+ * @param _start If specified, the process is started at _start value
+ * in order the retrieve a previuos status of the bakery.
+ */
 void Bakery::distribute_bread(int _start) {
     if(!stopped) {
-//        LOG(DEBUG) << QString("Iniciando[%1]: %2").arg(bakery_id).arg("Distribución del pan").toStdString();
         qsrand((uint) QTime::currentTime().msec());
 
         this->current_operation.description = "Distribuyendo el pan";
@@ -248,6 +322,9 @@ void Bakery::stop_operations(bool f) {
     LOG(DEBUG) << "Bakery [" + to_string(bakery_id) + "] stopped";
 }
 
+/**
+ * @brief Resume the bread production at the bakery.
+ */
 void Bakery::resume_operations(void) {
     stopped = false;
 
@@ -259,6 +336,9 @@ void Bakery::resume_operations(void) {
     LOG(DEBUG) << "Bakery [" + to_string(bakery_id) + "] started";
 }
 
+/**
+ * @brief Slot called when 'Bad yeast' thread attacks!
+ */
 void Bakery::bad_yeast(void) {
     stopped = true;
     this->terminate();
@@ -277,8 +357,8 @@ void Bakery::bad_yeast(void) {
 }
 
 /**
- * Method called by the Ministry of Health when it
- * detects a sanity problem in a bakery.
+ * @brief Method called by the Ministry of Health when it
+ *  detects a sanity problem in a bakery.
  */
 void Bakery::close_down(void) {
     stopped = true;
@@ -296,7 +376,7 @@ void Bakery::close_down(void) {
 }
 
 /**
- * Method called by the Baker in order to make the bakery
+ * @brief Method called by the Baker in order to make the bakery
  * functional one more time after a close down.
  */
 void Bakery::set_up(void) {
@@ -312,20 +392,30 @@ void Bakery::set_up(void) {
     this->start();
 }
 
-
+/**
+ * @brief Slot that select whether a 'status_changed' notification
+ * must be send to the server or not. It is specially useful to
+ * avoid the operation_changed signal being overloaded hence other
+ * application components do not get its correspondent buffers full
+ * of signals.
+ */
 void Bakery::select_notification() {
-    static int have_not_sent_since = 0;
-    qsrand((uint) QTime::currentTime().msec());
+//    static int have_not_sent_since = 0;
+//    qsrand((uint) QTime::currentTime().msec());
 
-    if(((qrand() % 8) - 5) > 0 || have_not_sent_since > 5) {
-        //then send it
-        emit operation_changed(current_operation);
-        have_not_sent_since = 0;
-    } else {
-        have_not_sent_since++;
-    }
+//    if(((qrand() % 8) - 5) > 0 || have_not_sent_since > 5) {
+//    if(1) {
+    //then send it
+    emit operation_changed(current_operation);
+//        have_not_sent_since = 0;
+//    } else {
+//        have_not_sent_since++;
+//    }
 }
 
+/**
+ * @brief The run of the Bakery thread.
+ */
 void Bakery::run() {
     bool first_time = true;
     while(!stopped) {

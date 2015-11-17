@@ -7,7 +7,15 @@
 #include "production_updater.h"
 #include "http.h"
 
-void StockUpdater::updater(int bid, int quantity) {
+/**
+ * @brief Slot used to send the production information about a bakery.
+ *  It is invoked every time a batch of bread is baked. The information
+ *  generated here is used by us in bollo_web to create the charts of
+ *  bakery production.
+ * @param bid Bakery id.
+ * @param quantity The quantity of bread produced.
+ */
+void ProductionUpdater::updater(int bid, int quantity) {
     QNetworkAccessManager* manager = new QNetworkAccessManager(this);
 
     //Build the url <- Have you noticed that you always write this stupid comment?

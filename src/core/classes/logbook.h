@@ -10,27 +10,63 @@
 
 class Logbook {
 protected:
+    /**
+     * The logbook entry id
+     */
     int id;
-    QString bakery;
+
+    /**
+     * The bakery name corresponding to the logbook entry.
+     */
+    QString bakery_name;
+
+    /**
+     * The bakery id corresponding to the logbook entry.
+     */
     int bakery_id;
+
+    /**
+     * The logbook entry description
+     */
     QString description;
+
+    /**
+     * The logbook entry date
+     */
     QString date;
+
+    /**
+     * The logbook entry hour
+     */
     QString hour;
 
 public:
     Logbook() { }
 
+    /**
+     * @brief Class constructor
+     * @param _id The id
+     * @param _bak The bakery name
+     * @param _des The description
+     * @param _date The date
+     * @param _hour The hour
+     */
     Logbook(int _id, const QString& _bak,
             const QString& _des,
             const QString& _date,
             const QString& _hour) :
-            id(_id), bakery(_bak), bakery_id(0),
+            id(_id), bakery_name(_bak), bakery_id(0),
             description(_des), date(_date), hour(_hour) {
 
     }
 
+    /**
+     * @brief Another class constructor
+     * @param _bakery The bakery id
+     * @param _des The entry description.
+     */
     Logbook(int _bakery, const QString& _des) :
-            id(0), bakery(""), bakery_id(_bakery), description(_des),
+            id(0), bakery_name(""), bakery_id(_bakery), description(_des),
             date(""), hour("") {
 
     }
@@ -56,7 +92,7 @@ public:
 
     LogbookProblem(const LogbookProblem& c) : Logbook(c) {
         this->id = c.id;
-        this->bakery = c.bakery;
+        this->bakery_name = c.bakery_name;
         this->bakery_id = c.bakery_id;
         this->date = c.date;
         this->hour = c.hour;
@@ -68,14 +104,10 @@ public:
                    const QString& _date,
                    const QString& _hour,
                    int _dh) : Logbook(_id, _bak, _des, _date, _hour),
-                              dough(_dh) {
-        //TODO
-    }
+                              dough(_dh) { }
 
     LogbookProblem(int _bakery, const QString& _des, int _dgh) :
-            Logbook(_bakery, _des), dough(_dgh) {
-
-    }
+            Logbook(_bakery, _des), dough(_dgh) { }
 
     int get_dough() const;
     void set_dough(int);

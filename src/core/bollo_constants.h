@@ -9,16 +9,37 @@
 
 class Constants {
 private:
+    /**
+     * @brief Class constructor
+     */
     Constants() { }
 
+    /**
+     * @brief Class destructor.
+     */
     ~Constants() { }
 
+    /**
+     * @brief Copy constructor
+     */
     Constants(const Constants&) { }
 
 public:
     /* Networking group */
+    /**
+     * The host where the API lives.
+     */
     static QString API_HOST;
+
+    /**
+     * The path of the API inside that host.
+     */
     static QString API_PATH;
+
+    /**
+     * Super secret server backdoor to access charts.
+     */
+    static QString CHARTS_URL;
 };
 
 #endif //BOLLO_BOLLO_CONSTANTS_H

@@ -2,8 +2,12 @@
 #define GRAPHBROWSER_H
 
 #include <QDialog>
+#include <QtWebKitWidgets/QWebView>
+
+#include "../core/classes/bakery.h"
 
 namespace Ui {
+
 class ChartsBrowser;
 }
 
@@ -17,6 +21,14 @@ public:
 
 private:
     Ui::ChartsBrowser *ui;
+    QWebView* viewer;
+
+    void settings();
+    void fillBakeriesList();
+    QUrl buildUrl(int bakeryId);
+
+private slots:
+    void loadPage(int);
 };
 
 #endif // GRAPHBROWSER_H

@@ -117,15 +117,15 @@ void MainWindow::showDashBoard (int bakeryId) {
 
     // Set the selected bakery name in status bar and window title
     QString bakery = "Panaderia: " + current_bakery->get_name();
-
-    // Set the status bar label (already in the status bar) in which the bakery name is displayed
-    ui->statusBarLabel->setText(bakery);
     ui->bakeryName->setText(bakery);
     this->setWindowTitle(WINDOW_TITLE + bakery);
 
+    // Set the status bar label in which the bakery name is displayed
+    ui->statusBarLabel->setText(bakery);
+
     // Clean status and bread labels
     ui->statusLabel->setText("Estado: Cargando...");
-    ui->createdBreadsLabel->setText("Panes creados: ---");
+    ui->createdBreadsLabel->setText("Panes creados:");
 }
 
 /**

@@ -5,11 +5,17 @@
 #include <QtCore/qdatetime.h>
 #include "ministry.h"
 
+/**
+ * @brief The class destructor.
+ */
 Ministry::~Ministry() {
     delete logbook;
     LOG(DEBUG) << "Deallocated memory at Ministry class";
 }
 
+/**
+ * @brief Run method of Ministry of health thread.
+ */
 void Ministry::run() {
     while(!stopped) {
         int chance = get_setting("Operations", "raid_probability").toInt();
@@ -34,14 +40,16 @@ void Ministry::run() {
     }
 }
 
-
+/**
+ * @brief Stops the execution of ministry thread.
+ */
 void Ministry::stop() {
     stopped = true;
-    while(this->isRunning()) {
-        cout << "Stopping...";
-    }
 }
 
+/**
+ * @brief Run of Quarantine thread.
+ */
 void Quarantine::run() {
     LOG(DEBUG) << "Entering quarantine [" + to_string(bakery->get_id()) + "]";
 
@@ -63,6 +71,9 @@ void Quarantine::run() {
 
 }
 
+/**
+ * @brief Slot used to notify when a bakery is leaving quarantine.
+ */
 void Quarantine::notify_exit_quarantine() {
     emit exiting_quarantine();
 }

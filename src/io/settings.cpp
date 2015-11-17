@@ -4,6 +4,11 @@
 
 #include "settings.h"
 
+/**
+ * @brief Method used to retrieve the basic Bollo configuration stored
+ * in a file at user's home. In case that such file does not exists, it
+ * will create a new one.
+ */
 void init_settings(void) {
     LOG(INFO) << "Loading Bollo settings";
     QDir app_dir = QDir(QDir().homePath() + "/bollo");
@@ -23,6 +28,10 @@ void init_settings(void) {
     load_settings();
 }
 
+/**
+ * @brief Method used to generated a default settings file when
+ * a previous one is not found in the user's home directory.
+ */
 void load_default_settings(void) {
     QString fullPath = config_file_path();
 
@@ -48,6 +57,9 @@ void load_default_settings(void) {
     bollo_settings.endGroup();
 }
 
+/**
+ * @brief Method used to load the stored settings of the app.
+ */
 void load_settings(void) {
     QString cf_path = config_file_path();
 
@@ -64,11 +76,23 @@ void load_settings(void) {
     bollo_settings.endGroup();
 }
 
+/**
+ * @brief Method the returns the absolute path of settings folder at
+ * user's home directory.
+ * @return A string with the absolute path to settings folder.
+ */
 QString config_file_path() {
     QDir app_dir = QDir(QDir().homePath() + "/bollo");
     return QString(app_dir.absolutePath() + "/settings/bollo.ini");
 }
 
+/**
+ * @brief Sets a new configuration at the specified group. See QSettings API
+ *  documentation for details about 'groups'.
+ * @group The setting group.
+ * @key The key of the setting.
+ * @value The value of the setting.
+ */
 void set_setting(const QString& group, const QString& key, const QVariant& value) {
     static QString cf_path = config_file_path();
     static QSettings bollo_settings(cf_path, QSettings::NativeFormat);
@@ -78,6 +102,12 @@ void set_setting(const QString& group, const QString& key, const QVariant& value
     bollo_settings.endGroup();
 }
 
+/**
+ * @brief Retrieves the value of a specific setting at a specific group.
+ *  See QSettings API documentation for details about 'groups'
+ * @param group The setting group.
+ * @param key The key of the setting.
+ */
 QVariant get_setting(const QString& group, const QString& key) {
     static QString cf_path = config_file_path();
     static QSettings bollo_settings(cf_path, QSettings::NativeFormat);

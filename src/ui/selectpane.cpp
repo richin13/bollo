@@ -4,7 +4,6 @@
 #include "selectpane.h"
 #include "assets.h"
 #include "ui_headers/ui_selectpane.h"
-#include "../core/bollo.h"
 
 SelectWindow::SelectWindow(QWidget *parent) : QWidget(parent),
                                               ui(new Ui::selectWindow) {

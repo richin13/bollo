@@ -21,9 +21,21 @@ class Bakery;
 class Ministry : public QThread {
 Q_OBJECT
 private:
+    /**
+     * Logger used to send logbook entries to the server.
+     */
     Logger* logbook;
+
+    /**
+     * Whether the ministry of health is running or not.
+     */
     bool stopped;
+
 public:
+
+    /**
+     * @brief The class constructor.
+     */
     Ministry() {
         logbook = new Logger;
 
@@ -42,17 +54,35 @@ signals:
 class Quarantine : public QThread {
 Q_OBJECT
 private:
+    /**
+     * A pointer to the bakery in quarantine.
+     */
     Bakery* bakery;
+
+    /**
+     * Logger used to send logbook entries to the server.
+     */
     Logger* logbook;
 
+    /**
+     * @brief Class constructor. Private because bakery pointer is necessary.
+     */
     Quarantine() { }
 
 public:
+
+    /**
+     * @brief Quarantine class constructor.
+     * @param _bak Bakery that is entering quarantine.
+     */
     Quarantine(Bakery* _bak) : bakery(_bak) {
         logbook = new Logger;
         QObject::connect(this, &Quarantine::notify_, logbook, &Logger::send_logbook_entry);
     }
 
+    /**
+     * @brief Class destructor.
+     */
     ~Quarantine() {
         delete logbook;
     }
