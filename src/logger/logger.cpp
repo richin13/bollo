@@ -10,7 +10,6 @@
  * @param txt The description of the logbook entry.
  */
 void Logger::send_logbook_entry(int bid, QString txt) {
-    LOG(DEBUG) << "Sending new logbook entry: " + txt.toStdString();
     QNetworkAccessManager* manager = new QNetworkAccessManager(this);
 
     //Build the url
@@ -24,7 +23,6 @@ void Logger::send_logbook_entry(int bid, QString txt) {
     QObject::connect(manager, &QNetworkAccessManager::finished, manager, &QNetworkAccessManager::deleteLater);
 
     manager->get(QNetworkRequest(url));
-    LOG(DEBUG) << "Sent: " + txt.toStdString();
 }
 
 /**
@@ -35,7 +33,6 @@ void Logger::send_logbook_entry(int bid, QString txt) {
  * @param dough Amount of dough affected.
  */
 void Logger::send_logbook_problem(int bid, QString txt, int dough) {
-    LOG(DEBUG) << "Sending new logbook problem: " + txt.toStdString();
     QNetworkAccessManager* manager = new QNetworkAccessManager(this);
 
     //Build the url
@@ -50,5 +47,4 @@ void Logger::send_logbook_problem(int bid, QString txt, int dough) {
     QObject::connect(manager, &QNetworkAccessManager::finished, manager, &QNetworkAccessManager::deleteLater);
 
     manager->get(QNetworkRequest(url));
-    LOG(DEBUG) << "Sent: " + txt.toStdString();
 }
