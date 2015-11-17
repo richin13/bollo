@@ -19,7 +19,7 @@ public:
 public slots:
     // Tool bar action
     void showBakeryList();
-    void showGraphs();
+    void chartsBrowser(); // Used in tools menu
     void logBrowser(); // Used in tools menu
     void continueProcess();
     void pauseProcess();
@@ -37,7 +37,6 @@ public slots:
     void preferencesPanel();
 
     // Tools menu
-    void graphViewer();
     void telegramMenu();
 
     // Help menu

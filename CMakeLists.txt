@@ -21,7 +21,8 @@ set(SOURCE_FILES src/main.cpp src/core/classes/bakery.cpp src/core/classes/baker
         src/ui/bakeryedit.cpp src/ui/bakeryedit.h src/ui/ui_headers/ui_bakeryedit.h src/ui/about.cpp src/ui/about.h
         src/ui/ui_headers/ui_about.h src/io/handler.cpp src/core/classes/baker.cpp src/core/classes/baker.h
         src/io/settings.cpp src/io/settings.h src/core/operations.h
-        src/io/production_updater.h src/io/production_updater.cpp)
+        src/io/production_updater.h src/io/production_updater.cpp src/ui/chartsbrowser.cpp src/ui/chartsbrowser.h
+        src/ui/ui_headers/ui_chartsBrowser.h)
 
 find_package(Qt5Core REQUIRED)
 find_package(Qt5Widgets REQUIRED)

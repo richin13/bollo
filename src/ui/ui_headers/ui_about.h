@@ -20,7 +20,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Ui_Dialog
+class Ui_AboutDialog
 {
 public:
     QLabel *icon;
@@ -103,7 +103,7 @@ public:
 };
 
 namespace Ui {
-    class About: public Ui_Dialog {};
+    class About: public Ui_AboutDialog {};
 } // namespace Ui
 
 QT_END_NAMESPACE

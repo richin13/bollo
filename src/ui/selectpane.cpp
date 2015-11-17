@@ -6,8 +6,6 @@
 #include "ui_headers/ui_selectpane.h"
 #include "../core/bollo.h"
 
-// TODO: Add scroll area to bakeries list
-
 SelectWindow::SelectWindow(QWidget *parent) : QWidget(parent),
                                               ui(new Ui::selectWindow) {
 

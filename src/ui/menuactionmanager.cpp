@@ -10,6 +10,7 @@
 #include "logbookdialog.h"
 #include "bakeryedit.h"
 #include "about.h"
+#include "chartsbrowser.h"
 
 using namespace std;
 
@@ -35,11 +36,6 @@ void MenuActionManager::showBakeryList() {
 
     connect(bakerySelect, SIGNAL(bakerySelected(int)), mainWindow, SLOT(showDashBoard(int)));
     connect(bakerySelect, &QDialog::finished, bakerySelect, &BakerySelect::deleteLater);
-}
-
-void MenuActionManager::showGraphs() {
-
-
 }
 
 void MenuActionManager::logBrowser() {
@@ -108,9 +104,11 @@ void MenuActionManager::preferencesPanel() {
 
 // ============ TOOLS MENU ================
 
-void MenuActionManager::graphViewer() {
+void MenuActionManager::chartsBrowser() {
 
-
+    ChartsBrowser* chartBrow = new ChartsBrowser();
+    chartBrow->show();
+    connect(chartBrow, &QDialog::finished, chartBrow, &ChartsBrowser::deleteLater);
 }
 
 void MenuActionManager::telegramMenu() {

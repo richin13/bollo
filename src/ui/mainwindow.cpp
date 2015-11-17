@@ -122,6 +122,10 @@ void MainWindow::showDashBoard (int bakeryId) {
     ui->statusBarLabel->setText(bakery);
     ui->bakeryName->setText(bakery);
     this->setWindowTitle(WINDOW_TITLE + bakery);
+
+    // Clean status and bread labels
+    ui->statusLabel->setText("Estado: Cargando...");
+    ui->createdBreadsLabel->setText("Panes creados: ---");
 }
 
 /**
@@ -302,6 +306,7 @@ void MainWindow::connectToolBarActions() {
     MenuActionManager* actManager = new MenuActionManager(this);
 
     connect(ui->actionBakeryList, SIGNAL(triggered(bool)), actManager, SLOT(showBakeryList()));
+    connect(ui->actionShowGraphs, SIGNAL(triggered(bool)), actManager, SLOT(chartsBrowser()));
     connect(ui->actionBakeryLog, &QAction::triggered, actManager, &MenuActionManager::logBrowser);
     connect(ui->actionContinueProcess, SIGNAL(triggered(bool)), actManager, SLOT(continueProcess()));
     connect(ui->actionPauseProcess, SIGNAL(triggered(bool)), actManager, SLOT(pauseProcess()));
@@ -328,6 +333,7 @@ void MainWindow::connectMenuActions() {
     connect(ui->actionPreferencesPanel, SIGNAL(triggered(bool)), actManager, SLOT(preferencesPanel()));
 
     // Tools menu
+    connect(ui->actionGraphViewer, SIGNAL(triggered(bool)), actManager, SLOT(chartsBrowser()));
     connect(ui->actionTelegram, SIGNAL(triggered(bool)), actManager, SLOT(telegramMenu()));
     connect(ui->actionLogBrowser, &QAction::triggered, actManager, &MenuActionManager::logBrowser);
 

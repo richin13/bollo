@@ -25,7 +25,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Ui_dialog
+class Ui_BakeryEditDialog
 {
 public:
     QVBoxLayout *verticalLayout;
@@ -182,7 +182,7 @@ public:
 };
 
 namespace Ui {
-    class BakeryEdit: public Ui_dialog {};
+    class BakeryEdit: public Ui_BakeryEditDialog {};
 } // namespace Ui
 
 QT_END_NAMESPACE
