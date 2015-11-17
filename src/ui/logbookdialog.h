@@ -19,7 +19,7 @@ class LogbookDialog : public QDialog {
 Q_OBJECT
 
 public:
-    LogbookDialog(QWidget* parent = 0);
+    explicit LogbookDialog(QWidget* parent = 0);
     ~LogbookDialog();
     void load_events(int filtering = 0);
     void load_problems(int filtering = 0);

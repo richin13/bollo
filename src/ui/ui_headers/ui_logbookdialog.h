@@ -23,7 +23,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Ui_Dialog
+class Ui_LogbookDialog
 {
 public:
     QPushButton *qbClose;
@@ -229,7 +229,7 @@ public:
 };
 
 namespace Ui {
-    class LogbookDialog: public Ui_Dialog {};
+    class LogbookDialog: public Ui_LogbookDialog {};
 } // namespace Ui
 
 QT_END_NAMESPACE
