@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 project(Bollo)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -pthread")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 set(CMAKE_AUTOMOC ON)
 # cmake_policy(SET CMP0043 NEW)
 
@@ -27,7 +27,6 @@ find_package(Qt5Core REQUIRED)
 find_package(Qt5Widgets REQUIRED)
 find_package(Qt5Gui REQUIRED)
 find_package(Qt5Network REQUIRED)
-find_package(Qt5Sql REQUIRED)
 find_package(Qt5WebKit REQUIRED)
 
 
@@ -37,4 +36,4 @@ qt5_add_resources(RESOURCE_ADDED ${RESOURCE})
 
 add_executable(Bollo ${SOURCE_FILES} ${RESOURCE_ADDED})
 
-qt5_use_modules(Bollo Core Widgets Gui Network Sql WebKitWidgets)
+qt5_use_modules(Bollo Core Widgets Gui Network WebKitWidgets)
