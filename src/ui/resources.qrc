@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="/images">
+    <file>assets/loadDark.GIF</file>
     <file>assets/quarantine.png</file>
     <file>assets/shut-down.png</file>
     <file>assets/idle.png</file>
@@ -13,7 +14,6 @@
     <file>assets/pending-icon.png</file>
     <file>assets/cancel-icon.png</file>
     <file>assets/graph-icon.png</file>
-    <file>assets/loadDark.GIF</file>
     <file>assets/shop-icon.png</file>
     <file>assets/avatar.png</file>
   </qresource>

@@ -318,7 +318,7 @@ void Bakery::stop_operations(bool f) {
         emit notify_(bakery_id, "Cierre de la panadería");
     }
 
-    showInfoPopup("Panadería detenida", msg + "la producción de pan en " + bakery_name.toStdString());
+    sendInfoNotification("Panadería detenida", msg + "la producción de pan en " + bakery_name.toStdString());
     LOG(DEBUG) << "Bakery [" + to_string(bakery_id) + "] stopped";
 }
 
@@ -336,7 +336,7 @@ void Bakery::resume_operations(void) {
         this->start();
         LOG(DEBUG) << "Bakery [" + to_string(bakery_id) + "] started";
     } else {
-        showInfoPopup(bakery_name.toStdString(), "La panadería ya se encuentra corriendo");
+        sendInfoNotification(bakery_name.toStdString(), "La panadería ya se encuentra corriendo");
     }
 }
 
@@ -352,7 +352,7 @@ void Bakery::bad_yeast(void) {
 
     LOG(DEBUG) << "Bakery [" + to_string(bakery_id) + "] affected by bad yeast";
 
-    showWarningPopup("Levadura mala", bakery_name.toStdString() + " ha sido afectada por levadura mala");
+    sendWarningNotification("Levadura mala", bakery_name.toStdString() + " ha sido afectada por levadura mala");
 
     current_operation.progress = 0;
 
@@ -375,8 +375,8 @@ void Bakery::close_down(void) {
 
     LOG(DEBUG) << "Bakery [" + to_string(bakery_id) + "] being closed down";
 
-    showWarningPopup("Panadería clausarada",
-                     bakery_name.toStdString() + " ha sido clausurada por el ministerio de salud");
+    sendWarningNotification("Panadería clausarada",
+                            bakery_name.toStdString() + " ha sido clausurada por el ministerio de salud");
 }
 
 /**
@@ -391,7 +391,7 @@ void Bakery::set_up(void) {
 
     LOG(DEBUG) << "Bakery [" + to_string(bakery_id) + "] being set up";
     emit internal_oc();
-    showInfoPopup("Panadería lista", bakery_name.toStdString() + " ha salido de cuarentena.");
+    sendInfoNotification("Panadería lista", bakery_name.toStdString() + " ha salido de cuarentena.");
 
     this->start();
 }

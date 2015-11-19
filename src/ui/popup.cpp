@@ -6,24 +6,32 @@
  * method in order to use less dependencies, since the libnotify library for C++
  * it's not installed by default in most linux distros.
  */
+#include <src/core/bollo_constants.h>
 #include "popup.h"
+#include "../io/telebot.h"
 
-void showPopup(string title, string msg, string icon) {
+void sendNotification(string title, string msg, string icon) {
+
     string cmd = "notify-send '" + title + "' '" + msg + "' --icon=" + icon;
 
+    // Send notification with tele bot to user.
+    string botMessage = title + "\n---------\n" + msg;
+    TeleBot::sendMessage(Constants::BOLLOBOT_CHAT_ID, botMessage);
+
     if(system(cmd.c_str())) {
+
         LOG(WARNING) << "An error ocurred while showing the event notification";
     }
 }
 
-void showInfoPopup(string title, string msg) {
-    showPopup(title, msg, "dialog-information");
+void sendInfoNotification(string title, string msg) {
+    sendNotification(title, msg, "dialog-information");
 }
 
-void showWarningPopup(string title, string msg) {
-    showPopup(title, msg, "dialog-warning");
+void sendWarningNotification(string title, string msg) {
+    sendNotification(title, msg, "dialog-warning");
 }
 
-void showQuestionPopup(string title, string msg) {
-    showPopup(title, msg, "dialog-question");
+void sendQuestionNotification(string title, string msg) {
+    sendNotification(title, msg, "dialog-question");
 }

@@ -48,6 +48,10 @@ public:
      * Super secret server backdoor to access charts.
      */
     static QString CHARTS_URL;
+
+    static QString BOLLOBOT_TOKEN;
+
+    static int BOLLOBOT_CHAT_ID;
 };
 
 #endif //BOLLO_BOLLO_CONSTANTS_H

@@ -24,7 +24,8 @@ set(SOURCE_FILES src/main.cpp src/core/classes/bakery.cpp src/core/classes/baker
         src/io/settings.cpp src/io/settings.h src/core/operations.h
         src/io/production_updater.h src/io/production_updater.cpp src/ui/chartsbrowser.cpp src/ui/chartsbrowser.h
         src/ui/ui_headers/ui_chartsBrowser.h
-        src/io/production_updater.h src/io/production_updater.cpp src/core/bollo_constants.cpp)
+        src/io/production_updater.h src/io/production_updater.cpp src/core/bollo_constants.cpp
+        src/io/telebot.cpp src/io/telebot.h)
 
 find_package(Qt5Core REQUIRED)
 find_package(Qt5Widgets REQUIRED)

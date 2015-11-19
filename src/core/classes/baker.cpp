@@ -10,7 +10,7 @@
 void Baker::run() {
     QThread::sleep(10);
 
-    showInfoPopup("Liempieza lista!", "El panadero ha terminado la limpieza de " + bakery_name.toStdString());
+    sendInfoNotification("Liempieza lista!", "El panadero ha terminado la limpieza de " + bakery_name.toStdString());
 
     emit clean_ready();
     LOG(DEBUG) << "Finished clean";
@@ -33,7 +33,7 @@ void Baker::find_pollutants(_operation op) {
             QString text = "Se encontró " + pollutants.at(qrand() % pollutants.size());
 
             emit found_pollutants(op.bakery_id, text, (qrand() % (dough - 1)) + 1);
-            showInfoPopup(bakery_name.toStdString(), text.toStdString());
+            sendInfoNotification(bakery_name.toStdString(), text.toStdString());
         }
     }
 }

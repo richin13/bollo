@@ -6,12 +6,12 @@
 
 using namespace std;
 
-void showPopup(string, string, string);
+void sendNotification(string, string, string);
 
-void showInfoPopup(string, string);
+void sendInfoNotification(string, string);
 
-void showWarningPopup(string, string);
+void sendWarningNotification(string, string);
 
-void showQuestionPopup(string, string);
+void sendQuestionNotification(string, string);
 
 #endif // POPUP_H
